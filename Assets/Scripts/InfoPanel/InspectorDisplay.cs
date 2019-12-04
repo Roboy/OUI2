@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DisplayView : MonoBehaviour
+public class InspectorDisplay : MonoBehaviour
 {
-    [SerializeField] public string[] data;
-    
+    public string[] data;
+
     public void Init(int size)
     {
         data = new string[size];

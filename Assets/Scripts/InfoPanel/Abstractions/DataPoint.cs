@@ -15,4 +15,14 @@
     {
         return value.ToString();
     }
+
+    public int GetID()
+    {
+        return id;
+    }
+
+    public double GetTimestamp()
+    {
+        return timestamp;
+    }
 }

@@ -1,27 +1,25 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class View<T> : ISubscriber<T>
+public abstract class View<T> : ISubscriber<T>
 {
-    DisplayView display;
+    protected MonoBehaviour display;
 
-    public View(DisplayView display)
+    public View(MonoBehaviour display, Model<T> model)
     {
         this.display = display;
+        SubscribeToModel(model);
     }
 
-    public void DisplayData(Queue<T> data)
-    {       
-        T[] dataArray = data.ToArray();
-
-        for (int i = 0; i < data.Count; i++)
-        { 
-            display.data[i] = dataArray[i].ToString();
-        }
-    }
+    public abstract void DisplayData(Queue<T> data);
 
     public void ReceiveUpdate(Queue<T> data)
     {
         DisplayData(data);
+    }
+
+    public void SubscribeToModel(Model<T> modelToSubscribeTo)
+    {
+        modelToSubscribeTo.Subscribe(this);
     }
 }

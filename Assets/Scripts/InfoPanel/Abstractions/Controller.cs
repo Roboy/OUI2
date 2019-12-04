@@ -14,14 +14,5 @@ public class Controller<T>
     public void AddDataPoint(T dataPoint)
     {
         model.AddDataPoint(dataPoint);
-    }   
-
-    public void RemoveView(View<T> viewToRemove)
-    {
-        if (views == null)
-            return;
-
-        views.Remove(viewToRemove);
-        model.Unsubscribe(viewToRemove);
     }
 }

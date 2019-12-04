@@ -8,7 +8,7 @@ public class Model<T> : IPublisher<T>
 
     List<ISubscriber<T>> subscriberList;
 
-    public void Init (int size)
+    public Model(int size)
     {
         this.size = size;
         data = new Queue<T>(size);

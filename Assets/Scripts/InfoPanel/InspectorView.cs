@@ -3,7 +3,7 @@
 public class InspectorView<T, U> : View<T> where T : DataPoint<U>
 {
     public InspectorView(InspectorDisplay display, Model<T> model) : base(display, model)
-    {
+    {        
     }
 
     public override void DisplayData(Queue<T> data)

@@ -25,4 +25,9 @@
     {
         return timestamp;
     }
+
+    public T GetValue()
+    {
+        return value;
+    }
 }

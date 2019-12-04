@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - HandMatchingCollider
+  - SenseGloveRight
   layers:
   - Default
   - TransparentFX

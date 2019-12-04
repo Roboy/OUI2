@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Model<T> : IPublisher<T>
+public class Model<T> : IPublisher<T> 
 {
     int size;
     Queue<T> data;
@@ -17,9 +17,12 @@ public class Model<T> : IPublisher<T>
     public void AddDataPoint(T dataPoint)
     {
         data.Enqueue(dataPoint);
-
+        
         if (data.Count > size)
+        {
+            Debug.Log("dequeue");
             data.Dequeue();
+        }
 
         Notify();
     }

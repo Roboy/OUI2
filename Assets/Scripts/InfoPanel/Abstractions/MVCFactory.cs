@@ -8,30 +8,38 @@ public class MVCFactory : MonoBehaviour
 
     View<DataPoint<float>> view;
 
-    DisplayView inspectorView;
+    InspectorDisplay inspectorDisplay;
 
     public int counter = 0;
 
     private void Start()
     {
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //++++++++++++++++  INIT THE MODEL  ++++++++++++++++++++++++++++++++++++++
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
         Model<DataPoint<float>> model = new Model<DataPoint<float>>();
-        model.InitializeModel(SIZE);
-               
+        model.Init(SIZE);
+
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //++++++++++++++++  ADD A CONTROLLER TO THE MODEL  +++++++++++++++++++++++
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
         controller = new Controller<DataPoint<float>>(model);
 
-        inspectorView = gameObject.AddComponent<DisplayView>();
-        inspectorView.Init(SIZE);
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        //++++++++++++++++  ADD A VIEW WITH A DISPLAY TO THE MODEL  ++++++++++++++
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        view = new View<DataPoint<float>>(inspectorView);
-
-        controller.AddView(view);
+        inspectorDisplay = gameObject.AddComponent<InspectorDisplay>();
+        inspectorDisplay.Init(SIZE);
+        view = new InspectorView<DataPoint<float>, float>(inspectorDisplay, model);
     }
     
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            
             controller.AddDataPoint(new DataPoint<float>(Time.time, counter++, Random.value));
         }
     }    

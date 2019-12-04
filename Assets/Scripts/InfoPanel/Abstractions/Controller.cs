@@ -14,18 +14,7 @@ public class Controller<T>
     public void AddDataPoint(T dataPoint)
     {
         model.AddDataPoint(dataPoint);
-    }
-
-    public void AddView(View<T> viewToAdd)
-    {
-        if (views == null)
-        {
-            views = new List<View<T>>();
-        }
-
-        views.Add(viewToAdd);
-        model.Subscribe(viewToAdd);
-    }
+    }   
 
     public void RemoveView(View<T> viewToRemove)
     {

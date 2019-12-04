@@ -8,7 +8,7 @@ public class Model<T> : IPublisher<T>
 
     List<ISubscriber<T>> subscriberList;
 
-    public void InitializeModel (int size)
+    public void Init (int size)
     {
         this.size = size;
         data = new Queue<T>(size);
@@ -20,7 +20,6 @@ public class Model<T> : IPublisher<T>
         
         if (data.Count > size)
         {
-            Debug.Log("dequeue");
             data.Dequeue();
         }
 

@@ -5,27 +5,40 @@ using UnityEngine;
 public class BuzzManager : Singleton<BuzzManager>
 {
 
-    private int[] fingers;
-    private SenseGlove_Object senseGloveObject;
+    private int[] fingersRight;
+    private int[] fingersLeft;
+    private SenseGlove_Object senseGloveObjectRight;
+    private SenseGlove_Object senseGloveObjectLeft;
     // Start is called before the first frame update
     void Start()
     {
-        senseGloveObject = GameObject.FindGameObjectWithTag("SenseGloveRight").transform.GetChild(0).GetComponent<SenseGlove_Object>();
-        fingers = new int[] { 0, 0, 0, 0, 0 };
+        senseGloveObjectRight = GameObject.FindGameObjectWithTag("SenseGloveRight").transform.GetChild(0).GetComponent<SenseGlove_Object>();
+        senseGloveObjectLeft = GameObject.FindGameObjectWithTag("SenseGloveLeft").transform.GetChild(0).GetComponent<SenseGlove_Object>();
+        fingersRight = new int[] { 0, 0, 0, 0, 0 };
+        fingersLeft = new int[] { 0, 0, 0, 0, 0 };
     }
 
     // Update is called once per frame
     void Update()
     {
-        senseGloveObject.SendBuzzCmd(fingers, 500);
-        fingers = new int[] {0,0,0,0,0};
+        senseGloveObjectRight.SendBuzzCmd(fingersRight, 500);
+        senseGloveObjectLeft.SendBuzzCmd(fingersLeft, 500);
+        fingersRight = new int[] {0,0,0,0,0};
+        fingersLeft = new int[] { 0, 0, 0, 0, 0 };
     }
 
-    public void ActivateFinger(int fingerindex, int buzzintensity)
+    public void ActivateFinger(bool rightHand, int fingerindex, int buzzintensity)
     {
         if(fingerindex < 5 && fingerindex >= 0)
         {
-            fingers[fingerindex] = buzzintensity;
+            if (rightHand)
+            {
+                fingersRight[fingerindex] = buzzintensity;
+            }
+            else
+            {
+                fingersLeft[fingerindex] = buzzintensity;
+            }
         }
     }
 }

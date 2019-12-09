@@ -1490,6 +1490,49 @@ MonoBehaviour:
   savedColor: {r: 1, g: 1, b: 1, a: 1}
   savedTextUV0: {x: 0, y: 0}
   savedFill: 1
+--- !u!1 &882687602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 882687604}
+  - component: {fileID: 882687603}
+  m_Layer: 0
+  m_Name: NativeDLLManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &882687603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882687602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c002a8a43dc27d642b6dd1324556b335, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &882687604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882687602}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.8677413, y: 1.8443611, z: 7.6212406}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &896221317 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4946709787590842076, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
@@ -2653,7 +2696,7 @@ PrefabInstance:
     - target: {fileID: 114465451640022592, guid: 4afc32a8460c3264ba37c41fe0813f1e,
         type: 3}
       propertyPath: Tracking
-      value: -1
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 114465451640022592, guid: 4afc32a8460c3264ba37c41fe0813f1e,
         type: 3}

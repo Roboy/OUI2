@@ -2200,6 +2200,11 @@ PrefabInstance:
       propertyPath: m_myId
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 3774640225388436468, guid: 46fd8a40a1749f945b96bcb0f67eabaf,
+        type: 3}
+      propertyPath: updateWrist
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46fd8a40a1749f945b96bcb0f67eabaf, type: 3}
 --- !u!1 &1586755076

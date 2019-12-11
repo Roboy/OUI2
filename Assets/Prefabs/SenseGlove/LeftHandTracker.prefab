@@ -476,6 +476,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 114652621073152480, guid: fdf857c49d30cb74493ec759f4052810,
+        type: 3}
+      propertyPath: updateWrist
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4125736790143620, guid: fdf857c49d30cb74493ec759f4052810, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.7071068

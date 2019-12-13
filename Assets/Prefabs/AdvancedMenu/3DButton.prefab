@@ -511,8 +511,8 @@ Rigidbody:
   m_GameObject: {fileID: 1279483405781329392}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: Infinity
+  m_AngularDrag: Infinity
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -527,10 +527,10 @@ SpringJoint:
   m_GameObject: {fileID: 1279483405781329392}
   m_ConnectedBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: -0.03740573, y: -0.081937574, z: -0.4645666}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -0.13599998, y: 4.7085, z: 2.8522499}
   serializedVersion: 2
-  m_Spring: 25
+  m_Spring: 50
   m_Damper: 10
   m_MinDistance: 0
   m_MaxDistance: 0
@@ -539,7 +539,7 @@ SpringJoint:
   m_BreakTorque: Infinity
   m_EnableCollision: 0
   m_EnablePreprocessing: 1
-  m_MassScale: 1
+  m_MassScale: 10
   m_ConnectedMassScale: 1
 --- !u!114 &5086676034467626896
 MonoBehaviour:
@@ -731,11 +731,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4172103998692018257, guid: 870685729b00ee64bb03c09c0ebfb530,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6067573193481836475, guid: 870685729b00ee64bb03c09c0ebfb530,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -790,6 +785,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_firstOverflowCharacterIndex
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172103998692018257, guid: 870685729b00ee64bb03c09c0ebfb530,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 870685729b00ee64bb03c09c0ebfb530, type: 3}

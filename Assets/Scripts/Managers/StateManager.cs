@@ -90,7 +90,6 @@ public class StateManager : Singleton<StateManager>
 
         public void Execute()
         {
-            print("HUD");
         }
 
         public void Exit()
@@ -120,7 +119,6 @@ public class StateManager : Singleton<StateManager>
 
         public void Execute()
         {
-            print("Advanced Menu");
         }
 
         public void Exit()

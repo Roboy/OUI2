@@ -10,7 +10,9 @@ public class GraphViewDummy : View
     public override void Init(Model model)
     {
         iconManager = GetComponent<IconStateManager>();
-        graphManager = GetComponent<GraphManager>();
+        graphManager = GetComponentInChildren<GraphManager>();
+        graphManager.Init();
+        iconManager.DetailedPanel.SetActive(false);
         UpdateView(model);
     }
 
@@ -19,6 +21,7 @@ public class GraphViewDummy : View
         GraphModel graphModel = (GraphModel)model;
         SetPosition(graphModel.GetPos());
         SetDetailedPanelPosition(graphModel.detailedPanelPos);
+        SetColor(model.title, graphModel.color);
         Debug.Log("View updated");
     }
 
@@ -55,6 +58,6 @@ public class GraphViewDummy : View
     private void SetColor(string title, int col)
     {
         // TODO: parse Color
-        graphManager.SetColor(title, new Color(1, 0, 0));
+        graphManager.SetColor(title, new Color(1, 1, 0));
     }
 }

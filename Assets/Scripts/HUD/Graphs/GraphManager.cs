@@ -25,7 +25,7 @@ public class GraphManager : MonoBehaviour
         this.graph = graph;
     }
 
-    private void Start()
+    public void Init()
     {
         graph = GetComponent<GraphChart>();
         if (graph == null)
@@ -34,18 +34,15 @@ public class GraphManager : MonoBehaviour
             Debug.LogWarning("No GraphChart found! Place this script into a graph chart!");
             return;
         }
-        CustomizeGraph("");
-        SetNumLabelsShownX(3);
-        SetColor("Temperature", Color.red);
+        //CustomizeGraph("");
+        //SetNumLabelsShownX(3);
+        //SetColor("Temperature", Color.red);
         //SetColor("CO2", Color.blue);
-        DrawInitialValues();
+        //DrawInitialValues();
     }
-    
+
     public void DrawInitialValues()
     {
-        print("Nice");
-        
-
         float x = 3f * TotalPoints;
         graph.DataSource.StartBatch(); // calling StartBatch allows changing the graph data without redrawing the graph for every change
         graph.DataSource.ClearCategory("Temperature"); // clear the "Player 1" category. this category is defined using the GraphChart inspector
@@ -64,7 +61,6 @@ public class GraphManager : MonoBehaviour
 
         
         graph.DataSource.EndBatch(); // finally we call EndBatch , this will cause the GraphChart to redraw itself
-        print("WND!");
     }
 
     public void CustomizeGraph(string config)
@@ -143,7 +139,7 @@ public class GraphManager : MonoBehaviour
             {
                 graph.DataSource.AddPointToCategoryRealtime("Temperature", System.DateTime.Now, Random.value * 20f + 10f,
                     0f); // each time we call AddPointToCategory 
-                SetColor("Temperature", new Color(Random.value, Random.value, Random.value));
+                //SetColor("Temperature", new Color(Random.value, Random.value, Random.value));
             }
 
             //graph.DataSource.AddPointToCategoryRealtime("CO2", System.DateTime.Now, Random.value * 10f, 0f); // each time we call AddPointToCategory

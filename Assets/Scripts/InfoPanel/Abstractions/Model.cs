@@ -7,12 +7,16 @@ public abstract class Model
 
     protected int pos;
 
-    public Model (View view, int pos)
+    public string title;
+
+    public Model (View view, int pos, string title)
     {
         this.view = view;
         this.pos = pos;
+        this.title = title;
     }
 
+    // TODO: public or getters?
     public int GetPos()
     {
         return pos;

@@ -11,20 +11,22 @@
 
     private TextBannerMessage ParseMessage()
     {
-        return new TextBannerMessage(1.0f, 1, 1, 1);
+        return new TextBannerMessage("Test Message", 1, 5, 1, 16);
     }
 }
 
 public class TextBannerMessage : WidgetMessage
 {
-    public float datapoint;
-    public int detailedPanelPos;
+    public string msg;
+    public float duration;
     public int color;
+    public int fontSize;
 
-    public TextBannerMessage(float datapoint, int pos, int detailedPanelPos, int color) : base(pos)
+    public TextBannerMessage(string msg, int pos, float duration, int color, int fontSize) : base(pos)
     {
-        this.datapoint = datapoint;
-        this.detailedPanelPos = detailedPanelPos;
+        this.msg = msg;
+        this.duration = duration;
         this.color = color;
+        this.fontSize = fontSize;
     }
 }

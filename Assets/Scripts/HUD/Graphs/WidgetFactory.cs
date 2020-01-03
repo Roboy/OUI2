@@ -63,7 +63,7 @@ public class WidgetFactory : Singleton<WidgetFactory>
                 break;
 
             case "TextBanner":
-                //widget = CreateTextBannerWidget(widgetContext);
+                widget = CreateTextBannerWidget(widgetContext);
                 break;
 
             default:
@@ -113,7 +113,8 @@ public class WidgetFactory : Singleton<WidgetFactory>
         // TODO: Greate new MVC Classes
         //GameObject newInstance = Instantiate(GraphPref);
         View view = WidgetManager.Instance.gameObject.AddComponent<TextBannerView>() as TextBannerView;
-        Model model = new TextBannerModel(view, widgetContext.pos, widgetContext.title, widgetContext.detailedPanelPos, widgetContext.color);
+        //Model model = new TextBannerModel(view, widgetContext.pos, widgetContext.title, widgetContext.duration, widgetContext.color, widgetContext.fontSize);
+        Model model = new TextBannerModel(view, widgetContext.pos, widgetContext.title, 5, widgetContext.color, 30);
         Controller controller = new TextBannerController(model);
         Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;
 

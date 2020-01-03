@@ -2,6 +2,7 @@
 
 public class MVCFactory : MonoBehaviour
 {
+    /*
     const int SIZE = 10;
 
     Controller<DataPoint<float>> controller;
@@ -52,4 +53,5 @@ public class MVCFactory : MonoBehaviour
         inspectorDisplay.Init(SIZE);
         return new InspectorView<DataPoint<float>, float>(inspectorDisplay, model);
     }
+    */
 }

@@ -12,7 +12,7 @@ public class GraphModel : Model
 
     Queue<float> datapoints;
 
-    public GraphModel(View view, int pos, int detailedPanelPos, int color) : base(view, pos)
+    public GraphModel(View view, int pos, string title, int detailedPanelPos, int color) : base(view, pos, title)
     {
         this.color = color;
         this.detailedPanelPos = detailedPanelPos;

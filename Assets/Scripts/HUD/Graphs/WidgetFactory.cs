@@ -88,7 +88,7 @@ public class WidgetFactory : Singleton<WidgetFactory>
     {
         GameObject newInstance = Instantiate(GraphPref);
         View view = newInstance.AddComponent<GraphViewDummy>() as GraphViewDummy;
-        Model model = new GraphModel(view, widgetContext.pos, widgetContext.detailedPanelPos, widgetContext.color);
+        Model model = new GraphModel(view, widgetContext.pos, widgetContext.title, widgetContext.detailedPanelPos, widgetContext.color);
         Controller controller = new GraphController(model);
         Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;
 

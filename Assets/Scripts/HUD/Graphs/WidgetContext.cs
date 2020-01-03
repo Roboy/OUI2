@@ -4,7 +4,7 @@ public class WidgetContext
 {
     public int template_ID;
     public LiveDataType type;
-    public byte[] data;
+    public string title;
     public int pos;
 
     // determines where the DetailedPanel should be shown
@@ -16,7 +16,7 @@ public class WidgetContext
     // the color of the graph
     public int color;
     
-    public WidgetContext(int template_ID, string type, byte[] data, int pos, int detailedPanelPos, int numLabelsShownX, int numLabelsShownY, int color)
+    public WidgetContext(int template_ID, string type, string title, int pos, int detailedPanelPos, int numLabelsShownX, int numLabelsShownY, int color)
     {
         this.template_ID = template_ID;
 
@@ -35,7 +35,7 @@ public class WidgetContext
                 break;
         }
 
-        this.data = data;
+        this.title = title;
         this.pos = pos;
         this.detailedPanelPos = detailedPanelPos;
         this.numLabelsShownX = numLabelsShownX;

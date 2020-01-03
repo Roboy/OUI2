@@ -5,10 +5,13 @@ using UnityEngine;
 public class GraphViewDummy : View
 {
     private IconStateManager iconManager;
+    private GraphManager graphManager;
 
-    public override void Init()
+    public override void Init(Model model)
     {
         iconManager = GetComponent<IconStateManager>();
+        graphManager = GetComponent<GraphManager>();
+        UpdateView(model);
     }
 
     public override void UpdateView(Model model)
@@ -47,5 +50,11 @@ public class GraphViewDummy : View
     private void SetThumbnailIcon(string iconName)
     {
         // TODO
+    }
+
+    private void SetColor(string title, int col)
+    {
+        // TODO: parse Color
+        graphManager.SetColor(title, new Color(1, 0, 0));
     }
 }

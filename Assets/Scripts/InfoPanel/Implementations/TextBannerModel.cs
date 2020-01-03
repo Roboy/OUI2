@@ -6,40 +6,58 @@ public class TextBannerModel : Model
 {
     const int SIZE = 100;
 
-    public int detailedPanelPos;
-
+    public float duration;
     public int color;
+    public int fontSize;
 
-    Queue<float> datapoints;
+    public Queue<Printable> datapoints;
 
-    public TextBannerModel(View view, int pos, string title, int detailedPanelPos, int color) : base(view, pos, title)
+    public TextBannerModel(View view, int pos, string title, float duration, int color, int fontSize) : base(view, pos, title)
     {
+        this.duration = duration;
         this.color = color;
-        this.detailedPanelPos = detailedPanelPos;
-        datapoints = new Queue<float>(SIZE);
+        this.fontSize = fontSize;
+
+        datapoints = new Queue<Printable>(SIZE);
     }
-    
+
     public override void UpdateModel(WidgetMessage newMessage)
     {
-        GraphMessage newGraphMessage = (GraphMessage)newMessage;
+        TextBannerMessage newTextBannerMessage = (TextBannerMessage)newMessage;
 
-        if (newGraphMessage.color != 0)
+        if (newTextBannerMessage.msg != "")
         {
-            color = newGraphMessage.color;
+            title = newTextBannerMessage.msg;
         }
 
-        if (newGraphMessage.pos != 0)
+        if (newTextBannerMessage.duration != 0)
         {
-            pos = newGraphMessage.pos;
+            duration = newTextBannerMessage.duration;
         }
 
-        if (newGraphMessage.detailedPanelPos != 0)
+        if (newTextBannerMessage.color != 0)
         {
-            detailedPanelPos = newGraphMessage.pos;
+            color = newTextBannerMessage.color;
         }
 
-        datapoints.Enqueue(newGraphMessage.datapoint);
+        if (newTextBannerMessage.pos != 0)
+        {
+            pos = newTextBannerMessage.pos;
+        }
+
+        if (newTextBannerMessage.fontSize != 0)
+        {
+            fontSize = newTextBannerMessage.fontSize;
+        }
+
+        datapoints.Enqueue(new Printable(newTextBannerMessage.msg, duration, ParseColor(color), (byte)fontSize));
 
         view.UpdateView(this);
+    }
+
+    // TODO: same colors for each type??
+    public Color ParseColor(int c)
+    {
+        return Color.red;
     }
 }

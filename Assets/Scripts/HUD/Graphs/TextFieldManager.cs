@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TextFieldManager : MonoBehaviour
 {
-    Queue<Printable> queue = new Queue<Printable>();
+    public Queue<Printable> queue = new Queue<Printable>();
 
     private float timer;
 
@@ -29,9 +29,13 @@ public class TextFieldManager : MonoBehaviour
             {
                 Printable p = queue.Dequeue();
                 text.text = p.msg;
-                timer = p.dur;
-                text.color = p.col;
+                timer = p.duration;
+                text.color = p.color;
                 text.fontSize = p.fontSize;
+            } else
+            {
+                // TODO: let the text vanish, e.g. shrink
+                text.text = "";
             }
         }
     }
@@ -40,7 +44,15 @@ public class TextFieldManager : MonoBehaviour
 public struct Printable 
 {
     public string msg;
-    public float dur;
-    public Color col;
+    public float duration;
+    public Color color;
     public byte fontSize;
+
+    public Printable(string msg, float duration, Color color, byte fontSize) : this()
+    {
+        this.msg = msg;
+        this.duration = duration;
+        this.color = color;
+        this.fontSize = fontSize;
+    }
 }

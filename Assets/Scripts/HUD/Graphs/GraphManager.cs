@@ -117,12 +117,6 @@ public class GraphManager : MonoBehaviour
 
     private void Update()
     {
-        /*if (Random.value < Time.deltaTime)
-        {
-            SetColor("Player 1", new Color(Random.value, Random.value, Random.value));
-            SetColor("Player 2", new Color(Random.value, Random.value, Random.value));
-        }*/
-        
         float time = Time.time;
         if (lastTime + 2f < time)
         {

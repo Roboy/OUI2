@@ -1,22 +1,46 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class JsonReceiver : MonoBehaviour
+public static class JsonReceiver
 {
-    // Start is called before the first frame update
-    void Start()
+    public static List<WidgetContext> ParseAllWidgetTemplates()
     {
-        //ReceivedJsonData d = new ReceivedJsonData(0, "temperature", BitConverter.GetBytes(27), 0);
-        //print(JsonUtility.ToJson(d));
-        //string s = Resources.Load<TextAsset>("TestTemplate").text;
+        List<WidgetContext> widgetContexts = new List<WidgetContext>();
+
         TextAsset[] textAssets = Resources.LoadAll<TextAsset>("JsonTemplates");
         foreach (TextAsset asset in textAssets)
         {
-            WidgetContext widgetContext = ParseWidgetTemplate(asset);
+            WidgetContext parsedWidgetContext = ParseWidgetTemplate(asset);
 
-            // Create a new Bytearray
+            if (parsedWidgetContext == null)
+            {
+                continue;
+            }
+
+            widgetContexts.Add(ParseWidgetTemplate(asset));
+        }
+
+        return widgetContexts;
+    }
+
+    private static WidgetContext ParseWidgetTemplate(TextAsset asset)
+    {
+        WidgetContext parsedContext = JsonUtility.FromJson<WidgetContext>(asset.text);
+        if (parsedContext == null)
+        {
+            Debug.LogWarning("Json " + asset.text + " is faulty");
+            return null;
+        }
+
+        return parsedContext;
+    }
+}
+
+
+
+/*
+ 
+    // Create a new Bytearray
             Byte[] bs = BitConverter.GetBytes(2);
             Byte[] bs2 = BitConverter.GetBytes(13);
             Byte[] bs3 = new byte[8];
@@ -33,26 +57,5 @@ public class JsonReceiver : MonoBehaviour
                 print(y);
             }
 
-        }
-        //print(s);
-    }
 
-    private WidgetContext ParseWidgetTemplate(TextAsset asset)
-    {
-        print(asset.text);
-        WidgetContext r = JsonUtility.FromJson<WidgetContext>(asset.text);
-        if (r == null)
-        {
-            Debug.LogWarning("Json " + asset.text + " is faulty");
-            return null;
-        }
-        print(r.pos);
-
-        return r;
-    }
-}
-
-enum LiveDataType
-{
-    ErrorMsg, Msg, Graph
-}
+ */

@@ -1,61 +1,17 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Model<T> : IPublisher<T> 
+public abstract class Model
 {
-    int size;
-    Queue<T> data;
+    protected View view;
 
-    List<ISubscriber<T>> subscriberList;
+    protected int pos;
 
-    public Model(int size)
+    public Model (View view, int pos)
     {
-        this.size = size;
-        data = new Queue<T>(size);
+        this.view = view;
+        this.pos = pos;
     }
-
-    public void AddDataPoint(T dataPoint)
-    {
-        data.Enqueue(dataPoint);
-        
-        if (data.Count > size)
-        {
-            data.Dequeue();
-        }
-
-        Notify();
-    }
-
-    public Queue<T> GetData()
-    {
-        return data;
-    }
-
-    #region Publisher Interface
-
-    public void Subscribe(ISubscriber<T> subscriber)
-    {
-        if (subscriberList == null)
-            subscriberList = new List<ISubscriber<T>>();
-
-        subscriberList.Add(subscriber);
-    }
-
-    public void Notify()
-    {
-        foreach(ISubscriber<T> subscriber in subscriberList)
-        {
-            subscriber.ReceiveUpdate(data);
-        }
-    }
-
-    public void Unsubscribe(ISubscriber<T> subscriber)
-    {
-        if (subscriberList == null)
-            return;
-
-        subscriberList.Remove(subscriber);
-    }
-
-    #endregion
+    
+    public abstract void UpdateModel(WidgetMessage newMessage);
 }

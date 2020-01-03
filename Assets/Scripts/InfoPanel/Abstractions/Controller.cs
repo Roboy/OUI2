@@ -1,18 +1,22 @@
-﻿using System.Collections.Generic;
-
-public class Controller<T>
+﻿
+public abstract class Controller
 {
-    private Model<T> model;
+    protected Model model;
 
-    private List<View<T>> views;
-
-    public Controller(Model<T> model)
+    public Controller(Model model)
     {
         this.model = model;
     }
 
-    public void AddDataPoint(T dataPoint)
+    public abstract void ReceiveMessage(byte[] message);
+}
+
+public abstract class WidgetMessage
+{   
+    public int pos;
+
+    public WidgetMessage(int pos)
     {
-        model.AddDataPoint(dataPoint);
+        this.pos = pos;
     }
 }

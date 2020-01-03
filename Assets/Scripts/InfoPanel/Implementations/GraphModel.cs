@@ -6,13 +6,16 @@ public class GraphModel : Model
 {
     const int SIZE = 100;
 
-    int color;
+    public int detailedPanelPos;
+
+    public int color;
 
     Queue<float> datapoints;
 
-    public GraphModel(View view, int pos, int color) : base(view, pos)
+    public GraphModel(View view, int pos, int detailedPanelPos, int color) : base(view, pos)
     {
         this.color = color;
+        this.detailedPanelPos = detailedPanelPos;
         datapoints = new Queue<float>(SIZE);
     }
     
@@ -28,6 +31,11 @@ public class GraphModel : Model
         if (newGraphMessage.pos != 0)
         {
             pos = newGraphMessage.pos;
+        }
+
+        if (newGraphMessage.detailedPanelPos != 0)
+        {
+            detailedPanelPos = newGraphMessage.pos;
         }
 
         datapoints.Enqueue(newGraphMessage.datapoint);

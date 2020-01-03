@@ -2,7 +2,10 @@
 using UnityEngine;
 
 public class WidgetFactory : Singleton<WidgetFactory>
-{ 
+{
+    public GameObject GraphPref;
+
+
     // Start is called before the first frame update
     public List<Widget> CreateWidgetsAtStartup()
     {
@@ -61,7 +64,7 @@ public class WidgetFactory : Singleton<WidgetFactory>
             default:
                 Debug.LogWarning("Type not defined: " + widgetContext.type);
                 break;
-        }        
+        }    
 
         return widget;
 
@@ -83,10 +86,16 @@ public class WidgetFactory : Singleton<WidgetFactory>
 
     public Widget CreateGraphWidget(WidgetContext widgetContext)
     {
-        View view = WidgetManager.Instance.gameObject.AddComponent<GraphViewDummy>() as GraphViewDummy;
-        Model model = new GraphModel(view, widgetContext.pos, widgetContext.color);
+        GameObject newInstance = Instantiate(GraphPref);
+        View view = newInstance.AddComponent<GraphViewDummy>() as GraphViewDummy;
+        Model model = new GraphModel(view, widgetContext.pos, widgetContext.detailedPanelPos, widgetContext.color);
         Controller controller = new GraphController(model);
         Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;
+
+        /*View view = WidgetManager.Instance.gameObject.AddComponent<GraphViewDummy>() as GraphViewDummy;
+        Model model = new GraphModel(view, widgetContext.pos, widgetContext.color);
+        Controller controller = new GraphController(model);
+        Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;*/
 
         widget.InitializeWidget(controller, model, view);
 

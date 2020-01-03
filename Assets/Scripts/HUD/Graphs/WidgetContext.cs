@@ -6,7 +6,9 @@ public class WidgetContext
     public LiveDataType type;
     public byte[] data;
     public int pos;
-    
+
+    // determines where the DetailedPanel should be shown
+    public int detailedPanelPos;
     // determines how many labels should be shown on the x axis of the graph
     public int numLabelsShownX;
     // determines how many labels should be shown on the y axis of the graph
@@ -14,7 +16,7 @@ public class WidgetContext
     // the color of the graph
     public int color;
     
-    public WidgetContext(int template_ID, string type, byte[] data, int pos, int numLabelsShownX, int numLabelsShownY, int color)
+    public WidgetContext(int template_ID, string type, byte[] data, int pos, int detailedPanelPos, int numLabelsShownX, int numLabelsShownY, int color)
     {
         this.template_ID = template_ID;
 
@@ -35,6 +37,7 @@ public class WidgetContext
 
         this.data = data;
         this.pos = pos;
+        this.detailedPanelPos = detailedPanelPos;
         this.numLabelsShownX = numLabelsShownX;
         this.numLabelsShownY = numLabelsShownY;
         this.color = color;

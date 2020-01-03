@@ -12,6 +12,11 @@ public abstract class Model
         this.view = view;
         this.pos = pos;
     }
+
+    public int GetPos()
+    {
+        return pos;
+    }
     
     public abstract void UpdateModel(WidgetMessage newMessage);
 }

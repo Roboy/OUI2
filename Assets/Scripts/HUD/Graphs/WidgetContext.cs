@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class WidgetContext
 {
     public int template_ID;
-    public LiveDataType type;
+    public string type;
     public string title;
     public int pos;
 
@@ -15,10 +16,32 @@ public class WidgetContext
     public int numLabelsShownY;
     // the color of the graph
     public int color;
-    
-    public WidgetContext(int template_ID, string type, string title, int pos, int detailedPanelPos, int numLabelsShownX, int numLabelsShownY, int color)
+
+    /*public WidgetContext(int template_ID, string type, string title, int pos, int detailedPanelPos, int numLabelsShownX, int numLabelsShownY, int color)
     {
         this.template_ID = template_ID;
+
+        if (!Enum.TryParse<LiveDataType>(type, true, out this.type))
+        {
+            this.type = 0;
+        }
+
+        this.title = title;
+        this.pos = pos;
+        this.detailedPanelPos = detailedPanelPos;
+        this.numLabelsShownX = numLabelsShownX;
+        this.numLabelsShownY = numLabelsShownY;
+        this.color = color;
+    }*/
+
+    /*public WidgetContext(int template_ID, string type, string title, int pos, int detailedPanelPos, int numLabelsShownX, int numLabelsShownY, int color)
+    {
+        this.template_ID = template_ID;
+
+        //if (!Enum.TryParse<LiveDataType>(type, true, out this.type))
+        //{
+        //    this.type = 0;
+        //}
 
         switch(type)
         {
@@ -41,10 +64,10 @@ public class WidgetContext
         this.numLabelsShownX = numLabelsShownX;
         this.numLabelsShownY = numLabelsShownY;
         this.color = color;
-    }
+    }*/
 }
 
-public enum LiveDataType
+/*public enum LiveDataType
 {
-    Graph, Inspector
-}
+    Missing, Graph, Inspector, TextBanner
+}*/

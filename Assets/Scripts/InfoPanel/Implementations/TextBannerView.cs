@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GraphViewDummy : View
+public class TextBannerView : View
 {
     private IconStateManager iconManager;
     private GraphManager graphManager;

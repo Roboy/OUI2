@@ -50,15 +50,20 @@ public class WidgetFactory : Singleton<WidgetFactory>
             return null;
         }
 
-        Widget widget = null; 
+        Widget widget = null;
+        Debug.Log(widgetContext.type.ToString());
         
         switch (widgetContext.type)
         {
-            case LiveDataType.Graph:
+            case "Graph":
                 widget = CreateGraphWidget(widgetContext);
                 break;
 
-            case LiveDataType.Inspector:
+            case "Inspector":
+                break;
+
+            case "TextBanner":
+                //widget = CreateTextBannerWidget(widgetContext);
                 break;
 
             default:
@@ -87,9 +92,29 @@ public class WidgetFactory : Singleton<WidgetFactory>
     public Widget CreateGraphWidget(WidgetContext widgetContext)
     {
         GameObject newInstance = Instantiate(GraphPref);
-        View view = newInstance.AddComponent<GraphViewDummy>() as GraphViewDummy;
+        View view = newInstance.AddComponent<GraphView>() as GraphView;
         Model model = new GraphModel(view, widgetContext.pos, widgetContext.title, widgetContext.detailedPanelPos, widgetContext.color);
         Controller controller = new GraphController(model);
+        Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;
+
+        /*View view = WidgetManager.Instance.gameObject.AddComponent<GraphViewDummy>() as GraphViewDummy;
+        Model model = new GraphModel(view, widgetContext.pos, widgetContext.color);
+        Controller controller = new GraphController(model);
+        Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;*/
+
+        widget.InitializeWidget(controller, model, view);
+
+        return widget;
+    }
+
+    // TODO: adjust MVC for TextBanner and implement new needed Variables (duration, ...) 
+    public Widget CreateTextBannerWidget(WidgetContext widgetContext)
+    {
+        // TODO: Greate new MVC Classes
+        //GameObject newInstance = Instantiate(GraphPref);
+        View view = WidgetManager.Instance.gameObject.AddComponent<TextBannerView>() as TextBannerView;
+        Model model = new TextBannerModel(view, widgetContext.pos, widgetContext.title, widgetContext.detailedPanelPos, widgetContext.color);
+        Controller controller = new TextBannerController(model);
         Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;
 
         /*View view = WidgetManager.Instance.gameObject.AddComponent<GraphViewDummy>() as GraphViewDummy;

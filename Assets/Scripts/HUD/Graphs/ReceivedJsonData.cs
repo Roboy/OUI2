@@ -17,11 +17,14 @@ public class ReceivedJsonData
     // the color of the graph
     public int color;
 
-    public ReceivedJsonData(int templateId, string type, byte[] data, int pos)
+    public ReceivedJsonData(int template_ID, string type, byte[] data, int pos, int numLabelsShownX, int numLabelsShownY, int color)
     {
-        template_ID = templateId;
+        this.template_ID = template_ID;
         this.type = type;
         this.data = data;
         this.pos = pos;
+        this.numLabelsShownX = numLabelsShownX;
+        this.numLabelsShownY = numLabelsShownY;
+        this.color = color;
     }
 }

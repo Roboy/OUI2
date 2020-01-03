@@ -18,7 +18,7 @@ public class JsonReceiver : MonoBehaviour
             ReceivedJsonData r = JsonUtility.FromJson<ReceivedJsonData>(asset.text);
             if (r == null)
             {
-                print("Json " + asset.text);
+                print("Json " + asset.text + " is faulty");
                 continue;
             }
             print(r.pos);

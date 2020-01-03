@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-
-public class ReceivedJsonData
+﻿public class WidgetContext
 {
     public int template_ID;
     public string type;
@@ -17,7 +12,7 @@ public class ReceivedJsonData
     // the color of the graph
     public int color;
 
-    public ReceivedJsonData(int template_ID, string type, byte[] data, int pos, int numLabelsShownX, int numLabelsShownY, int color)
+    public WidgetContext(int template_ID, string type, byte[] data, int pos, int numLabelsShownX, int numLabelsShownY, int color)
     {
         this.template_ID = template_ID;
         this.type = type;

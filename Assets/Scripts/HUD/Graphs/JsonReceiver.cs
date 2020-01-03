@@ -14,15 +14,8 @@ public class JsonReceiver : MonoBehaviour
         TextAsset[] textAssets = Resources.LoadAll<TextAsset>("JsonTemplates");
         foreach (TextAsset asset in textAssets)
         {
-            print(asset.text);
-            ReceivedJsonData r = JsonUtility.FromJson<ReceivedJsonData>(asset.text);
-            if (r == null)
-            {
-                print("Json " + asset.text + " is faulty");
-                continue;
-            }
-            print(r.pos);
-            
+            WidgetContext widgetContext = ParseWidgetTemplate(asset);
+
             // Create a new Bytearray
             Byte[] bs = BitConverter.GetBytes(2);
             Byte[] bs2 = BitConverter.GetBytes(13);
@@ -42,8 +35,20 @@ public class JsonReceiver : MonoBehaviour
 
         }
         //print(s);
-        
-        
+    }
+
+    private WidgetContext ParseWidgetTemplate(TextAsset asset)
+    {
+        print(asset.text);
+        WidgetContext r = JsonUtility.FromJson<WidgetContext>(asset.text);
+        if (r == null)
+        {
+            Debug.LogWarning("Json " + asset.text + " is faulty");
+            return null;
+        }
+        print(r.pos);
+
+        return r;
     }
 }
 

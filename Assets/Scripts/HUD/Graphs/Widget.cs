@@ -16,6 +16,9 @@ public class Widget : MonoBehaviour
         this.controller = controller;
         this.model = model;
         this.view = view;
+        //TODO: probably not wanted
+        view.Init();
+        view.UpdateView(model);
     }
     
     public int GetID()

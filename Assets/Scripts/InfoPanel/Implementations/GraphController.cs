@@ -11,18 +11,20 @@
 
     private GraphMessage ParseMessage()
     {
-        return new GraphMessage(1.0f, 2, 1);
+        return new GraphMessage(1.0f, 1, 1, 1);
     }
 }
 
 public class GraphMessage : WidgetMessage
 {
     public float datapoint;
+    public int detailedPanelPos;
     public int color;
 
-    public GraphMessage(float datapoint, int pos, int color) : base(pos)
+    public GraphMessage(float datapoint, int pos, int detailedPanelPos, int color) : base(pos)
     {
         this.datapoint = datapoint;
+        this.detailedPanelPos = detailedPanelPos;
         this.color = color;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class RosMock : Singleton<RosMock>
 {
@@ -46,34 +47,103 @@ public class RosMock : Singleton<RosMock>
 
 public class RosMockSubscriber : MonoBehaviour
 {
+    private float temperature;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            int id = 1;
-
-            float datapoint = UnityEngine.Random.Range(5.0f, 15.0f);
-            int pos = 0;
-            int detailedPosition = 0;
-            int color = 1;
-
-            byte[] data = new byte[(sizeof(float) + sizeof(int) + sizeof(int) + sizeof(int))];
-
-            Buffer.BlockCopy(BitConverter.GetBytes(datapoint),          0, data, 0,                                                 BitConverter.GetBytes(datapoint).Length);
-            Buffer.BlockCopy(BitConverter.GetBytes(pos),                0, data, sizeof(float),                                     BitConverter.GetBytes(pos).Length);
-            Buffer.BlockCopy(BitConverter.GetBytes(detailedPosition),   0, data, sizeof(float) + sizeof(int),                       BitConverter.GetBytes(detailedPosition).Length);
-            Buffer.BlockCopy(BitConverter.GetBytes(color),              0, data, sizeof(float) + sizeof(int) + sizeof(int),         BitConverter.GetBytes(color).Length);
-
-            RosMock.Instance.EnqueueNewMessage(new RosMessage(1, data));
-                        
+            float tempDiff = UnityEngine.Random.Range(0f, 5.0f);
+            temperature += tempDiff;
+            //send the message to the graph
+            CreateTemperatureData(1, temperature, 0, 0, 1);
             // Same message on inspector widget id = 3
-            RosMock.Instance.EnqueueNewMessage(new RosMessage(3, data));
+            CreateTemperatureData(3, temperature, 0, 0, 1);
+            if (temperature > 40 && temperature - tempDiff <= 40)
+            {
+                // Send a message that the temperature is critically high
+                CreateTemperatureWarningData(2, 0, 6, 1, 50, "Temperature is critically high!");
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            float tempDiff = UnityEngine.Random.Range(0f, 7.0f);
+            temperature -= tempDiff;
+            //send the message to the graph
+            CreateTemperatureData(1, temperature, 0, 0, 1);
+            // Same message on inspector widget id = 3
+            CreateTemperatureData(3, temperature, 0, 0, 1);
+            if (temperature < 0 && temperature + tempDiff >= 0)
+            {
+                // Send a message that the temperature is critically high
+                CreateTemperatureWarningData(2, 0, 6, 1, 50, "Temperature is critically low!");
+            }
         }
     }
 
-    private int AppendData(float f)
+    private void CreateTemperatureData(int id, float datapoint, int pos, int detailedPanelPos, int color)
     {
-        return 0;
+        byte[] data = new byte[(sizeof(float) + 3 * sizeof(int))];
+        int offset = 0;
+
+        offset = AppendData(data, offset, datapoint);
+        offset = AppendData(data, offset, pos);
+        offset = AppendData(data, offset, detailedPanelPos);
+        offset = AppendData(data, offset, color);
+
+        RosMock.Instance.EnqueueNewMessage(new RosMessage(id, data));
+    }
+
+    private void CreateTemperatureWarningData(int id, int pos, float duration, int color, int fontSize, string msg)
+    {
+        byte[] data = new byte[(sizeof(float) + 3 * sizeof(int) + msg.Length * sizeof(char) + 1)];
+        int offset = 0;
+
+        offset = AppendData(data, offset, pos);
+        offset = AppendData(data, offset, duration);
+        offset = AppendData(data, offset, color);
+        offset = AppendData(data, offset, fontSize);
+        offset = AppendData(data, offset, msg);
+
+        RosMock.Instance.EnqueueNewMessage(new RosMessage(id, data));
+    }
+
+    private int AppendData(byte[] data, int offset, int i)
+    {
+        byte[] newData = BitConverter.GetBytes(i);
+        Buffer.BlockCopy(newData, 0, data, offset, newData.Length);
+        return offset + sizeof(int);
+    }
+
+    private int AppendData(byte[] data, int offset, float i)
+    {
+        byte[] newData = BitConverter.GetBytes(i);
+        Buffer.BlockCopy(newData, 0, data, offset, newData.Length);
+        return offset + sizeof(float);
+    }
+
+    private int AppendData(byte[] data, int offset, string i)
+    {
+        MemoryStream dataStream = new MemoryStream();
+        BinaryWriter binaryWriter = new BinaryWriter(dataStream);
+        binaryWriter.Write(i);
+        byte[] newData = dataStream.ToArray();
+        Buffer.BlockCopy(newData, 0, data, offset, newData.Length);
+        return offset + newData.Length;
+
+        /*data[offset++] = BitConverter.GetBytes(i.Length)[0];
+        print(data[offset - 1]);
+        foreach (char c in i) {
+            offset = AppendData(data, offset, c);
+        }
+        return offset;*/
+    }
+
+    private int AppendData(byte[] data, int offset, char i)
+    {
+        byte[] newData = BitConverter.GetBytes(i);
+        Buffer.BlockCopy(newData, 0, data, offset, newData.Length);
+        return offset + sizeof(char);
     }
 }
 

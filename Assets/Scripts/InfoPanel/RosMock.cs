@@ -17,8 +17,6 @@ public class RosMock : Singleton<RosMock>
 
     public void EnqueueNewMessage(RosMessage message)
     {
-        Debug.Log("New Ros message received");
-
         rosMessageQueue.Enqueue(message);        
     }
 
@@ -55,8 +53,8 @@ public class RosMockSubscriber : MonoBehaviour
             int id = 1;
 
             float datapoint = UnityEngine.Random.Range(5.0f, 15.0f);
-            int pos = 1;
-            int detailedPosition = 1;
+            int pos = 0;
+            int detailedPosition = 0;
             int color = 1;
 
             byte[] data = new byte[(sizeof(float) + sizeof(int) + sizeof(int) + sizeof(int))];
@@ -66,11 +64,16 @@ public class RosMockSubscriber : MonoBehaviour
             Buffer.BlockCopy(BitConverter.GetBytes(detailedPosition),   0, data, sizeof(float) + sizeof(int),                       BitConverter.GetBytes(detailedPosition).Length);
             Buffer.BlockCopy(BitConverter.GetBytes(color),              0, data, sizeof(float) + sizeof(int) + sizeof(int),         BitConverter.GetBytes(color).Length);
 
-            RosMock.Instance.EnqueueNewMessage(new RosMessage(id, data));
+            RosMock.Instance.EnqueueNewMessage(new RosMessage(1, data));
                         
             // Same message on inspector widget id = 3
             RosMock.Instance.EnqueueNewMessage(new RosMessage(3, data));
         }
+    }
+
+    private int AppendData(float f)
+    {
+        return 0;
     }
 }
 

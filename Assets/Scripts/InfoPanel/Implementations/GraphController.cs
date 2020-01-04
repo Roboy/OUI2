@@ -17,8 +17,6 @@ public class GraphController : Controller
         Stream dataStream = new MemoryStream(rosMessageData);
         BinaryReader binaryReader = new BinaryReader(dataStream);
 
-        Debug.Log("New message arrived");
-
         return new GraphMessage(binaryReader.ReadSingle(), binaryReader.ReadInt32(), binaryReader.ReadInt32(), binaryReader.ReadInt32());
     }
 }

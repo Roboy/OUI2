@@ -1,10 +1,10 @@
-﻿public class InspectorView : View
+﻿public class InspectorGraphView : View
 {
-    public string[] display;
+    public string[] displayArray;
 
     public override void Init(Model model)
     {
-        display = new string[GraphModel.SIZE];
+        displayArray = new string[GraphModel.SIZE];
     }
 
     public override void UpdateView(Model model)
@@ -15,7 +15,7 @@
 
         for (int i = 0; i < dataArray.Length; i++)
         {
-            display[i] = dataArray[i].ToString();
+            displayArray[i] = dataArray[i].ToString();
         }
     }
 }

@@ -10,18 +10,25 @@ public class Widget : MonoBehaviour
     private Model model;
     private View view;
 
+    private WidgetContext context;
 
-    public void InitializeWidget(Controller controller, Model model, View view)
+    public void InitializeWidget(Controller controller, Model model, View view, WidgetContext context)
     {
         this.controller = controller;
         this.model = model;
         this.view = view;
-        //TODO: probably not wanted
-        view.Init(model);
+        this.context = context;
+        id = context.template_ID;
+
     }
     
     public int GetID()
     {
         return id;
+    }
+
+    public void ForwardRosMessage(byte[] rosMessageData)
+    {
+        controller.ReceiveMessage(rosMessageData);
     }
 }

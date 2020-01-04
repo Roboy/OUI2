@@ -1,17 +1,25 @@
-﻿public class GraphController : Controller
+﻿using System.IO;
+using UnityEngine;
+
+public class GraphController : Controller
 {
     public GraphController(Model model) : base(model)
     {
     }
 
-    public override void ReceiveMessage(byte[] message)
+    public override void ReceiveMessage(byte[] rosMessageData)
     {
-        model.UpdateModel(ParseMessage());
+        model.UpdateModel(ParseMessage(rosMessageData));
     }
 
-    private GraphMessage ParseMessage()
+    private GraphMessage ParseMessage(byte[] rosMessageData)
     {
-        return new GraphMessage(1.0f, 1, 1, 1);
+        Stream dataStream = new MemoryStream(rosMessageData);
+        BinaryReader binaryReader = new BinaryReader(dataStream);
+
+        Debug.Log("New message arrived");
+
+        return new GraphMessage(binaryReader.ReadSingle(), binaryReader.ReadInt32(), binaryReader.ReadInt32(), binaryReader.ReadInt32());
     }
 }
 

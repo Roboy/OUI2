@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
+[Serializable]
 public class WidgetContext
 {
     public int template_ID;
@@ -17,57 +18,8 @@ public class WidgetContext
     // the color of the graph
     public int color;
 
-    /*public WidgetContext(int template_ID, string type, string title, int pos, int detailedPanelPos, int numLabelsShownX, int numLabelsShownY, int color)
-    {
-        this.template_ID = template_ID;
+    // the time how long this widget should be shown
+    public float duration;
 
-        if (!Enum.TryParse<LiveDataType>(type, true, out this.type))
-        {
-            this.type = 0;
-        }
-
-        this.title = title;
-        this.pos = pos;
-        this.detailedPanelPos = detailedPanelPos;
-        this.numLabelsShownX = numLabelsShownX;
-        this.numLabelsShownY = numLabelsShownY;
-        this.color = color;
-    }*/
-
-    /*public WidgetContext(int template_ID, string type, string title, int pos, int detailedPanelPos, int numLabelsShownX, int numLabelsShownY, int color)
-    {
-        this.template_ID = template_ID;
-
-        //if (!Enum.TryParse<LiveDataType>(type, true, out this.type))
-        //{
-        //    this.type = 0;
-        //}
-
-        switch(type)
-        {
-            case "graph":
-                this.type = LiveDataType.Graph;
-                break;
-
-            case "inspector":
-                this.type = LiveDataType.Inspector;
-                break;
-
-            default:
-                Debug.LogWarning("Type of widget template " + template_ID + " not correct.");
-                break;
-        }
-
-        this.title = title;
-        this.pos = pos;
-        this.detailedPanelPos = detailedPanelPos;
-        this.numLabelsShownX = numLabelsShownX;
-        this.numLabelsShownY = numLabelsShownY;
-        this.color = color;
-    }*/
+    public byte fontSize;
 }
-
-/*public enum LiveDataType
-{
-    Missing, Graph, Inspector, TextBanner
-}*/

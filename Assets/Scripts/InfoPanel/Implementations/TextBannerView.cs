@@ -31,13 +31,13 @@ public class TextBannerView : View
 
     private void SetPosition(int pos)
     {
-        if (pos - 1 < 0 || pos - 1 > WidgetPositions.Instance.positionsText.Length)
+        if (pos - 1 < 0 || pos - 1 > WidgetData.Instance.positionsText.Length)
         {
             Debug.LogWarning("Invalid position for widget:" + pos);
             return;
         }
         // TODO: Make positionText of Type TextFieldManager[]
-        textFieldManager = WidgetPositions.Instance.positionsText[pos - 1].GetComponent<TextFieldManager>();
+        textFieldManager = WidgetData.Instance.positionsText[pos - 1].GetComponent<TextFieldManager>();
     }
 
     private void SetColor(string title, int col)

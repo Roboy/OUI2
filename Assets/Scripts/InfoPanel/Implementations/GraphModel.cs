@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class GraphModel : Model
 {
-    const int SIZE = 100;
+    public const int SIZE = 10;
 
     public int detailedPanelPos;
 
     public int color;
 
-    Queue<float> datapoints;
+    public Queue<float> datapoints;
 
     public GraphModel(View view, int pos, string title, int detailedPanelPos, int color) : base(view, pos, title)
     {
@@ -36,6 +36,11 @@ public class GraphModel : Model
         if (newGraphMessage.detailedPanelPos != 0)
         {
             detailedPanelPos = newGraphMessage.pos;
+        }
+
+        if (datapoints.Count == SIZE)
+        {
+            datapoints.Dequeue();
         }
 
         datapoints.Enqueue(newGraphMessage.datapoint);

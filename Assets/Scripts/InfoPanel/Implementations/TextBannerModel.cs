@@ -10,13 +10,17 @@ public class TextBannerModel : Model
     public int color;
     public int fontSize;
 
+    public string messageToDisplay;
+
     public Queue<Printable> datapoints;
 
     public TextBannerModel(View view, int pos, string title, float duration, int color, int fontSize) : base(view, pos, title)
     {
-        this.duration = duration;
+        // TODO: if 0 set to default value
+        this.duration = ProcessInitialValue(duration, 6, false, "duration");
         this.color = color;
-        this.fontSize = fontSize;
+
+        this.fontSize = ProcessInitialValue(fontSize, 32, false, "fontSize");
 
         datapoints = new Queue<Printable>(SIZE);
     }
@@ -27,7 +31,7 @@ public class TextBannerModel : Model
 
         if (newTextBannerMessage.msg != "")
         {
-            title = newTextBannerMessage.msg;
+            messageToDisplay = newTextBannerMessage.msg;
         }
 
         if (newTextBannerMessage.duration != 0)

@@ -9767,6 +9767,7 @@ MonoBehaviour:
 >>>>>>> Templates can now generate a thumbnail with an image of a graph
 MonoBehaviour:
   m_ObjectHideFlags: 0
+<<<<<<< master
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -9943,6 +9944,38 @@ MonoBehaviour:
   savedFill: 1
 =======
     - target: {fileID: 4364374707289102589, guid: 2a13184c5b19a1648831a4984f35c284,
+=======
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1035264847}
+    m_Modifications:
+    - target: {fileID: -3145434331993811079, guid: 9e7b86dfa5ccc8546a19c645854fb25d,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8166567870579517880, guid: 9e7b86dfa5ccc8546a19c645854fb25d,
+        type: 3}
+      propertyPath: m_Name
+      value: Bottom
+      objectReference: {fileID: 0}
+    - target: {fileID: 5915476451159072705, guid: 9e7b86dfa5ccc8546a19c645854fb25d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5915476451159072705, guid: 9e7b86dfa5ccc8546a19c645854fb25d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5915476451159072705, guid: 9e7b86dfa5ccc8546a19c645854fb25d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5915476451159072705, guid: 9e7b86dfa5ccc8546a19c645854fb25d,
+>>>>>>> Ros Mock added, InspectorGraphView added
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -10819,6 +10852,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1035264847}
     m_Modifications:
+    - target: {fileID: -3145434331993811079, guid: 9e7b86dfa5ccc8546a19c645854fb25d,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8166567870579517880, guid: 9e7b86dfa5ccc8546a19c645854fb25d,
         type: 3}
       propertyPath: m_Name
@@ -11658,6 +11696,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1035264847}
     m_Modifications:
+    - target: {fileID: -3145434331993811079, guid: 9e7b86dfa5ccc8546a19c645854fb25d,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8166567870579517880, guid: 9e7b86dfa5ccc8546a19c645854fb25d,
         type: 3}
       propertyPath: m_Name

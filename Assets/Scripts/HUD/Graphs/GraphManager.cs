@@ -117,6 +117,7 @@ public class GraphManager : MonoBehaviour
 
     private void Update()
     {
+        /*
         float time = Time.time;
         if (lastTime + 2f < time)
         {
@@ -125,19 +126,18 @@ public class GraphManager : MonoBehaviour
             //Graph.DataSource.Poin
             
             lastTime = time;
-            //DrawInitialValues();
             lastX += Random.value * 3f;
 //            System.DateTime t = ChartDateUtility.ValueToDate(lastX);
 
             if (Random.value < 1.5)
             {
-                graph.DataSource.AddPointToCategoryRealtime("Temperature", System.DateTime.Now, Random.value * 20f + 10f,
-                    0f); // each time we call AddPointToCategory 
+                graph.DataSource.AddPointToCategoryRealtime("Temperature", System.DateTime.Now, Random.value * 20f + 10f,0f); // each time we call AddPointToCategory 
                 //SetColor("Temperature", new Color(Random.value, Random.value, Random.value));
             }
 
             //graph.DataSource.AddPointToCategoryRealtime("CO2", System.DateTime.Now, Random.value * 10f, 0f); // each time we call AddPointToCategory
         
         }
+        */
     }
 }

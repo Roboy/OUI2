@@ -9,7 +9,7 @@ using UnityEngine;
 /// In a push architecture, this class could not funtion correctly. RosSharp classes behave weird sometimes. Pull architecture works though.
 /// For every log level, there is a subclass to handle that topic.
 /// </summary>
-public class ROSManager : Singleton<ROSManager>
+public class ROSControllerTest : Singleton<ROSControllerTest>
 {    
     public string topic;
 
@@ -71,7 +71,7 @@ public class ROSManager : Singleton<ROSManager>
         {
             // Split operator and roboy log with code 0 for operator log, 1 for roboy log
             if (message.code == 0)
-                ROSManager.Instance.EnqueueMessage(message);
+                ROSControllerTest.Instance.EnqueueMessage(message);
         }
     }
 }

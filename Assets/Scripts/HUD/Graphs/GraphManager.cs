@@ -80,7 +80,7 @@ public class GraphManager : MonoBehaviour
     {
         Material fill = new Material(graphFill);
         fill.color = c;
-        print(c.ToString());
+        // print(c.ToString());
         graph.DataSource.SetCategoryLine(topic, fill, 5, new MaterialTiling(false, 0));
     }
 

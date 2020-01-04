@@ -13,20 +13,20 @@ public class GraphView : View
         graphManager = GetComponentInChildren<GraphManager>();
         graphManager.Init();
         iconManager.DetailedPanel.SetActive(false);
+        SetPosition(((GraphModel)model).GetPos());
         UpdateView(model);
     }
 
     public override void UpdateView(Model model)
     {
         GraphModel graphModel = (GraphModel)model;
-        SetPosition(graphModel.GetPos());
         SetDetailedPanelPosition(graphModel.detailedPanelPos);
         SetColor(graphModel.title, graphModel.color);
         if (graphModel.datapoints.Count > 0)
         { 
-            graphManager.AddDataPoint("Temperature", System.DateTime.Now, graphModel.datapoints.Peek());
+            graphManager.AddDataPoint(graphModel.title, System.DateTime.Now, graphModel.datapoints.ToArray()[graphModel.datapoints.Count-1]);
         }
-        Debug.Log("View updated");
+        // Debug.Log("View updated");
     }
 
     private void SetPosition(int pos)

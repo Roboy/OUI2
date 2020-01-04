@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +19,12 @@ public class GraphModel : Model
         this.detailedPanelPos = detailedPanelPos;
         datapoints = new Queue<float>(SIZE);
     }
-    
+
+    public static explicit operator GraphModel(int v)
+    {
+        throw new NotImplementedException();
+    }
+
     public override void UpdateModel(WidgetMessage newMessage)
     {
         GraphMessage newGraphMessage = (GraphMessage)newMessage;

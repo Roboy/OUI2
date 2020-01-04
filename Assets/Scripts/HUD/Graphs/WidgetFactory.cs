@@ -4,7 +4,7 @@ using UnityEngine;
 public class WidgetFactory : Singleton<WidgetFactory>
 {
     public GameObject GraphPref;
-
+    public CurvedUI.CurvedUISettings curvedUI;
 
     // Start is called before the first frame update
     public List<Widget> CreateWidgetsAtStartup()
@@ -25,6 +25,8 @@ public class WidgetFactory : Singleton<WidgetFactory>
 
             widgets.Add(createdWidget);
         }
+
+        //curvedUI.AddEffectToChildren();
 
         return widgets;
     }
@@ -51,15 +53,12 @@ public class WidgetFactory : Singleton<WidgetFactory>
         }
 
         Widget widget = null;
-        Debug.Log(widgetContext.type.ToString());
+        // Debug.Log(widgetContext.type.ToString());
         
         switch (widgetContext.type)
         {
-            case "Graph":
-                
-                widget = CreateGraphWidget(widgetContext);                
-                // widget = CreateInspectorGraphWidget(widgetContext);
-
+            case "Graph":                
+                widget = CreateGraphWidget(widgetContext);  
                 break;
 
             case "InspectorGraph":
@@ -114,7 +113,7 @@ public class WidgetFactory : Singleton<WidgetFactory>
 
     public Widget CreateInspectorGraphWidget(WidgetContext widgetContext)
     {
-        View view = gameObject.AddComponent<InspectorView>() as InspectorView;
+        View view = gameObject.AddComponent<InspectorGraphView>() as InspectorGraphView;
         Model model = new GraphModel(view, widgetContext.pos, widgetContext.title, widgetContext.detailedPanelPos, widgetContext.color);
         view.Init(model);
         Controller controller = new GraphController(model);

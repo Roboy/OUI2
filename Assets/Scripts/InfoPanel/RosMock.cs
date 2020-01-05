@@ -47,7 +47,7 @@ public class RosMock : Singleton<RosMock>
 
 public class RosMockSubscriber : MonoBehaviour
 {
-    private float temperature;
+    private float temperature = 20;
 
     private void Update()
     {
@@ -56,32 +56,49 @@ public class RosMockSubscriber : MonoBehaviour
             float tempDiff = UnityEngine.Random.Range(0f, 5.0f);
             temperature += tempDiff;
             //send the message to the graph
-            CreateTemperatureData(1, temperature, 0, 0, 1);
+            CreateTemperatureData(1, temperature, 0, 0, GetColor());
             // Same message on inspector widget id = 3
-            CreateTemperatureData(3, temperature, 0, 0, 1);
+            CreateTemperatureData(3, temperature, 0, 0, GetColor());
             if (temperature > 40 && temperature - tempDiff <= 40)
             {
                 // Send a message that the temperature is critically high
-                CreateTemperatureWarningData(2, 0, 6, 1, 50, "Temperature is critically high!");
+                CreateTemperatureWarningData(2, 0, 3, GetColor(), 50, "Temperature is critically high!");
             }
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
             float tempDiff = UnityEngine.Random.Range(0f, 7.0f);
             temperature -= tempDiff;
+            string color;
             //send the message to the graph
-            CreateTemperatureData(1, temperature, 0, 0, 1);
+            CreateTemperatureData(1, temperature, 0, 0, GetColor());
             // Same message on inspector widget id = 3
-            CreateTemperatureData(3, temperature, 0, 0, 1);
+            CreateTemperatureData(3, temperature, 0, 0, GetColor());
             if (temperature < 0 && temperature + tempDiff >= 0)
             {
                 // Send a message that the temperature is critically high
-                CreateTemperatureWarningData(2, 0, 6, 1, 50, "Temperature is critically low!");
+                CreateTemperatureWarningData(2, 0, 3, GetColor(), 50, "Temperature is critically low!");
             }
         }
     }
 
-    private void CreateTemperatureData(int id, float datapoint, int pos, int detailedPanelPos, int color)
+    private byte[] GetColor()
+    {
+        if (temperature > 30)
+        {
+            return new byte[] { 0xFF, 0, 0, 0xFF };
+        } 
+        else if (temperature < 10)
+        {
+            return new byte[] { 0, 0, 0xFF, 0xFF };
+        }
+        else
+        {
+            return new byte[] { 0xFF, 0xFE, 0x01, 0xFF };
+        }
+    }
+
+    private void CreateTemperatureData(int id, float datapoint, int pos, int detailedPanelPos, byte[] color)
     {
         byte[] data = new byte[(sizeof(float) + 3 * sizeof(int))];
         int offset = 0;
@@ -94,7 +111,7 @@ public class RosMockSubscriber : MonoBehaviour
         RosMock.Instance.EnqueueNewMessage(new RosMessage(id, data));
     }
 
-    private void CreateTemperatureWarningData(int id, int pos, float duration, int color, int fontSize, string msg)
+    private void CreateTemperatureWarningData(int id, int pos, float duration, byte[] color, int fontSize, string msg)
     {
         byte[] data = new byte[(sizeof(float) + 3 * sizeof(int) + msg.Length * sizeof(char) + 1)];
         int offset = 0;
@@ -118,6 +135,13 @@ public class RosMockSubscriber : MonoBehaviour
     private int AppendData(byte[] data, int offset, float i)
     {
         byte[] newData = BitConverter.GetBytes(i);
+        Buffer.BlockCopy(newData, 0, data, offset, newData.Length);
+        return offset + sizeof(float);
+    }
+
+    private int AppendData(byte[] data, int offset, byte[] i)
+    {
+        byte[] newData = i;
         Buffer.BlockCopy(newData, 0, data, offset, newData.Length);
         return offset + sizeof(float);
     }

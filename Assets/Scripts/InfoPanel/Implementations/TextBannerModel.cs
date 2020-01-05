@@ -7,14 +7,14 @@ public class TextBannerModel : Model
     const int SIZE = 100;
 
     public float duration;
-    public int color;
+    public Color color;
     public int fontSize;
 
     public string messageToDisplay;
 
     public Queue<Printable> datapoints;
 
-    public TextBannerModel(View view, int pos, string title, float duration, int color, int fontSize) : base(view, pos, title)
+    public TextBannerModel(View view, int pos, string title, float duration, Color color, int fontSize) : base(view, pos, title)
     {
         // TODO: if 0 set to default value
         this.duration = ProcessInitialValue(duration, 6, false, "duration");
@@ -39,7 +39,7 @@ public class TextBannerModel : Model
             duration = newTextBannerMessage.duration;
         }
 
-        if (newTextBannerMessage.color != 0)
+        if (!newTextBannerMessage.color.Equals(new Color(0, 0, 0, 0)))
         {
             color = newTextBannerMessage.color;
         }
@@ -54,14 +54,8 @@ public class TextBannerModel : Model
             fontSize = newTextBannerMessage.fontSize;
         }
 
-        datapoints.Enqueue(new Printable(newTextBannerMessage.msg, duration, ParseColor(color), (byte)fontSize));
+        datapoints.Enqueue(new Printable(newTextBannerMessage.msg, duration, color, (byte)fontSize));
 
         view.UpdateView(this);
-    }
-
-    // TODO: same colors for each type??
-    public Color ParseColor(int c)
-    {
-        return Color.red;
     }
 }

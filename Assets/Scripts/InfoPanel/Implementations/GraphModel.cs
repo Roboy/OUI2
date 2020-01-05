@@ -9,11 +9,11 @@ public class GraphModel : Model
 
     public int detailedPanelPos;
 
-    public int color;
+    public Color color;
 
     public Queue<float> datapoints;
 
-    public GraphModel(View view, int pos, string title, int detailedPanelPos, int color) : base(view, pos, title)
+    public GraphModel(View view, int pos, string title, int detailedPanelPos, Color color) : base(view, pos, title)
     {
         this.color = color;
         this.detailedPanelPos = detailedPanelPos;
@@ -29,7 +29,7 @@ public class GraphModel : Model
     {
         GraphMessage newGraphMessage = (GraphMessage)newMessage;
 
-        if (newGraphMessage.color != 0)
+        if (!newGraphMessage.color.Equals(new Color(0, 0, 0, 0)))
         {
             color = newGraphMessage.color;
         }

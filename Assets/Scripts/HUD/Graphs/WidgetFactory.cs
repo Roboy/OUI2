@@ -96,7 +96,7 @@ public class WidgetFactory : Singleton<WidgetFactory>
     {
         GameObject newInstance = Instantiate(GraphPref);
         View view = newInstance.AddComponent<GraphView>() as GraphView;
-        Model model = new GraphModel(view, widgetContext.pos, widgetContext.title, widgetContext.detailedPanelPos, widgetContext.color);
+        Model model = new GraphModel(view, widgetContext.pos, widgetContext.title, widgetContext.detailedPanelPos, WidgetUtility.IntToColor(widgetContext.color));
         view.Init(model);
         Controller controller = new GraphController(model);
         Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;
@@ -114,7 +114,7 @@ public class WidgetFactory : Singleton<WidgetFactory>
     public Widget CreateInspectorGraphWidget(WidgetContext widgetContext)
     {
         View view = gameObject.AddComponent<InspectorGraphView>() as InspectorGraphView;
-        Model model = new GraphModel(view, widgetContext.pos, widgetContext.title, widgetContext.detailedPanelPos, widgetContext.color);
+        Model model = new GraphModel(view, widgetContext.pos, widgetContext.title, widgetContext.detailedPanelPos, WidgetUtility.IntToColor(widgetContext.color));
         view.Init(model);
         Controller controller = new GraphController(model);
         Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;
@@ -131,7 +131,7 @@ public class WidgetFactory : Singleton<WidgetFactory>
         //GameObject newInstance = Instantiate(GraphPref);
         View view = WidgetManager.Instance.gameObject.AddComponent<TextBannerView>() as TextBannerView;
         //Model model = new TextBannerModel(view, widgetContext.pos, widgetContext.title, widgetContext.duration, widgetContext.color, widgetContext.fontSize);
-        Model model = new TextBannerModel(view, widgetContext.pos, widgetContext.title, widgetContext.duration, widgetContext.color, widgetContext.fontSize);
+        Model model = new TextBannerModel(view, widgetContext.pos, widgetContext.title, widgetContext.duration, WidgetUtility.IntToColor(widgetContext.color), widgetContext.fontSize);
         Controller controller = new TextBannerController(model);
         Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;
 

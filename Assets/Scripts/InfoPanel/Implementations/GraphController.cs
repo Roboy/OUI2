@@ -17,7 +17,7 @@ public class GraphController : Controller
         Stream dataStream = new MemoryStream(rosMessageData);
         BinaryReader binaryReader = new BinaryReader(dataStream);
 
-        return new GraphMessage(binaryReader.ReadSingle(), binaryReader.ReadInt32(), binaryReader.ReadInt32(), binaryReader.ReadInt32());
+        return new GraphMessage(binaryReader.ReadSingle(), binaryReader.ReadInt32(), binaryReader.ReadInt32(), WidgetUtility.IntToColor(binaryReader.ReadInt32()));
     }
 }
 
@@ -25,9 +25,9 @@ public class GraphMessage : WidgetMessage
 {
     public float datapoint;
     public int detailedPanelPos;
-    public int color;
+    public Color color;
 
-    public GraphMessage(float datapoint, int pos, int detailedPanelPos, int color) : base(pos)
+    public GraphMessage(float datapoint, int pos, int detailedPanelPos, Color color) : base(pos)
     {
         this.datapoint = datapoint;
         this.detailedPanelPos = detailedPanelPos;

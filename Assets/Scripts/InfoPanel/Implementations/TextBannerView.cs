@@ -14,9 +14,6 @@ public class TextBannerView : View
         graphManager.Init();
         iconManager.DetailedPanel.SetActive(false);*/
 
-        // Just for testing
-        ((TextBannerModel)model).datapoints.Enqueue(new Printable("testttt", 5, Color.blue, (byte)50));
-        UpdateView(model);
     }
 
     public override void UpdateView(Model model)
@@ -38,11 +35,5 @@ public class TextBannerView : View
         }
         // TODO: Make positionText of Type TextFieldManager[]
         textFieldManager = WidgetData.Instance.positionsText[pos - 1].GetComponent<TextFieldManager>();
-    }
-
-    private void SetColor(string title, int col)
-    {
-        // TODO: parse Color
-        //graphManager.SetColor(title, new Color(1, 1, 0));
     }
 }

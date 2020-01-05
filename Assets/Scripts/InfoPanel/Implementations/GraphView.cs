@@ -27,6 +27,7 @@ public class GraphView : View
             graphManager.AddDataPoint(graphModel.title, System.DateTime.Now, graphModel.datapoints.ToArray()[graphModel.datapoints.Count-1]);
         }
         // Debug.Log("View updated");
+        
     }
 
     private void SetPosition(int pos)
@@ -51,6 +52,7 @@ public class GraphView : View
         iconManager.DetailedPanel.transform.SetParent(WidgetData.Instance.positionsDetailedPanels[pos - 1].transform);
         iconManager.DetailedPanel.GetComponent<RectTransform>().offsetMin = Vector3.zero;
         iconManager.DetailedPanel.GetComponent<RectTransform>().offsetMax = Vector3.zero;
+        //iconManager.DetailedPanel.transform.SetParent(transform);
         //iconManager.DetailedPanel.transform.localScale = Vector3.one;
     }
 

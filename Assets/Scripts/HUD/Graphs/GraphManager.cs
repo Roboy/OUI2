@@ -113,6 +113,7 @@ public class GraphManager : MonoBehaviour
     public void AddDataPoint(string topic, DateTime time, float val)
     {
         graph.DataSource.AddPointToCategoryRealtime(topic, time, val,0f);
+        //WidgetFactory.Instance.curvedUI..AddEffectToChildren();
     }
 
     private void Update()

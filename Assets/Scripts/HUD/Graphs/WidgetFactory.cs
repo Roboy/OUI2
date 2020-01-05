@@ -31,6 +31,11 @@ public class WidgetFactory : Singleton<WidgetFactory>
         return widgets;
     }
 
+    private void LateUpdate()
+    {
+        curvedUI.AddEffectToChildren();
+    }
+
     private bool IsWidgetIdUnique(WidgetContext widgetContext, List<Widget> existingWidgets)
     {
         foreach (Widget existingWidget in existingWidgets)

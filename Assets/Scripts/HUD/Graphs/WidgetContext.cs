@@ -16,7 +16,7 @@ public class WidgetContext
     // determines how many labels should be shown on the y axis of the graph
     public int numLabelsShownY;
     // the color of the graph
-    public int color;
+    public byte[] color;
 
     // the time how long this widget should be shown
     public float duration;

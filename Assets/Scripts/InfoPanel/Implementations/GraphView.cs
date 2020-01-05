@@ -49,10 +49,17 @@ public class GraphView : View
             Debug.LogWarning("Invalid position of Detailed Panel for widget:" + pos);
             return;
         }
+
         iconManager.DetailedPanel.transform.SetParent(WidgetData.Instance.positionsDetailedPanels[pos - 1].transform);
-        iconManager.DetailedPanel.GetComponent<RectTransform>().offsetMin = Vector3.zero;
-        iconManager.DetailedPanel.GetComponent<RectTransform>().offsetMax = Vector3.zero;
-        //iconManager.DetailedPanel.transform.SetParent(transform);
+        RectTransform rect = iconManager.DetailedPanel.GetComponent<RectTransform>();
+        rect.offsetMin = Vector3.zero;
+        rect.offsetMax = Vector3.zero;
+        iconManager.DetailedPanel.transform.SetParent(transform, true);
+        // TODO: set the panel to the correct x position
+        iconManager.DetailedPanel.transform.localPosition = iconManager.DetailedPanel.transform.localPosition -= Vector3.right * 120; // iconManager.DetailedPanel.transform.position.x
+        //rect.offsetMin = Vector3.zero;
+        //rect.offsetMax = Vector3.zero;
+
         //iconManager.DetailedPanel.transform.localScale = Vector3.one;
     }
 

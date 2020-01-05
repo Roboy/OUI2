@@ -31,6 +31,7 @@ public class WidgetFactory : Singleton<WidgetFactory>
         return widgets;
     }
 
+    // TODO: What is the performance of this call?
     private void LateUpdate()
     {
         curvedUI.AddEffectToChildren();

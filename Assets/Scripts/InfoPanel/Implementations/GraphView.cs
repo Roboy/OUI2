@@ -59,9 +59,9 @@ public class GraphView : View
         // TODO
     }
 
-    private void SetColor(string title, int col)
+    private void SetColor(string title, Color col)
     {
         // TODO: parse Color
-        graphManager.SetColor(title, new Color(1, 1, 0));
+        graphManager.SetColor(title, col);
     }
 }

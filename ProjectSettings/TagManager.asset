@@ -6,6 +6,7 @@ TagManager:
   tags:
   - HandMatchingCollider
   - SenseGloveRight
+  - TransitionManager
   layers:
   - Default
   - TransparentFX

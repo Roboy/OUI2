@@ -11198,6 +11198,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2002138597}
   - component: {fileID: 2002138598}
+  - component: {fileID: 2002138601}
+  - component: {fileID: 2002138600}
+  - component: {fileID: 2002138599}
   m_Layer: 0
   m_Name: RosManager
   m_TagString: Untagged
@@ -11231,6 +11234,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62d3365eafc0c6b4fba423e2c6e02b36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2002138599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002138596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c019f177892b10942a6a204ec6246944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /oui/interface
+--- !u!114 &2002138600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002138596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825fca9d731786c49b255edfed59878c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /oui/interface
+  TimeStep: 0
+--- !u!114 &2002138601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002138596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff98778ae051cfd40a6e4effdf851ebd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timeout: 10
+  Protocol: 0
+  RosBridgeServerUrl: ws://localhost:9090
 --- !u!1001 &2098487189
 PrefabInstance:
   m_ObjectHideFlags: 0

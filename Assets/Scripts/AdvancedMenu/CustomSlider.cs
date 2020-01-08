@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor.Events;
+using TMPro;
 
 public class CustomSlider : MonoBehaviour
 {
@@ -11,11 +12,12 @@ public class CustomSlider : MonoBehaviour
 
     private Animator titleAnimator;
     private Animator valueAnimator;
-    private TextMesh valueText;
+    private TextMeshPro valueText;
     private GameObject IntersectingObject;
     private float value;
 
-    public int[] fingers;
+    public int[] fingersRight;
+    public int[] fingersLeft;
 
     //For debugging
     /*public Vector3 v1 = new Vector3(0, 0, 0);
@@ -35,9 +37,10 @@ public class CustomSlider : MonoBehaviour
     {
         titleAnimator = this.transform.parent.GetChild(1).GetComponent<Animator>();
         valueAnimator = this.transform.GetChild(1).GetComponent<Animator>();
-        valueText = this.transform.GetChild(1).GetComponent<TextMesh>();
+        valueText = this.transform.GetChild(1).GetChild(0).GetComponent<TextMeshPro>();
 
-        fingers = new[] { 0, 0, 0, 0, 0 };
+        fingersRight = new[] { 0, 0, 0, 0, 0 };
+        fingersLeft = new[] { 0, 0, 0, 0, 0 };
 
         defaultPosFull = transform.localPosition;
 
@@ -46,11 +49,17 @@ public class CustomSlider : MonoBehaviour
 
     private void Update()
     {
-        for(int i = 0; i < fingers.Length; i++)
+        for(int i = 0; i < fingersRight.Length; i++)
         {
-            if(fingers[i] > 0)
+            if(fingersRight[i] > 0)
             {
-                BuzzManager.Instance.ActivateFinger(i, fingers[i]);
+                BuzzManager.Instance.ActivateFinger(true, i, fingersRight[i]);
+                fingersRight[i] = 0;
+            }
+            if (fingersLeft[i] > 0)
+            {
+                BuzzManager.Instance.ActivateFinger(false, i, fingersLeft[i]);
+                fingersLeft[i] = 0;
             }
         }
     }
@@ -69,29 +78,7 @@ public class CustomSlider : MonoBehaviour
             IntersectingObject = collision.gameObject;
             updateValue(collision.transform.position);
         }
-        if (collision.gameObject.CompareTag("HandMatchingCollider"))
-        {
-            if (collision.name.Equals("thumbMatchCollider"))
-            {
-                fingers[0] = 50;
-            }
-            if (collision.name.Equals("indexMatchCollider"))
-            {
-                fingers[1] = 50;
-            }
-            if (collision.name.Equals("middleMatchCollider"))
-            {
-                fingers[2] = 50;
-            }
-            if (collision.name.Equals("ringMatchCollider"))
-            {
-                fingers[3] = 50;
-            }
-            if (collision.name.Equals("pinkyMatchCollider"))
-            {
-                fingers[4] = 50;
-            }
-        }
+        sendHapticFeedbackIfFinger(collision);
     }
 
     /// <summary>
@@ -115,6 +102,7 @@ public class CustomSlider : MonoBehaviour
         {
             updateValue(collision.transform.position);
         }
+        sendHapticFeedbackIfFinger(collision);
     }
 
     /// <summary>
@@ -130,27 +118,55 @@ public class CustomSlider : MonoBehaviour
             titleAnimator.SetBool("Collision", false);
             valueAnimator.SetBool("VisibleIntersect", false);
         }
+    }
+
+    /// <summary>
+    /// If a finger collides with this slider, haptic feedback is sent through the SenseGloves
+    /// </summary>
+    /// <param name="collision">Collider of the intersecting object</param>
+    private void sendHapticFeedbackIfFinger(Collider collision)
+    {
         if (collision.gameObject.CompareTag("HandMatchingCollider"))
         {
-            if (collision.name.Equals("thumbMatchCollider"))
+            if (collision.name.Equals("thumbMatchColliderRight"))
             {
-                fingers[0] = 0;
+                fingersRight[0] = 50;
             }
-            if (collision.name.Equals("indexMatchCollider"))
+            if (collision.name.Equals("indexMatchColliderRight"))
             {
-                fingers[1] = 0;
+                fingersRight[1] = 50;
             }
-            if (collision.name.Equals("middleMatchCollider"))
+            if (collision.name.Equals("middleMatchColliderRight"))
             {
-                fingers[2] = 0;
+                fingersRight[2] = 50;
             }
-            if (collision.name.Equals("ringMatchCollider"))
+            if (collision.name.Equals("ringMatchColliderRight"))
             {
-                fingers[3] = 0;
+                fingersRight[3] = 50;
             }
-            if (collision.name.Equals("pinkyMatchCollider"))
+            if (collision.name.Equals("pinkyMatchColliderRight"))
             {
-                fingers[4] = 0;
+                fingersRight[4] = 50;
+            }
+            if (collision.name.Equals("thumbMatchColliderLeft"))
+            {
+                fingersLeft[0] = 50;
+            }
+            if (collision.name.Equals("indexMatchColliderLeft"))
+            {
+                fingersLeft[1] = 50;
+            }
+            if (collision.name.Equals("middleMatchColliderLeft"))
+            {
+                fingersLeft[2] = 50;
+            }
+            if (collision.name.Equals("ringMatchColliderLeft"))
+            {
+                fingersLeft[3] = 50;
+            }
+            if (collision.name.Equals("pinkyMatchColliderLeft"))
+            {
+                fingersLeft[4] = 50;
             }
         }
     }
@@ -239,7 +255,6 @@ public class CustomSlider : MonoBehaviour
         localLeftBorderPoint.y += 1f * transform.localScale.y;
         Vector3 localRightBorderPoint = transform.localPosition;
         localRightBorderPoint.y += -1f * transform.localScale.y;
-        Debug.Log("Called SetDefaultValue, updating slider now " + defaultValue);
         updateValue(transform.TransformPoint(localLeftBorderPoint - new Vector3(0, (defaultValue / 100f) * (localLeftBorderPoint.y - localRightBorderPoint.y), 0)));
     }
 

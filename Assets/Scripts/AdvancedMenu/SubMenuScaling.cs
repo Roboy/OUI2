@@ -36,6 +36,7 @@ public class SubMenuScaling : MonoBehaviour
     private void Start()
     {
         runInEditMode = true;
+        findChildren();
     }
 
     private void Reset()
@@ -45,6 +46,11 @@ public class SubMenuScaling : MonoBehaviour
 
         width = 1;
         height = 1;
+
+        horizontalAlignment = 0;
+        verticalAlignment = 1;
+        horizontalAlignmentText = "center";
+        verticalAlignmentText = "top";
 
         findChildren();
 
@@ -62,7 +68,7 @@ public class SubMenuScaling : MonoBehaviour
         topSide.localPosition = new Vector3(0, 0.1005f, 0);
         bottomSide.localPosition = new Vector3(0, -0.1005f, 0);
 
-        nameTag.localPosition = new Vector3(0.2285f, 0.1233001f, 0);
+        nameTag.localPosition = new Vector3(0.6229f, 0.1237f, 0);
     }
     
     /// <summary>
@@ -90,10 +96,6 @@ public class SubMenuScaling : MonoBehaviour
 
         oldWidth = width;
         oldHeight = height;
-        horizontalAlignment = 0;
-        verticalAlignment = 1;
-        horizontalAlignmentText = "center";
-        verticalAlignmentText = "top";
     }
 
     /// <summary>

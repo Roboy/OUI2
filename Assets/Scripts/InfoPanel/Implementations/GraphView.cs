@@ -54,9 +54,9 @@ public class GraphView : View
         RectTransform rect = iconManager.DetailedPanel.GetComponent<RectTransform>();
         rect.offsetMin = Vector3.zero;
         rect.offsetMax = Vector3.zero;
-        iconManager.DetailedPanel.transform.SetParent(transform, true);
+        //iconManager.DetailedPanel.transform.SetParent(transform, true);
         // TODO: set the panel to the correct x position
-        iconManager.DetailedPanel.transform.localPosition = iconManager.DetailedPanel.transform.localPosition -= Vector3.right * 120; // iconManager.DetailedPanel.transform.position.x
+        ////iconManager.DetailedPanel.transform.localPosition = iconManager.DetailedPanel.transform.localPosition -= Vector3.right * 120; // iconManager.DetailedPanel.transform.position.x
         //rect.offsetMin = Vector3.zero;
         //rect.offsetMax = Vector3.zero;
 

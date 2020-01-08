@@ -6,6 +6,10 @@ TagManager:
   tags:
   - HandMatchingCollider
   - SenseGloveRight
+  - SubMenu3D
+  - Slider3D
+  - Button3D
+  - ROS_Manager
   layers:
   - Default
   - TransparentFX

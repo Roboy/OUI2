@@ -5,21 +5,23 @@ using UnityEngine;
 public class WidgetManager : Singleton<WidgetManager>
 {
     public List<Widget> widgets;
+    public InterfaceMessageSubscriber interfaceMessageSubscriber;
 
     void Start()
     {
+        interfaceMessageSubscriber = GameObject.FindGameObjectWithTag("ROS_Manager").GetComponent<InterfaceMessageSubscriber>();
         widgets = WidgetFactory.Instance.CreateWidgetsAtStartup();
     }
 
     void Update()
     {
-        if (RosMock.Instance.HasNewMessage())
+        if (!interfaceMessageSubscriber.IsEmpty())
         {
-            ForwardMessageToWidget(RosMock.Instance.DequeueMessage());
+            ForwardMessageToWidget(interfaceMessageSubscriber.DequeueInterfaceMessage());
         }
     }
 
-    private void ForwardMessageToWidget(RosMessage rosMessage)
+    private void ForwardMessageToWidget(RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage rosMessage)
     {
         Widget widget = FindWidgetWithID(rosMessage.id);
 

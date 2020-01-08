@@ -18,6 +18,7 @@ public class InterfaceMessageSubscriber : Subscriber<RosSharp.RosBridgeClient.Me
         interfaceMessageQueue = new Queue<RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage>();
         StartCoroutine(startSubscriber(1.0f));
     }
+
     /// <summary>
     /// Enqueues the interface message queue.
     /// </summary>
@@ -26,6 +27,7 @@ public class InterfaceMessageSubscriber : Subscriber<RosSharp.RosBridgeClient.Me
     {
         interfaceMessageQueue.Enqueue(msg);
     }
+
     /// <summary>
     /// Dequeues the interface message queue.
     /// </summary>
@@ -34,6 +36,7 @@ public class InterfaceMessageSubscriber : Subscriber<RosSharp.RosBridgeClient.Me
     {
         return interfaceMessageQueue.Dequeue();
     }
+
     /// <summary>
     /// Counts the number of objects in the queue.
     /// </summary>
@@ -42,6 +45,12 @@ public class InterfaceMessageSubscriber : Subscriber<RosSharp.RosBridgeClient.Me
     {
         return interfaceMessageQueue.Count;
     }
+
+    public bool IsEmpty()
+    {
+        return interfaceMessageQueue.Count == 0;
+    }
+
     /// <summary>
     /// Starts the subscriber.
     /// </summary>
@@ -56,13 +65,14 @@ public class InterfaceMessageSubscriber : Subscriber<RosSharp.RosBridgeClient.Me
             break;
         }
     }
+
     /// <summary>
     /// Receives the message by enqueueing the queue.
     /// </summary>
     /// <param name="message">Message.</param>
     protected override void ReceiveMessage(RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage message)
     {
-        Debug.Log("Received Message: ID=" + message.id + " | Data=" + System.Text.Encoding.UTF8.GetString(message.data));
+        // Debug.Log("Received Message: ID=" + message.id + " | Data=" + System.Text.Encoding.UTF8.GetString(message.data));
         EnqueueInterfaceMessage(message);
     }
 }

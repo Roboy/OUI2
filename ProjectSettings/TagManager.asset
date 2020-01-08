@@ -9,9 +9,13 @@ TagManager:
   - SubMenu3D
   - Slider3D
   - Button3D
+<<<<<<< master
   - SenseGloveLeft
   - TransitionManager
   - AdditiveSceneManager
+=======
+  - ROS_Manager
+>>>>>>> Ros mock exchanged for real ros subscriber
   layers:
   - Default
   - TransparentFX

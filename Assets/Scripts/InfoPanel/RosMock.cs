@@ -25,7 +25,7 @@ public class RosMock : Singleton<RosMock>
     void Update()
     {
         
-    } 
+    }
 
     public bool HasNewMessage()
     {
@@ -98,7 +98,7 @@ public class RosMockSubscriber : MonoBehaviour
         }
     }
 
-    private void CreateTemperatureData(int id, float datapoint, int pos, int detailedPanelPos, byte[] color)
+    private RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage CreateTemperatureData(int id, float datapoint, int pos, int detailedPanelPos, byte[] color)
     {
         byte[] data = new byte[(sizeof(float) + 3 * sizeof(int))];
         int offset = 0;
@@ -108,10 +108,15 @@ public class RosMockSubscriber : MonoBehaviour
         offset = AppendData(data, offset, detailedPanelPos);
         offset = AppendData(data, offset, color);
 
-        RosMock.Instance.EnqueueNewMessage(new RosMessage(id, data));
+        RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage rosMessage = new RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage();
+
+        rosMessage.id = id;
+        rosMessage.data = data;
+
+        return new RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage();
     }
 
-    private void CreateTemperatureWarningData(int id, int pos, float duration, byte[] color, int fontSize, string msg)
+    private RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage CreateTemperatureWarningData(int id, int pos, float duration, byte[] color, int fontSize, string msg)
     {
         byte[] data = new byte[(sizeof(float) + 3 * sizeof(int) + msg.Length * sizeof(char) + 1)];
         int offset = 0;
@@ -122,7 +127,12 @@ public class RosMockSubscriber : MonoBehaviour
         offset = AppendData(data, offset, fontSize);
         offset = AppendData(data, offset, msg);
 
-        RosMock.Instance.EnqueueNewMessage(new RosMessage(id, data));
+        RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage rosMessage = new RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage();
+
+        rosMessage.id = id;
+        rosMessage.data = data;
+
+        return new RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage();
     }
 
     private int AppendData(byte[] data, int offset, int i)

@@ -10601,10 +10601,39 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< master
   m_GameObject: {fileID: 1699004155}
   m_CullTransparentMesh: 0
 --- !u!1001 &1727710212
+<<<<<<< master
 >>>>>>> Prototype for the new HUD
+=======
+=======
+  m_GameObject: {fileID: 1262120143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4a992128f166fc41b6966aca2fe4046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionsUI:
+  - {fileID: 1388633437}
+  - {fileID: 1857725382}
+  positionsDetailedPanels:
+  - {fileID: 1632904302}
+  positionsText:
+  - {fileID: 7178870815441879456}
+  - {fileID: 2098487191}
+  - {fileID: 1481344138}
+  positionsAdvancedMenu: []
+--- !u!1 &1388633437 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 160200827236529589, guid: 2a13184c5b19a1648831a4984f35c284,
+    type: 3}
+  m_PrefabInstance: {fileID: 940417411}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1416649465
+>>>>>>> Widgets can now be created and their pos set to the log
+>>>>>>> Widgets can now be created and their pos set to the log
 PrefabInstance:
   m_ObjectHideFlags: 0
 >>>>>>> cleanup
@@ -12274,6 +12303,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 833916754}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< master
 --- !u!224 &1857725383 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6256006468854863410, guid: 42952144f9aee844fbe3e0332984a37a,
@@ -12281,6 +12311,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 833916754}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< master
+=======
+>>>>>>> Widgets can now be created and their pos set to the log
 --- !u!1 &2001630525 stripped
 >>>>>>> Widgets can now be created and their pos set to the log
 GameObject:

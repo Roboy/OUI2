@@ -13,6 +13,9 @@ public class IconStateManager : MonoBehaviour, IPointerExitHandler, IPointerEnte
     [Tooltip("The image which should blink when there is a notification")]
     public Image GlowEffect;
 
+    public Image thumbnailIcon;
+    public Text thumbnailText;
+
     private float glowPulseDuration = 5.5f;
     private float glowPulseTimer = -1;
 

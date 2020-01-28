@@ -21,5 +21,11 @@ public class WidgetContext
     // the time how long this widget should be shown
     public float duration;
 
+    // Thumbnail
+    // the path+name of the icon Image in the resources folder relative to the resources/icons folder
+    public string iconName;
+    // the text that should be shown on the Thumbnail
+    public string thumbnailText;
+
     public byte fontSize;
 }

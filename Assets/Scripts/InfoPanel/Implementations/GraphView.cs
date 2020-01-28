@@ -9,11 +9,15 @@ public class GraphView : View
 
     public override void Init(Model model)
     {
+        GraphModel graphModel = (GraphModel)model;
+
         iconManager = GetComponent<IconStateManager>();
         graphManager = GetComponentInChildren<GraphManager>();
         graphManager.Init();
         iconManager.DetailedPanel.SetActive(false);
-        SetPosition(((GraphModel)model).GetPos());
+        SetPosition((graphModel).GetPos());
+        SetThumbnailIcon(graphModel.iconName);
+        SetThumbnailText(graphModel.thumbnailText);
         UpdateView(model);
     }
 
@@ -65,7 +69,18 @@ public class GraphView : View
 
     private void SetThumbnailIcon(string iconName)
     {
-        // TODO
+        print("icon: " + "Icons/" + iconName);
+        iconManager.thumbnailIcon.gameObject.SetActive(iconName != null);
+        if (iconName == null) return;
+        iconManager.thumbnailIcon.sprite = (Sprite)Resources.Load("Icons/" + iconName, typeof(Sprite));
+        print(iconManager.thumbnailIcon.sprite);
+    }
+
+    private void SetThumbnailText(string text)
+    {
+        print("text: " + text);
+        iconManager.thumbnailText.gameObject.SetActive(text != null);
+        iconManager.thumbnailText.text = text;
     }
 
     private void SetColor(string title, Color col)

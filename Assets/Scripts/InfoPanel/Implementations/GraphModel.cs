@@ -11,12 +11,18 @@ public class GraphModel : Model
 
     public Color color;
 
+    public string iconName;
+
+    public string thumbnailText;
+
     public Queue<float> datapoints;
 
-    public GraphModel(View view, int pos, string title, int detailedPanelPos, Color color) : base(view, pos, title)
+    public GraphModel(View view, int pos, string title, int detailedPanelPos, Color color, string iconName, string thumbnailText) : base(view, pos, title)
     {
         this.color = color;
         this.detailedPanelPos = detailedPanelPos;
+        this.iconName = iconName;
+        this.thumbnailText = thumbnailText;
         datapoints = new Queue<float>(SIZE);
     }
 

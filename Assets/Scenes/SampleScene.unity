@@ -344,6 +344,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4934749565128719077}
     m_Modifications:
+    - target: {fileID: 7145502999508306744, guid: 42952144f9aee844fbe3e0332984a37a,
+        type: 3}
+      propertyPath: m_Name
+      value: TaskbarRight
+      objectReference: {fileID: 0}
     - target: {fileID: 4057544118125487671, guid: 42952144f9aee844fbe3e0332984a37a,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -363,11 +368,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7145502999508306744, guid: 42952144f9aee844fbe3e0332984a37a,
-        type: 3}
-      propertyPath: m_Name
-      value: TaskbarRight
       objectReference: {fileID: 0}
     - target: {fileID: 6256006468854863410, guid: 42952144f9aee844fbe3e0332984a37a,
         type: 3}
@@ -1779,7 +1779,7 @@ PrefabInstance:
     - target: {fileID: 114465451640022592, guid: 4afc32a8460c3264ba37c41fe0813f1e,
         type: 3}
       propertyPath: Tracking
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4afc32a8460c3264ba37c41fe0813f1e, type: 3}

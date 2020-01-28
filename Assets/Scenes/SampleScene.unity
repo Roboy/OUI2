@@ -1153,6 +1153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionsUI:
   - {fileID: 1388633437}
+  - {fileID: 1857725382}
   positionsDetailedPanels:
   - {fileID: 1632904302}
   positionsText:
@@ -1160,7 +1161,6 @@ MonoBehaviour:
   - {fileID: 2098487191}
   - {fileID: 1481344138}
   positionsAdvancedMenu: []
-  icons: []
 --- !u!1 &1388633437 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 160200827236529589, guid: 2a13184c5b19a1648831a4984f35c284,
@@ -1828,6 +1828,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HUDGameObjects: []
   advancedMenuGameObjects: []
+--- !u!1 &1857725382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7145502999508306744, guid: 42952144f9aee844fbe3e0332984a37a,
+    type: 3}
+  m_PrefabInstance: {fileID: 833916754}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2001630525 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1045630209119774, guid: 4afc32a8460c3264ba37c41fe0813f1e,

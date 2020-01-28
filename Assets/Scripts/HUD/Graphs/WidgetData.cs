@@ -8,5 +8,4 @@ public class WidgetData : Singleton<WidgetData>
     public GameObject[] positionsDetailedPanels;
     public GameObject[] positionsText;
     public GameObject[] positionsAdvancedMenu;
-    public Sprite[] icons;
 }

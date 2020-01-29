@@ -7,17 +7,14 @@ public class GraphController : Controller
     {
     }
 
-    public override void ReceiveMessage(byte[] rosMessageData)
+    public override void ReceiveMessage(JSON_message rosMessage)
     {
-        model.UpdateModel(ParseMessage(rosMessageData));
+        model.UpdateModel(ParseMessage(rosMessage));
     }
 
-    private GraphMessage ParseMessage(byte[] rosMessageData)
+    private GraphMessage ParseMessage(JSON_message rosMessage)
     {
-        Stream dataStream = new MemoryStream(rosMessageData);
-        BinaryReader binaryReader = new BinaryReader(dataStream);
-
-        return new GraphMessage(binaryReader.ReadSingle(), binaryReader.ReadInt32(), binaryReader.ReadInt32(), WidgetUtility.IntToColor(binaryReader.ReadInt32()));
+        return new GraphMessage(rosMessage.datapoint, 0, 0, Color.red);
     }
 }
 

@@ -20,7 +20,7 @@ public class UI_Manager : MonoBehaviour
 
     private Vector2 pointerPos;
 
-    public enum PointerTechnique { PointerMouse, PointerViveController, PointerSenseGlove};
+    public enum PointerTechnique { PointerMouse, PointerViveController, PointerSenseGlove, PointerEye};
 
     #region Setup
 
@@ -41,11 +41,13 @@ public class UI_Manager : MonoBehaviour
     /// <param name="rotation">rotation of pointer</param>
     public void Point(Vector3 position, Vector3 rotation)
     {
+        print(rotation);
+
         this.transform.position = position;
-        this.transform.rotation = Quaternion.Euler(rotation);
+        //this.transform.rotation = Quaternion.Euler(rotation);
 
         // Send pointer information to Curved UI Input Module to use event system
-        CurvedUIInputModule.CustomControllerRay = new Ray(this.transform.position, this.transform.forward);
+        CurvedUIInputModule.CustomControllerRay = new Ray(this.transform.position, rotation);
 
         // this draws the ray - the rest of the raycast Manager is not being used
         raycastManager.GetRaycastHit(position, rotation);
@@ -61,9 +63,14 @@ public class UI_Manager : MonoBehaviour
         {
             case PointerTechnique.PointerMouse:
                 pointer = this.gameObject.AddComponent<PointerMouse>();
-                return;                
+                return;
             case PointerTechnique.PointerSenseGlove:
                 pointer = this.gameObject.AddComponent<PointerSenseGlove>();
+                break;
+            case PointerTechnique.PointerViveController:
+                break;
+            case PointerTechnique.PointerEye:
+                pointer = this.gameObject.AddComponent<PointerEye>();
                 break;
             default:
                 throw new System.Exception("No pointer technique specified.");

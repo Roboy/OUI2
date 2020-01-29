@@ -7,19 +7,23 @@ public class TextBannerController : Controller
     {
     }
 
-    public override void ReceiveMessage(byte[] rosMessageData)
+    public override void ReceiveMessage(JSON_message rosMessage)
     {
-        model.UpdateModel(ParseMessage(rosMessageData));
+        model.UpdateModel(ParseMessage(rosMessage));
     }
 
-    private TextBannerMessage ParseMessage(byte[] rosMessageData)
-    {
+    private TextBannerMessage ParseMessage(JSON_message rosMessage)
+    {        
+        /*
         Stream dataStream = new MemoryStream(rosMessageData);
         BinaryReader binaryReader = new BinaryReader(dataStream);
 
         return new TextBannerMessage(binaryReader.ReadInt32(), binaryReader.ReadSingle(), WidgetUtility.IntToColor(binaryReader.ReadInt32()), binaryReader.ReadInt32(), binaryReader.ReadString());
 
-        //return new TextBannerMessage("Test Message", 1, 5, 1, 16);
+        //return new TextBannerMessage("Test Message", 1, 5, 1, 16);  
+        */
+
+        return new TextBannerMessage(0, 1, Color.blue, 12, rosMessage.datapoint.ToString());
     }
 }
 

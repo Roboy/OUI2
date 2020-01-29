@@ -27,8 +27,8 @@ public class Widget : MonoBehaviour
         return id;
     }
 
-    public void ForwardRosMessage(byte[] rosMessageData)
+    public void ForwardRosMessage(JSON_message rosMessage)
     {
-        controller.ReceiveMessage(rosMessageData);
+        controller.ReceiveMessage(rosMessage);
     }
 }

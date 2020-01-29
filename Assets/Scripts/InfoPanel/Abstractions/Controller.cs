@@ -8,7 +8,7 @@ public abstract class Controller
         this.model = model;
     }
 
-    public abstract void ReceiveMessage(byte[] message);
+    public abstract void ReceiveMessage(JSON_message rosMessage);
 }
 
 public abstract class WidgetMessage

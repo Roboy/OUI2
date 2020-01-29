@@ -21,7 +21,7 @@ public class WidgetManager : Singleton<WidgetManager>
         }
     }
 
-    private void ForwardMessageToWidget(RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage rosMessage)
+    private void ForwardMessageToWidget(JSON_message rosMessage)
     {
         Widget widget = FindWidgetWithID(rosMessage.id);
 
@@ -31,7 +31,7 @@ public class WidgetManager : Singleton<WidgetManager>
             return;
         }
 
-        widget.ForwardRosMessage(rosMessage.data);   
+        widget.ForwardRosMessage(rosMessage);   
 
     }
 

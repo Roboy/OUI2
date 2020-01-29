@@ -4,18 +4,18 @@ using UnityEngine;
 using RosSharp.RosBridgeClient;
 using RosSharp.RosBridgeClient.Messages.Roboy;
 
-public class InterfaceMessageSubscriber : Subscriber<RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage>
+public class InterfaceMessageSubscriber : Subscriber<RosSharp.RosBridgeClient.Messages.Standard.String>
 {
     /// <summary>
     /// Holds a queue of messages to be read one after the other from the manager.
     /// </summary>
-    private Queue<RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage> interfaceMessageQueue;
+    private Queue<JSON_message> interfaceMessageQueue;
     /// <summary>
     /// Start this instance.
     /// </summary>
     protected override void Start()
     {
-        interfaceMessageQueue = new Queue<RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage>();
+        interfaceMessageQueue = new Queue<JSON_message>();
         StartCoroutine(startSubscriber(1.0f));
     }
 
@@ -23,7 +23,7 @@ public class InterfaceMessageSubscriber : Subscriber<RosSharp.RosBridgeClient.Me
     /// Enqueues the interface message queue.
     /// </summary>
     /// <param name="msg">The interface Message.</param>
-    public void EnqueueInterfaceMessage(RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage msg)
+    public void EnqueueInterfaceMessage(JSON_message msg)
     {
         interfaceMessageQueue.Enqueue(msg);
     }
@@ -32,7 +32,7 @@ public class InterfaceMessageSubscriber : Subscriber<RosSharp.RosBridgeClient.Me
     /// Dequeues the interface message queue.
     /// </summary>
     /// <returns>The interface message.</returns>
-    public RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage DequeueInterfaceMessage()
+    public JSON_message DequeueInterfaceMessage()
     {
         return interfaceMessageQueue.Dequeue();
     }
@@ -70,9 +70,10 @@ public class InterfaceMessageSubscriber : Subscriber<RosSharp.RosBridgeClient.Me
     /// Receives the message by enqueueing the queue.
     /// </summary>
     /// <param name="message">Message.</param>
-    protected override void ReceiveMessage(RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage message)
+    protected override void ReceiveMessage(RosSharp.RosBridgeClient.Messages.Standard.String message)
     {
-        // Debug.Log("Received Message: ID=" + message.id + " | Data=" + System.Text.Encoding.UTF8.GetString(message.data));
-        EnqueueInterfaceMessage(message);
+        Debug.Log("Received Message");
+        JSON_message msg = JsonUtility.FromJson<JSON_message>(message.data);
+        EnqueueInterfaceMessage(msg);
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 using System;
 using System.IO;
 
-public class InterfaceMessagePublisher : Publisher<RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage>
+public class InterfaceMessagePublisher : Publisher<RosSharp.RosBridgeClient.Messages.Standard.String>
 {
     private float temperature = 20;
 
@@ -37,21 +37,51 @@ public class InterfaceMessagePublisher : Publisher<RosSharp.RosBridgeClient.Mess
     /// Publishs the mock motor status message.
     /// </summary>
     /// <param name="message">message</param>
-    private void PublishMessage(RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage message)
+    private void PublishMessage(RosSharp.RosBridgeClient.Messages.Standard.String message)
     {
         Publish(message);
     }
 
     private void PublishDemoMessage()
     {
-        RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage tmpMessage = new RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage();
+        System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
+        int cur_time = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
+
+        JSON_message demoMessage = new JSON_message(1, UnityEngine.Random.Range(20.0f, 25.0f), cur_time, 2);
+        string jsonString = JsonUtility.ToJson(demoMessage);
+        RosSharp.RosBridgeClient.Messages.Standard.String tmpMessage = new RosSharp.RosBridgeClient.Messages.Standard.String(jsonString);
+        PublishMessage(tmpMessage);
+
+        WriteMessageToFile("demoMessage", jsonString);
+
+
+
+        /*
         tmpMessage.id = 2;
         tmpMessage.data = Encoding.UTF8.GetBytes("TestNachricht");
         PublishMessage(tmpMessage);
+        */
+    }
+
+    private bool WriteMessageToFile(string fileName, string json)
+    {
+        string filePath = Application.persistentDataPath + fileName + ".json";
+
+        print("Saved demoMessage at " + filePath);
+
+        File.WriteAllText(filePath, json);
+
+        return true;
     }
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            PublishDemoMessage();
+        }
+
+        /*
         if (Input.GetKeyDown(KeyCode.M))
         {
             float tempDiff = UnityEngine.Random.Range(0f, 5.0f);
@@ -81,9 +111,10 @@ public class InterfaceMessagePublisher : Publisher<RosSharp.RosBridgeClient.Mess
                 PublishMessage(CreateTemperatureWarningData(2, 0, 3, GetColor(), 50, "Temperature is critically low!"));
             }
         }    
+        */
     }
 
-
+    /*
     private byte[] GetColor()
     {
         if (temperature > 30)
@@ -100,7 +131,7 @@ public class InterfaceMessagePublisher : Publisher<RosSharp.RosBridgeClient.Mess
         }
     }
 
-    private RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage CreateTemperatureData(int id, float datapoint, int pos, int detailedPanelPos, byte[] color)
+    private RosSharp.RosBridgeClient.Messages.Standard.String CreateTemperatureData(int id, float datapoint, int pos, int detailedPanelPos, byte[] color)
     {
         byte[] data = new byte[(sizeof(float) + 3 * sizeof(int))];
         int offset = 0;
@@ -110,7 +141,7 @@ public class InterfaceMessagePublisher : Publisher<RosSharp.RosBridgeClient.Mess
         offset = AppendData(data, offset, detailedPanelPos);
         offset = AppendData(data, offset, color);
 
-        RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage rosMessage = new RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage();
+        RosSharp.RosBridgeClient.Messages.Standard.String rosMessage = new RosSharp.RosBridgeClient.Messages.Standard.String();
 
         rosMessage.id = id;
         rosMessage.data = data;
@@ -118,7 +149,7 @@ public class InterfaceMessagePublisher : Publisher<RosSharp.RosBridgeClient.Mess
         return rosMessage;
     }
 
-    private RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage CreateTemperatureWarningData(int id, int pos, float duration, byte[] color, int fontSize, string msg)
+    private RosSharp.RosBridgeClient.Messages.Standard.String CreateTemperatureWarningData(int id, int pos, float duration, byte[] color, int fontSize, string msg)
     {
         byte[] data = new byte[(sizeof(float) + 3 * sizeof(int) + msg.Length * sizeof(char) + 1)];
         int offset = 0;
@@ -129,7 +160,7 @@ public class InterfaceMessagePublisher : Publisher<RosSharp.RosBridgeClient.Mess
         offset = AppendData(data, offset, fontSize);
         offset = AppendData(data, offset, msg);
 
-        RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage rosMessage = new RosSharp.RosBridgeClient.Messages.Roboy.InterfaceMessage();
+        RosSharp.RosBridgeClient.Messages.Standard.String rosMessage = new RosSharp.RosBridgeClient.Messages.Standard.String();
 
         rosMessage.id = id;
         rosMessage.data = data;
@@ -172,7 +203,7 @@ public class InterfaceMessagePublisher : Publisher<RosSharp.RosBridgeClient.Mess
         foreach (char c in i) {
             offset = AppendData(data, offset, c);
         }
-        return offset;*/
+        return offset;
     }
 
     private int AppendData(byte[] data, int offset, char i)
@@ -181,5 +212,23 @@ public class InterfaceMessagePublisher : Publisher<RosSharp.RosBridgeClient.Mess
         Buffer.BlockCopy(newData, 0, data, offset, newData.Length);
         return offset + sizeof(char);
     }
+
+    */
 }
 
+[Serializable]
+public class JSON_message
+{
+    public int id;
+    public float datapoint;
+    public long timestamp;
+    public int color;
+
+    public JSON_message(int id, float datapoint, long timestamp, int color)
+    {
+        this.id = id;
+        this.datapoint = datapoint;
+        this.timestamp = timestamp;
+        this.color = color;
+    }
+}

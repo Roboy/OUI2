@@ -5,23 +5,23 @@ using UnityEngine;
 public class WidgetManager : Singleton<WidgetManager>
 {
     public List<Widget> widgets;
-    public InterfaceMessageSubscriber interfaceMessageSubscriber;
+    public WidgetRosSubscriber rosSubscriber;
 
     void Start()
     {
-        interfaceMessageSubscriber = GameObject.FindGameObjectWithTag("ROS_Manager").GetComponent<InterfaceMessageSubscriber>();
+        rosSubscriber = GameObject.FindGameObjectWithTag("ROS_Manager").GetComponent<WidgetRosSubscriber>();
         widgets = WidgetFactory.Instance.CreateWidgetsAtStartup();
     }
 
     void Update()
     {
-        if (!interfaceMessageSubscriber.IsEmpty())
+        if (!rosSubscriber.IsEmpty())
         {
-            ForwardMessageToWidget(interfaceMessageSubscriber.DequeueInterfaceMessage());
+            ForwardMessageToWidget(rosSubscriber.DequeueInterfaceMessage());
         }
     }
 
-    private void ForwardMessageToWidget(JSON_message rosMessage)
+    private void ForwardMessageToWidget(RosJsonMessage rosMessage)
     {
         Widget widget = FindWidgetWithID(rosMessage.id);
 

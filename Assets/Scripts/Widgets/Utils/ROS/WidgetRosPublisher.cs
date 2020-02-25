@@ -6,7 +6,7 @@ using System.Text;
 using System;
 using System.IO;
 
-public class InterfaceMessagePublisher : Publisher<RosSharp.RosBridgeClient.Messages.Standard.String>
+public class WidgetRosPublisher : Publisher<RosSharp.RosBridgeClient.Messages.Standard.String>
 {
     private float temperature = 20;
 
@@ -47,7 +47,7 @@ public class InterfaceMessagePublisher : Publisher<RosSharp.RosBridgeClient.Mess
         System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
         int cur_time = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
 
-        JSON_message demoMessage = new JSON_message(1, UnityEngine.Random.Range(20.0f, 25.0f), cur_time, 2);
+        RosJsonMessage demoMessage = new RosJsonMessage(1, UnityEngine.Random.Range(20.0f, 25.0f), cur_time, 2);
         string jsonString = JsonUtility.ToJson(demoMessage);
         RosSharp.RosBridgeClient.Messages.Standard.String tmpMessage = new RosSharp.RosBridgeClient.Messages.Standard.String(jsonString);
         PublishMessage(tmpMessage);
@@ -216,19 +216,3 @@ public class InterfaceMessagePublisher : Publisher<RosSharp.RosBridgeClient.Mess
     */
 }
 
-[Serializable]
-public class JSON_message
-{
-    public int id;
-    public float datapoint;
-    public long timestamp;
-    public int color;
-
-    public JSON_message(int id, float datapoint, long timestamp, int color)
-    {
-        this.id = id;
-        this.datapoint = datapoint;
-        this.timestamp = timestamp;
-        this.color = color;
-    }
-}

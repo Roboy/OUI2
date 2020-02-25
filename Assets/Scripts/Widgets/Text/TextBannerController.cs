@@ -7,12 +7,12 @@ public class TextBannerController : Controller
     {
     }
 
-    public override void ReceiveMessage(JSON_message rosMessage)
+    public override void ReceiveMessage(RosJsonMessage rosMessage)
     {
         model.UpdateModel(ParseMessage(rosMessage));
     }
 
-    private TextBannerMessage ParseMessage(JSON_message rosMessage)
+    private TextBannerMessage ParseMessage(RosJsonMessage rosMessage)
     {        
         /*
         Stream dataStream = new MemoryStream(rosMessageData);

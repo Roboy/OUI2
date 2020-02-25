@@ -19,7 +19,6 @@ public class Widget : MonoBehaviour
         this.view = view;
         this.context = context;
         id = context.template_ID;
-
     }
     
     public int GetID()
@@ -27,7 +26,7 @@ public class Widget : MonoBehaviour
         return id;
     }
 
-    public void ForwardRosMessage(JSON_message rosMessage)
+    public void ForwardRosMessage(RosJsonMessage rosMessage)
     {
         controller.ReceiveMessage(rosMessage);
     }

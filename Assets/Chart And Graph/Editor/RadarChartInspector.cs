@@ -144,7 +144,7 @@ namespace Assets
                     }
                     GUILayout.FlexibleSpace();
                     if (GUILayout.Button("..."))
-                        DoContext(type, name);
+                        DoRosJsonMessage(type, name);
                     EditorGUILayout.EndHorizontal();
                     if (toogle)
                     {
@@ -288,7 +288,7 @@ namespace Assets
                 window.ShowDialog(data.Value, data.Key, RenameGroup);
         }
 
-        void DoContext(string type, string name)
+        void DoRosJsonMessage(string type, string name)
         {
             string arg = type + "|" + name;
             GenericMenu menu = new GenericMenu();

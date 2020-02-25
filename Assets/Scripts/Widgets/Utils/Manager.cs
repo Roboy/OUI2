@@ -29,7 +29,7 @@ namespace Widgets
 
             if (widget == null)
             {
-                Debug.LogWarning("Message with no matching widget id: " + rosMessage.id + " received.");
+                Debug.Log("Message with no matching widget id: " + rosMessage.id + " received.");
                 return;
             }
 

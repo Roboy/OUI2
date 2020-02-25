@@ -15,14 +15,14 @@ namespace Widgets
             graphManager = GetComponentInChildren<GraphManager>();
             graphManager.Init();
             iconManager.DetailedPanel.SetActive(false);
-            SetPosition(((GraphModel)model).GetPos());
+            SetPosition(((GraphModel)model).GetPanelId());
             UpdateView(model);
         }
 
         public override void UpdateView(Model model)
         {
             GraphModel graphModel = (GraphModel)model;
-            SetDetailedPanelPosition(graphModel.detailedPanelPos);
+            //SetDetailedPanelPosition(graphModel.detailedPanelPos);
             SetColor(graphModel.title, graphModel.color);
             if (graphModel.datapoints.Count > 0)
             {
@@ -44,6 +44,7 @@ namespace Widgets
             transform.localScale = Vector3.one;
         }
 
+        /*
         private void SetDetailedPanelPosition(int pos)
         {
             if (pos - 1 < 0 || pos - 1 > GUIData.Instance.positionsDetailedPanels.Length)
@@ -64,6 +65,7 @@ namespace Widgets
 
             //iconManager.DetailedPanel.transform.localScale = Vector3.one;
         }
+        */
 
         private void SetThumbnailIcon(string iconName)
         {

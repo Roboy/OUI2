@@ -11,17 +11,17 @@ namespace Widgets
         // Start is called before the first frame update
         public List<Widget> CreateWidgetsAtStartup()
         {
-            List<Context> widgetContexts = TemplateParser.ParseAllWidgetTemplates();
+            List<RosJsonMessage> widgetContexts = TemplateParser.ParseAllWidgetTemplates();
 
             List<Widget> widgets = new List<Widget>();
 
-            foreach (Context widgetContext in widgetContexts)
+            foreach (RosJsonMessage widgetContext in widgetContexts)
             {
                 Widget createdWidget = CreateWidgetFromContext(widgetContext, widgets);
 
                 if (createdWidget == null)
                 {
-                    Debug.Log("null");
+                    Debug.Log("widget is null");
                     continue;
                 }
 
@@ -39,13 +39,12 @@ namespace Widgets
             curvedUI.AddEffectToChildren();
         }
 
-        private bool IsWidgetIdUnique(Context widgetContext, List<Widget> existingWidgets)
+        private bool IsWidgetIdUnique(RosJsonMessage widgetContext, List<Widget> existingWidgets)
         {
             foreach (Widget existingWidget in existingWidgets)
             {
-                if (existingWidget.GetID() == widgetContext.template_ID)
-                {
-                    Debug.LogWarning("duplicate ID: " + widgetContext.template_ID + " in widget templates");
+                if (existingWidget.GetID() == widgetContext.id)
+                {                    
                     return false;
                 }
             }
@@ -53,16 +52,16 @@ namespace Widgets
             return true;
         }
 
-        public Widget CreateWidgetFromContext(Context widgetContext, List<Widget> existingWidgets)
+        public Widget CreateWidgetFromContext(RosJsonMessage widgetContext, List<Widget> existingWidgets)
         {
             if (IsWidgetIdUnique(widgetContext, existingWidgets) == false)
             {
+                Debug.Log("duplicate ID: " + widgetContext.id + " in widget templates");
                 return null;
             }
 
             Widget widget = null;
-            // Debug.Log(widgetContext.type.ToString());
-
+            
             switch (widgetContext.type)
             {
                 case "Graph":
@@ -74,11 +73,11 @@ namespace Widgets
                     break;
 
                 case "TextBanner":
-                    widget = CreateTextBannerWidget(widgetContext);
+                    widget = CreateToastrWidget(widgetContext);
                     break;
 
                 default:
-                    Debug.LogWarning("Type not defined: " + widgetContext.type);
+                    Debug.Log("Type not defined: " + widgetContext.type);
                     break;
             }
 
@@ -100,13 +99,13 @@ namespace Widgets
             */
         }
 
-        public Widget CreateGraphWidget(Context widgetContext)
+        public Widget CreateGraphWidget(RosJsonMessage widgetContext)
         {
             GameObject newInstance = Instantiate(GraphPref);
-            View view = newInstance.AddComponent<GraphView>() as GraphView;
-            Model model = new GraphModel(view, widgetContext.pos, widgetContext.title, widgetContext.detailedPanelPos, WidgetUtility.BytesToColor(widgetContext.color));
+            GraphView view = newInstance.AddComponent<GraphView>() as GraphView;
+            GraphModel model = new GraphModel(view, widgetContext.title, widgetContext.panel_id, WidgetUtility.BytesToColor(widgetContext.graphColor));
             view.Init(model);
-            Controller controller = new GraphController(model);
+            GraphController controller = new GraphController(model);
             Widget widget = Manager.Instance.gameObject.AddComponent<Widget>() as Widget;
 
             /*View view = WidgetManager.Instance.gameObject.AddComponent<GraphViewDummy>() as GraphViewDummy;
@@ -119,12 +118,12 @@ namespace Widgets
             return widget;
         }
 
-        public Widget CreateInspectorGraphWidget(Context widgetContext)
+        public Widget CreateInspectorGraphWidget(RosJsonMessage widgetContext)
         {
-            View view = gameObject.AddComponent<InspectorGraphView>() as InspectorGraphView;
-            Model model = new GraphModel(view, widgetContext.pos, widgetContext.title, widgetContext.detailedPanelPos, WidgetUtility.BytesToColor(widgetContext.color));
+            InspectorGraphView view = gameObject.AddComponent<InspectorGraphView>() as InspectorGraphView;
+            GraphModel model = new GraphModel(view, widgetContext.title, widgetContext.panel_id, WidgetUtility.BytesToColor(widgetContext.graphColor));
             view.Init(model);
-            Controller controller = new GraphController(model);
+            GraphController controller = new GraphController(model);
             Widget widget = Manager.Instance.gameObject.AddComponent<Widget>() as Widget;
 
             widget.InitializeWidget(controller, model, view, widgetContext);
@@ -133,14 +132,14 @@ namespace Widgets
         }
 
         // TODO: adjust MVC for TextBanner and implement new needed Variables (duration, ...) 
-        public Widget CreateTextBannerWidget(Context widgetContext)
+        public Widget CreateToastrWidget(RosJsonMessage widgetContext)
         {
             // TODO: Greate new MVC Classes
             //GameObject newInstance = Instantiate(GraphPref);
-            View view = Manager.Instance.gameObject.AddComponent<TextBannerView>() as TextBannerView;
+            View view = Manager.Instance.gameObject.AddComponent<ToastrView>() as ToastrView;
             //Model model = new TextBannerModel(view, widgetContext.pos, widgetContext.title, widgetContext.duration, widgetContext.color, widgetContext.fontSize);
-            Model model = new TextBannerModel(view, widgetContext.pos, widgetContext.title, widgetContext.duration, WidgetUtility.BytesToColor(widgetContext.color), widgetContext.fontSize);
-            Controller controller = new TextBannerController(model);
+            ToastrModel model = new ToastrModel(view, widgetContext.title, widgetContext.panel_id, widgetContext.toastrDuration, WidgetUtility.BytesToColor(widgetContext.toastrColor), widgetContext.toastrFontSize);
+            ToastrController controller = new ToastrController(model);
             Widget widget = Manager.Instance.gameObject.AddComponent<Widget>() as Widget;
 
             /*View view = WidgetManager.Instance.gameObject.AddComponent<GraphViewDummy>() as GraphViewDummy;

@@ -10,15 +10,15 @@ namespace Widgets
         private Model model;
         private View view;
 
-        private Context context;
+        private RosJsonMessage RosJsonMessage;
 
-        public void InitializeWidget(Controller controller, Model model, View view, Context context)
+        public void InitializeWidget(Controller controller, Model model, View view, RosJsonMessage RosJsonMessage)
         {
             this.controller = controller;
             this.model = model;
             this.view = view;
-            this.context = context;
-            id = context.template_ID;
+            this.RosJsonMessage = RosJsonMessage;
+            id = RosJsonMessage.id;
         }
 
         public int GetID()
@@ -29,6 +29,7 @@ namespace Widgets
         public void ForwardRosMessage(RosJsonMessage rosMessage)
         {
             controller.ReceiveMessage(rosMessage);
+            view.UpdateView(model);
         }
     }
 }

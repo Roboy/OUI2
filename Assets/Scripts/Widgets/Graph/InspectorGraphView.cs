@@ -4,7 +4,7 @@
     {
         public string[] displayArray;
 
-        public override void Init(Model model)
+        public override void Init(Model model, int panel_id)
         {
             displayArray = new string[GraphModel.SIZE];
         }

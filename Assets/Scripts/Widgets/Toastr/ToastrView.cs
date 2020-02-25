@@ -9,7 +9,7 @@ namespace Widgets
     {
         private TextFieldManager textFieldManager;
 
-        public override void Init(Model model)
+        public override void Init(Model model, int panel_id)
         {
             /*iconManager = GetComponent<IconStateManager>();
             graphManager = GetComponentInChildren<GraphManager>();

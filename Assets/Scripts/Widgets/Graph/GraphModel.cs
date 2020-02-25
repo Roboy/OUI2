@@ -13,7 +13,7 @@ namespace Widgets
 
         public Queue<float> datapoints;
 
-        public GraphModel(View view, string title, int panel_id, Color color) : base(view, title, panel_id)
+        public GraphModel(View view, string title, Color color) : base(view, title)
         {
             this.color = color;
             datapoints = new Queue<float>(SIZE);

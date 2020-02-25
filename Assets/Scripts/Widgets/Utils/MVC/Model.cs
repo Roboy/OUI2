@@ -7,20 +7,12 @@ namespace Widgets
     {
         protected View view;
 
-        protected int panel_id;
-
         public string title;
 
-        public Model(View view, string title, int panel_id)
+        public Model(View view, string title)
         {
             this.view = view;
-            this.panel_id = panel_id;
             this.title = title;
-        }
-
-        public int GetPanelId()
-        {
-            return panel_id;
         }
 
         protected static int ProcessInitialValue(int value, int defaultValue, bool allowNegValues, string variableName)

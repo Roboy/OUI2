@@ -5,6 +5,7 @@ namespace Widgets
     public class Widget : MonoBehaviour
     {
         private int id;
+        private int panel_id;
 
         private Controller controller;
         private Model model;
@@ -19,11 +20,17 @@ namespace Widgets
             this.view = view;
             this.RosJsonMessage = RosJsonMessage;
             id = RosJsonMessage.id;
+            panel_id = RosJsonMessage.panel_id;
         }
 
         public int GetID()
         {
             return id;
+        }
+
+        public int GetPanelID()
+        {
+            return panel_id;
         }
 
         public void ForwardRosMessage(RosJsonMessage rosMessage)

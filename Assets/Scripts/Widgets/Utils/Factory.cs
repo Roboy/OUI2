@@ -72,9 +72,20 @@ namespace Widgets
                     widget = CreateInspectorGraphWidget(widgetContext);
                     break;
 
-                case "TextBanner":
+                case "Toastr":
                     widget = CreateToastrWidget(widgetContext);
                     break;
+
+                /* For Later
+                 
+                case "Text":
+                    widget = CreateToastrWidget(widgetContext);
+                    break;
+
+                case "Icon":
+                    widget = CreateToastrWidget(widgetContext);
+                    break;
+                */
 
                 default:
                     Debug.Log("Type not defined: " + widgetContext.type);
@@ -82,46 +93,26 @@ namespace Widgets
             }
 
             return widget;
-
-            /*
-            AbstractController controller;
-            AbstractModel model;
-            AbstractView view;
-
-            if (widgetContext.type == graph)
-            {
-                view = new GraphView(widgetContext.color);
-            }
-
-            Widget widget = new Widget(controller, model, view);
-
-            return widget;
-            */
         }
 
         public Widget CreateGraphWidget(RosJsonMessage widgetContext)
         {
             GameObject newInstance = Instantiate(GraphPref);
+
             GraphView view = newInstance.AddComponent<GraphView>() as GraphView;
-            GraphModel model = new GraphModel(view, widgetContext.title, widgetContext.panel_id, WidgetUtility.BytesToColor(widgetContext.graphColor));
+            GraphModel model = new GraphModel(view, widgetContext.title, WidgetUtility.BytesToColor(widgetContext.graphColor));
             view.Init(model);
             GraphController controller = new GraphController(model);
+
             Widget widget = Manager.Instance.gameObject.AddComponent<Widget>() as Widget;
-
-            /*View view = WidgetManager.Instance.gameObject.AddComponent<GraphViewDummy>() as GraphViewDummy;
-            Model model = new GraphModel(view, widgetContext.pos, widgetContext.color);
-            Controller controller = new GraphController(model);
-            Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;*/
-
             widget.InitializeWidget(controller, model, view, widgetContext);
-
             return widget;
         }
 
         public Widget CreateInspectorGraphWidget(RosJsonMessage widgetContext)
         {
             InspectorGraphView view = gameObject.AddComponent<InspectorGraphView>() as InspectorGraphView;
-            GraphModel model = new GraphModel(view, widgetContext.title, widgetContext.panel_id, WidgetUtility.BytesToColor(widgetContext.graphColor));
+            GraphModel model = new GraphModel(view, widgetContext.title, WidgetUtility.BytesToColor(widgetContext.graphColor));
             view.Init(model);
             GraphController controller = new GraphController(model);
             Widget widget = Manager.Instance.gameObject.AddComponent<Widget>() as Widget;
@@ -138,7 +129,7 @@ namespace Widgets
             //GameObject newInstance = Instantiate(GraphPref);
             View view = Manager.Instance.gameObject.AddComponent<ToastrView>() as ToastrView;
             //Model model = new TextBannerModel(view, widgetContext.pos, widgetContext.title, widgetContext.duration, widgetContext.color, widgetContext.fontSize);
-            ToastrModel model = new ToastrModel(view, widgetContext.title, widgetContext.panel_id, widgetContext.toastrDuration, WidgetUtility.BytesToColor(widgetContext.toastrColor), widgetContext.toastrFontSize);
+            ToastrModel model = new ToastrModel(view, widgetContext.title, widgetContext.toastrDuration, WidgetUtility.BytesToColor(widgetContext.toastrColor), widgetContext.toastrFontSize);
             ToastrController controller = new ToastrController(model);
             Widget widget = Manager.Instance.gameObject.AddComponent<Widget>() as Widget;
 

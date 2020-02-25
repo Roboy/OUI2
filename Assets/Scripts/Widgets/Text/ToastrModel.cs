@@ -16,7 +16,7 @@ namespace Widgets
 
         public Queue<Printable> datapoints;
 
-        public ToastrModel(View view, string title, int panel_id, float duration, Color color, int fontSize) : base(view, title, panel_id)
+        public ToastrModel(View view, string title, float duration, Color color, int fontSize) : base(view, title)
         {
             // TODO: if 0 set to default value
             this.duration = ProcessInitialValue(duration, 6, false, "duration");

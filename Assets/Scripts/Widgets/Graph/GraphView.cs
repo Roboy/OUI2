@@ -15,7 +15,7 @@ namespace Widgets
             graphManager = GetComponentInChildren<GraphManager>();
             graphManager.Init();
             iconManager.DetailedPanel.SetActive(false);
-            SetPosition(((GraphModel)model).GetPanelId());
+            //SetPosition(((GraphModel)model).GetPanelId());
             UpdateView(model);
         }
 

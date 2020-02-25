@@ -1163,6 +1163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6664fc8f2f18cc147bbdc9790ab8e9ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< master
   RectTransformOverride: {fileID: 0}
   parentSet: 0
   parent: {fileID: 7599326}
@@ -1670,6 +1671,8 @@ MonoBehaviour:
   savedFill: 1
 --- !u!1001 &789635039
 =======
+=======
+>>>>>>> Restored the scene (not fully working)
   UI_Mask:
     serializedVersion: 2
     m_Bits: 0
@@ -1677,7 +1680,10 @@ MonoBehaviour:
   thickness: 0.002
   length: 100
 --- !u!1001 &940417411
+<<<<<<< master
 >>>>>>> Chnaged positions of the detailed Panels
+=======
+>>>>>>> Restored the scene (not fully working)
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1687,6 +1693,7 @@ PrefabInstance:
     - target: {fileID: 160200826970674363, guid: 2a13184c5b19a1648831a4984f35c284,
         type: 3}
       propertyPath: m_Name
+<<<<<<< master
 <<<<<<< master
       value: ModularTrayIcons
       objectReference: {fileID: 0}
@@ -1834,6 +1841,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AdjustedModularTrayIcons
+=======
+      value: AdjustedModularTrayIcons
+      objectReference: {fileID: 0}
+    - target: {fileID: 160200826970674363, guid: 2a13184c5b19a1648831a4984f35c284,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+>>>>>>> Restored the scene (not fully working)
       objectReference: {fileID: 0}
     - target: {fileID: 160200826970674359, guid: 2a13184c5b19a1648831a4984f35c284,
         type: 3}
@@ -1869,6 +1884,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
+<<<<<<< master
 <<<<<<< master
       inSlope: 0
       outSlope: 0
@@ -9087,6 +9103,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6038986271458525329, guid: db6fe23e6bfb5c044ae08a5bfc28b0b3,
+=======
+      objectReference: {fileID: 0}
+    - target: {fileID: 160200826970674359, guid: 2a13184c5b19a1648831a4984f35c284,
+>>>>>>> Restored the scene (not fully working)
         type: 3}
       propertyPath: m_Name
 <<<<<<< master
@@ -9202,8 +9222,12 @@ PrefabInstance:
       value: 0
 =======
       propertyPath: m_AnchorMin.y
+<<<<<<< master
       value: 1
 >>>>>>> Next cleanup & refactor
+=======
+      value: 0
+>>>>>>> Restored the scene (not fully working)
       objectReference: {fileID: 0}
     - target: {fileID: 6038986271458525328, guid: db6fe23e6bfb5c044ae08a5bfc28b0b3,
         type: 3}
@@ -9212,8 +9236,12 @@ PrefabInstance:
       value: 0
 =======
       propertyPath: m_AnchorMax.y
+<<<<<<< master
       value: 1
 >>>>>>> Next cleanup & refactor
+=======
+      value: 0
+>>>>>>> Restored the scene (not fully working)
       objectReference: {fileID: 0}
     - target: {fileID: 6038986271458525328, guid: db6fe23e6bfb5c044ae08a5bfc28b0b3,
         type: 3}
@@ -9222,8 +9250,12 @@ PrefabInstance:
       value: 0
 =======
       propertyPath: m_AnchoredPosition.x
+<<<<<<< master
       value: 170
 >>>>>>> Next cleanup & refactor
+=======
+      value: 0
+>>>>>>> Restored the scene (not fully working)
       objectReference: {fileID: 0}
     - target: {fileID: 6038986271458525328, guid: db6fe23e6bfb5c044ae08a5bfc28b0b3,
         type: 3}
@@ -9232,8 +9264,12 @@ PrefabInstance:
       value: 0
 =======
       propertyPath: m_AnchoredPosition.y
+<<<<<<< master
       value: -25
 >>>>>>> Next cleanup & refactor
+=======
+      value: 0
+>>>>>>> Restored the scene (not fully working)
       objectReference: {fileID: 0}
     - target: {fileID: 6038986271458525328, guid: db6fe23e6bfb5c044ae08a5bfc28b0b3,
         type: 3}
@@ -9241,8 +9277,12 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
 =======
       propertyPath: m_AnchorMin.y
+<<<<<<< master
 >>>>>>> Next cleanup & refactor
       value: 1
+=======
+      value: 0
+>>>>>>> Restored the scene (not fully working)
       objectReference: {fileID: 0}
     - target: {fileID: 6038986271458525328, guid: db6fe23e6bfb5c044ae08a5bfc28b0b3,
         type: 3}
@@ -9251,8 +9291,12 @@ PrefabInstance:
       value: 2
 =======
       propertyPath: m_AnchorMax.y
+<<<<<<< master
       value: 1
 >>>>>>> Next cleanup & refactor
+=======
+      value: 0
+>>>>>>> Restored the scene (not fully working)
       objectReference: {fileID: 0}
     - target: {fileID: 6038986271458525328, guid: db6fe23e6bfb5c044ae08a5bfc28b0b3,
         type: 3}
@@ -9261,8 +9305,12 @@ PrefabInstance:
       value: 0
 =======
       propertyPath: m_AnchoredPosition.x
+<<<<<<< master
       value: 250
 >>>>>>> Next cleanup & refactor
+=======
+      value: 0
+>>>>>>> Restored the scene (not fully working)
       objectReference: {fileID: 0}
     - target: {fileID: 6038986271458525328, guid: db6fe23e6bfb5c044ae08a5bfc28b0b3,
         type: 3}
@@ -9271,8 +9319,12 @@ PrefabInstance:
       value: 0
 =======
       propertyPath: m_AnchoredPosition.y
+<<<<<<< master
       value: -25
 >>>>>>> Next cleanup & refactor
+=======
+      value: 0
+>>>>>>> Restored the scene (not fully working)
       objectReference: {fileID: 0}
     - target: {fileID: 6038986271458525328, guid: db6fe23e6bfb5c044ae08a5bfc28b0b3,
         type: 3}
@@ -9281,8 +9333,12 @@ PrefabInstance:
       value: 0
 =======
       propertyPath: m_AnchorMin.y
+<<<<<<< master
       value: 1
 >>>>>>> Next cleanup & refactor
+=======
+      value: 0
+>>>>>>> Restored the scene (not fully working)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db6fe23e6bfb5c044ae08a5bfc28b0b3, type: 3}
@@ -9300,8 +9356,12 @@ PrefabInstance:
       value: Bottom
 =======
       propertyPath: m_AnchorMax.y
+<<<<<<< master
       value: 1
 >>>>>>> Next cleanup & refactor
+=======
+      value: 0
+>>>>>>> Restored the scene (not fully working)
       objectReference: {fileID: 0}
     - target: {fileID: 5915476451159072705, guid: 9e7b86dfa5ccc8546a19c645854fb25d,
         type: 3}
@@ -9310,8 +9370,12 @@ PrefabInstance:
       value: 0
 =======
       propertyPath: m_AnchoredPosition.x
+<<<<<<< master
       value: 330
 >>>>>>> Next cleanup & refactor
+=======
+      value: 0
+>>>>>>> Restored the scene (not fully working)
       objectReference: {fileID: 0}
     - target: {fileID: 5915476451159072705, guid: 9e7b86dfa5ccc8546a19c645854fb25d,
         type: 3}
@@ -9320,8 +9384,12 @@ PrefabInstance:
       value: 0
 =======
       propertyPath: m_AnchoredPosition.y
+<<<<<<< master
       value: -25
 >>>>>>> Next cleanup & refactor
+=======
+      value: 0
+>>>>>>> Restored the scene (not fully working)
       objectReference: {fileID: 0}
     - target: {fileID: 5915476451159072705, guid: 9e7b86dfa5ccc8546a19c645854fb25d,
         type: 3}
@@ -9951,6 +10019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e62188adca544cf1b96ccf1630f15f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< master
   DoNotTesselate: 0
   savedPos: {x: 0, y: 184.00002, z: 6.99971}
   savedUp: {x: 0, y: 1, z: 0}
@@ -10092,6 +10161,15 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 0
 --- !u!114 &1659364888
+=======
+  DetailedPanel: {fileID: 0}
+  GlowEffect: {fileID: 0}
+  thumbnailIcon: {fileID: 0}
+  thumbnailText: {fileID: 0}
+  dwellTimeActivate: 0.5
+  dwellTimeDeactivate: 0.5
+--- !u!114 &1082160683
+>>>>>>> Restored the scene (not fully working)
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10147,6 +10225,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659364887}
   m_CullTransparentMesh: 0
+<<<<<<< master
 --- !u!224 &1659364891
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10168,6 +10247,15 @@ RectTransform:
   m_SizeDelta: {x: 0, y: -50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1699004155
+=======
+--- !u!1 &1157037882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 160200826970674363, guid: 2a13184c5b19a1648831a4984f35c284,
+    type: 3}
+  m_PrefabInstance: {fileID: 940417411}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1262120143
+>>>>>>> Restored the scene (not fully working)
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10233,7 +10321,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1699004155}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< master
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+=======
+  m_Script: {fileID: 11500000, guid: 815463e60cb94f240af7af3cd96335c7, type: 3}
+>>>>>>> Restored the scene (not fully working)
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -10272,25 +10364,20 @@ CanvasRenderer:
   m_GameObject: {fileID: 1262120143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4a992128f166fc41b6966aca2fe4046, type: 3}
+  m_Script: {fileID: 11500000, guid: 5401fae846504cb4c9d367c30708ce45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   positionsUI:
-  - {fileID: 1388633437}
+  - {fileID: 1157037882}
   - {fileID: 1857725382}
   positionsDetailedPanels:
-  - {fileID: 1632904302}
+  - {fileID: 2109235140}
   positionsText:
   - {fileID: 7178870815441879456}
   - {fileID: 2098487191}
   - {fileID: 1481344138}
   positionsAdvancedMenu: []
---- !u!1 &1388633437 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 160200827236529589, guid: 2a13184c5b19a1648831a4984f35c284,
-    type: 3}
-  m_PrefabInstance: {fileID: 940417411}
-  m_PrefabAsset: {fileID: 0}
+  icons: []
 --- !u!1001 &1416649465
 >>>>>>> Widgets can now be created and their pos set to the log
 PrefabInstance:
@@ -11587,7 +11674,42 @@ Transform:
   m_Father: {fileID: 1491050401}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< master
 --- !u!114 &2002138599
+=======
+--- !u!224 &1575012976 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 160200826970674359, guid: 2a13184c5b19a1648831a4984f35c284,
+    type: 3}
+  m_PrefabInstance: {fileID: 940417411}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1657810723 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4439294843196103386, guid: 75adeddf5b6fb5a4c9c9b4244d35d51c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4439294843755001337}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1659364887
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1659364891}
+  - component: {fileID: 1659364890}
+  - component: {fileID: 1659364889}
+  - component: {fileID: 1659364888}
+  m_Layer: 5
+  m_Name: DetailedPanelBattery
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1659364888
+>>>>>>> Restored the scene (not fully working)
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11916,6 +12038,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 833916754}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &1857725383 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6256006468854863410, guid: 42952144f9aee844fbe3e0332984a37a,
+    type: 3}
+  m_PrefabInstance: {fileID: 833916754}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2001630525 stripped
 >>>>>>> Widgets can now be created and their pos set to the log
 GameObject:
@@ -12217,7 +12345,7 @@ RectTransform:
   - {fileID: 1659364891}
   - {fileID: 203324848}
   m_Father: {fileID: 4934749565128719077}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12553,8 +12681,14 @@ RectTransform:
 =======
 >>>>>>> The type of a JSONTemplate will now be parsed correct
   - {fileID: 1035264847}
+<<<<<<< master
   - {fileID: 2109235141}
   - {fileID: 1076174223}
+=======
+  - {fileID: 1082160681}
+  - {fileID: 1857725383}
+  - {fileID: 2109235141}
+>>>>>>> Restored the scene (not fully working)
   m_Father: {fileID: 4934749566881069615}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

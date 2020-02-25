@@ -21,7 +21,7 @@ namespace Widgets
         public override void UpdateView(Model model)
         {
             ToastrModel textBannerModel = (ToastrModel)model;
-            SetPosition(textBannerModel.GetPanelId());
+            //SetPosition(textBannerModel.GetPanelId());
             //SetDetailedPanelPosition(textBannerModel.detailedPanelPos);
             //SetColor(model.title, textBannerModel.color);
             textFieldManager.queue.Enqueue(textBannerModel.datapoints.Dequeue());

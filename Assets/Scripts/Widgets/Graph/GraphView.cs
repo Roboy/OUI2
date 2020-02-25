@@ -15,6 +15,7 @@ namespace Widgets
             graphManager = GetComponentInChildren<GraphManager>();
             graphManager.Init();
             iconManager.DetailedPanel.SetActive(false);
+            SetPosition(panel_id); // test
             //SetPosition(((GraphModel)model).GetPanelId());
             UpdateView(model);
         }
@@ -22,7 +23,7 @@ namespace Widgets
         public override void UpdateView(Model model)
         {
             GraphModel graphModel = (GraphModel)model;
-            //SetDetailedPanelPosition(graphModel.detailedPanelPos);
+            SetDetailedPanelPosition(1); // graphModel.detailedPanelPos
             SetColor(graphModel.title, graphModel.color);
             if (graphModel.datapoints.Count > 0)
             {
@@ -44,7 +45,7 @@ namespace Widgets
             transform.localScale = Vector3.one;
         }
 
-        /*
+        
         private void SetDetailedPanelPosition(int pos)
         {
             if (pos - 1 < 0 || pos - 1 > GUIData.Instance.positionsDetailedPanels.Length)
@@ -57,7 +58,7 @@ namespace Widgets
             RectTransform rect = iconManager.DetailedPanel.GetComponent<RectTransform>();
             rect.offsetMin = Vector3.zero;
             rect.offsetMax = Vector3.zero;
-            iconManager.DetailedPanel.transform.SetParent(transform);
+            //iconManager.DetailedPanel.transform.SetParent(transform);
             // TODO: set the panel to the correct x position
             // iconManager.DetailedPanel.transform.localPosition -= Vector3.right * transform.position.x; //120; // iconManager.DetailedPanel.transform.position.x
             //rect.offsetMin = Vector3.zero;
@@ -65,7 +66,7 @@ namespace Widgets
 
             //iconManager.DetailedPanel.transform.localScale = Vector3.one;
         }
-        */
+        
 
         private void SetThumbnailIcon(string iconName)
         {

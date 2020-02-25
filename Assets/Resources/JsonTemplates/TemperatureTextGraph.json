@@ -1,1 +1,1 @@
-{"template_ID":5,"type":"Graph","title":"Temperature","pos":2, "detailedPanelPos":1, "color":[255, 255, 255, 255], "thumbnailText":"Temperature"}
+{"template_ID":5,"type":"Graph","title":"Temperature","panel_id":2, "detailedPanelPos":1, "graphColor":[255, 255, 255, 255], "textMessage":"Temperature"}

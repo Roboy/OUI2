@@ -10304,6 +10304,9 @@ GameObject:
   m_IsActive: 0
 --- !u!114 &1659364888
 <<<<<<< master
+<<<<<<< master
+=======
+>>>>>>> Restored the scene (not fully working)
 =======
   DetailedPanel: {fileID: 0}
   GlowEffect: {fileID: 0}
@@ -10313,8 +10316,11 @@ GameObject:
   dwellTimeDeactivate: 0.5
 --- !u!114 &1082160683
 >>>>>>> Restored the scene (not fully working)
+<<<<<<< master
 =======
 >>>>>>> Prototype for the new HUD
+=======
+>>>>>>> Restored the scene (not fully working)
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10372,8 +10378,11 @@ CanvasRenderer:
   m_CullTransparentMesh: 0
 <<<<<<< master
 <<<<<<< master
+<<<<<<< master
 =======
 >>>>>>> Prototype for the new HUD
+=======
+>>>>>>> Restored the scene (not fully working)
 --- !u!224 &1659364891
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10396,6 +10405,9 @@ RectTransform:
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1699004155
 <<<<<<< master
+<<<<<<< master
+=======
+>>>>>>> Restored the scene (not fully working)
 =======
 --- !u!1 &1157037882 stripped
 GameObject:
@@ -10405,8 +10417,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1262120143
 >>>>>>> Restored the scene (not fully working)
+<<<<<<< master
 =======
 >>>>>>> Prototype for the new HUD
+=======
+>>>>>>> Restored the scene (not fully working)
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10517,6 +10532,7 @@ CanvasRenderer:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5401fae846504cb4c9d367c30708ce45, type: 3}
+<<<<<<< master
   m_Name: 
   m_EditorClassIdentifier: 
   positionsUI:
@@ -10613,24 +10629,21 @@ CanvasRenderer:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4a992128f166fc41b6966aca2fe4046, type: 3}
+=======
+>>>>>>> Restored the scene (not fully working)
   m_Name: 
   m_EditorClassIdentifier: 
   positionsUI:
-  - {fileID: 1388633437}
+  - {fileID: 1157037882}
   - {fileID: 1857725382}
   positionsDetailedPanels:
-  - {fileID: 1632904302}
+  - {fileID: 2109235140}
   positionsText:
   - {fileID: 7178870815441879456}
   - {fileID: 2098487191}
   - {fileID: 1481344138}
   positionsAdvancedMenu: []
---- !u!1 &1388633437 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 160200827236529589, guid: 2a13184c5b19a1648831a4984f35c284,
-    type: 3}
-  m_PrefabInstance: {fileID: 940417411}
-  m_PrefabAsset: {fileID: 0}
+  icons: []
 --- !u!1001 &1416649465
 >>>>>>> Widgets can now be created and their pos set to the log
 >>>>>>> Widgets can now be created and their pos set to the log
@@ -12304,6 +12317,9 @@ GameObject:
   m_PrefabInstance: {fileID: 833916754}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< master
+<<<<<<< master
+=======
+>>>>>>> Restored the scene (not fully working)
 --- !u!224 &1857725383 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6256006468854863410, guid: 42952144f9aee844fbe3e0332984a37a,
@@ -12311,8 +12327,11 @@ RectTransform:
   m_PrefabInstance: {fileID: 833916754}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< master
+<<<<<<< master
 =======
 >>>>>>> Widgets can now be created and their pos set to the log
+=======
+>>>>>>> Restored the scene (not fully working)
 --- !u!1 &2001630525 stripped
 >>>>>>> Widgets can now be created and their pos set to the log
 GameObject:
@@ -12618,10 +12637,14 @@ RectTransform:
   - {fileID: 203324848}
   m_Father: {fileID: 4934749565128719077}
 <<<<<<< master
+<<<<<<< master
   m_RootOrder: 5
 =======
   m_RootOrder: 3
 >>>>>>> Prototype for the new HUD
+=======
+  m_RootOrder: 5
+>>>>>>> Restored the scene (not fully working)
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12959,6 +12982,7 @@ RectTransform:
   - {fileID: 1035264847}
 <<<<<<< master
 <<<<<<< master
+<<<<<<< master
   - {fileID: 2109235141}
   - {fileID: 1076174223}
 =======
@@ -12970,6 +12994,15 @@ RectTransform:
   - {fileID: 2109235141}
   - {fileID: 1076174223}
 >>>>>>> Prototype for the new HUD
+=======
+  - {fileID: 2109235141}
+  - {fileID: 1076174223}
+=======
+  - {fileID: 1082160681}
+  - {fileID: 1857725383}
+  - {fileID: 2109235141}
+>>>>>>> Restored the scene (not fully working)
+>>>>>>> Restored the scene (not fully working)
   m_Father: {fileID: 4934749566881069615}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

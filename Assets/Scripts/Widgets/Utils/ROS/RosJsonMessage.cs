@@ -6,16 +6,48 @@ namespace Widgets
     public class RosJsonMessage
     {
         public int id;
-        public float datapoint;
-        public long timestamp;
-        public int color;
 
-        public RosJsonMessage(int id, float datapoint, long timestamp, int color)
+        #region General        
+        public string title;
+        public string type;
+        public int panel_id;
+        public int childWidgetId;
+        public int timestamp;
+        #endregion
+
+        #region Graph
+        public float graphDatapoint;
+        public byte[] graphColor;
+        #endregion
+
+        #region Toastr
+        public string toastrMessage;
+        public int toastrFontSize;
+        public byte[] toastrColor;
+        public float toastrDuration;
+        #endregion
+
+        #region Text
+        public string textMessage;
+        public int textFontSize;
+        #endregion
+
+        #region TaskbarIcon
+        public int taskbarIconId;
+        #endregion
+        
+
+        private RosJsonMessage(int id, float graphDatapoint, int timestamp, byte[] graphColor)
         {
             this.id = id;
-            this.datapoint = datapoint;
+            this.graphDatapoint = graphDatapoint;
+            this.graphColor = graphColor;
             this.timestamp = timestamp;
-            this.color = color;
+        }
+
+        public static RosJsonMessage CreateGraphMessage(int id, float graphDatapoint, int timestamp, byte[] graphColor)
+        {
+            return new RosJsonMessage(id, graphDatapoint, timestamp, graphColor);
         }
     }
 }

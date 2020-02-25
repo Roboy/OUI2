@@ -48,13 +48,19 @@ namespace Widgets
         {
             System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
             int cur_time = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
-
-            RosJsonMessage demoMessage = new RosJsonMessage(1, UnityEngine.Random.Range(20.0f, 25.0f), cur_time, 2);
+            RosJsonMessage demoMessage = RosJsonMessage.CreateGraphMessage(1, UnityEngine.Random.Range(20.0f, 25.0f), cur_time, new byte[] { 255, 255, 255, 255 });
             string jsonString = JsonUtility.ToJson(demoMessage);
             RosSharp.RosBridgeClient.Messages.Standard.String tmpMessage = new RosSharp.RosBridgeClient.Messages.Standard.String(jsonString);
             PublishMessage(tmpMessage);
 
+
+            RosJsonMessage demoMessageInspector = RosJsonMessage.CreateGraphMessage(3, UnityEngine.Random.Range(20.0f, 25.0f), cur_time, new byte[] { 255, 255, 255, 255 });
+            string jsonStringInspector = JsonUtility.ToJson(demoMessageInspector);
+            RosSharp.RosBridgeClient.Messages.Standard.String tmpMessageInspector = new RosSharp.RosBridgeClient.Messages.Standard.String(jsonStringInspector);
+            PublishMessage(tmpMessageInspector);
+
             WriteMessageToFile("demoMessage", jsonString);
+            WriteMessageToFile("demoMessage", jsonStringInspector);
 
 
 

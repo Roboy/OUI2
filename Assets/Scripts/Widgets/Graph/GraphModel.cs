@@ -9,51 +9,29 @@ namespace Widgets
     {
         public const int SIZE = 10;
 
-        public int detailedPanelPos;
-
         public Color color;
 
         public Queue<float> datapoints;
 
-        public GraphModel(View view, int pos, string title, int detailedPanelPos, Color color) : base(view, pos, title)
+        public GraphModel(View view, string title, int panel_id, Color color) : base(view, title, panel_id)
         {
             this.color = color;
-            this.detailedPanelPos = detailedPanelPos;
             datapoints = new Queue<float>(SIZE);
         }
 
-        public static explicit operator GraphModel(int v)
+        public void ChangeColor(Color color)
         {
-            throw new NotImplementedException();
+            this.color = color;
         }
 
-        public override void UpdateModel(WidgetMessage newMessage)
+        public void AddDatapoint(float newDatapoint)
         {
-            GraphMessage newGraphMessage = (GraphMessage)newMessage;
-
-            if (!newGraphMessage.color.Equals(new Color(0, 0, 0, 0)))
-            {
-                color = newGraphMessage.color;
-            }
-
-            if (newGraphMessage.pos != 0)
-            {
-                pos = newGraphMessage.pos;
-            }
-
-            if (newGraphMessage.detailedPanelPos != 0)
-            {
-                detailedPanelPos = newGraphMessage.pos;
-            }
-
             if (datapoints.Count == SIZE)
             {
                 datapoints.Dequeue();
             }
 
-            datapoints.Enqueue(newGraphMessage.datapoint);
-
-            view.UpdateView(this);
+            datapoints.Enqueue(newDatapoint);
         }
     }
 }

@@ -5,32 +5,23 @@ namespace Widgets
 {
     public class GraphController : Controller
     {
-        public GraphController(Model model) : base(model)
+        public GraphController(GraphModel model) : base(model)
         {
         }
 
         public override void ReceiveMessage(RosJsonMessage rosMessage)
         {
-            model.UpdateModel(ParseMessage(rosMessage));
-        }
+            GraphModel graphModel = (GraphModel)model;
 
-        private GraphMessage ParseMessage(RosJsonMessage rosMessage)
-        {
-            return new GraphMessage(rosMessage.datapoint, 0, 0, Color.red);
-        }
-    }
+            if (rosMessage.graphColor != null)
+            {
+                graphModel.ChangeColor(WidgetUtility.BytesToColor(rosMessage.graphColor));
+            }
 
-    public class GraphMessage : WidgetMessage
-    {
-        public float datapoint;
-        public int detailedPanelPos;
-        public Color color;
-
-        public GraphMessage(float datapoint, int pos, int detailedPanelPos, Color color) : base(pos)
-        {
-            this.datapoint = datapoint;
-            this.detailedPanelPos = detailedPanelPos;
-            this.color = color;
+            if (rosMessage.graphDatapoint != 0.0f)
+            {
+                graphModel.AddDatapoint(rosMessage.graphDatapoint);
+            }
         }
     }
 }

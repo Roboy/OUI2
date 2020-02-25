@@ -11,14 +11,4 @@
 
         public abstract void ReceiveMessage(RosJsonMessage rosMessage);
     }
-
-    public abstract class WidgetMessage
-    {
-        public int pos;
-
-        public WidgetMessage(int pos)
-        {
-            this.pos = pos;
-        }
-    }
 }

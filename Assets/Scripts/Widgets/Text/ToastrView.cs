@@ -5,7 +5,7 @@ using UnityEngine;
 // TODO!!
 namespace Widgets
 {
-    public class TextBannerView : View
+    public class ToastrView : View
     {
         private TextFieldManager textFieldManager;
 
@@ -20,8 +20,8 @@ namespace Widgets
 
         public override void UpdateView(Model model)
         {
-            TextBannerModel textBannerModel = (TextBannerModel)model;
-            SetPosition(textBannerModel.GetPos());
+            ToastrModel textBannerModel = (ToastrModel)model;
+            SetPosition(textBannerModel.GetPanelId());
             //SetDetailedPanelPosition(textBannerModel.detailedPanelPos);
             //SetColor(model.title, textBannerModel.color);
             textFieldManager.queue.Enqueue(textBannerModel.datapoints.Dequeue());

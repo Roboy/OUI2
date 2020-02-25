@@ -5,14 +5,14 @@ namespace Widgets
 {
     public static class TemplateParser
     {
-        public static List<Context> ParseAllWidgetTemplates()
+        public static List<RosJsonMessage> ParseAllWidgetTemplates()
         {
-            List<Context> widgetContexts = new List<Context>();
+            List<RosJsonMessage> widgetContexts = new List<RosJsonMessage>();
 
             TextAsset[] widgetTemplates = Resources.LoadAll<TextAsset>("JsonTemplates");
             foreach (TextAsset widgetTemplate in widgetTemplates)
             {
-                Context parsedWidgetContext = ParseWidgetTemplate(widgetTemplate);
+                RosJsonMessage parsedWidgetContext = ParseWidgetTemplate(widgetTemplate);
 
                 if (parsedWidgetContext == null)
                 {
@@ -25,9 +25,9 @@ namespace Widgets
             return widgetContexts;
         }
 
-        private static Context ParseWidgetTemplate(TextAsset asset)
+        private static RosJsonMessage ParseWidgetTemplate(TextAsset asset)
         {
-            Context parsedContext = JsonUtility.FromJson<Context>(asset.text);
+            RosJsonMessage parsedContext = JsonUtility.FromJson<RosJsonMessage>(asset.text);
             if (parsedContext == null)
             {
                 Debug.LogWarning("Json " + asset.text + " is faulty");

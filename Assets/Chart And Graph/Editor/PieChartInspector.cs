@@ -158,7 +158,7 @@ class PieChartInspetor : Editor
                 if(valueProp != null)
                     EditorGUILayout.PropertyField(valueProp);
                 if (GUILayout.Button("..."))
-                    DoContext(type, name);
+                    DoRosJsonMessage(type, name);
                 EditorGUILayout.EndHorizontal();
                 if (toogle)
                 {
@@ -266,7 +266,7 @@ class PieChartInspetor : Editor
         if (data.Key == "category")
             window.ShowDialog(data.Value, data.Key, RenameCategory);
     }
-    void DoContext(string type, string name)
+    void DoRosJsonMessage(string type, string name)
     {
         string arg = type + "|" + name;
         GenericMenu menu = new GenericMenu();

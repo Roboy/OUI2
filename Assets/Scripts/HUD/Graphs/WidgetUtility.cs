@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Widgets
 {
-    public class WidgetUtility : MonoBehaviour
+    public static class WidgetUtility
     {
         public static Color BytesToColor(byte[] b)
         {

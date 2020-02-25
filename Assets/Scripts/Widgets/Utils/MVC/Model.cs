@@ -7,24 +7,21 @@ namespace Widgets
     {
         protected View view;
 
-        protected int pos;
+        protected int panel_id;
 
         public string title;
 
-        public Model(View view, int pos, string title)
+        public Model(View view, string title, int panel_id)
         {
             this.view = view;
-            this.pos = pos;
+            this.panel_id = panel_id;
             this.title = title;
         }
 
-        // TODO: public or getters?
-        public int GetPos()
+        public int GetPanelId()
         {
-            return pos;
+            return panel_id;
         }
-
-        public abstract void UpdateModel(WidgetMessage newMessage);
 
         protected static int ProcessInitialValue(int value, int defaultValue, bool allowNegValues, string variableName)
         {
@@ -59,14 +56,5 @@ namespace Widgets
                 return value;
             }
         }
-
-        /*private static Color IntToColor(int value, int defaultValue)
-        {
-
-            if (value == 0)
-            {
-                value = defaultValue;
-            }
-        }*/
     }
 }

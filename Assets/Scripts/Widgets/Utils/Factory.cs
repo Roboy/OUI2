@@ -101,7 +101,7 @@ namespace Widgets
 
             GraphView view = newInstance.AddComponent<GraphView>() as GraphView;
             GraphModel model = new GraphModel(view, widgetContext.title, WidgetUtility.BytesToColor(widgetContext.graphColor));
-            view.Init(model);
+            view.Init(model, widgetContext.panel_id);
             GraphController controller = new GraphController(model);
 
             Widget widget = Manager.Instance.gameObject.AddComponent<Widget>() as Widget;
@@ -113,7 +113,7 @@ namespace Widgets
         {
             InspectorGraphView view = gameObject.AddComponent<InspectorGraphView>() as InspectorGraphView;
             GraphModel model = new GraphModel(view, widgetContext.title, WidgetUtility.BytesToColor(widgetContext.graphColor));
-            view.Init(model);
+            view.Init(model, widgetContext.panel_id);
             GraphController controller = new GraphController(model);
             Widget widget = Manager.Instance.gameObject.AddComponent<Widget>() as Widget;
 

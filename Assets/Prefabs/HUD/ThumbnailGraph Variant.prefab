@@ -207,7 +207,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 421052179488418731}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55b5a59897c650342a9b23ff348a9992, type: 3}
+  m_Script: {fileID: -1200242548, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!223 &5759877588701080973
@@ -2397,7 +2397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3302,14 +3302,14 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &5036077730052775603 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7554012448794504622, guid: dc9c6fba23423334fbe2afbef3fa8689,
+  m_CorrespondingSourceObject: {fileID: 8671030147371775324, guid: dc9c6fba23423334fbe2afbef3fa8689,
     type: 3}
   m_PrefabInstance: {fileID: 3257932461506261789}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6152813973114144321 stripped

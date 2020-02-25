@@ -7,12 +7,12 @@ public class GraphController : Controller
     {
     }
 
-    public override void ReceiveMessage(JSON_message rosMessage)
+    public override void ReceiveMessage(RosJsonMessage rosMessage)
     {
         model.UpdateModel(ParseMessage(rosMessage));
     }
 
-    private GraphMessage ParseMessage(JSON_message rosMessage)
+    private GraphMessage ParseMessage(RosJsonMessage rosMessage)
     {
         return new GraphMessage(rosMessage.datapoint, 0, 0, Color.red);
     }

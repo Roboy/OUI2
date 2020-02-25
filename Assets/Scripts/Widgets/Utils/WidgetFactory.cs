@@ -9,7 +9,7 @@ public class WidgetFactory : Singleton<WidgetFactory>
     // Start is called before the first frame update
     public List<Widget> CreateWidgetsAtStartup()
     {
-        List<WidgetContext> widgetContexts = JsonReceiver.ParseAllWidgetTemplates();
+        List<WidgetContext> widgetContexts = WidgetTemplateParser.ParseAllWidgetTemplates();
 
         List<Widget> widgets = new List<Widget>();
 

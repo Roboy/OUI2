@@ -4,18 +4,18 @@ using UnityEngine;
 using RosSharp.RosBridgeClient;
 using RosSharp.RosBridgeClient.Messages.Roboy;
 
-public class InterfaceMessageSubscriber : Subscriber<RosSharp.RosBridgeClient.Messages.Standard.String>
+public class WidgetRosSubscriber : Subscriber<RosSharp.RosBridgeClient.Messages.Standard.String>
 {
     /// <summary>
     /// Holds a queue of messages to be read one after the other from the manager.
     /// </summary>
-    private Queue<JSON_message> interfaceMessageQueue;
+    private Queue<RosJsonMessage> interfaceMessageQueue;
     /// <summary>
     /// Start this instance.
     /// </summary>
     protected override void Start()
     {
-        interfaceMessageQueue = new Queue<JSON_message>();
+        interfaceMessageQueue = new Queue<RosJsonMessage>();
         StartCoroutine(startSubscriber(1.0f));
     }
 
@@ -23,7 +23,7 @@ public class InterfaceMessageSubscriber : Subscriber<RosSharp.RosBridgeClient.Me
     /// Enqueues the interface message queue.
     /// </summary>
     /// <param name="msg">The interface Message.</param>
-    public void EnqueueInterfaceMessage(JSON_message msg)
+    public void EnqueueInterfaceMessage(RosJsonMessage msg)
     {
         interfaceMessageQueue.Enqueue(msg);
     }
@@ -32,7 +32,7 @@ public class InterfaceMessageSubscriber : Subscriber<RosSharp.RosBridgeClient.Me
     /// Dequeues the interface message queue.
     /// </summary>
     /// <returns>The interface message.</returns>
-    public JSON_message DequeueInterfaceMessage()
+    public RosJsonMessage DequeueInterfaceMessage()
     {
         return interfaceMessageQueue.Dequeue();
     }
@@ -73,7 +73,7 @@ public class InterfaceMessageSubscriber : Subscriber<RosSharp.RosBridgeClient.Me
     protected override void ReceiveMessage(RosSharp.RosBridgeClient.Messages.Standard.String message)
     {
         Debug.Log("Received Message");
-        JSON_message msg = JsonUtility.FromJson<JSON_message>(message.data);
+        RosJsonMessage msg = JsonUtility.FromJson<RosJsonMessage>(message.data);
         EnqueueInterfaceMessage(msg);
     }
 }

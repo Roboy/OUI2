@@ -1,33 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Widget : MonoBehaviour
+namespace Widgets
 {
-    private int id;
-
-    private Controller controller;
-    private Model model;
-    private View view;
-
-    private WidgetContext context;
-
-    public void InitializeWidget(Controller controller, Model model, View view, WidgetContext context)
+    public class Widget : MonoBehaviour
     {
-        this.controller = controller;
-        this.model = model;
-        this.view = view;
-        this.context = context;
-        id = context.template_ID;
-    }
-    
-    public int GetID()
-    {
-        return id;
-    }
+        private int id;
 
-    public void ForwardRosMessage(RosJsonMessage rosMessage)
-    {
-        controller.ReceiveMessage(rosMessage);
+        private Controller controller;
+        private Model model;
+        private View view;
+
+        private Context context;
+
+        public void InitializeWidget(Controller controller, Model model, View view, Context context)
+        {
+            this.controller = controller;
+            this.model = model;
+            this.view = view;
+            this.context = context;
+            id = context.template_ID;
+        }
+
+        public int GetID()
+        {
+            return id;
+        }
+
+        public void ForwardRosMessage(RosJsonMessage rosMessage)
+        {
+            controller.ReceiveMessage(rosMessage);
+        }
     }
 }

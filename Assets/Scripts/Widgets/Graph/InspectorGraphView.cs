@@ -1,22 +1,24 @@
-﻿public class InspectorGraphView : View
+﻿namespace Widgets
 {
-    public string[] displayArray;
-
-    public override void Init(Model model)
+    public class InspectorGraphView : View
     {
-        displayArray = new string[GraphModel.SIZE];
-    }
+        public string[] displayArray;
 
-    public override void UpdateView(Model model)
-    {
-        GraphModel graphModel = (GraphModel)model;
-
-        float[] dataArray = graphModel.datapoints.ToArray();
-
-        for (int i = 0; i < dataArray.Length; i++)
+        public override void Init(Model model)
         {
-            displayArray[i] = dataArray[i].ToString();
+            displayArray = new string[GraphModel.SIZE];
+        }
+
+        public override void UpdateView(Model model)
+        {
+            GraphModel graphModel = (GraphModel)model;
+
+            float[] dataArray = graphModel.datapoints.ToArray();
+
+            for (int i = 0; i < dataArray.Length; i++)
+            {
+                displayArray[i] = dataArray[i].ToString();
+            }
         }
     }
 }
-

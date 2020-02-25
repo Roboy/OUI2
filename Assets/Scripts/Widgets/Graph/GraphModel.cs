@@ -3,54 +3,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GraphModel : Model
+namespace Widgets
 {
-    public const int SIZE = 10;
-
-    public int detailedPanelPos;
-
-    public Color color;
-
-    public Queue<float> datapoints;
-
-    public GraphModel(View view, int pos, string title, int detailedPanelPos, Color color) : base(view, pos, title)
+    public class GraphModel : Model
     {
-        this.color = color;
-        this.detailedPanelPos = detailedPanelPos;
-        datapoints = new Queue<float>(SIZE);
-    }
+        public const int SIZE = 10;
 
-    public static explicit operator GraphModel(int v)
-    {
-        throw new NotImplementedException();
-    }
+        public int detailedPanelPos;
 
-    public override void UpdateModel(WidgetMessage newMessage)
-    {
-        GraphMessage newGraphMessage = (GraphMessage)newMessage;
+        public Color color;
 
-        if (!newGraphMessage.color.Equals(new Color(0, 0, 0, 0)))
+        public Queue<float> datapoints;
+
+        public GraphModel(View view, int pos, string title, int detailedPanelPos, Color color) : base(view, pos, title)
         {
-            color = newGraphMessage.color;
+            this.color = color;
+            this.detailedPanelPos = detailedPanelPos;
+            datapoints = new Queue<float>(SIZE);
         }
 
-        if (newGraphMessage.pos != 0)
+        public static explicit operator GraphModel(int v)
         {
-            pos = newGraphMessage.pos;
+            throw new NotImplementedException();
         }
 
-        if (newGraphMessage.detailedPanelPos != 0)
+        public override void UpdateModel(WidgetMessage newMessage)
         {
-            detailedPanelPos = newGraphMessage.pos;
+            GraphMessage newGraphMessage = (GraphMessage)newMessage;
+
+            if (!newGraphMessage.color.Equals(new Color(0, 0, 0, 0)))
+            {
+                color = newGraphMessage.color;
+            }
+
+            if (newGraphMessage.pos != 0)
+            {
+                pos = newGraphMessage.pos;
+            }
+
+            if (newGraphMessage.detailedPanelPos != 0)
+            {
+                detailedPanelPos = newGraphMessage.pos;
+            }
+
+            if (datapoints.Count == SIZE)
+            {
+                datapoints.Dequeue();
+            }
+
+            datapoints.Enqueue(newGraphMessage.datapoint);
+
+            view.UpdateView(this);
         }
-
-        if (datapoints.Count == SIZE)
-        {
-            datapoints.Dequeue();
-        }
-
-        datapoints.Enqueue(newGraphMessage.datapoint);
-
-        view.UpdateView(this);
     }
 }

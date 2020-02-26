@@ -11,6 +11,7 @@ TagManager:
   - Button3D
   - SenseGloveLeft
   - TransitionManager
+  - AdditiveSceneManager
   layers:
   - Default
   - TransparentFX

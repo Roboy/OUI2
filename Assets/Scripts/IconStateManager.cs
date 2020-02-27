@@ -104,19 +104,23 @@ public class IconStateManager : MonoBehaviour, IPointerExitHandler, IPointerEnte
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        lookingAway = false;
-        timerActivate = dwellTimeActivate;
-        timerDeactivate = dwellTimeDeactivate;
+        Focus(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        lookingAway = true;
-        timerActivate = dwellTimeActivate;
-        timerDeactivate = dwellTimeDeactivate;
+        Focus(false);
     }
 
-    
+    public void Focus(bool focus)
+    {
+        lookingAway = !focus;
+        timerActivate = dwellTimeActivate;
+        timerDeactivate = dwellTimeDeactivate;
+        Debug.LogError(this.name + " has focus: " + focus);
+    }
+
+
     public void OnButtonPressed()
     {
         if (DetailedPanel != null)

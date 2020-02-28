@@ -18,50 +18,10 @@ public class StateManager : Singleton<StateManager>
         HUDGameObjects = new List<GameObject>();
         advancedMenuGameObjects = new List<GameObject>();
 
-        FindHUDGameObjects();
-        FindAdvancedMenuGameObjects();
-
         additiveSceneManager = GameObject.FindGameObjectWithTag("AdditiveSceneManager").GetComponent<AdditiveSceneManager>();
         transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
-
-        // Deactivate AdvancedMenu GameObjects right away
-        DeactivateAdvancedMenuGameObjects();
-
+        
         stateMachine = new StateMachine(new HUDState(this));
-    }
-
-    void FindHUDGameObjects()
-    {
-        // HUDGameObjects.Add(GameObject.Find("Room"));
-    }
-
-    void FindAdvancedMenuGameObjects()
-    {
-        // advancedMenuGameObjects.Add(GameObject.Find("AdvancedMenu"));
-    }
-
-    void ActivateHUDGameObjects()
-    {
-        foreach (GameObject HUDGameObject in HUDGameObjects)
-            HUDGameObject.SetActive(true);
-    }
-
-    void DeactivateHUDGameObjects()
-    {
-        foreach (GameObject HUDGameObject in HUDGameObjects)
-            HUDGameObject.SetActive(false);
-    }
-
-    void ActivateAdvancedMenuGameObjects()
-    {
-        foreach (GameObject advancedMenuGameObject in advancedMenuGameObjects)
-            advancedMenuGameObject.SetActive(true);
-    }
-
-    void DeactivateAdvancedMenuGameObjects()
-    {
-        foreach (GameObject advancedMenuGameObject in advancedMenuGameObjects)
-            advancedMenuGameObject.SetActive(false);
     }
 
     void CheckForDebugInput()
@@ -92,7 +52,6 @@ public class StateManager : Singleton<StateManager>
 
         public void Enter()
         {
-            owner.ActivateHUDGameObjects();
             owner.additiveSceneManager.LoadScene(Scenes.HUD, null, null);
         }
 
@@ -103,7 +62,6 @@ public class StateManager : Singleton<StateManager>
 
         public void Exit()
         {
-            owner.DeactivateHUDGameObjects();
             owner.additiveSceneManager.UnloadScene(null, null);
         }
 
@@ -124,7 +82,6 @@ public class StateManager : Singleton<StateManager>
 
         public void Enter()
         {
-            owner.ActivateAdvancedMenuGameObjects();
             owner.additiveSceneManager.LoadScene(Scenes.CONSTRUCT, null, null);
         }
 
@@ -135,7 +92,6 @@ public class StateManager : Singleton<StateManager>
 
         public void Exit()
         {
-            owner.DeactivateAdvancedMenuGameObjects();
             owner.additiveSceneManager.UnloadScene(null, null);
         }
 

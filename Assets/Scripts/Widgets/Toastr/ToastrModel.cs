@@ -14,7 +14,7 @@ namespace Widgets
 
         public string messageToDisplay;
 
-        public Queue<Printable> datapoints;
+        public Queue<Toastr> toastrQueue;
 
         public ToastrModel(View view, string title, float duration, Color color, int fontSize) : base(view, title)
         {
@@ -24,36 +24,44 @@ namespace Widgets
 
             this.fontSize = ProcessInitialValue(fontSize, 32, false, "fontSize");
 
-            datapoints = new Queue<Printable>(SIZE);
+            toastrQueue = new Queue<Toastr>(SIZE);
         }
 
-        /*
-        public void ChangeMessageToDisplay(string newMessage)
+        public void EnqueueNewMessage(string toastrMessage, float toastrDuration, Color toastrColor, int toastrFontSize)
         {
-            messageToDisplay = newMessage;
+            if (toastrColor == null)
+            {
+                toastrColor = color;
+            }
+
+            if (toastrDuration == 0.0f)
+            {
+                toastrDuration = duration;
+            }
+
+            if (toastrFontSize == 0)
+            {
+                toastrFontSize = fontSize;
+            }
+
+            if (toastrMessage.Equals(""))
+            {
+                return;
+            }
+
+            toastrQueue.Enqueue(new Toastr(toastrMessage, toastrDuration, toastrColor, toastrFontSize));
+            ((ToastrView)view).NewToastr();
         }
-        */
 
-        public void ChangeDuration(float newDuration)
+        public void Update()
         {
-            duration = newDuration;
-        }
+            toastrQueue.Peek().duration -= Time.deltaTime;
 
-        public void ChangeColor(Color newColor)
-        {
-            color = newColor;
-        }
-
-        public void ChangeFontSize(int newFontSize)
-        {
-            fontSize = newFontSize;
-        }
-
-        public void EnqueueNewMessage(string newMessage)
-        {
-            datapoints.Enqueue(new Printable(newMessage, duration, color, (byte)fontSize));
-
-            // view.UpdateView(this);
+            if (toastrQueue.Peek().duration <= 0.0f)
+            {
+                toastrQueue.Dequeue();
+                ((ToastrView)view).DeleteTopToastr();
+            }
         }
     }
 }

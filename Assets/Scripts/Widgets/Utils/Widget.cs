@@ -38,5 +38,10 @@ namespace Widgets
             controller.ReceiveMessage(rosMessage);
             view.UpdateView(model);
         }
+
+        public void Update()
+        {
+            controller.Update();
+        }
     }
 }

@@ -23,5 +23,10 @@ namespace Widgets
                 graphModel.AddDatapoint(rosMessage.graphDatapoint);
             }
         }
+
+        public override void Update()
+        {
+           
+        }
     }
 }

@@ -10,8 +10,7 @@ public class EyeGaze : MonoBehaviour, IGazeFocusable
     // Start is called before the first frame update
     void Start()
     {
-        Debug.LogError("Started Script");
-        //ism = this.GetComponent<IconStateManager>();
+        ism = this.GetComponent<IconStateManager>();
     }
 
     // Update is called once per frame
@@ -22,7 +21,18 @@ public class EyeGaze : MonoBehaviour, IGazeFocusable
 
     public void GazeFocusChanged(bool hasFocus)
     {
-        Debug.LogError(this.name + " changed focus");
         //ism.Focus(hasFocus);
+        glow(hasFocus);
+    }
+
+    public void glow(bool glow)
+    {
+        if (glow)
+        {
+            ism.ShowNotification();
+        } else
+        {
+            ism.StopNotification();
+        }
     }
 }

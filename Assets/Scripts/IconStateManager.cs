@@ -44,7 +44,7 @@ public class IconStateManager : MonoBehaviour, IPointerExitHandler, IPointerEnte
     // Update is called once per frame
     void Update()
     {
-        if (lookingAway)
+        /*if (lookingAway)
         {
             timerDeactivate -= Time.deltaTime;
             if (timerDeactivate <= 0 && DetailedPanel.activeSelf)
@@ -59,24 +59,27 @@ public class IconStateManager : MonoBehaviour, IPointerExitHandler, IPointerEnte
             {
                 ActivateDetails();
             }
-        }
+        }*/
 
-        if (glowPulseTimer >= 0 && glowPulseTimer < glowPulseDuration)
+        /*if (glowPulseTimer >= 0 && glowPulseTimer < glowPulseDuration)
         {
+            Debug.LogError("Glow");
             SetGlowAlph(1 - 0.5f * ((float)Math.Cos(glowPulseTimer * Math.PI) + 1));
             glowPulseTimer += Time.deltaTime;
         } else if (glowPulseTimer >= glowPulseDuration)
         {
+            Debug.LogError("Duration succeded");
             SetGlowAlph(0.5f);
         }
         else
         {
+            Debug.LogError("Fade out");
             float currAlph = GlowEffect.color.a;
             if (currAlph > 0)
             {
                 SetGlowAlph(currAlph -= Time.deltaTime);
             }
-        }
+        }*/
     }
 
     /// <summary>
@@ -92,14 +95,16 @@ public class IconStateManager : MonoBehaviour, IPointerExitHandler, IPointerEnte
 
     public void ShowNotification()
     {
+        Debug.LogError("Start Glowing");
         SetGlowAlph(1);
-        glowPulseTimer = 0;
+        //glowPulseTimer = 0;
     }
     
     public void StopNotification()
     {
-        //SetGlowAlph(0);
-        glowPulseTimer = -1;
+        Debug.LogError("Stop Glowing");
+        SetGlowAlph(0);
+        //glowPulseTimer = -1;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

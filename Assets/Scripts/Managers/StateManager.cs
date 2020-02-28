@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class StateManager : Singleton<StateManager>
@@ -7,6 +6,11 @@ public class StateManager : Singleton<StateManager>
     private StateMachine stateMachine;
     [SerializeField] private List<GameObject> HUDGameObjects;
     [SerializeField] private List<GameObject> advancedMenuGameObjects;
+
+    delegate void MakeTransition();
+
+    AdditiveSceneManager additiveSceneManager;
+    TransitionManager transitionManager;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +21,9 @@ public class StateManager : Singleton<StateManager>
         FindHUDGameObjects();
         FindAdvancedMenuGameObjects();
 
+        additiveSceneManager = GameObject.FindGameObjectWithTag("AdditiveSceneManager").GetComponent<AdditiveSceneManager>();
+        transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
+
         // Deactivate AdvancedMenu GameObjects right away
         DeactivateAdvancedMenuGameObjects();
 
@@ -25,12 +32,12 @@ public class StateManager : Singleton<StateManager>
 
     void FindHUDGameObjects()
     {
-        HUDGameObjects.Add(GameObject.Find("Room"));
+        // HUDGameObjects.Add(GameObject.Find("Room"));
     }
 
     void FindAdvancedMenuGameObjects()
     {
-        advancedMenuGameObjects.Add(GameObject.Find("AdvancedMenu"));
+        // advancedMenuGameObjects.Add(GameObject.Find("AdvancedMenu"));
     }
 
     void ActivateHUDGameObjects()
@@ -86,6 +93,7 @@ public class StateManager : Singleton<StateManager>
         public void Enter()
         {
             owner.ActivateHUDGameObjects();
+            owner.additiveSceneManager.LoadScene(Scenes.HUD, null, null);
         }
 
         public void Execute()
@@ -96,6 +104,7 @@ public class StateManager : Singleton<StateManager>
         public void Exit()
         {
             owner.DeactivateHUDGameObjects();
+            owner.additiveSceneManager.UnloadScene(null, null);
         }
 
         public IState GoToNextState()
@@ -116,6 +125,7 @@ public class StateManager : Singleton<StateManager>
         public void Enter()
         {
             owner.ActivateAdvancedMenuGameObjects();
+            owner.additiveSceneManager.LoadScene(Scenes.CONSTRUCT, null, null);
         }
 
         public void Execute()
@@ -126,6 +136,7 @@ public class StateManager : Singleton<StateManager>
         public void Exit()
         {
             owner.DeactivateAdvancedMenuGameObjects();
+            owner.additiveSceneManager.UnloadScene(null, null);
         }
 
         public IState GoToNextState()
@@ -153,6 +164,7 @@ public class StateManager : Singleton<StateManager>
         public StateMachine(IState startState)
         {
             currentState = startState;
+            startState.Enter();
         }
         
         public void ChangeState(IState newState)

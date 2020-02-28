@@ -10,5 +10,7 @@
         }
 
         public abstract void ReceiveMessage(RosJsonMessage rosMessage);
+
+        public abstract void Update();
     }
 }

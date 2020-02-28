@@ -13,25 +13,12 @@ namespace Widgets
         {
             ToastrModel toastrModel = (ToastrModel)model;
 
-            if (rosMessage.toastrColor != null)
-            {
-                toastrModel.ChangeColor(WidgetUtility.BytesToColor(rosMessage.toastrColor));
-            }
+            toastrModel.EnqueueNewMessage(rosMessage.toastrMessage, rosMessage.toastrDuration, WidgetUtility.BytesToColor(rosMessage.toastrColor), rosMessage.toastrFontSize);
+        }
 
-            if (rosMessage.toastrDuration != 0.0f)
-            {
-                toastrModel.ChangeDuration(rosMessage.toastrDuration);
-            }
-
-            if (rosMessage.toastrFontSize != 0)
-            {
-                toastrModel.ChangeFontSize(rosMessage.toastrFontSize);
-            }
-
-            if (!rosMessage.toastrMessage.Equals(""))
-            {
-                toastrModel.EnqueueNewMessage(rosMessage.toastrMessage);
-            }
+        public override void Update()
+        {
+            ((ToastrModel)model).Update();
         }
     }
 }

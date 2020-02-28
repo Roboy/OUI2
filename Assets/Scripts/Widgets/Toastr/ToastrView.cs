@@ -11,10 +11,17 @@ namespace Widgets
 
         public override void Init(Model model, int panel_id)
         {
+            this.model = model;
+
             /*iconManager = GetComponent<IconStateManager>();
             graphManager = GetComponentInChildren<GraphManager>();
             graphManager.Init();
             iconManager.DetailedPanel.SetActive(false);*/
+
+        }
+
+        public void Update()
+        {
 
         }
 
@@ -24,8 +31,18 @@ namespace Widgets
             //SetPosition(textBannerModel.GetPanelId());
             //SetDetailedPanelPosition(textBannerModel.detailedPanelPos);
             //SetColor(model.title, textBannerModel.color);
-            textFieldManager.queue.Enqueue(textBannerModel.datapoints.Dequeue());
+            textFieldManager.queue.Enqueue(textBannerModel.toastrQueue.Dequeue());
             Debug.Log("TextBannerView updated");
+        }
+
+        public void NewToastr()
+        {
+
+        }
+
+        public void DeleteTopToastr()
+        {
+
         }
 
         private void SetPosition(int pos)

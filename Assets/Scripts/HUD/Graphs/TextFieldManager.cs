@@ -7,7 +7,7 @@ namespace Widgets
 {
     public class TextFieldManager : MonoBehaviour
     {
-        public Queue<Printable> queue = new Queue<Printable>();
+        public Queue<Toastr> queue = new Queue<Toastr>();
 
         private float timer;
 
@@ -30,7 +30,7 @@ namespace Widgets
             {
                 if (queue.Count > 0)
                 {
-                    Printable p = queue.Dequeue();
+                    Toastr p = queue.Dequeue();
                     text.text = p.msg;
                     timer = p.duration;
                     text.color = p.color;
@@ -45,15 +45,15 @@ namespace Widgets
         }
     }
 
-    public struct Printable
+    public class Toastr
     {
         public string msg;
         public float duration;
         public Color color;
-        public byte fontSize;
+        public int fontSize;
 
-        public Printable(string msg, float duration, Color color, byte fontSize) : this()
-        {
+        public Toastr(string msg, float duration, Color color, int fontSize)
+        {          
             this.msg = msg;
             this.duration = duration;
             this.color = color;

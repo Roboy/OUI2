@@ -16,15 +16,16 @@ namespace Widgets
 
         public Queue<Toastr> toastrQueue;
 
-        public ToastrModel(View view, string title, float duration, Color color, int fontSize) : base(view, title)
+        public void Awake()
         {
-            // TODO: if 0 set to default value
-            this.duration = ProcessInitialValue(duration, 6, false, "duration");
-            this.color = color;
-
-            this.fontSize = ProcessInitialValue(fontSize, 32, false, "fontSize");
-
             toastrQueue = new Queue<Toastr>(SIZE);
+        }
+
+        public void Init(View view, string title, float duration, Color color, int fontSize)
+        {
+            base.Init(view, title);
+
+            this.color = color;
         }
 
         public void EnqueueNewMessage(string toastrMessage, float toastrDuration, Color toastrColor, int toastrFontSize)
@@ -49,18 +50,26 @@ namespace Widgets
                 return;
             }
 
-            toastrQueue.Enqueue(new Toastr(toastrMessage, toastrDuration, toastrColor, toastrFontSize));
+            GameObject toastrGameObject = new GameObject();
+            toastrGameObject.transform.SetParent(this.transform, false);
+            toastrGameObject.name = toastrMessage;
+            Toastr newToastr = toastrGameObject.gameObject.AddComponent<Toastr>();
+            newToastr.Init(toastrMessage, toastrDuration, toastrColor, toastrFontSize);
+
+            toastrQueue.Enqueue(newToastr);
             ((ToastrView)view).NewToastr();
         }
 
         public void Update()
         {
-            toastrQueue.Peek().duration -= Time.deltaTime;
-
-            if (toastrQueue.Peek().duration <= 0.0f)
+            if (toastrQueue.Count != 0)
             {
-                toastrQueue.Dequeue();
-                ((ToastrView)view).DeleteTopToastr();
+                toastrQueue.Peek().duration -= Time.deltaTime;
+
+                if (toastrQueue.Peek().duration <= 0.0f)
+                {
+                    ((ToastrView)view).DeleteToastr(toastrQueue.Dequeue());
+                }
             }
         }
     }

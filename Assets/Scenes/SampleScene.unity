@@ -1001,7 +1001,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242890684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.45, z: 3.09}
+  m_LocalPosition: {x: 0, y: -0.67, z: 3.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1408469718}
@@ -1070,6 +1070,7 @@ MonoBehaviour:
   GraphPref: {fileID: 1413842410345509511, guid: 43ae5ae36b04e8040835ab37f32ee3b4,
     type: 3}
   curvedUI: {fileID: 4934749566881069616}
+  canvas: {fileID: 4934749566881069614}
 --- !u!114 &1262120147
 MonoBehaviour:
   m_ObjectHideFlags: 0

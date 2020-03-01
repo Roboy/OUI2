@@ -8,9 +8,21 @@ namespace Widgets
         public GameObject GraphPref;
         public CurvedUI.CurvedUISettings curvedUI;
 
+        public GameObject canvas;
+        private GameObject widgetParentGameObject;
+
+        private void CreateWidgetParentGameObject()
+        {
+            widgetParentGameObject = new GameObject();
+            widgetParentGameObject.transform.SetParent(canvas.transform, false);
+            widgetParentGameObject.name = "Widgets";
+        }
+
         // Start is called before the first frame update
         public List<Widget> CreateWidgetsAtStartup()
         {
+            CreateWidgetParentGameObject();
+
             List<RosJsonMessage> widgetContexts = TemplateParser.ParseAllWidgetTemplates();
 
             List<Widget> widgets = new List<Widget>();
@@ -65,11 +77,11 @@ namespace Widgets
             switch (widgetContext.type)
             {
                 case "Graph":
-                    widget = CreateGraphWidget(widgetContext);
+                    //widget = CreateGraphWidget(widgetContext);
                     break;
 
                 case "InspectorGraph":
-                    widget = CreateInspectorGraphWidget(widgetContext);
+                    //widget = CreateInspectorGraphWidget(widgetContext);
                     break;
 
                 case "Toastr":
@@ -94,18 +106,23 @@ namespace Widgets
 
             return widget;
         }
-
+        /*
         public Widget CreateGraphWidget(RosJsonMessage widgetContext)
         {
+            GameObject widgetGameObject = new GameObject();
+            widgetGameObject.name = widgetContext.title;
+            widgetGameObject.transform.SetParent(widgetParentGameObject.transform);            
+
             GameObject newInstance = Instantiate(GraphPref);
 
-            GraphView view = newInstance.AddComponent<GraphView>() as GraphView;
-            GraphModel model = new GraphModel(view, widgetContext.title, WidgetUtility.BytesToColor(widgetContext.graphColor));
+            GraphView view = widgetGameObject.AddComponent<GraphView>() as GraphView;
+            GraphModel model = widgetGameObject.AddComponent<GraphModel>(); // (view, widgetContext.title, WidgetUtility.BytesToColor(widgetContext.graphColor));
             view.Init(model, widgetContext.panel_id);
             GraphController controller = new GraphController(model);
 
             Widget widget = Manager.Instance.gameObject.AddComponent<Widget>() as Widget;
             widget.InitializeWidget(controller, model, view, widgetContext);
+
             return widget;
         }
 
@@ -121,26 +138,49 @@ namespace Widgets
 
             return widget;
         }
+        */
 
+
+        
         // TODO: adjust MVC for TextBanner and implement new needed Variables (duration, ...) 
         public Widget CreateToastrWidget(RosJsonMessage widgetContext)
         {
+            GameObject widgetGameObject = new GameObject();
+            widgetGameObject.name = widgetContext.title;
+            widgetGameObject.transform.SetParent(widgetParentGameObject.transform, false);
+
+            ToastrModel model = widgetGameObject.AddComponent<ToastrModel>();
+            ToastrView view = widgetGameObject.AddComponent<ToastrView>();
+            ToastrController controller = widgetGameObject.AddComponent<ToastrController>();
+
+            view.Init(model, widgetContext.panel_id);
+            model.Init(view, widgetContext.title, widgetContext.toastrDuration, WidgetUtility.BytesToColor(widgetContext.toastrColor), widgetContext.toastrFontSize);
+            controller.Init(model);
+
+            Widget widget = widgetGameObject.AddComponent<Widget>();
+            widget.InitializeWidget(controller, model, view, widgetContext);
+
+            return widget;
+
+            /*
             // TODO: Greate new MVC Classes
             //GameObject newInstance = Instantiate(GraphPref);
             View view = Manager.Instance.gameObject.AddComponent<ToastrView>() as ToastrView;
             //Model model = new TextBannerModel(view, widgetContext.pos, widgetContext.title, widgetContext.duration, widgetContext.color, widgetContext.fontSize);
-            ToastrModel model = new ToastrModel(view, widgetContext.title, widgetContext.toastrDuration, WidgetUtility.BytesToColor(widgetContext.toastrColor), widgetContext.toastrFontSize);
+            //ToastrModel model = new ToastrModel(view, widgetContext.title, widgetContext.toastrDuration, WidgetUtility.BytesToColor(widgetContext.toastrColor), widgetContext.toastrFontSize);
             ToastrController controller = new ToastrController(model);
             Widget widget = Manager.Instance.gameObject.AddComponent<Widget>() as Widget;
 
-            /*View view = WidgetManager.Instance.gameObject.AddComponent<GraphViewDummy>() as GraphViewDummy;
+            View view = WidgetManager.Instance.gameObject.AddComponent<GraphViewDummy>() as GraphViewDummy;
             Model model = new GraphModel(view, widgetContext.pos, widgetContext.color);
             Controller controller = new GraphController(model);
-            Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;*/
-
+            Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;
+            
             widget.InitializeWidget(controller, model, view, widgetContext);
 
             return widget;
+            */
         }
+    
     }
 }

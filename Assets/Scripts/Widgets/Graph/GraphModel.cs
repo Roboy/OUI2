@@ -13,8 +13,9 @@ namespace Widgets
 
         public Queue<float> datapoints;
 
-        public GraphModel(View view, string title, Color color) : base(view, title)
+        public void Init(View view, string title, Color color)
         {
+            base.Init(view, title);
             this.color = color;
             datapoints = new Queue<float>(SIZE);
         }

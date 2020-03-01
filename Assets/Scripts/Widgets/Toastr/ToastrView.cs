@@ -7,16 +7,11 @@ namespace Widgets
 {
     public class ToastrView : View
     {
-        private TextFieldManager textFieldManager;
+        // private TextFieldManager textFieldManager;
 
         public override void Init(Model model, int panel_id)
         {
             this.model = model;
-
-            /*iconManager = GetComponent<IconStateManager>();
-            graphManager = GetComponentInChildren<GraphManager>();
-            graphManager.Init();
-            iconManager.DetailedPanel.SetActive(false);*/
 
         }
 
@@ -25,35 +20,22 @@ namespace Widgets
 
         }
 
-        public override void UpdateView(Model model)
-        {
-            ToastrModel textBannerModel = (ToastrModel)model;
-            //SetPosition(textBannerModel.GetPanelId());
-            //SetDetailedPanelPosition(textBannerModel.detailedPanelPos);
-            //SetColor(model.title, textBannerModel.color);
-            textFieldManager.queue.Enqueue(textBannerModel.toastrQueue.Dequeue());
-            Debug.Log("TextBannerView updated");
-        }
-
         public void NewToastr()
         {
+            Debug.Log("new toastr");
+        }
+
+        public void DeleteToastr(Toastr toastrToDelete)
+        {
+            Debug.Log("deleted toastr");
+
+            Destroy(toastrToDelete.gameObject);
 
         }
 
-        public void DeleteTopToastr()
+        public override void UpdateView(Model model)
         {
-
-        }
-
-        private void SetPosition(int pos)
-        {
-            if (pos - 1 < 0 || pos - 1 > GUIData.Instance.positionsText.Length)
-            {
-                Debug.LogWarning("Invalid position for widget:" + pos);
-                return;
-            }
-            // TODO: Make positionText of Type TextFieldManager[]
-            textFieldManager = GUIData.Instance.positionsText[pos - 1].GetComponent<TextFieldManager>();
+            
         }
     }
 }

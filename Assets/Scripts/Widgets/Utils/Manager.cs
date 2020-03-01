@@ -21,6 +21,12 @@ namespace Widgets
             {
                 ForwardMessageToWidget(rosSubscriber.DequeueInterfaceMessage());
             }
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                Widget testToastrWidget = FindWidgetWithID(10);
+                testToastrWidget.ForwardRosMessage(testToastrWidget.GetContext());
+            }
         }
 
         private void ForwardMessageToWidget(RosJsonMessage rosMessage)

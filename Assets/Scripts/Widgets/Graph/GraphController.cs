@@ -5,8 +5,9 @@ namespace Widgets
 {
     public class GraphController : Controller
     {
-        public GraphController(GraphModel model) : base(model)
+        public void Init(GraphModel model)
         {
+            base.Init(model);
         }
 
         public override void ReceiveMessage(RosJsonMessage rosMessage)
@@ -22,11 +23,6 @@ namespace Widgets
             {
                 graphModel.AddDatapoint(rosMessage.graphDatapoint);
             }
-        }
-
-        public override void Update()
-        {
-           
         }
     }
 }

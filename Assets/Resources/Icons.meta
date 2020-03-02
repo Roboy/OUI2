@@ -1,4 +1,5 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 <<<<<<< master
 <<<<<<< master
 guid: 81ee342e15aa23145a7144f4cab007d3
@@ -8,6 +9,9 @@ guid: c28c315a9df86e74689f9d330d7e28c5
 =======
 guid: c28c315a9df86e74689f9d330d7e28c5
 >>>>>>> SetThumbnailIcon and SetThumbnailText now possible
+=======
+guid: c28c315a9df86e74689f9d330d7e28c5
+>>>>>>> OUI-2-NotificationWidget
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

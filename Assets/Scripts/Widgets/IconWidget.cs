@@ -23,7 +23,7 @@ namespace Widgets
             image = gameObject.AddComponent<RawImage>();
         }
 
-        public new void Init(RosJsonMessage rosJsonMessage, Dictionary<string, Texture2D> icons)
+        public void Init(RosJsonMessage rosJsonMessage, Dictionary<string, Texture2D> icons)
         {
             this.icons = icons;
             iconsArray = new Texture2D[icons.Count];
@@ -63,6 +63,11 @@ namespace Widgets
             if (childWidget == null)
             {
                 childWidget = Manager.Instance.FindWidgetWithID(childWidgetId);
+                
+                if (childWidget == null)
+                {
+                    Debug.LogWarning("Child widget not found.");
+                }
             }
         }
     }

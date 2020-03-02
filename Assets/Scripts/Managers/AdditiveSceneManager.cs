@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-enum Scenes
+public enum Scenes
 {
     NONE,
     HUD,
@@ -14,10 +14,10 @@ enum Scenes
 public class AdditiveSceneManager : MonoBehaviour
 {
     static Scenes currentScene = Scenes.NONE;
-    delegate void BeforeSceneLoadDelegate();
-    delegate void OnSceneLoadDelegate();
-    delegate void BeforeSceneUnloadDelegate();
-    delegate void OnSceneUnloadDelegate();
+    public delegate void BeforeSceneLoadDelegate();
+    public delegate void OnSceneLoadDelegate();
+    public delegate void BeforeSceneUnloadDelegate();
+    public delegate void OnSceneUnloadDelegate();
 
 
     void Start()
@@ -28,7 +28,7 @@ public class AdditiveSceneManager : MonoBehaviour
     void Update()
     {
         // Debug for testing purposes
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.A))
         {
             LoadScene(Scenes.CONSTRUCT, null, DelegateDemo);
         }
@@ -77,8 +77,10 @@ public class AdditiveSceneManager : MonoBehaviour
     /// </summary>
     /// <param name="beforeSceneUnload">Handler executed before scene is loaded. If null, default handler is executed.</param>
     /// <param name="onSceneUnload">Handler executed after scene is loaded. If null, default handler is executed.</param>
-    void LoadScene(Scenes scene, BeforeSceneLoadDelegate beforeSceneLoad, OnSceneLoadDelegate onSceneLoad)
+    public void LoadScene(Scenes scene, BeforeSceneLoadDelegate beforeSceneLoad, OnSceneLoadDelegate onSceneLoad)
     {
+        print("loaded " + SceneNameForScene(scene));
+
         if(currentScene != Scenes.NONE)
         {
             throw new Exception("There is another scene loaded. Unload first.");
@@ -114,9 +116,11 @@ public class AdditiveSceneManager : MonoBehaviour
     /// </summary>
     /// <param name="beforeSceneUnload">Handler executed before scene is unloaded. If null, default handler is executed.</param>
     /// <param name="onSceneUnload">Handler executed after scene is unloaded. If null, default handler is executed.</param>
-    void UnloadScene(BeforeSceneUnloadDelegate beforeSceneUnload, OnSceneUnloadDelegate onSceneUnload)
+    public void UnloadScene(BeforeSceneUnloadDelegate beforeSceneUnload, OnSceneUnloadDelegate onSceneUnload)
     {
-        if(currentScene == Scenes.NONE)
+        print("unloaded " + SceneNameForScene(currentScene));
+
+        if (currentScene == Scenes.NONE)
         {
             throw new Exception("There is no scene loaded.");
         }
@@ -139,6 +143,8 @@ public class AdditiveSceneManager : MonoBehaviour
                 DefaultOnSceneUnload();
             }
         }
+
+        currentScene = Scenes.NONE;
     }
 
     /// <summary>

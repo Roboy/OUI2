@@ -1,26 +1,32 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Widgets
 {
     public class Factory : Singleton<Factory>
     {
+        readonly int TASKBAR_ICON_OFFSET = 200;
+
         public GameObject GraphPref;
         public CurvedUI.CurvedUISettings curvedUI;
 
         public GameObject canvas;
         private GameObject widgetParentGameObject;
 
-        private void CreateWidgetParentGameObject()
-        {
-            widgetParentGameObject = new GameObject();
-            widgetParentGameObject.transform.SetParent(canvas.transform, false);
-            widgetParentGameObject.name = "Widgets";
-        }
+        Dictionary<string, Texture2D> icons;
+
+        public Transform[] panelTransforms;
+
+        List<Widget> taskbarWidgets;
 
         // Start is called before the first frame update
         public List<Widget> CreateWidgetsAtStartup()
         {
+            icons = FetchAllIcons();
+
+            taskbarWidgets = new List<Widget>();
+
             CreateWidgetParentGameObject();
 
             List<RosJsonMessage> widgetContexts = TemplateParser.ParseAllWidgetTemplates();
@@ -40,15 +46,65 @@ namespace Widgets
                 widgets.Add(createdWidget);
             }
 
-            //curvedUI.AddEffectToChildren();
+            PositionTaskbarWidgets();
 
             return widgets;
+        }
+        
+        private void CreateWidgetParentGameObject()
+        {
+            widgetParentGameObject = new GameObject();
+            widgetParentGameObject.transform.SetParent(canvas.transform, false);
+            widgetParentGameObject.name = "Widgets";
+        }
+
+        private Dictionary<string, Texture2D> FetchAllIcons()
+        {
+            Texture2D[] iconsArray = Resources.LoadAll<Texture2D>("Icons");
+
+            Dictionary<string, Texture2D> iconsDictionary = new Dictionary<string, Texture2D>();
+
+            foreach (Texture2D icon in iconsArray)
+            {
+                iconsDictionary.Add(icon.name, icon);
+            }
+
+            return iconsDictionary;
+        }
+
+        private Dictionary<string, Texture2D> FindIconsWithName(string[] iconNames)
+        {
+            Dictionary<string, Texture2D> iconsFound = new Dictionary<string, Texture2D>();
+
+            foreach (string name in iconNames)
+            {
+                if (icons.ContainsKey(name))
+                {
+                    Texture2D iconFound;
+                    icons.TryGetValue(name, out iconFound);
+                    iconsFound.Add(name, iconFound);
+                }
+            }
+
+            return iconsFound;
         }
 
         // TODO: What is the performance of this call?
         private void LateUpdate()
         {
             curvedUI.AddEffectToChildren();
+        }
+
+        private void PositionTaskbarWidgets()
+        {
+            
+
+            for (int i = 0; i < taskbarWidgets.Count; i++)
+            {
+                taskbarWidgets[i].transform.position = panelTransforms[0].transform.position;
+
+                taskbarWidgets[i].transform.localPosition += (Vector3.right * (taskbarWidgets.Count - 1) * (TASKBAR_ICON_OFFSET / 2) * -1) + Vector3.right * TASKBAR_ICON_OFFSET * i;
+            }
         }
 
         private bool IsWidgetIdUnique(RosJsonMessage widgetContext, List<Widget> existingWidgets)
@@ -72,115 +128,41 @@ namespace Widgets
                 return null;
             }
 
-            Widget widget = null;
-            
+            GameObject widgetGameObject = new GameObject();
+            widgetGameObject.name = widgetContext.title;
+            widgetGameObject.transform.SetParent(widgetParentGameObject.transform, false);
+
             switch (widgetContext.type)
             {
                 case "Graph":
-                    //widget = CreateGraphWidget(widgetContext);
-                    break;
-
-                case "InspectorGraph":
-                    //widget = CreateInspectorGraphWidget(widgetContext);
-                    break;
+                    GraphWidget graphWidget = widgetGameObject.AddComponent<GraphWidget>();
+                    graphWidget.Init(widgetContext);
+                    return graphWidget;
 
                 case "Toastr":
-                    widget = CreateToastrWidget(widgetContext);
-                    break;
+                    ToastrWidget toastrWidget = widgetGameObject.AddComponent<ToastrWidget>();
+                    toastrWidget.Init(widgetContext);
+                    return toastrWidget;
 
                 /* For Later
                  
                 case "Text":
                     widget = CreateToastrWidget(widgetContext);
                     break;
+                */
 
                 case "Icon":
-                    widget = CreateToastrWidget(widgetContext);
-                    break;
-                */
+                    IconWidget iconWidget = widgetGameObject.AddComponent<IconWidget>();
+                    Dictionary<string, Texture2D> iconsForThisWidget = FindIconsWithName(widgetContext.icons);
+                    iconWidget.Init(widgetContext, iconsForThisWidget);
+                    taskbarWidgets.Add(iconWidget);                    
+                    return iconWidget;
 
                 default:
                     Debug.Log("Type not defined: " + widgetContext.type);
-                    break;
+                    Destroy(widgetGameObject);
+                    return null;
             }
-
-            return widget;
         }
-        /*
-        public Widget CreateGraphWidget(RosJsonMessage widgetContext)
-        {
-            GameObject widgetGameObject = new GameObject();
-            widgetGameObject.name = widgetContext.title;
-            widgetGameObject.transform.SetParent(widgetParentGameObject.transform);            
-
-            GameObject newInstance = Instantiate(GraphPref);
-
-            GraphView view = widgetGameObject.AddComponent<GraphView>() as GraphView;
-            GraphModel model = widgetGameObject.AddComponent<GraphModel>(); // (view, widgetContext.title, WidgetUtility.BytesToColor(widgetContext.graphColor));
-            view.Init(model, widgetContext.panel_id);
-            GraphController controller = new GraphController(model);
-
-            Widget widget = Manager.Instance.gameObject.AddComponent<Widget>() as Widget;
-            widget.InitializeWidget(controller, model, view, widgetContext);
-
-            return widget;
-        }
-
-        public Widget CreateInspectorGraphWidget(RosJsonMessage widgetContext)
-        {
-            InspectorGraphView view = gameObject.AddComponent<InspectorGraphView>() as InspectorGraphView;
-            GraphModel model = new GraphModel(view, widgetContext.title, WidgetUtility.BytesToColor(widgetContext.graphColor));
-            view.Init(model, widgetContext.panel_id);
-            GraphController controller = new GraphController(model);
-            Widget widget = Manager.Instance.gameObject.AddComponent<Widget>() as Widget;
-
-            widget.InitializeWidget(controller, model, view, widgetContext);
-
-            return widget;
-        }
-        */
-
-
-        
-        // TODO: adjust MVC for TextBanner and implement new needed Variables (duration, ...) 
-        public Widget CreateToastrWidget(RosJsonMessage widgetContext)
-        {
-            GameObject widgetGameObject = new GameObject();
-            widgetGameObject.name = widgetContext.title;
-            widgetGameObject.transform.SetParent(widgetParentGameObject.transform, false);
-
-            ToastrModel model = widgetGameObject.AddComponent<ToastrModel>();
-            ToastrView view = widgetGameObject.AddComponent<ToastrView>();
-            ToastrController controller = widgetGameObject.AddComponent<ToastrController>();
-
-            view.Init(model, widgetContext.panel_id);
-            model.Init(view, widgetContext.title, widgetContext.toastrDuration, WidgetUtility.BytesToColor(widgetContext.toastrColor), widgetContext.toastrFontSize);
-            controller.Init(model);
-
-            Widget widget = widgetGameObject.AddComponent<Widget>();
-            widget.InitializeWidget(controller, model, view, widgetContext);
-
-            return widget;
-
-            /*
-            // TODO: Greate new MVC Classes
-            //GameObject newInstance = Instantiate(GraphPref);
-            View view = Manager.Instance.gameObject.AddComponent<ToastrView>() as ToastrView;
-            //Model model = new TextBannerModel(view, widgetContext.pos, widgetContext.title, widgetContext.duration, widgetContext.color, widgetContext.fontSize);
-            //ToastrModel model = new ToastrModel(view, widgetContext.title, widgetContext.toastrDuration, WidgetUtility.BytesToColor(widgetContext.toastrColor), widgetContext.toastrFontSize);
-            ToastrController controller = new ToastrController(model);
-            Widget widget = Manager.Instance.gameObject.AddComponent<Widget>() as Widget;
-
-            View view = WidgetManager.Instance.gameObject.AddComponent<GraphViewDummy>() as GraphViewDummy;
-            Model model = new GraphModel(view, widgetContext.pos, widgetContext.color);
-            Controller controller = new GraphController(model);
-            Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;
-            
-            widget.InitializeWidget(controller, model, view, widgetContext);
-
-            return widget;
-            */
-        }
-    
     }
 }

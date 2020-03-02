@@ -730,7 +730,7 @@ MonoBehaviour:
   savedPos: {x: 483, y: -28, z: 6.99971}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 100, y: 400}
-  savedColor: {r: 1, g: 1, b: 1, a: 1}
+  savedColor: {r: 1, g: 1, b: 1, a: 0.13333334}
   savedTextUV0: {x: 0, y: 0}
   savedFill: 0
 --- !u!114 &877977659
@@ -746,7 +746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.13333334}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -10864,10 +10864,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
+<<<<<<< master
   savedPos: {x: 0, y: 0, z: 0}
   savedUp: {x: 0, y: 0, z: 0}
   savedRectSize: {x: 0, y: 0}
   savedColor: {r: 0, g: 0, b: 0, a: 0}
+=======
+  savedPos: {x: 0, y: 184.00002, z: 6.99971}
+  savedUp: {x: 0, y: 1, z: 0}
+  savedRectSize: {x: 700, y: 100}
+  savedColor: {r: 1, g: 1, b: 1, a: 0.13333334}
+>>>>>>> Major cleanup, got rid of MVC
   savedTextUV0: {x: 0, y: 0}
   savedFill: 0
 --- !u!1 &1255627711 stripped
@@ -10888,6 +10895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e62188adca544cf1b96ccf1630f15f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< master
   DoNotTesselate: 0
   savedPos: {x: 0, y: 0, z: 0}
   savedUp: {x: 0, y: 0, z: 0}
@@ -10903,6 +10911,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1329833652
 MonoBehaviour:
+=======
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.13333334}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &1082160685
+CanvasRenderer:
+>>>>>>> Major cleanup, got rid of MVC
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -11185,6 +11212,10 @@ GameObject:
     type: 3}
   curvedUI: {fileID: 4934749566881069616}
   canvas: {fileID: 4934749566881069614}
+  panelTransforms:
+  - {fileID: 1082160681}
+  - {fileID: 1470996451}
+  - {fileID: 877977656}
 --- !u!114 &1262120147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11377,8 +11408,13 @@ MonoBehaviour:
   DoNotTesselate: 0
   savedPos: {x: -300, y: 200, z: -0.00016403198}
   savedUp: {x: 0, y: 1, z: 0}
+<<<<<<< master
   savedRectSize: {x: 100, y: 100}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
+=======
+  savedRectSize: {x: 500, y: 100}
+  savedColor: {r: 1, g: 1, b: 1, a: 0.13333334}
+>>>>>>> Major cleanup, got rid of MVC
   savedTextUV0: {x: 0, y: 0}
   savedFill: 0
 --- !u!114 &1586755079
@@ -11394,7 +11430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.13333334}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

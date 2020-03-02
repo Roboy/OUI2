@@ -10,7 +10,7 @@ namespace Widgets
         #region General        
         public string title;
         public string type;
-        public int panel_id;
+        public int panelId;
         public int childWidgetId;
         public int timestamp;
         #endregion
@@ -32,7 +32,7 @@ namespace Widgets
         public int textFontSize;
         #endregion
 
-        #region TaskbarIcon
+        #region Icon
         public string currentIcon;
         public string[] icons;
         #endregion
@@ -46,9 +46,35 @@ namespace Widgets
             this.timestamp = timestamp;
         }
 
+        private RosJsonMessage(int id, string currentIcon)
+        {
+            this.id = id;
+            this.currentIcon = currentIcon;
+        }
+
+        public RosJsonMessage(int id, string title, string type, int panelId, string toastrMessage, int toastrFontSize, byte[] toastrColor, float toastrDuration) : this(id, title)
+        {
+            this.type = type;
+            this.panelId = panelId;
+            this.toastrMessage = toastrMessage;
+            this.toastrFontSize = toastrFontSize;
+            this.toastrColor = toastrColor;
+            this.toastrDuration = toastrDuration;
+        }
+
         public static RosJsonMessage CreateGraphMessage(int id, float graphDatapoint, int timestamp, byte[] graphColor)
         {
             return new RosJsonMessage(id, graphDatapoint, timestamp, graphColor);
+        }
+
+        public static RosJsonMessage CreateIconMessage(int id, string currentIcon)
+        {
+            return new RosJsonMessage(id, currentIcon);
+        }
+
+        public static RosJsonMessage CreateToastrMessage(int id, string text)
+        {
+            return new RosJsonMessage(id, text, null, 0, text, 0, null, 0);
         }
     }
 }

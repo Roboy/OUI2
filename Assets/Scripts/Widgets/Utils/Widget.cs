@@ -13,7 +13,7 @@ namespace Widgets
         {
             context = RosJsonMessage;
             id = RosJsonMessage.id;
-            panel_id = RosJsonMessage.panel_id;
+            panel_id = RosJsonMessage.panelId;
         }
 
         public int GetID()
@@ -32,7 +32,7 @@ namespace Widgets
         }
 
         public abstract void ProcessRosMessage(RosJsonMessage rosMessage);
-
+        
         public abstract void RestoreViews();
     }
 }

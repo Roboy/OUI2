@@ -15,12 +15,8 @@ namespace Widgets
 
         private string currentIconName;
         private Texture2D currentIcon;
-        private RawImage image;
 
-        public void Awake()
-        {
-            image = gameObject.AddComponent<RawImage>();
-        }
+        IconView view;
 
         public void Init(RosJsonMessage rosJsonMessage, Dictionary<string, Texture2D> icons)
         {
@@ -37,6 +33,8 @@ namespace Widgets
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            Debug.Log("POIMT");
+
             childWidget.gameObject.SetActive(true);
         }
 
@@ -52,7 +50,10 @@ namespace Widgets
                 currentIconName = rosMessage.currentIcon;
                 if (icons.TryGetValue(currentIconName, out currentIcon))
                 {
-                    image.texture = currentIcon;
+                    if (view != null)
+                    {
+                        view.SetIcon(currentIcon);
+                    }
                 }
             }
         }
@@ -71,6 +72,20 @@ namespace Widgets
                 if (childWidget == null)
                 {
                     Debug.LogWarning("Child widget not found.");
+                }
+            }
+
+            // This is true, everytime the HUD scene changes
+            if (view == null && currentIcon != null)
+            {
+                GameObject iconParent = GameObject.FindGameObjectWithTag("Panel_" + GetPanelID());
+                
+                if (iconParent != null)
+                {
+                    GameObject iconGameObject = new GameObject();
+                    iconGameObject.transform.SetParent(iconParent.transform, false);
+                    view = iconGameObject.AddComponent<IconView>();
+                    view.Init(currentIcon);
                 }
             }
         }

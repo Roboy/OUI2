@@ -9,6 +9,10 @@ namespace Widgets
     {
         public static Color BytesToColor(byte[] b)
         {
+            if (b.Length == 0)
+            {
+                return new Color32(255, 255, 255, 255);
+            }
             return new Color32(b[0], b[1], b[2], b[3]);
         }
 

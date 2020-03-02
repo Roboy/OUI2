@@ -57,6 +57,11 @@ namespace Widgets
             }
         }
 
+        public override void RestoreViews()
+        {
+            // throw new System.NotImplementedException();
+        }
+
         public void Update()
         {
             if (childWidget == null)

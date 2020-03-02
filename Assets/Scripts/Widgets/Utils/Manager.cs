@@ -10,7 +10,7 @@ namespace Widgets
 
         void Start()
         {
-            rosSubscriber = GameObject.FindGameObjectWithTag("ROS_Manager").GetComponent<RosSubscriber>();
+            rosSubscriber = GameObject.FindGameObjectWithTag("RosManager").GetComponent<RosSubscriber>();
             widgets = Factory.Instance.CreateWidgetsAtStartup();
         }
 

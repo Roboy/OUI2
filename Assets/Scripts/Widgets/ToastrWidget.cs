@@ -5,13 +5,16 @@ namespace Widgets
 {
     public class ToastrWidget : Widget
     {
-        public readonly int OFFSET = 40;
-
-        public Queue<Toastr> toastrQueue;
+        public Queue<ToastrTemplate> toastrToInstantiateQueue;
+        public Queue<ToastrTemplate> toastrActiveQueue;
 
         public float duration;
         public Color color;
         public int fontSize;
+
+        public float timer;
+
+        ToastrView view;
 
         public override void ProcessRosMessage(RosJsonMessage rosMessage)
         {
@@ -20,7 +23,9 @@ namespace Widgets
 
         private void Awake()
         {
-            toastrQueue = new Queue<Toastr>();
+            toastrToInstantiateQueue = new Queue<ToastrTemplate>();
+            toastrActiveQueue = new Queue<ToastrTemplate>();
+            ResetTimer();
         }
 
         public new void Init(RosJsonMessage rosJsonMessage)
@@ -28,7 +33,7 @@ namespace Widgets
             duration = rosJsonMessage.toastrDuration;
             color = WidgetUtility.BytesToColor(rosJsonMessage.toastrColor);
             fontSize = rosJsonMessage.toastrFontSize;
-            
+
             base.Init(rosJsonMessage);
         }
 
@@ -54,41 +59,79 @@ namespace Widgets
                 toastrFontSize = fontSize;
             }
 
-            toastrQueue.Enqueue(CreateNewToastr(toastrMessage, toastrDuration, toastrColor, toastrFontSize));
-        }
-
-        private Toastr CreateNewToastr(string toastrMessage, float toastrDuration, Color toastrColor, int toastrFontSize)
-        {
-            GameObject toastrGameObject = new GameObject();
-            toastrGameObject.transform.SetParent(this.transform, false);
-            toastrGameObject.transform.localPosition -= toastrQueue.Count * OFFSET * Vector3.up;
-
-            toastrGameObject.name = toastrMessage;
-            Toastr newToastr = toastrGameObject.gameObject.AddComponent<Toastr>();
-            newToastr.Init(toastrMessage + " " + toastrQueue.Count, toastrDuration, toastrColor, toastrFontSize);
-
-            return newToastr;
-        }
-
-        private void MoveToastrsUp()
-        {
-            foreach (Toastr toastr in toastrQueue)
-            {
-                toastr.transform.localPosition += OFFSET * Vector3.up;
-            }
-        }
+            toastrToInstantiateQueue.Enqueue(new ToastrTemplate(toastrMessage, toastrDuration, toastrColor, toastrFontSize));
+        }   
 
         public void Update()
         {
-            if (toastrQueue.Count != 0)
+            if (IsHudActive())
             {
-                toastrQueue.Peek().duration -= Time.deltaTime;
-
-                if (toastrQueue.Peek().duration <= 0.0f)
+                if (IsToastrTemplateInQueue() && view != null)
                 {
-                    Destroy(toastrQueue.Dequeue().gameObject);
-                    MoveToastrsUp();
+                    ToastrTemplate toastrToInstantiate = toastrToInstantiateQueue.Dequeue();
+                    toastrActiveQueue.Enqueue(toastrToInstantiate);
+                    view.CreateNewToastr(toastrToInstantiate);
                 }
+
+                if (toastrActiveQueue.Count != 0)
+                {
+                    timer += Time.deltaTime;
+
+                    if (timer >= toastrActiveQueue.Peek().toastrDuration)
+                    {
+                        view.DestroyTopToastr();
+                        toastrActiveQueue.Dequeue();                        
+                        ResetTimer();
+                    }
+                }
+            }
+
+            // This is true, everytime the HUD scene changes
+            if (view == null)
+            {
+                GameObject toastrParent = GameObject.FindGameObjectWithTag("Panel_" + GetPanelID());
+                if (toastrParent != null)
+                {
+                    view = toastrParent.AddComponent<ToastrView>();
+                    view.Init(toastrActiveQueue.ToArray());
+                }
+            }
+        }
+
+        private void ResetTimer()
+        {
+            timer = 0;
+        }
+
+        private bool IsHudActive()
+        {
+            return (AdditiveSceneManager.GetCurrentScene() == Scenes.HUD);
+        }
+
+        private bool IsToastrTemplateInQueue()
+        {
+            return (toastrToInstantiateQueue.Count != 0);
+        }
+
+        public override void RestoreViews()
+        {
+            ResetTimer();
+            view.Init(toastrActiveQueue.ToArray());
+        }
+
+        public class ToastrTemplate
+        {
+            public string toastrMessage;
+            public Color toastrColor;
+            public int toastrFontSize;
+            public float toastrDuration;
+
+            public ToastrTemplate(string toastrMessage, float toastrDuration, Color toastrColor, int toastrFontSize)
+            {
+                this.toastrMessage = toastrMessage;
+                this.toastrColor = toastrColor;
+                this.toastrFontSize = toastrFontSize;
+                this.toastrDuration = toastrDuration;
             }
         }
     }

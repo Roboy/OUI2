@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - AdditiveSceneManager
+  - TransitionManager
+  - SenseGloveRight
+  - HandMatchingCollider
+  - RosManager
+  - Panel_0
   layers:
   - Default
   - TransparentFX

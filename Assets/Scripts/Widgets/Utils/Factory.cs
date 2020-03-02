@@ -8,15 +8,14 @@ namespace Widgets
     {
         readonly int TASKBAR_ICON_OFFSET = 200;
 
-        public GameObject GraphPref;
-        public CurvedUI.CurvedUISettings curvedUI;
+        // public CurvedUI.CurvedUISettings curvedUI;
 
-        public GameObject canvas;
+        // public GameObject canvas;
         private GameObject widgetParentGameObject;
 
         Dictionary<string, Texture2D> icons;
 
-        public Transform[] panelTransforms;
+        // public Transform[] panelTransforms;
 
         List<Widget> taskbarWidgets;
 
@@ -46,7 +45,7 @@ namespace Widgets
                 widgets.Add(createdWidget);
             }
 
-            PositionTaskbarWidgets();
+            // PositionTaskbarWidgets();
 
             return widgets;
         }
@@ -54,7 +53,6 @@ namespace Widgets
         private void CreateWidgetParentGameObject()
         {
             widgetParentGameObject = new GameObject();
-            widgetParentGameObject.transform.SetParent(canvas.transform, false);
             widgetParentGameObject.name = "Widgets";
         }
 
@@ -92,13 +90,12 @@ namespace Widgets
         // TODO: What is the performance of this call?
         private void LateUpdate()
         {
-            curvedUI.AddEffectToChildren();
+            // curvedUI.AddEffectToChildren();
         }
 
+        /*
         private void PositionTaskbarWidgets()
-        {
-            
-
+        {           
             for (int i = 0; i < taskbarWidgets.Count; i++)
             {
                 taskbarWidgets[i].transform.position = panelTransforms[0].transform.position;
@@ -106,6 +103,7 @@ namespace Widgets
                 taskbarWidgets[i].transform.localPosition += (Vector3.right * (taskbarWidgets.Count - 1) * (TASKBAR_ICON_OFFSET / 2) * -1) + Vector3.right * TASKBAR_ICON_OFFSET * i;
             }
         }
+        */
 
         private bool IsWidgetIdUnique(RosJsonMessage widgetContext, List<Widget> existingWidgets)
         {

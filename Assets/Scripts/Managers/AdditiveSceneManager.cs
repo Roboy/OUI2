@@ -19,10 +19,14 @@ public class AdditiveSceneManager : MonoBehaviour
     public delegate void BeforeSceneUnloadDelegate();
     public delegate void OnSceneUnloadDelegate();
 
-
     void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;  
+    }
+
+    public static Scenes GetCurrentScene()
+    {
+        return currentScene;
     }
     
     /// <summary>

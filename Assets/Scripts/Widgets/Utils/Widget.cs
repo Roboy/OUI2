@@ -32,5 +32,7 @@ namespace Widgets
         }
 
         public abstract void ProcessRosMessage(RosJsonMessage rosMessage);
+
+        public abstract void RestoreViews();
     }
 }

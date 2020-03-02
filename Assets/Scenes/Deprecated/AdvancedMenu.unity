@@ -415,7 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d37c2cf88f7c59f4c8cf5d3812568143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 5
+  index: 3
   origin: {fileID: 0}
 --- !u!1 &201810077 stripped
 GameObject:
@@ -2478,6 +2478,11 @@ PrefabInstance:
       propertyPath: updateWrist
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3883651412791469134, guid: 46fd8a40a1749f945b96bcb0f67eabaf,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46fd8a40a1749f945b96bcb0f67eabaf, type: 3}
 --- !u!1 &1586755076
@@ -3137,6 +3142,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 354960858, guid: 44a3e778eb89642478c6cbd71e8d4cbb, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6351733235227535309, guid: 44a3e778eb89642478c6cbd71e8d4cbb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

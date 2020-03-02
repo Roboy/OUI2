@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Widgets
@@ -22,6 +21,7 @@ namespace Widgets
                 ForwardMessageToWidget(rosSubscriber.DequeueInterfaceMessage());
             }
 
+            // Mock Area
             if (Input.GetKeyDown(KeyCode.T))
             {
                 Widget testToastrWidget = FindWidgetWithID(10);
@@ -48,7 +48,7 @@ namespace Widgets
 
             if (widget == null)
             {
-                Debug.Log("Message could not be forwarded.");
+                Debug.LogWarning("Message could not be forwarded.");
                 return;
             }
 
@@ -65,7 +65,7 @@ namespace Widgets
                 }
             }
 
-            Debug.Log("No widget with id " + id + " found.");
+            Debug.LogWarning("No widget with id " + id + " found.");
             return null;
         }
     }

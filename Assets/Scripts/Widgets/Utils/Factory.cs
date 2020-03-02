@@ -39,7 +39,7 @@ namespace Widgets
 
                 if (createdWidget == null)
                 {
-                    Debug.Log("widget is null");
+                    Debug.LogWarning("widget is null");
                     continue;
                 }
 
@@ -124,7 +124,7 @@ namespace Widgets
         {
             if (IsWidgetIdUnique(widgetContext, existingWidgets) == false)
             {
-                Debug.Log("duplicate ID: " + widgetContext.id + " in widget templates");
+                Debug.LogWarning("duplicate ID: " + widgetContext.id + " in widget templates");
                 return null;
             }
 
@@ -144,6 +144,13 @@ namespace Widgets
                     toastrWidget.Init(widgetContext);
                     return toastrWidget;
 
+                case "Icon":
+                    IconWidget iconWidget = widgetGameObject.AddComponent<IconWidget>();
+                    Dictionary<string, Texture2D> iconsForThisWidget = FindIconsWithName(widgetContext.icons);
+                    iconWidget.Init(widgetContext, iconsForThisWidget);
+                    taskbarWidgets.Add(iconWidget);                    
+                    return iconWidget;
+                    
                 /* For Later
                  
                 case "Text":
@@ -151,15 +158,8 @@ namespace Widgets
                     break;
                 */
 
-                case "Icon":
-                    IconWidget iconWidget = widgetGameObject.AddComponent<IconWidget>();
-                    Dictionary<string, Texture2D> iconsForThisWidget = FindIconsWithName(widgetContext.icons);
-                    iconWidget.Init(widgetContext, iconsForThisWidget);
-                    taskbarWidgets.Add(iconWidget);                    
-                    return iconWidget;
-
                 default:
-                    Debug.Log("Type not defined: " + widgetContext.type);
+                    Debug.LogWarning("Type not defined: " + widgetContext.type);
                     Destroy(widgetGameObject);
                     return null;
             }

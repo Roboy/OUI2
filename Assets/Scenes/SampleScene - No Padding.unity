@@ -367,7 +367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -200, y: 165, z: 8.9996605}
+  savedPos: {x: -200.0122, y: 164.99329, z: 8.9996605}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 50, y: 50}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -455,7 +455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 0, y: 220.00002, z: 7.999733}
+  savedPos: {x: 0, y: 220.00122, z: 7.999733}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 50, y: 50}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -664,7 +664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -120.00001, y: 165, z: 8.9996605}
+  savedPos: {x: -119.99512, y: 164.99329, z: 8.9996605}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 70, y: 70}
   savedColor: {r: 1, g: 0.32941177, b: 0, a: 1}
@@ -745,7 +745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -200, y: 165, z: 8.9996605}
+  savedPos: {x: -200.0122, y: 164.99329, z: 8.9996605}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 40, y: 40}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -770,7 +770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 120.00001, y: 165, z: 8.9996605}
+  savedPos: {x: 119.99512, y: 164.99329, z: 8.9996605}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 70, y: 70}
   savedColor: {r: 1, g: 0.32941177, b: 0, a: 1}
@@ -795,7 +795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 120.00001, y: 165, z: 8.9996605}
+  savedPos: {x: 119.99512, y: 164.99329, z: 8.9996605}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 40, y: 40}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -851,7 +851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 120.00001, y: 165, z: 8.9996605}
+  savedPos: {x: 119.99512, y: 164.99329, z: 8.9996605}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 50, y: 50}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -964,7 +964,7 @@ PrefabInstance:
     - target: {fileID: 8795042121523061503, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0.999897
       objectReference: {fileID: 0}
     - target: {fileID: 8795042121523061503, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
         type: 3}
@@ -1071,26 +1071,31 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4946709786385297283, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
+    - target: {fileID: 8795042121403032249, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
         type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4946709786385297283, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
+    - target: {fileID: 8795042121403032249, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4946709786385297283, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
+    - target: {fileID: 8795042121403032249, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4946709786385297283, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
+    - target: {fileID: 8795042121403032249, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2410356758484084806, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4946709786430271157, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -1107,6 +1112,26 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4946709786430271157, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946709786385297283, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946709786385297283, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946709786385297283, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4946709786385297283, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
@@ -1167,26 +1192,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4946709787585914921, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8795042121403032249, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8795042121403032249, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8795042121403032249, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8795042121403032249, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
@@ -1195,11 +1200,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2410356758484084806, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7035751962196615365, guid: 1e7828978c803524d8f3a2fd7c2da8d8,
         type: 3}
@@ -1369,7 +1369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -40.000004, y: 165, z: 8.9996605}
+  savedPos: {x: -40.008545, y: 164.99329, z: 8.9996605}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 50, y: 50}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -1451,7 +1451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 0, y: 220.00002, z: 7.999733}
+  savedPos: {x: 0, y: 220.00122, z: 7.999733}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 40, y: 40}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -1649,7 +1649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 40.000004, y: 165, z: 8.9996605}
+  savedPos: {x: 40.008545, y: 164.99329, z: 8.9996605}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 70, y: 70}
   savedColor: {r: 1, g: 0.32941177, b: 0, a: 1}
@@ -1680,7 +1680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 40.000004, y: 165, z: 8.9996605}
+  savedPos: {x: 40.008545, y: 164.99329, z: 8.9996605}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 50, y: 50}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -1762,7 +1762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -40.000004, y: 165, z: 8.9996605}
+  savedPos: {x: -40.008545, y: 164.99329, z: 8.9996605}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 40, y: 40}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -1787,7 +1787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -40.000004, y: 165, z: 8.9996605}
+  savedPos: {x: -40.008545, y: 164.99329, z: 8.9996605}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 70, y: 70}
   savedColor: {r: 1, g: 0.32941177, b: 0, a: 1}
@@ -1981,7 +1981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -120.00001, y: 165, z: 8.9996605}
+  savedPos: {x: -119.99512, y: 164.99329, z: 8.9996605}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 50, y: 50}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -2458,7 +2458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 0, y: 220.00002, z: 7.999733}
+  savedPos: {x: 0, y: 220.00122, z: 7.999733}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 70, y: 70}
   savedColor: {r: 1, g: 0.32941177, b: 0, a: 1}
@@ -2929,7 +2929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -200, y: 165, z: 8.9996605}
+  savedPos: {x: -200.0122, y: 164.99329, z: 8.9996605}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 70, y: 70}
   savedColor: {r: 1, g: 0.32941177, b: 0, a: 1}
@@ -2979,7 +2979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: -120.00001, y: 165, z: 8.9996605}
+  savedPos: {x: -119.99512, y: 164.99329, z: 8.9996605}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 40, y: 40}
   savedColor: {r: 1, g: 1, b: 1, a: 1}
@@ -3077,7 +3077,7 @@ PrefabInstance:
     - target: {fileID: 114404013065818992, guid: 596e593361e094a43934c013fa0b5764,
         type: 3}
       propertyPath: Settings.StandaloneEyeTrackingProviders.Array.data[3].TypeName
-      value: Tobii.XR.NoseDirectionProvider
+      value: Tobii.XR.TobiiProvider
       objectReference: {fileID: 0}
     - target: {fileID: 114404013065818992, guid: 596e593361e094a43934c013fa0b5764,
         type: 3}
@@ -3087,12 +3087,12 @@ PrefabInstance:
     - target: {fileID: 114404013065818992, guid: 596e593361e094a43934c013fa0b5764,
         type: 3}
       propertyPath: Settings.StandaloneEyeTrackingProviders.Array.data[1].TypeName
-      value: Tobii.XR.MouseProvider
+      value: Tobii.XR.NoseDirectionProvider
       objectReference: {fileID: 0}
     - target: {fileID: 114404013065818992, guid: 596e593361e094a43934c013fa0b5764,
         type: 3}
       propertyPath: Settings.StandaloneEyeTrackingProviders.Array.data[2].TypeName
-      value: Tobii.XR.TobiiProvider
+      value: Tobii.XR.MouseProvider
       objectReference: {fileID: 0}
     - target: {fileID: 114404013065818992, guid: 596e593361e094a43934c013fa0b5764,
         type: 3}

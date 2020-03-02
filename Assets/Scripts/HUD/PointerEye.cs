@@ -6,6 +6,21 @@ using Tobii.XR;
 
 public class PointerEye : Pointer
 {
+#pragma warning disable 649
+    [SerializeField] private bool _smoothMove = true;
+
+    [SerializeField] [Range(1, 30)] private int _smoothMoveSpeed = 7;
+#pragma warning restore 649
+    private float _defaultDistance;
+
+    private Camera _mainCamera;
+    private Vector3 _lastGazeDirection;
+
+    private const float OffsetFromFarClipPlane = 10f;
+    private const float PrecisionAngleScaleFactor = 5f;
+
+    private float ScaleFactor = 0.03f;
+
     private static EyeData_v2 eyeData = new EyeData_v2();
     private bool eye_callback_registered = false;
 
@@ -17,14 +32,18 @@ public class PointerEye : Pointer
     public override void SubclassStart()
     {
         //sranipalStart();
+        startGazeVisualizer();
     }
 
     public override void GetPointerPosition()
     {
         //sranipalUpdate();
-        tobiiUpdate();
+        //tobiiUpdate();
+        updateGazeVisualizer();
+        
     }
 
+    #region tobii 
     private void tobiiStart()
     {
 
@@ -47,7 +66,9 @@ public class PointerEye : Pointer
             PushPointerPosition(rayOrigin, rayDirection);
         }
     }
+    #endregion
 
+    #region sranipal
     private void sranipalStart()
     {
         if (!SRanipal_Eye_Framework.Instance.EnableEye)
@@ -108,4 +129,51 @@ public class PointerEye : Pointer
     {
         eyeData = eye_data;
     }
+    #endregion
+
+    #region GazeVisualizer
+    private void startGazeVisualizer()
+    {
+        _mainCamera = CameraHelper.GetMainCamera();
+
+        _defaultDistance = _mainCamera.farClipPlane - OffsetFromFarClipPlane;
+    }
+
+    private void updateGazeVisualizer()
+    {
+        var provider = TobiiXR.Internal.Provider;
+        var eyeTrackingData = EyeTrackingDataHelper.Clone(provider.EyeTrackingDataLocal);
+        var localToWorldMatrix = provider.LocalToWorldMatrix;
+        var worldForward = localToWorldMatrix.MultiplyVector(Vector3.forward);
+        EyeTrackingDataHelper.TransformGazeData(eyeTrackingData, localToWorldMatrix);
+
+        var gazeRay = eyeTrackingData.GazeRay;
+        if (!gazeRay.IsValid) return;
+        SetPositionAndScale(gazeRay);
+    }
+
+    private void SetPositionAndScale(TobiiXR_GazeRay gazeRay)
+    {
+        RaycastHit hit;
+        var distance = _defaultDistance;
+        if (Physics.Raycast(gazeRay.Origin, gazeRay.Direction, out hit))
+        {
+            distance = hit.distance;
+        }
+
+        var interpolatedGazeDirection = Vector3.Lerp(_lastGazeDirection, gazeRay.Direction,
+            _smoothMoveSpeed * Time.unscaledDeltaTime);
+
+        var usedDirection = _smoothMove ? interpolatedGazeDirection.normalized : gazeRay.Direction.normalized;
+        transform.position = gazeRay.Origin + usedDirection * distance;
+
+        transform.localScale = Vector3.one * distance * ScaleFactor;
+
+        transform.forward = usedDirection.normalized;
+
+        _lastGazeDirection = usedDirection;
+
+        PushPointerPosition(gazeRay.Origin, usedDirection);
+    }
+    #endregion
 }

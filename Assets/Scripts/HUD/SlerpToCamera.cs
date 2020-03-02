@@ -84,14 +84,14 @@ public class SlerpToCamera : MonoBehaviour
         {
             slerp = true;
             startTime = Time.time;
-            Debug.Log("Start Slerp");
+            // Debug.Log("Start Slerp");
         }
 
         // stop slerp
         else if (rotationalDistance <= flexibleStopSlerpAngle && slerp == true)
         {
             slerp = false;
-            Debug.Log("Stop Slerp");
+            // Debug.Log("Stop Slerp");
         }
 
         // If slerp is active, use Quaternion.Slerp to correct rotation

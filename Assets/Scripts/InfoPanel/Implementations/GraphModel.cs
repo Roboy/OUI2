@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GraphModel : Model
+public class GraphModel : MonoBehaviour
 {
+    /*
     public const int SIZE = 10;
 
     public int detailedPanelPos;
@@ -58,5 +59,5 @@ public class GraphModel : Model
         datapoints.Enqueue(newGraphMessage.datapoint);
 
         view.UpdateView(this);
-    }
+    }*/
 }

@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+
 public class WidgetFactory : Singleton<WidgetFactory>
 {
-    public GameObject GraphPref;
+    /*public GameObject GraphPref;
     public CurvedUI.CurvedUISettings curvedUI;
 
     // Start is called before the first frame update
@@ -81,21 +82,6 @@ public class WidgetFactory : Singleton<WidgetFactory>
         }    
 
         return widget;
-
-        /*
-        AbstractController controller;
-        AbstractModel model;
-        AbstractView view;
-
-        if (widgetContext.type == graph)
-        {
-            view = new GraphView(widgetContext.color);
-        }
-
-        Widget widget = new Widget(controller, model, view);
-
-        return widget;
-        */
     }
 
     public Widget CreateGraphWidget(WidgetContext widgetContext)
@@ -107,11 +93,6 @@ public class WidgetFactory : Singleton<WidgetFactory>
         view.Init(model);
         Controller controller = new GraphController(model);
         Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;
-
-        /*View view = WidgetManager.Instance.gameObject.AddComponent<GraphViewDummy>() as GraphViewDummy;
-        Model model = new GraphModel(view, widgetContext.pos, widgetContext.color);
-        Controller controller = new GraphController(model);
-        Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;*/
 
         widget.InitializeWidget(controller, model, view, widgetContext);
 
@@ -143,13 +124,8 @@ public class WidgetFactory : Singleton<WidgetFactory>
         Controller controller = new TextBannerController(model);
         Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;
 
-        /*View view = WidgetManager.Instance.gameObject.AddComponent<GraphViewDummy>() as GraphViewDummy;
-        Model model = new GraphModel(view, widgetContext.pos, widgetContext.color);
-        Controller controller = new GraphController(model);
-        Widget widget = WidgetManager.Instance.gameObject.AddComponent<Widget>() as Widget;*/
-
         widget.InitializeWidget(controller, model, view, widgetContext);
 
         return widget;
-    }
+    }*/
 }

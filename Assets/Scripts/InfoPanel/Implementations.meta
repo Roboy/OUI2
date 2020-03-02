@@ -1,4 +1,5 @@
 fileFormatVersion: 2
+<<<<<<< master:Assets/Scripts/Widgets/Toastr.meta
 <<<<<<< master
 <<<<<<< master
 guid: 057d65e761095374b85063e4379b100d
@@ -8,6 +9,9 @@ guid: 1c10655844fbad74a9cdc9b96e743d36
 =======
 guid: 1c10655844fbad74a9cdc9b96e743d36
 >>>>>>> Prototype for the new HUD
+=======
+guid: 873e9626397c27c40b6a0dfd38c05014
+>>>>>>> Fixed Merge Conflicts:Assets/Scripts/InfoPanel/Implementations.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

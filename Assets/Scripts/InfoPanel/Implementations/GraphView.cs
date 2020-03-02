@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GraphView : View
+public class GraphView : MonoBehaviour
 {
+    /*
     private IconStateManager iconManager;
     private GraphManager graphManager;
 
@@ -87,5 +88,5 @@ public class GraphView : View
     {
         // TODO: parse Color
         graphManager.SetColor(title, col);
-    }
+    }*/
 }

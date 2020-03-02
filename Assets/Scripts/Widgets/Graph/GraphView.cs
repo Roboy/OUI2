@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Widgets
 {
-    public class GraphView : View
+    public class GraphView : MonoBehaviour
     {
         private IconStateManager iconManager;
         private GraphManager graphManager;
 
-        public override void Init(Model model, int panel_id)
+        public void Init(Widget widget, int panel_id)
         {
             iconManager = GetComponent<IconStateManager>();
             graphManager = GetComponentInChildren<GraphManager>();
@@ -17,17 +17,18 @@ namespace Widgets
             iconManager.DetailedPanel.SetActive(false);
             SetPosition(panel_id); // test
             //SetPosition(((GraphModel)model).GetPanelId());
-            UpdateView(model);
+            UpdateView(widget);
         }
 
-        public override void UpdateView(Model model)
+        public void UpdateView(Widget widget)
         {
-            GraphModel graphModel = (GraphModel)model;
+            GraphWidget graphWidget = (GraphWidget)widget;
             SetDetailedPanelPosition(1); // graphModel.detailedPanelPos
-            SetColor(graphModel.title, graphModel.color);
-            if (graphModel.datapoints.Count > 0)
+            SetColor(graphWidget.name, graphWidget.color);
+            if (graphWidget.datapoints.Count > 0)
             {
-                graphManager.AddDataPoint(graphModel.title, System.DateTime.Now, graphModel.datapoints.ToArray()[graphModel.datapoints.Count - 1]);
+                graphManager.AddDataPoint(graphWidget.name, System.DateTime.Now,
+                    graphWidget.datapoints.ToArray()[graphWidget.datapoints.Count - 1]);
             }
             // Debug.Log("View updated");
 

@@ -25,7 +25,20 @@ namespace Widgets
             if (Input.GetKeyDown(KeyCode.T))
             {
                 Widget testToastrWidget = FindWidgetWithID(10);
-                testToastrWidget.ForwardRosMessage(testToastrWidget.GetContext());
+                testToastrWidget.ProcessRosMessage(testToastrWidget.GetContext());
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Widget testGraphWidget = FindWidgetWithID(1);
+                testGraphWidget.ProcessRosMessage(testGraphWidget.GetContext());
+            }
+
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                Widget iconTestWidget = FindWidgetWithID(20);
+                iconTestWidget.GetContext().currentIcon = "SenseGlove_1";
+                iconTestWidget.ProcessRosMessage(iconTestWidget.GetContext());
             }
         }
 
@@ -35,15 +48,14 @@ namespace Widgets
 
             if (widget == null)
             {
-                Debug.Log("Message with no matching widget id: " + rosMessage.id + " received.");
+                Debug.Log("Message could not be forwarded.");
                 return;
             }
 
-            widget.ForwardRosMessage(rosMessage);
-
+            widget.ProcessRosMessage(rosMessage);
         }
 
-        private Widget FindWidgetWithID(int id)
+        public Widget FindWidgetWithID(int id)
         {
             foreach (Widget widget in widgets)
             {
@@ -53,6 +65,7 @@ namespace Widgets
                 }
             }
 
+            Debug.Log("No widget with id " + id + " found.");
             return null;
         }
     }

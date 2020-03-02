@@ -33,7 +33,8 @@ namespace Widgets
         #endregion
 
         #region TaskbarIcon
-        public int taskbarIconId;
+        public string currentIcon;
+        public string[] icons;
         #endregion
         
 

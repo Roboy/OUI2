@@ -296,7 +296,7 @@ MonoBehaviour:
   savedPos: {x: 483, y: -28, z: 6.99971}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 100, y: 400}
-  savedColor: {r: 1, g: 1, b: 1, a: 1}
+  savedColor: {r: 1, g: 1, b: 1, a: 0.13333334}
   savedTextUV0: {x: 0, y: 0}
   savedFill: 0
 --- !u!114 &877977659
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.13333334}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -898,7 +898,7 @@ MonoBehaviour:
   savedPos: {x: 0, y: 184.00002, z: 6.99971}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 700, y: 100}
-  savedColor: {r: 1, g: 1, b: 1, a: 1}
+  savedColor: {r: 1, g: 1, b: 1, a: 0.13333334}
   savedTextUV0: {x: 0, y: 0}
   savedFill: 0
 --- !u!114 &1082160684
@@ -914,7 +914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.13333334}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1071,6 +1071,10 @@ MonoBehaviour:
     type: 3}
   curvedUI: {fileID: 4934749566881069616}
   canvas: {fileID: 4934749566881069614}
+  panelTransforms:
+  - {fileID: 1082160681}
+  - {fileID: 1470996451}
+  - {fileID: 877977656}
 --- !u!114 &1262120147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1385,7 +1389,7 @@ MonoBehaviour:
   savedPos: {x: 0, y: -28.000015, z: 6.99971}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 500, y: 100}
-  savedColor: {r: 1, g: 1, b: 1, a: 1}
+  savedColor: {r: 1, g: 1, b: 1, a: 0.13333334}
   savedTextUV0: {x: 0, y: 0}
   savedFill: 0
 --- !u!114 &1470996454
@@ -1401,7 +1405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.13333334}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

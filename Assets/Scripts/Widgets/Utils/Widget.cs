@@ -2,23 +2,16 @@
 
 namespace Widgets
 {
-    public class Widget : MonoBehaviour
+    public abstract class Widget : MonoBehaviour
     {
         [SerializeField] private int id;
         [SerializeField] private int panel_id;
 
-        private Controller controller;
-        private Model model;
-        private View view;
-
         private RosJsonMessage context;
 
-        public void InitializeWidget(Controller controller, Model model, View view, RosJsonMessage RosJsonMessage)
+        public void Init(RosJsonMessage RosJsonMessage)
         {
-            this.controller = controller;
-            this.model = model;
-            this.view = view;
-            this.context = RosJsonMessage;
+            context = RosJsonMessage;
             id = RosJsonMessage.id;
             panel_id = RosJsonMessage.panel_id;
         }
@@ -38,10 +31,6 @@ namespace Widgets
             return context;
         }
 
-        public void ForwardRosMessage(RosJsonMessage rosMessage)
-        {
-            controller.ReceiveMessage(rosMessage);
-            view.UpdateView(model);
-        }
+        public abstract void ProcessRosMessage(RosJsonMessage rosMessage);
     }
 }

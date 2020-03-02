@@ -24,16 +24,7 @@ public class AdditiveSceneManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;  
     }
-
-    void Update()
-    {
-        // Debug for testing purposes
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            LoadScene(Scenes.CONSTRUCT, null, DelegateDemo);
-        }
-    }
-
+    
     /// <summary>
     /// Delegate that executes everytime a scene is loaded to update currentScene variable.
     /// </summary>
@@ -79,8 +70,6 @@ public class AdditiveSceneManager : MonoBehaviour
     /// <param name="onSceneUnload">Handler executed after scene is loaded. If null, default handler is executed.</param>
     public void LoadScene(Scenes scene, BeforeSceneLoadDelegate beforeSceneLoad, OnSceneLoadDelegate onSceneLoad)
     {
-        print("loaded " + SceneNameForScene(scene));
-
         if(currentScene != Scenes.NONE)
         {
             throw new Exception("There is another scene loaded. Unload first.");
@@ -118,8 +107,6 @@ public class AdditiveSceneManager : MonoBehaviour
     /// <param name="onSceneUnload">Handler executed after scene is unloaded. If null, default handler is executed.</param>
     public void UnloadScene(BeforeSceneUnloadDelegate beforeSceneUnload, OnSceneUnloadDelegate onSceneUnload)
     {
-        print("unloaded " + SceneNameForScene(currentScene));
-
         if (currentScene == Scenes.NONE)
         {
             throw new Exception("There is no scene loaded.");

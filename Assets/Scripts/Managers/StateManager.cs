@@ -4,8 +4,6 @@ using UnityEngine;
 public class StateManager : Singleton<StateManager>
 {
     private StateMachine stateMachine;
-    [SerializeField] private List<GameObject> HUDGameObjects;
-    [SerializeField] private List<GameObject> advancedMenuGameObjects;
 
     delegate void MakeTransition();
 
@@ -15,9 +13,6 @@ public class StateManager : Singleton<StateManager>
     // Start is called before the first frame update
     void Start()
     {
-        HUDGameObjects = new List<GameObject>();
-        advancedMenuGameObjects = new List<GameObject>();
-
         additiveSceneManager = GameObject.FindGameObjectWithTag("AdditiveSceneManager").GetComponent<AdditiveSceneManager>();
         transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
         

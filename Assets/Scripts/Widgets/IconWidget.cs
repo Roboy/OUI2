@@ -17,7 +17,6 @@ namespace Widgets
         private Texture2D currentIcon;
         private RawImage image;
 
-
         public void Awake()
         {
             image = gameObject.AddComponent<RawImage>();

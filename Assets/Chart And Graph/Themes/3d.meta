@@ -1,6 +1,7 @@
 fileFormatVersion: 2
 guid: 6b561b1eb8efb3141985715746897205
 folderAsset: yes
+<<<<<<< HEAD
 <<<<<<< master
 DefaultImporter:
   externalObjects: {}
@@ -9,6 +10,11 @@ timeCreated: 1500311988
 licenseType: Store
 DefaultImporter:
 >>>>>>> Integrated ChartAndGraph
+=======
+timeCreated: 1500311988
+licenseType: Store
+DefaultImporter:
+>>>>>>> OUI2-66-Demo-RosToHUD
   userData: 
   assetBundleName: 
   assetBundleVariant: 

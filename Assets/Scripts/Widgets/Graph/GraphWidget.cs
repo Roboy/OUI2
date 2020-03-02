@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Widgets
@@ -43,6 +42,11 @@ namespace Widgets
             datapoints.Enqueue(newDatapoint);
 
             datapointsArray = datapoints.ToArray();
+        }
+
+        public override void RestoreViews()
+        {
+            // throw new System.NotImplementedException();
         }
     }
 }

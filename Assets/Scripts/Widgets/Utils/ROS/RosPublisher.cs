@@ -1,16 +1,17 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using RosSharp.RosBridgeClient;
-using System.Text;
-using System;
 using System.IO;
+using System;
 
 namespace Widgets
 {
     public class RosPublisher : Publisher<RosSharp.RosBridgeClient.Messages.Standard.String>
     {
         private float temperature = 20;
+
+
+        private bool started = false;
 
         /// <summary>
         ///  Start method of InterfaceMessage.
@@ -31,6 +32,7 @@ namespace Widgets
             {
                 yield return new WaitForSeconds(waitTime);
                 base.Start();
+                started = true;
                 break;
             }
         }
@@ -41,26 +43,31 @@ namespace Widgets
         /// <param name="message">message</param>
         private void PublishMessage(RosSharp.RosBridgeClient.Messages.Standard.String message)
         {
-            Publish(message);
+            if (started)
+            {
+                Publish(message);
+            }
         }
 
-        private void PublishDemoMessage()
+        private void PublishMessage(RosJsonMessage demoMessage)
         {
-            System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
-            int cur_time = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
-            RosJsonMessage demoMessage = RosJsonMessage.CreateGraphMessage(1, UnityEngine.Random.Range(20.0f, 25.0f), cur_time, new byte[] { 255, 255, 255, 255 });
             string jsonString = JsonUtility.ToJson(demoMessage);
             RosSharp.RosBridgeClient.Messages.Standard.String tmpMessage = new RosSharp.RosBridgeClient.Messages.Standard.String(jsonString);
             PublishMessage(tmpMessage);
 
-
-            RosJsonMessage demoMessageInspector = RosJsonMessage.CreateGraphMessage(3, UnityEngine.Random.Range(20.0f, 25.0f), cur_time, new byte[] { 255, 255, 255, 255 });
-            string jsonStringInspector = JsonUtility.ToJson(demoMessageInspector);
-            RosSharp.RosBridgeClient.Messages.Standard.String tmpMessageInspector = new RosSharp.RosBridgeClient.Messages.Standard.String(jsonStringInspector);
-            PublishMessage(tmpMessageInspector);
-
             WriteMessageToFile("demoMessage", jsonString);
-            WriteMessageToFile("demoMessage", jsonStringInspector);
+        }
+
+        private void PublishGraphDemoMessage()
+        {
+            System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
+            int cur_time = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
+            RosJsonMessage demoMessage = RosJsonMessage.CreateGraphMessage(1, UnityEngine.Random.Range(20.0f, 25.0f), cur_time, new byte[] { 255, 255, 255, 255 });
+            //string jsonString = JsonUtility.ToJson(demoMessage);
+            //RosSharp.RosBridgeClient.Messages.Standard.String tmpMessage = new RosSharp.RosBridgeClient.Messages.Standard.String(jsonString);
+            //PublishMessage(tmpMessage);
+
+            //WriteMessageToFile("demoMessage", jsonString);
 
 
 
@@ -82,11 +89,46 @@ namespace Widgets
             return true;
         }
 
+        bool toggle = false;
+
+        private void PublishIconDemoMessage()
+        {
+            RosJsonMessage demoMessage;
+            if (toggle)
+            {
+                demoMessage = RosJsonMessage.CreateIconMessage(20, "SenseGlove_0");
+                
+            }
+            else
+            {
+                demoMessage = RosJsonMessage.CreateIconMessage(20, "SenseGlove_1");
+            }
+            PublishMessage(demoMessage);
+
+            toggle = !toggle;
+        }
+
+        private void PublishToastrDemoMessage()
+        {
+            RosJsonMessage demoMessage = RosJsonMessage.CreateToastrMessage(10, "Hello Roboy");
+            PublishMessage(demoMessage);
+        }
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.M))
             {
-                PublishDemoMessage();
+                PublishGraphDemoMessage();
+            }
+
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                PublishIconDemoMessage();
+            }
+
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                PublishToastrDemoMessage();
             }
 
             /*
@@ -121,6 +163,7 @@ namespace Widgets
             }    
             */
         }
+
 
         /*
         private byte[] GetColor()

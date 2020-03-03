@@ -3,7 +3,6 @@
 	"type": "Icon",
 	"title": "IconTest",
 	"panelId": 0,
-	"childWidgetId": 1,
 	"icons": [ "SenseGlove_0", "SenseGlove_1" ],
 	"currentIcon": "SenseGlove_0"
 }

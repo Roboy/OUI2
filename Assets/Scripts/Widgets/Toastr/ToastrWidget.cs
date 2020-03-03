@@ -14,6 +14,8 @@ namespace Widgets
 
         public float timer;
 
+        static int counter = 0;
+
         ToastrView view;
 
         public override void ProcessRosMessage(RosJsonMessage rosMessage)
@@ -59,10 +61,11 @@ namespace Widgets
                 toastrFontSize = fontSize;
             }
 
-            toastrToInstantiateQueue.Enqueue(new ToastrTemplate(toastrMessage, toastrDuration, toastrColor, toastrFontSize));
-        }   
+            // toastrToInstantiateQueue.Enqueue(new ToastrTemplate(toastrMessage, toastrDuration, toastrColor, toastrFontSize));
+            toastrToInstantiateQueue.Enqueue(new ToastrTemplate(toastrMessage + " " + counter++, toastrDuration, toastrColor, toastrFontSize));
+        }
 
-        public void Update()
+        protected override void UpdateInClass()
         {
             if (IsHudActive())
             {
@@ -115,8 +118,22 @@ namespace Widgets
         public override void RestoreViews(GameObject viewParent)
         {
             ResetTimer();
-            view = viewParent.AddComponent<ToastrView>();
-            view.Init(toastrActiveQueue.ToArray());
+            
+            GameObject toastrGameObject = new GameObject();
+            toastrGameObject.transform.SetParent(viewParent.transform, false);
+            toastrGameObject.name = gameObject.name + "View";
+            view = toastrGameObject.AddComponent<ToastrView>();
+            view.Init(toastrActiveQueue.ToArray(), childWidget != null ? childWidget : null);
+
+            if (isChildWidget)
+            {
+                view.HideView();
+            }
+        }
+
+        public override View GetView()
+        {
+            return view;
         }
 
         public class ToastrTemplate

@@ -48,8 +48,16 @@ namespace Widgets
 
         public override void RestoreViews(GameObject viewParent)
         {
-            view = viewParent.AddComponent<GraphView>();
-            view.Init(datapoints);
+            GameObject graphGameObject = new GameObject();
+            graphGameObject.transform.SetParent(viewParent.transform, false);
+            graphGameObject.name = gameObject.name + "View";
+            view = graphGameObject.AddComponent<GraphView>();
+            view.Init(datapoints, childWidget != null ? childWidget : null);
+            
+            if (isChildWidget)
+            {
+                view.HideView();
+            }
         }
 
         public void Update()
@@ -58,11 +66,22 @@ namespace Widgets
             if (view == null)
             {
                 GameObject graphParent = GameObject.FindGameObjectWithTag("Panel_" + GetPanelID());
+
                 if (graphParent != null)
                 {
                     RestoreViews(graphParent);
                 }
             }
+        }
+
+        protected override void UpdateInClass()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override View GetView()
+        {
+            return view;
         }
 
         public struct Datapoint

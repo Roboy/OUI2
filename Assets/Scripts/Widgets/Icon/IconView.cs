@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Widgets
 {
-    public class IconView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class IconView : View
     {
         private RawImage image;
 
@@ -13,8 +13,9 @@ namespace Widgets
             image = gameObject.AddComponent<RawImage>();
         }
 
-        public void Init(Texture2D icon)
+        public void Init(Texture2D icon, Widget childWidget)
         {   
+            SetChildWidget(childWidget);
             SetIcon(icon);
         }
 
@@ -23,14 +24,14 @@ namespace Widgets
             image.texture = iconTexture;
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        public override void ShowView()
         {
-            Debug.Log("POIMT");
+            image.enabled = true;
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
+        public override void HideView()
         {
-            throw new System.NotImplementedException();
+            image.enabled = false;
         }
     }
 }

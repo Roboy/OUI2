@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Widgets
 {
-    public class GraphView : MonoBehaviour
+    public class GraphView : View
     {
         private IconStateManager iconManager;
         private GraphManager graphManager;
@@ -26,12 +26,13 @@ namespace Widgets
             return graph;
         }
 
-        public void Init(Queue<float> dataPoints)
+        public void Init(Queue<float> dataPoints, Widget childWidget)
         {
+            SetChildWidget(childWidget);
+        
             GameObject graph = CreateGraph();
             graphManager = graph.GetComponent<GraphManager>();
-
-
+            
             /*
             //iconManager = GetComponent<IconStateManager>();
             graphManager = GetComponentInChildren<GraphManager>();
@@ -100,6 +101,16 @@ namespace Widgets
         {
             // TODO: parse Color
             graphManager.SetColor(title, col);
+        }
+
+        public override void ShowView()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void HideView()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

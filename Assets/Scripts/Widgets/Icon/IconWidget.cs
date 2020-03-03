@@ -58,9 +58,12 @@ namespace Widgets
             }
         }
 
-        public override void RestoreViews()
+        public override void RestoreViews(GameObject iconParent)
         {
-            // throw new System.NotImplementedException();
+            GameObject iconGameObject = new GameObject();
+            iconGameObject.transform.SetParent(iconParent.transform, false);
+            view = iconGameObject.AddComponent<IconView>();
+            view.Init(currentIcon);
         }
 
         public void Update()
@@ -82,10 +85,7 @@ namespace Widgets
                 
                 if (iconParent != null)
                 {
-                    GameObject iconGameObject = new GameObject();
-                    iconGameObject.transform.SetParent(iconParent.transform, false);
-                    view = iconGameObject.AddComponent<IconView>();
-                    view.Init(currentIcon);
+                    RestoreViews(iconParent);
                 }
             }
         }

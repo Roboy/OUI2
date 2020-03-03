@@ -12,6 +12,8 @@ namespace Widgets
         public Queue<float> datapoints;
         public float[] datapointsArray;
 
+        GraphView view;
+
         public void Awake()
         {
             datapoints = new Queue<float>();
@@ -44,9 +46,29 @@ namespace Widgets
             datapointsArray = datapoints.ToArray();
         }
 
-        public override void RestoreViews()
+        public override void RestoreViews(GameObject viewParent)
         {
-            // throw new System.NotImplementedException();
+            view = viewParent.AddComponent<GraphView>();
+            view.Init(datapoints);
+        }
+
+        public void Update()
+        {
+            // This is true, everytime the HUD scene changes
+            if (view == null)
+            {
+                GameObject graphParent = GameObject.FindGameObjectWithTag("Panel_" + GetPanelID());
+                if (graphParent != null)
+                {
+                    RestoreViews(graphParent);
+                }
+            }
+        }
+
+        public struct Datapoint
+        {
+            float time;
+            float data;
         }
     }
 }

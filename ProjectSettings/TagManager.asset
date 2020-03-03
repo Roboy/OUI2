@@ -18,6 +18,7 @@ TagManager:
   - Slider3D
   - ConstructObjects
   - SenseGloveManager
+  - Panel_2
   layers:
   - Default
   - TransparentFX

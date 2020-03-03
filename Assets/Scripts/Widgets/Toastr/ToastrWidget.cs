@@ -92,8 +92,7 @@ namespace Widgets
                 GameObject toastrParent = GameObject.FindGameObjectWithTag("Panel_" + GetPanelID());
                 if (toastrParent != null)
                 {
-                    view = toastrParent.AddComponent<ToastrView>();
-                    view.Init(toastrActiveQueue.ToArray());
+                    RestoreViews(toastrParent);
                 }
             }
         }
@@ -113,9 +112,10 @@ namespace Widgets
             return (toastrToInstantiateQueue.Count != 0);
         }
 
-        public override void RestoreViews()
+        public override void RestoreViews(GameObject viewParent)
         {
             ResetTimer();
+            view = viewParent.AddComponent<ToastrView>();
             view.Init(toastrActiveQueue.ToArray());
         }
 

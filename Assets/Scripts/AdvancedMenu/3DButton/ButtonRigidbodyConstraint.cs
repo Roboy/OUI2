@@ -19,4 +19,10 @@ public class ButtonRigidbodyConstraint : MonoBehaviour
         this.transform.localRotation = defaultRot;
         this.transform.localPosition = new Vector3(defaultPos.x, defaultPos.y, this.transform.localPosition.z);
     }
+
+    public void InitialState()
+    {
+        this.transform.localRotation = defaultRot;
+        this.transform.localPosition = defaultPos;
+    }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Assertions;
 
 public class SubMenuAnimationHandler : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class SubMenuAnimationHandler : MonoBehaviour
 
     public bool MButtonTransition;
     public bool IsNested = false;
+    public bool AcivateOnFadeOut;
+    public GameObject ElementToActivate;
     private int currentState;
     private bool newRequest;
     private bool fadeIn;
@@ -156,6 +159,16 @@ public class SubMenuAnimationHandler : MonoBehaviour
     {
         newRequest = true;
         fadeIn = false;
+        if (AcivateOnFadeOut)
+        {
+            Assert.IsNotNull(ElementToActivate, "If you set 'ActivateOnFadeOut' to true, then you must specify the 'ElementToActivate'.");
+            ElementToActivate.SetActive(true);
+            if(ElementToActivate.CompareTag("Button3D"))
+            {
+                ElementToActivate.transform.GetChild(0).GetComponent<ButtonRigidbodyConstraint>().InitialState();
+                ElementToActivate.transform.GetChild(1).GetComponent<FrameClickDetection>().highlightOff();
+            }
+        }
     }
 
     private void safeModeOn()

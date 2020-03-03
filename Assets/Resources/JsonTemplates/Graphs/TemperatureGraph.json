@@ -1,0 +1,8 @@
+{
+	"id": 1,
+	"type": "Graph",
+	"panelId": 0,
+	"title": "Temperature",
+	"graphColor": [ 255, 255, 255, 255 ],
+	"graphDatapoint": 10
+}

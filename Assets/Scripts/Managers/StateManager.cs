@@ -1,60 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class StateManager : Singleton<StateManager>
 {
     private StateMachine stateMachine;
-    [SerializeField] private List<GameObject> HUDGameObjects;
-    [SerializeField] private List<GameObject> advancedMenuGameObjects;
+
+    delegate void MakeTransition();
+
+    AdditiveSceneManager additiveSceneManager;
+    TransitionManager transitionManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        HUDGameObjects = new List<GameObject>();
-        advancedMenuGameObjects = new List<GameObject>();
-
-        FindHUDGameObjects();
-        FindAdvancedMenuGameObjects();
-
-        // Deactivate AdvancedMenu GameObjects right away
-        DeactivateAdvancedMenuGameObjects();
-
+        additiveSceneManager = GameObject.FindGameObjectWithTag("AdditiveSceneManager").GetComponent<AdditiveSceneManager>();
+        transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
+        
         stateMachine = new StateMachine(new HUDState(this));
-    }
-
-    void FindHUDGameObjects()
-    {
-        HUDGameObjects.Add(GameObject.Find("Room"));
-    }
-
-    void FindAdvancedMenuGameObjects()
-    {
-        advancedMenuGameObjects.Add(GameObject.Find("AdvancedMenu"));
-    }
-
-    void ActivateHUDGameObjects()
-    {
-        foreach (GameObject HUDGameObject in HUDGameObjects)
-            HUDGameObject.SetActive(true);
-    }
-
-    void DeactivateHUDGameObjects()
-    {
-        foreach (GameObject HUDGameObject in HUDGameObjects)
-            HUDGameObject.SetActive(false);
-    }
-
-    void ActivateAdvancedMenuGameObjects()
-    {
-        foreach (GameObject advancedMenuGameObject in advancedMenuGameObjects)
-            advancedMenuGameObject.SetActive(true);
-    }
-
-    void DeactivateAdvancedMenuGameObjects()
-    {
-        foreach (GameObject advancedMenuGameObject in advancedMenuGameObjects)
-            advancedMenuGameObject.SetActive(false);
     }
 
     void CheckForDebugInput()
@@ -85,17 +47,16 @@ public class StateManager : Singleton<StateManager>
 
         public void Enter()
         {
-            owner.ActivateHUDGameObjects();
+            owner.additiveSceneManager.LoadScene(Scenes.HUD, null, null);
         }
 
         public void Execute()
         {
-            print("HUD");
         }
 
         public void Exit()
         {
-            owner.DeactivateHUDGameObjects();
+            owner.additiveSceneManager.UnloadScene(null, null);
         }
 
         public IState GoToNextState()
@@ -115,17 +76,16 @@ public class StateManager : Singleton<StateManager>
 
         public void Enter()
         {
-            owner.ActivateAdvancedMenuGameObjects();
+            owner.additiveSceneManager.LoadScene(Scenes.CONSTRUCT, null, null);
         }
 
         public void Execute()
         {
-            print("Advanced Menu");
         }
 
         public void Exit()
         {
-            owner.DeactivateAdvancedMenuGameObjects();
+            owner.additiveSceneManager.UnloadScene(null, null);
         }
 
         public IState GoToNextState()
@@ -153,6 +113,7 @@ public class StateManager : Singleton<StateManager>
         public StateMachine(IState startState)
         {
             currentState = startState;
+            startState.Enter();
         }
         
         public void ChangeState(IState newState)

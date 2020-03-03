@@ -12,6 +12,12 @@ TagManager:
   - RosManager
   - Panel_0
   - Panel_1
+  - Button3D
+  - SenseGloveLeft
+  - SubMenu3D
+  - Slider3D
+  - ConstructObjects
+  - SenseGloveManager
   - Panel_2
   layers:
   - Default

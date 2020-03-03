@@ -72,7 +72,7 @@ public class AdditiveSceneManager : MonoBehaviour
     /// </summary>
     /// <param name="beforeSceneUnload">Handler executed before scene is loaded. If null, default handler is executed.</param>
     /// <param name="onSceneUnload">Handler executed after scene is loaded. If null, default handler is executed.</param>
-    public void LoadScene(Scenes scene, BeforeSceneLoadDelegate beforeSceneLoad, OnSceneLoadDelegate onSceneLoad)
+    public IEnumerator LoadScene(Scenes scene, BeforeSceneLoadDelegate beforeSceneLoad, OnSceneLoadDelegate onSceneLoad)
     {
         if(currentScene != Scenes.NONE)
         {
@@ -90,7 +90,11 @@ public class AdditiveSceneManager : MonoBehaviour
             {
                 DefaultBeforeSceneLoad();
             }
-            SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+            while(!asyncLoad.isDone)
+            {
+                yield return null;
+            }
             if (onSceneLoad != null)
             {
                 onSceneLoad();

@@ -230,7 +230,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3888124606873376386}
-  - component: {fileID: 3888124606873376387}
   - component: {fileID: 1032377359654105156}
   m_Layer: 0
   m_Name: LeftHandTracker
@@ -255,19 +254,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3888124606873376387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3888124606873376388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2bfb02108a1927458c390326b39f67f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_myId: 5
 --- !u!114 &1032377359654105156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d37c2cf88f7c59f4c8cf5d3812568143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 3
+  index: 4
   origin: {fileID: 0}
 --- !u!1 &4287450777380485008
 GameObject:
@@ -511,6 +497,36 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 871157858510840697, guid: 8def27947565178489cae42c458c0226,
+        type: 3}
+      propertyPath: CompareObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313497725202652275, guid: 8def27947565178489cae42c458c0226,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0.030806122
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313497725202652275, guid: 8def27947565178489cae42c458c0226,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 2.383
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313497725202652275, guid: 8def27947565178489cae42c458c0226,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: 1.79275
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313497725202652275, guid: 8def27947565178489cae42c458c0226,
+        type: 3}
+      propertyPath: m_MassScale
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2313497725202652275, guid: 8def27947565178489cae42c458c0226,
+        type: 3}
+      propertyPath: m_EnablePreprocessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1279483405066123018, guid: 8def27947565178489cae42c458c0226,
         type: 3}
       propertyPath: onPress.Array.size
@@ -545,7 +561,7 @@ PrefabInstance:
     - target: {fileID: 1279483405066123018, guid: 8def27947565178489cae42c458c0226,
         type: 3}
       propertyPath: onPress.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: deactivateAndReset
+      value: InitialState
       objectReference: {fileID: 0}
     - target: {fileID: 1279483405066123018, guid: 8def27947565178489cae42c458c0226,
         type: 3}
@@ -607,36 +623,16 @@ PrefabInstance:
       propertyPath: onPress.Array.data[0].m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 2313497725202652275, guid: 8def27947565178489cae42c458c0226,
+    - target: {fileID: 8952679187941188470, guid: 8def27947565178489cae42c458c0226,
         type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: 0.030806122
-      objectReference: {fileID: 0}
-    - target: {fileID: 2313497725202652275, guid: 8def27947565178489cae42c458c0226,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: 2.383
-      objectReference: {fileID: 0}
-    - target: {fileID: 2313497725202652275, guid: 8def27947565178489cae42c458c0226,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.z
-      value: 1.79275
-      objectReference: {fileID: 0}
-    - target: {fileID: 2313497725202652275, guid: 8def27947565178489cae42c458c0226,
-        type: 3}
-      propertyPath: m_MassScale
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2313497725202652275, guid: 8def27947565178489cae42c458c0226,
-        type: 3}
-      propertyPath: m_EnablePreprocessing
+      propertyPath: Follow
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6399660823901901149, guid: 8def27947565178489cae42c458c0226,
+    - target: {fileID: 8952679187941188470, guid: 8def27947565178489cae42c458c0226,
         type: 3}
-      propertyPath: m_Mesh
+      propertyPath: FollowObject
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3888124606873376386}
     - target: {fileID: 3819679530671705783, guid: 8def27947565178489cae42c458c0226,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -684,14 +680,9 @@ PrefabInstance:
       propertyPath: m_firstOverflowCharacterIndex
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 8952679187941188470, guid: 8def27947565178489cae42c458c0226,
+    - target: {fileID: 6399660823901901149, guid: 8def27947565178489cae42c458c0226,
         type: 3}
-      propertyPath: Follow
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8952679187941188470, guid: 8def27947565178489cae42c458c0226,
-        type: 3}
-      propertyPath: FollowObject
+      propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []

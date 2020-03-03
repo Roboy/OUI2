@@ -11,7 +11,7 @@ public class BuzzManager : Singleton<BuzzManager>
     private SenseGlove_Object senseGloveObjectRight;
     private SenseGlove_Object senseGloveObjectLeft;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         if (RightHand)
         {

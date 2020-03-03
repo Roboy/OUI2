@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 public class StateManager : Singleton<StateManager>
 {
@@ -17,6 +18,11 @@ public class StateManager : Singleton<StateManager>
         transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
         
         stateMachine = new StateMachine(new HUDState(this));
+    }
+
+    public void GoToNextState()
+    {
+        stateMachine.GoToNextState();
     }
 
     void CheckForDebugInput()
@@ -47,7 +53,7 @@ public class StateManager : Singleton<StateManager>
 
         public void Enter()
         {
-            owner.additiveSceneManager.LoadScene(Scenes.HUD, null, null);
+            owner.additiveSceneManager.TriggerLoadScene(Scenes.HUD, null, null);
         }
 
         public void Execute()
@@ -56,7 +62,7 @@ public class StateManager : Singleton<StateManager>
 
         public void Exit()
         {
-            owner.additiveSceneManager.UnloadScene(null, null);
+           owner.additiveSceneManager.TriggerUnloadScene(null, null);
         }
 
         public IState GoToNextState()
@@ -76,7 +82,7 @@ public class StateManager : Singleton<StateManager>
 
         public void Enter()
         {
-            owner.additiveSceneManager.LoadScene(Scenes.CONSTRUCT, null, null);
+            owner.additiveSceneManager.TriggerLoadScene(Scenes.CONSTRUCT, null, DelegateAfterConstructLoad);
         }
 
         public void Execute()
@@ -85,12 +91,23 @@ public class StateManager : Singleton<StateManager>
 
         public void Exit()
         {
-            owner.additiveSceneManager.UnloadScene(null, null);
+            owner.additiveSceneManager.TriggerUnloadScene(null, null);
         }
 
         public IState GoToNextState()
         {
             return new HUDState(owner);
+        }
+
+        void DelegateAfterConstructLoad()
+        {
+            Transform cameraOrigin = GameObject.FindGameObjectWithTag("CameraOrigin").transform;
+            Transform leftSenseGlove = GameObject.FindGameObjectWithTag("SenseGloveLeft").transform;
+            leftSenseGlove.SetParent(cameraOrigin, false);
+            leftSenseGlove.GetChild(1).GetComponent<ShowOpenMenuButton>().CompareObject = cameraOrigin;
+            leftSenseGlove.GetComponent<SteamVR_TrackedObject>().enabled = true;
+            GameObject.FindGameObjectWithTag("SenseGloveRight").transform.SetParent(cameraOrigin, false);
+            GameObject.FindGameObjectWithTag("ConstructObjects").transform.GetChild(0).SetParent(cameraOrigin, false);
         }
     }
 

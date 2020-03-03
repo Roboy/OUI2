@@ -5,15 +5,20 @@ namespace Widgets
     public abstract class Widget : MonoBehaviour
     {
         [SerializeField] private int id;
-        [SerializeField] private int panel_id;
+        [SerializeField] private int panelId;
 
         private RosJsonMessage context;
+        public int childWidgetId;
+        public Widget childWidget;
+
+        protected bool isChildWidget = false;
 
         public void Init(RosJsonMessage RosJsonMessage)
         {
             context = RosJsonMessage;
             id = RosJsonMessage.id;
-            panel_id = RosJsonMessage.panelId;
+            childWidgetId = RosJsonMessage.childWidgetId;
+            panelId = RosJsonMessage.panelId;
         }
 
         public int GetID()
@@ -23,7 +28,7 @@ namespace Widgets
 
         public int GetPanelID()
         {
-            return panel_id;
+            return panelId;
         }
 
         public RosJsonMessage GetContext()
@@ -31,8 +36,34 @@ namespace Widgets
             return context;
         }
 
+        public void SetIsChildWidget()
+        {
+            isChildWidget = true;
+        }
+
+        private void Update()
+        {
+            if (childWidget == null && childWidgetId != 0)
+            {
+                childWidget = Manager.Instance.FindWidgetWithID(childWidgetId);
+
+                childWidget.SetIsChildWidget();
+
+                if (childWidget == null)
+                {
+                    Debug.LogWarning("Child widget not found.");
+                }
+            }
+
+            UpdateInClass();
+        }
+
+        protected abstract void UpdateInClass();
+
         public abstract void ProcessRosMessage(RosJsonMessage rosMessage);
-        
+
         public abstract void RestoreViews(GameObject viewParent);
+
+        public abstract View GetView();
     }
 }

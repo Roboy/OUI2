@@ -5,7 +5,7 @@ using static Widgets.ToastrWidget;
 
 namespace Widgets
 {
-    public class ToastrView : MonoBehaviour
+    public class ToastrView : View
     {
         public readonly int OFFSET = 40;
         public Queue<Toastr> toastrQueue;
@@ -15,8 +15,10 @@ namespace Widgets
             toastrQueue = new Queue<Toastr>();
         }
 
-        public void Init(ToastrTemplate[] activeToastr)
+        public void Init(ToastrTemplate[] activeToastr, Widget childWidget)
         {
+            SetChildWidget(childWidget);
+
             foreach (ToastrTemplate toastrTemplate in activeToastr)
             {
                 CreateNewToastr(toastrTemplate);
@@ -40,9 +42,13 @@ namespace Widgets
         {
             // TODO: A nice slerp like toastr.SlerpUp()
 
+            float offsetTime = 0;
+
             foreach (Toastr toastr in toastrQueue)
             {
-                toastr.transform.localPosition += OFFSET * Vector3.up;
+                // toastr.transform.localPosition += OFFSET * Vector3.up;
+                offsetTime += 0.1f;
+                toastr.SlerpUp(OFFSET, offsetTime);
             }
         }
 
@@ -52,5 +58,16 @@ namespace Widgets
             MoveToastrsUp();
         }
 
+        // TODO: hide new toastr as well
+        public override void ShowView()
+        {
+
+        }
+
+        // TODO: hide new toastr as well
+        public override void HideView()
+        {
+            Debug.LogWarning("Toastr widget can not be hidden.");
+        }
     }
 }

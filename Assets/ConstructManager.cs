@@ -27,8 +27,9 @@ public class ConstructManager : MonoBehaviour
         Transform cameraOrigin = GameObject.FindGameObjectWithTag("CameraOrigin").transform;
         Transform leftSenseGlove = GameObject.FindGameObjectWithTag("SenseGloveLeft").transform;
         leftSenseGlove.SetParent(cameraOrigin, false);
+        leftSenseGlove.GetChild(1).GetComponent<ShowOpenMenuButton>().CompareObject = cameraOrigin;
         Transform openMenuButtonPressurePlate = leftSenseGlove.GetChild(1).GetChild(0);
-        openMenuButtonPressurePlate.GetComponent<SpringJoint>().connectedAnchor = openMenuButtonPressurePlate.position;
+        //openMenuButtonPressurePlate.GetComponent<SpringJoint>().connectedAnchor = openMenuButtonPressurePlate.position;
         leftSenseGlove.GetComponent<SteamVR_TrackedObject>().enabled = true;
         GameObject.FindGameObjectWithTag("SenseGloveRight").transform.SetParent(cameraOrigin, false);
         GameObject.FindGameObjectWithTag("ConstructObjects").transform.GetChild(0).SetParent(cameraOrigin, false);

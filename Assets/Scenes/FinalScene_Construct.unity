@@ -272,6 +272,11 @@ PrefabInstance:
       propertyPath: onPress.Array.data[0].m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
       value: FadeIn
       objectReference: {fileID: 0}
+    - target: {fileID: 4477314023876514452, guid: 46fd8a40a1749f945b96bcb0f67eabaf,
+        type: 3}
+      propertyPath: onPress.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: InitialState
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46fd8a40a1749f945b96bcb0f67eabaf, type: 3}
 --- !u!4 &420913494 stripped

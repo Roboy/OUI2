@@ -27,7 +27,7 @@ namespace Widgets
             this.graph = graph;
         }
 
-        public void Init()
+        public void Init(string topic)
         {
             graph = GetComponent<GraphChart>();
             if (graph == null)
@@ -36,6 +36,9 @@ namespace Widgets
                 Debug.LogWarning("No GraphChart found! Place this script into a graph chart!");
                 return;
             }
+            
+            graph.DataSource.AddCategory(topic, new Material(Shader.Find("Chart/Canvas/Solid")), 20, new MaterialTiling(false, 20), null, true, null, 20);
+            //graph.DataSource.AddCategory(topic, new Material(Shader.Find("Standard")), 20, new MaterialTiling(false, 20), null, true, null, 20);
             //CustomizeGraph("");
             //SetNumLabelsShownX(3);
             //SetColor("Temperature", Color.red);
@@ -80,7 +83,8 @@ namespace Widgets
 
         public void SetColor(string topic, Color c)
         {
-            Material fill = new Material(graphFill);
+            //Material fill = new Material(graphFill);
+            Material fill = new Material(Shader.Find("Chart/Canvas/Solid"));
             fill.color = c;
             // print(c.ToString());
             graph.DataSource.SetCategoryLine(topic, fill, 5, new MaterialTiling(false, 0));
@@ -114,6 +118,7 @@ namespace Widgets
 
         public void AddDataPoint(string topic, DateTime time, float val)
         {
+            print("topic is " + topic);
             graph.DataSource.AddPointToCategoryRealtime(topic, time, val, 0f);
             //WidgetFactory.Instance.curvedUI..AddEffectToChildren();
         }

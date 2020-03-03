@@ -12,6 +12,7 @@ TagManager:
   - RosManager
   - Panel_0
   - Panel_1
+  - Panel_2
   layers:
   - Default
   - TransparentFX

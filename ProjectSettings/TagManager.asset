@@ -12,6 +12,7 @@ TagManager:
   - SenseGloveLeft
   - TransitionManager
   - AdditiveSceneManager
+  - CameraOrigin
   layers:
   - Default
   - TransparentFX

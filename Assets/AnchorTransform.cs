@@ -5,50 +5,65 @@ using UnityEngine;
 public class AnchorTransform : MonoBehaviour
 {
     public GameObject[] buttons;
+
+    public bool Follow;
+    public Transform FollowObject;
+    SpringJoint spring;
     Vector3 oldPos;
     Quaternion oldRot;
 
-    // Start is called before the first frame update
     void Start()
     {
-        //GameObject.FindGameObjectsWithTag("Button3D");
-        oldPos = this.transform.position;
+        spring = this.GetComponent<SpringJoint>();
+        if(Follow && FollowObject == null)
+        {
+            FollowObject = GameObject.FindGameObjectWithTag("CameraOrigin").transform;
+        }
+        oldPos = FollowObject.position;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        bool posChanged = !this.transform.position.Equals(oldPos);
-        bool rotChanged = !this.transform.rotation.Equals(oldRot);
-        if (!posChanged && !rotChanged)
+        if (Follow)
         {
-            for (int i = 0; i < buttons.Length; i++)
+            bool posChanged = !FollowObject.position.Equals(oldPos);
+            bool rotChanged = !FollowObject.rotation.Equals(oldRot);
+            if (!posChanged && !rotChanged)
             {
-                buttons[i].transform.GetChild(0).GetComponent<SpringJoint>().massScale = 10f;
-            }
-        } else
-        {
-            if (rotChanged)
-            {
-                for (int i = 0; i < buttons.Length; i++)
+                /*for (int i = 0; i < buttons.Length; i++)
                 {
-                    SpringJoint spring = buttons[i].GetComponentInChildren<SpringJoint>();
+                    buttons[i].transform.GetChild(0).GetComponent<SpringJoint>().massScale = 10f;
+                }*/
+                spring.massScale = 10f;
+            }
+            else
+            {
+                if (rotChanged)
+                {
+                    /*for (int i = 0; i < buttons.Length; i++)
+                    {
+                        SpringJoint spring = buttons[i].GetComponentInChildren<SpringJoint>();
+                        spring.massScale = 0.00001f;
+                        Quaternion rotDiff = this.transform.rotation * Quaternion.Inverse(oldRot);
+                        spring.connectedAnchor = oldPos + rotDiff * (spring.connectedAnchor - oldPos);
+                    }*/
                     spring.massScale = 0.00001f;
-                    Quaternion rotDiff = this.transform.rotation * Quaternion.Inverse(oldRot);
+                    Quaternion rotDiff = FollowObject.rotation * Quaternion.Inverse(oldRot);
                     spring.connectedAnchor = oldPos + rotDiff * (spring.connectedAnchor - oldPos);
                 }
-            }
-            if (posChanged)
-            {
-                for (int i = 0; i < buttons.Length; i++)
+                if (posChanged)
                 {
-                    SpringJoint spring = buttons[i].transform.GetChild(0).GetComponent<SpringJoint>();
+                    /*for (int i = 0; i < buttons.Length; i++)
+                    {
+                        SpringJoint spring = buttons[i].transform.GetChild(0).GetComponent<SpringJoint>();
+                        
+                    }*/
                     spring.massScale = 0.00001f;
-                    spring.connectedAnchor = buttons[i].transform.GetChild(0).GetComponent<SpringJoint>().connectedAnchor + (this.transform.position - oldPos);
+                    spring.connectedAnchor = spring.connectedAnchor + (FollowObject.position - oldPos);
                 }
             }
+            oldRot = FollowObject.rotation;
+            oldPos = FollowObject.position;
         }
-        oldRot = this.transform.rotation;
-        oldPos = this.transform.position;
     }
 }

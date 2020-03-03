@@ -422,6 +422,7 @@ GameObject:
   - component: {fileID: 1279483405781329389}
   - component: {fileID: 2313497725202652275}
   - component: {fileID: 5086676034467626896}
+  - component: {fileID: 7848388396979470247}
   m_Layer: 0
   m_Name: PressurePlate
   m_TagString: Untagged
@@ -527,8 +528,8 @@ SpringJoint:
   m_GameObject: {fileID: 1279483405781329392}
   m_ConnectedBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.13599998, y: 4.7085, z: 2.8522499}
+  m_AutoConfigureConnectedAnchor: 0
+  m_ConnectedAnchor: {x: -0.03740573, y: -0.081937574, z: -0.4645666}
   serializedVersion: 2
   m_Spring: 50
   m_Damper: 10
@@ -553,6 +554,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f00aebd24893f4087cfea4edbcf356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7848388396979470247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279483405781329392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3173599a82d0e674e816da86e071b21e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons: []
+  Follow: 0
+  FollowObject: {fileID: 0}
 --- !u!1 &4939614792462324697
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,11 +637,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1279483405781329393}
     m_Modifications:
-    - target: {fileID: 9153680947776687044, guid: 870685729b00ee64bb03c09c0ebfb530,
-        type: 3}
-      propertyPath: m_Name
-      value: Text
-      objectReference: {fileID: 0}
     - target: {fileID: 7106691509173400626, guid: 870685729b00ee64bb03c09c0ebfb530,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -730,6 +741,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9153680947776687044, guid: 870685729b00ee64bb03c09c0ebfb530,
+        type: 3}
+      propertyPath: m_Name
+      value: Text
       objectReference: {fileID: 0}
     - target: {fileID: 6067573193481836475, guid: 870685729b00ee64bb03c09c0ebfb530,
         type: 3}

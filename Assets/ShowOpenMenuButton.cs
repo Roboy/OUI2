@@ -5,20 +5,15 @@ using UnityEngine;
 public class ShowOpenMenuButton : MonoBehaviour
 {
     bool menuOpen;
-    Transform OpenMenuButton;
-    // Start is called before the first frame update
+    public Transform CompareObject;
+
     void Start()
     {
-        menuOpen = false;
-        Transform leftSenseGlove = GameObject.FindGameObjectWithTag("SenseGloveLeft").transform;
-        for(int i = 0; i < leftSenseGlove.childCount; i++)
+        if (CompareObject == null)
         {
-            if (leftSenseGlove.GetChild(i).CompareTag("Button3D"))
-            {
-                OpenMenuButton = leftSenseGlove.GetChild(i);
-                break;
-            }
+            CompareObject = GameObject.FindGameObjectWithTag("CameraOrigin").transform;
         }
+        menuOpen = false;
     }
 
     // Update is called once per frame
@@ -26,12 +21,18 @@ public class ShowOpenMenuButton : MonoBehaviour
     {
         if (!menuOpen)
         {
-            if(Vector3.Dot(OpenMenuButton.forward, this.transform.up) < 0)
+            if(Vector3.Dot(this.transform.forward, CompareObject.up) < 0)
             {
-                OpenMenuButton.gameObject.SetActive(true);
+                for(int i = 0; i < this.transform.childCount; i++)
+                {
+                    this.transform.GetChild(i).gameObject.SetActive(true);
+                }
             } else
             {
-                OpenMenuButton.gameObject.SetActive(false);
+                for (int i = 0; i < this.transform.childCount; i++)
+                {
+                    this.transform.GetChild(i).gameObject.SetActive(false);
+                }
             }
         }
     }

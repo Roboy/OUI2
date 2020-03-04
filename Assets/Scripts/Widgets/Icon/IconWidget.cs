@@ -11,14 +11,7 @@ namespace Widgets
         public Texture2D[] iconsArray;
         
         private string currentIconName;
-        private Texture2D currentIcon;
-
-        IconView view;
-
-        public override View GetView()
-        {
-            return view;
-        }
+        public Texture2D currentIcon;
 
         public void Init(RosJsonMessage context, Dictionary<string, Texture2D> icons)
         {
@@ -42,38 +35,20 @@ namespace Widgets
                 {
                     if (view != null)
                     {
-                        view.SetIcon(currentIcon);
+                        ((IconView)view).SetIcon(currentIcon);
                     }
                 }
             }
         }
 
-        public override void CreateView(GameObject iconParent)
-        {
-            GameObject iconGameObject = new GameObject();
-            iconGameObject.transform.SetParent(iconParent.transform, false);
-            iconGameObject.name = gameObject.name + "View";
-            view = iconGameObject.AddComponent<IconView>();
-            view.Init(currentIcon, childWidget != null ? childWidget : null);
-
-            if (isChildWidget)
-            {
-                view.HideView();
-            }
-        }
-
         protected override void UpdateInClass()
         {
-            // This is true, everytime the HUD scene changes
-            if (view == null && currentIcon != null)
-            {
-                GameObject iconParent = GameObject.FindGameObjectWithTag("Panel_" + GetPanelID());
-                
-                if (iconParent != null)
-                {
-                    CreateView(iconParent);
-                }
-            }
+
+        }
+
+        public override View AddViewComponent(GameObject viewGameObject)
+        {
+            return viewGameObject.AddComponent<IconView>();
         }
     }
 }

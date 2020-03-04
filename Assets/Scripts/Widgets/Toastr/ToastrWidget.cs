@@ -16,8 +16,6 @@ namespace Widgets
 
         static int counter = 0;
 
-        ToastrView view;
-
         public override void ProcessRosMessage(RosJsonMessage rosMessage)
         {
             EnqueueNewMessage(rosMessage.toastrMessage, rosMessage.toastrDuration, WidgetUtility.BytesToColor(rosMessage.toastrColor), rosMessage.toastrFontSize);
@@ -73,7 +71,7 @@ namespace Widgets
                 {
                     ToastrTemplate toastrToInstantiate = toastrToInstantiateQueue.Dequeue();
                     toastrActiveQueue.Enqueue(toastrToInstantiate);
-                    view.CreateNewToastr(toastrToInstantiate);
+                    ((ToastrView)view).CreateNewToastr(toastrToInstantiate);
                 }
 
                 if (toastrActiveQueue.Count != 0)
@@ -82,20 +80,10 @@ namespace Widgets
 
                     if (timer >= toastrActiveQueue.Peek().toastrDuration)
                     {
-                        view.DestroyTopToastr();
+                        ((ToastrView)view).DestroyTopToastr();
                         toastrActiveQueue.Dequeue();                        
                         ResetTimer();
                     }
-                }
-            }
-
-            // This is true, everytime the HUD scene changes
-            if (view == null)
-            {
-                GameObject toastrParent = GameObject.FindGameObjectWithTag("Panel_" + GetPanelID());
-                if (toastrParent != null)
-                {
-                    CreateView(toastrParent);
                 }
             }
         }
@@ -115,25 +103,9 @@ namespace Widgets
             return (toastrToInstantiateQueue.Count != 0);
         }
 
-        public override void CreateView(GameObject viewParent)
+        public override View AddViewComponent(GameObject viewGameObject)
         {
-            ResetTimer();
-            
-            GameObject toastrGameObject = new GameObject();
-            toastrGameObject.transform.SetParent(viewParent.transform, false);
-            toastrGameObject.name = gameObject.name + "View";
-            view = toastrGameObject.AddComponent<ToastrView>();
-            view.Init(toastrActiveQueue.ToArray(), childWidget != null ? childWidget : null);
-
-            if (isChildWidget)
-            {
-                view.HideView();
-            }
-        }
-
-        public override View GetView()
-        {
-            return view;
+            return viewGameObject.AddComponent<ToastrView>();
         }
 
         public class ToastrTemplate

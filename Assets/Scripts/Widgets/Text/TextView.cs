@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static Widgets.TextWidget;
 
 namespace Widgets
@@ -7,21 +8,21 @@ namespace Widgets
     public class TextView : View
     {
         TextMeshProUGUI textMeshPro;
+        RawImage image;
 
-        public void Init(TextWidgetTemplate textWidgetTemplate, Widget childWidget)
+        private void Awake()
         {
-            this.childWidget = childWidget;
-            ChangeMessage(textWidgetTemplate);
+            textMeshPro = gameObject.AddComponent<TextMeshProUGUI>();
         }
-
+        
         public override void HideView()
         {
-            throw new System.NotImplementedException();
+            textMeshPro.enabled = false;
         }
 
         public override void ShowView()
         {
-            throw new System.NotImplementedException();
+            textMeshPro.enabled = true;
         }
 
         public void ChangeMessage(TextWidgetTemplate incomingMessageTemplate)
@@ -29,6 +30,12 @@ namespace Widgets
             textMeshPro.text = incomingMessageTemplate.messageToDisplay;
             textMeshPro.color = incomingMessageTemplate.textColor;
             textMeshPro.fontSize = incomingMessageTemplate.textFontSize;
+        }
+
+        public override void Init(Widget widget)
+        {
+            SetChildWidget(widget.childWidget);
+            ChangeMessage(((TextWidget)widget).currentlyDisplayedMessage);
         }
     }
 }

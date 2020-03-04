@@ -39,6 +39,14 @@ namespace Widgets
 
             lineMaterial = new Material(Shader.Find("Chart/Canvas/Solid"));
             graph.DataSource.AddCategory(topic, lineMaterial, 20, new MaterialTiling(false, 20), null, true, null, 20);
+
+            if (verticalAxis == null)
+            {
+                verticalAxis = graph.GetComponent<VerticalAxis>();
+                horizontalAxis = graph.GetComponent<HorizontalAxis>();
+                horizontalAxis.Format = AxisFormat.Time;
+            }
+
             //graph.DataSource.AddCategory(topic, new Material(Shader.Find("Standard")), 20, new MaterialTiling(false, 20), null, true, null, 20);
             //CustomizeGraph("");
             //SetNumLabelsShownX(3);
@@ -46,6 +54,89 @@ namespace Widgets
             //SetColor("CO2", Color.blue);
             //DrawInitialValues();
         }
+
+        public void CustomizeGraph(string config)
+        {
+            
+
+            string unit = "";
+            string topic = "";
+            string categorie = topic + " in " + unit;
+        }
+
+        public void SetColor(string topic, Color c)
+        {
+            //Material fill = new Material(graphFill);
+            Material fill = new Material(lineMaterial);
+            fill.color = c;
+            // print(c.ToString());
+            graph.DataSource.SetCategoryLine(topic, fill, 5, new MaterialTiling(false, 0));
+        }
+
+        private void SetNumDataPointsShown(string categorie, int num)
+        {
+            //graph.DataSource.AddCategory();
+            //graph.DataSource.AddCategory();
+        }
+
+        public string SetNumLabelsShownX(int num)
+        {
+            if (num < 0 || num > 10)
+            {
+                return "Invalid Amount of Labels on X Axis";
+            }
+            horizontalAxis.MainDivisions.Total = num;
+            horizontalAxis.SubDivisions.Total = 1;
+            return success;
+        }
+
+        public string SetNumLabelsShownY(int num)
+        {
+            if (num <= 0 || num >= 10)
+            {
+                return "Invalid Amount of Labels on Y Axis";
+            }
+            verticalAxis.MainDivisions.Total = num;
+            verticalAxis.SubDivisions.Total = 1;
+            return success;
+        }
+
+        public void AddDataPoint(string topic, DateTime time, float val)
+        {
+            graph.DataSource.AddPointToCategoryRealtime(topic, time, val, 0f);
+            //WidgetFactory.Instance.curvedUI..AddEffectToChildren();
+        }
+    }
+}
+/*
+private void Update()
+{
+            
+            float time = Time.time;
+            if (lastTime + 2f < time)
+            {
+                //gv.SetColor("Player 1", new Color(Random.value, Random.value, Random.value));
+
+                //Graph.DataSource.Poin
+
+                lastTime = time;
+                lastX += Random.value * 3f;
+    //            System.DateTime t = ChartDateUtility.ValueToDate(lastX);
+
+                if (Random.value < 1.5)
+                {
+                    graph.DataSource.AddPointToCategoryRealtime("Temperature", System.DateTime.Now, Random.value * 20f + 10f,0f); // each time we call AddPointToCategory 
+                    //SetColor("Temperature", new Color(Random.value, Random.value, Random.value));
+                }
+
+                //graph.DataSource.AddPointToCategoryRealtime("CO2", System.DateTime.Now, Random.value * 10f, 0f); // each time we call AddPointToCategory
+
+            }
+            
+        
+        }
+
+    
 
         public void DrawInitialValues()
         {
@@ -68,85 +159,4 @@ namespace Widgets
 
             graph.DataSource.EndBatch(); // finally we call EndBatch , this will cause the GraphChart to redraw itself
         }
-
-        public void CustomizeGraph(string config)
-        {
-            if (verticalAxis == null)
-            {
-                verticalAxis = graph.GetComponent<VerticalAxis>();
-                horizontalAxis = graph.GetComponent<HorizontalAxis>();
-            }
-
-            string unit = "";
-            string topic = "";
-            string categorie = topic + " in " + unit;
-        }
-
-        public void SetColor(string topic, Color c)
-        {
-            //Material fill = new Material(graphFill);
-            Material fill = new Material(lineMaterial);
-            fill.color = c;
-            // print(c.ToString());
-            graph.DataSource.SetCategoryLine(topic, fill, 5, new MaterialTiling(false, 0));
-        }
-
-        private void SetNumDataPointsShown(string categorie, int num)
-        {
-            //graph.DataSource.AddCategory();
-            //graph.DataSource.AddCategory();
-        }
-
-        private string SetNumLabelsShownX(int num)
-        {
-            if (num < 0 || num > 10)
-            {
-                return "Invalid Amount of Labels on X Axis";
-            }
-            horizontalAxis.MainDivisions.Total = num;
-            return success;
-        }
-
-        private string SetNumLabelsShownY(int num)
-        {
-            if (num <= 0 || num >= 10)
-            {
-                return "Invalid Amount of Labels on Y Axis";
-            }
-            verticalAxis.MainDivisions.Total = num;
-            return success;
-        }
-
-        public void AddDataPoint(string topic, DateTime time, float val)
-        {
-            graph.DataSource.AddPointToCategoryRealtime(topic, time, val, 0f);
-            //WidgetFactory.Instance.curvedUI..AddEffectToChildren();
-        }
-
-        private void Update()
-        {
-            /*
-            float time = Time.time;
-            if (lastTime + 2f < time)
-            {
-                //gv.SetColor("Player 1", new Color(Random.value, Random.value, Random.value));
-
-                //Graph.DataSource.Poin
-
-                lastTime = time;
-                lastX += Random.value * 3f;
-    //            System.DateTime t = ChartDateUtility.ValueToDate(lastX);
-
-                if (Random.value < 1.5)
-                {
-                    graph.DataSource.AddPointToCategoryRealtime("Temperature", System.DateTime.Now, Random.value * 20f + 10f,0f); // each time we call AddPointToCategory 
-                    //SetColor("Temperature", new Color(Random.value, Random.value, Random.value));
-                }
-
-                //graph.DataSource.AddPointToCategoryRealtime("CO2", System.DateTime.Now, Random.value * 10f, 0f); // each time we call AddPointToCategory
-
-            }
             */
-        }
-    }
-}

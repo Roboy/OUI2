@@ -26,13 +26,21 @@ namespace Widgets
             return graph;
         }
 
-        public void Init(Queue<float> dataPoints, Widget childWidget)
+        public void Init(List<float> dataPoints, Widget childWidget, string graphName, Color color)
         {
             SetChildWidget(childWidget);
         
             GameObject graph = CreateGraph();
             graphManager = graph.GetComponent<GraphManager>();
-            
+
+            graphManager.Init(graphName);
+            SetColor(graphName, color);
+            foreach (float data in dataPoints)
+            {
+                graphManager.AddDataPoint(graphName, System.DateTime.Now,
+                    data);
+            }
+
             /*
             //iconManager = GetComponent<IconStateManager>();
             graphManager = GetComponentInChildren<GraphManager>();
@@ -43,6 +51,7 @@ namespace Widgets
             UpdateView(widget);*/
         }
 
+        // not in use atm and outdated
         public void UpdateView(Widget widget)
         {
             GraphWidget graphWidget = (GraphWidget)widget;
@@ -51,7 +60,8 @@ namespace Widgets
             if (graphWidget.datapoints.Count > 0)
             {
                 graphManager.AddDataPoint(graphWidget.name, System.DateTime.Now,
-                    graphWidget.datapoints.ToArray()[graphWidget.datapoints.Count - 1]);
+                    graphWidget.datapoints[graphWidget.datapoints.Count - 1]);
+                    //graphWidget.datapoints.ToArray()[graphWidget.datapoints.Count - 1]);
             }
             // Debug.Log("View updated");
 
@@ -105,12 +115,14 @@ namespace Widgets
 
         public override void ShowView()
         {
-            throw new System.NotImplementedException();
+            print("Showing the graphview");
+            gameObject.SetActive(true);
         }
 
         public override void HideView()
         {
-            throw new System.NotImplementedException();
+            print("Hiding the graph_view");
+            gameObject.SetActive(false);
         }
     }
 }

@@ -7,16 +7,16 @@ namespace Widgets
     {
         public readonly int SIZE = 10;
 
-        public Color color;
+        public Color color = Color.white;
 
-        public Queue<float> datapoints;
+        public List<float> datapoints;
         public float[] datapointsArray;
 
         GraphView view;
 
         public void Awake()
         {
-            datapoints = new Queue<float>();
+            datapoints = new List<float>();
         }
 
         public new void Init(RosJsonMessage rosJsonMessage)
@@ -38,12 +38,17 @@ namespace Widgets
         {
             if (datapoints.Count == SIZE)
             {
-                datapoints.Dequeue();
+                datapoints.Remove(0);
             }
 
-            datapoints.Enqueue(newDatapoint);
+            datapoints.Add(newDatapoint);
 
             datapointsArray = datapoints.ToArray();
+
+            if (view != null)
+            {
+                view.UpdateView(this);
+            }
         }
 
         public override void RestoreViews(GameObject viewParent)
@@ -52,7 +57,7 @@ namespace Widgets
             graphGameObject.transform.SetParent(viewParent.transform, false);
             graphGameObject.name = gameObject.name + "View";
             view = graphGameObject.AddComponent<GraphView>();
-            view.Init(datapoints, childWidget != null ? childWidget : null);
+            view.Init(datapoints, childWidget != null ? childWidget : null, name, color);
             
             if (isChildWidget)
             {
@@ -60,7 +65,7 @@ namespace Widgets
             }
         }
 
-        public void Update()
+        protected override void UpdateInClass()
         {
             // This is true, everytime the HUD scene changes
             if (view == null)
@@ -72,11 +77,6 @@ namespace Widgets
                     RestoreViews(graphParent);
                 }
             }
-        }
-
-        protected override void UpdateInClass()
-        {
-            throw new System.NotImplementedException();
         }
 
         public override View GetView()

@@ -68,7 +68,7 @@ namespace Widgets
             //PublishMessage(tmpMessage);
 
             //WriteMessageToFile("demoMessage", jsonString);
-
+            PublishMessage(demoMessage);
 
 
             /*

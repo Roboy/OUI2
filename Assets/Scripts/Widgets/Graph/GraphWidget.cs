@@ -19,11 +19,11 @@ namespace Widgets
             datapoints = new List<float>();
         }
 
-        public new void Init(RosJsonMessage rosJsonMessage)
+        public new void Init(RosJsonMessage context)
         {
-            color = WidgetUtility.BytesToColor(rosJsonMessage.graphColor);
+            color = WidgetUtility.BytesToColor(context.graphColor);
 
-            base.Init(rosJsonMessage);
+            base.Init(context);
         }
 
         public override void ProcessRosMessage(RosJsonMessage rosMessage)
@@ -51,7 +51,7 @@ namespace Widgets
             }
         }
 
-        public override void RestoreViews(GameObject viewParent)
+        public override void CreateView(GameObject viewParent)
         {
             GameObject graphGameObject = new GameObject();
             graphGameObject.transform.SetParent(viewParent.transform, false);
@@ -74,7 +74,7 @@ namespace Widgets
 
                 if (graphParent != null)
                 {
-                    RestoreViews(graphParent);
+                    CreateView(graphParent);
                 }
             }
         }

@@ -30,6 +30,7 @@ namespace Widgets
         #region Text
         public string textMessage;
         public int textFontSize;
+        public byte[] textColor;
         #endregion
 
         #region Icon

@@ -115,13 +115,11 @@ namespace Widgets
 
         public override void ShowView()
         {
-            print("Showing the graphview");
             gameObject.SetActive(true);
         }
 
         public override void HideView()
         {
-            print("Hiding the graph_view");
             gameObject.SetActive(false);
         }
     }

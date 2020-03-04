@@ -46,12 +46,12 @@ namespace Widgets
         #endregion
         
 
-        private RosJsonMessage(int id, float graphDatapoint, int timestamp, byte[] graphColor)
+        private RosJsonMessage(int id, float graphDatapoint, double graphTimestamp, byte[] graphColor)
         {
             this.id = id;
             this.graphValue = graphDatapoint;
             this.graphColor = graphColor;
-            this.timestamp = timestamp;
+            this.graphDatapointTime = graphTimestamp;
         }
 
         private RosJsonMessage(int id, string currentIcon)
@@ -67,7 +67,7 @@ namespace Widgets
             this.toastrDuration = toastrDuration;
         }
 
-        public static RosJsonMessage CreateGraphMessage(int id, float graphDatapoint, int timestamp, byte[] graphColor)
+        public static RosJsonMessage CreateGraphMessage(int id, float graphDatapoint, double timestamp, byte[] graphColor)
         {
             return new RosJsonMessage(id, graphDatapoint, timestamp, graphColor);
         }

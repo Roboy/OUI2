@@ -61,7 +61,7 @@ namespace Widgets
         private void PublishGraphDemoMessage()
         {
             System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
-            int cur_time = (int)(System.DateTime.UtcNow - epochStart).TotalMilliseconds;
+            double cur_time = (System.DateTime.UtcNow - epochStart).TotalMilliseconds;
             byte[] col = new byte[] { 255, 255, 255, 255 };
             if (temperature > 30)
             {

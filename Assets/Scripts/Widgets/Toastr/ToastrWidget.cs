@@ -59,7 +59,6 @@ namespace Widgets
                 toastrFontSize = fontSize;
             }
 
-            // toastrToInstantiateQueue.Enqueue(new ToastrTemplate(toastrMessage, toastrDuration, toastrColor, toastrFontSize));
             toastrToInstantiateQueue.Enqueue(new ToastrTemplate(toastrMessage + " " + counter++, toastrDuration, toastrColor, toastrFontSize));
         }
 

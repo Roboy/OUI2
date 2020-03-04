@@ -15,14 +15,14 @@ namespace Widgets
 
         public abstract void Init(Widget widget);
 
-        public void OnPointerEnter(PointerEventData eventData)
+        public void OnSelectionEnter()
         {
             timer = 0;
             timerActive = false;
 
             if (parentView != null)
             {
-                parentView.OnPointerEnter(eventData);
+                parentView.OnSelectionEnter();
             }
 
             if (childWidget != null)
@@ -32,7 +32,7 @@ namespace Widgets
             }
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        public void OnSelectionExit()
         {
             timer = 0;
             timerActive = true;
@@ -42,7 +42,7 @@ namespace Widgets
         {
             if (parentView != null)
             {
-                parentView.OnPointerExit(null);
+                parentView.OnSelectionExit();
             }
 
             if (childWidget != null)
@@ -79,6 +79,16 @@ namespace Widgets
                     TimeIsUp();
                 }
             }
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            OnSelectionEnter();
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            OnSelectionExit();
         }
     }
 }

@@ -32,19 +32,19 @@ namespace Widgets
 
         public override void ProcessRosMessage(RosJsonMessage rosMessage)
         {
-            if (rosMessage.graphColor != null || rosMessage.graphColor.Length < 4)
+            if (rosMessage.graphColor != null && rosMessage.graphColor.Length < 4)
             {
                 color = WidgetUtility.BytesToColor(rosMessage.graphColor);
             }
             DateTime dt = DateTime.Now;
-            if (rosMessage.graphDatapointTime != 0)
+            if (rosMessage.graphTimestamp != 0)
             {
                 System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
-                dt = epochStart.AddMilliseconds(rosMessage.graphDatapointTime);
+                dt = epochStart.AddMilliseconds(rosMessage.graphTimestamp);
             }
-            if (rosMessage.graphDatapoint != 0)
+            if (rosMessage.graphValue != 0)
             {
-                AddDatapoint(new Datapoint(dt, rosMessage.graphDatapoint));
+                AddDatapoint(new Datapoint(dt, rosMessage.graphValue));
             }
         }
 

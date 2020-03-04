@@ -5,7 +5,8 @@ namespace Widgets
     [Serializable]
     public class RosJsonMessage
     {
-        public int id;
+        
+        public int id;  // MANDATORY
 
         #region General        
         public string title;
@@ -18,28 +19,28 @@ namespace Widgets
 
         #region Graph
         // Time passed in ms since 1/1/1970
-        public int graphDatapointTime;
-        public float graphDatapoint;
+        public int graphTimestamp;  // MANDATORY FOR GRAPH
+        public float graphValue;    // MANDATORY FOR GRAPH
         public byte[] graphColor;
         public int xDivisionUnits;
         public int yDivisionUnits;
         #endregion
 
         #region Toastr
-        public string toastrMessage;
+        public string toastrMessage;    // MANDATORY FOR GRAPH
         public int toastrFontSize;
         public byte[] toastrColor;
         public float toastrDuration;
         #endregion
 
         #region Text
-        public string textMessage;
+        public string textMessage;      // MANDATORY FOR GRAPH
         public int textFontSize;
         public byte[] textColor;
         #endregion
 
         #region Icon
-        public string currentIcon;
+        public string currentIcon;      // MANDATORY FOR GRAPH
         public string[] icons;
         #endregion
         
@@ -47,7 +48,7 @@ namespace Widgets
         private RosJsonMessage(int id, float graphDatapoint, int timestamp, byte[] graphColor)
         {
             this.id = id;
-            this.graphDatapoint = graphDatapoint;
+            this.graphValue = graphDatapoint;
             this.graphColor = graphColor;
             this.timestamp = timestamp;
         }

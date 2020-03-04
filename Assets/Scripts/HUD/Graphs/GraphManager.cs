@@ -40,6 +40,8 @@ namespace Widgets
             lineMaterial = new Material(Shader.Find("Chart/Canvas/Solid"));
             graph.DataSource.AddCategory(topic, lineMaterial, 20, new MaterialTiling(false, 20), null, true, null, 20);
 
+            graph.AutoScrollHorizontally = true;
+            graph.DataSource.AutomaticHorizontalView = false;
             if (verticalAxis == null)
             {
                 verticalAxis = graph.GetComponent<VerticalAxis>();

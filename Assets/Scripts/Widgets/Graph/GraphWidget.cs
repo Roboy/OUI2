@@ -28,6 +28,10 @@ namespace Widgets
 
         public override void ProcessRosMessage(RosJsonMessage rosMessage)
         {
+            if (rosMessage.graphColor != null || rosMessage.graphColor.Length < 4)
+            {
+                color = WidgetUtility.BytesToColor(rosMessage.graphColor);
+            }
             if (rosMessage.graphDatapoint != 0)
             {
                 AddDatapoint(rosMessage.graphDatapoint);

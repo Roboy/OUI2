@@ -62,7 +62,16 @@ namespace Widgets
         {
             System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
             int cur_time = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
-            RosJsonMessage demoMessage = RosJsonMessage.CreateGraphMessage(1, UnityEngine.Random.Range(20.0f, 25.0f), cur_time, new byte[] { 255, 255, 255, 255 });
+            byte[] col = new byte[] { 255, 255, 255, 255 };
+            if (temperature > 30)
+            {
+                col = new byte[] { 255, 20, 5, 255 };
+            }
+            else if (temperature < 20)
+            {
+                col = new byte[] { 5, 10, 255, 255 };
+            }
+            RosJsonMessage demoMessage = RosJsonMessage.CreateGraphMessage(1, temperature, cur_time, col);
             //string jsonString = JsonUtility.ToJson(demoMessage);
             //RosSharp.RosBridgeClient.Messages.Standard.String tmpMessage = new RosSharp.RosBridgeClient.Messages.Standard.String(jsonString);
             //PublishMessage(tmpMessage);
@@ -118,6 +127,13 @@ namespace Widgets
         {
             if (Input.GetKeyDown(KeyCode.M))
             {
+                temperature -= 2;
+                PublishGraphDemoMessage();
+            }
+
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                temperature += 2;
                 PublishGraphDemoMessage();
             }
 

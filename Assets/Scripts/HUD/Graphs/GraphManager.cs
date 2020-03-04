@@ -118,7 +118,6 @@ namespace Widgets
 
         public void AddDataPoint(string topic, DateTime time, float val)
         {
-            print("topic is " + topic);
             graph.DataSource.AddPointToCategoryRealtime(topic, time, val, 0f);
             //WidgetFactory.Instance.curvedUI..AddEffectToChildren();
         }

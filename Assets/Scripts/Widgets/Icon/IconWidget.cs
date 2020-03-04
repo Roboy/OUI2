@@ -64,16 +64,7 @@ namespace Widgets
 
         protected override void UpdateInClass()
         {
-            // This is true, everytime the HUD scene changes
-            if (view == null && currentIcon != null)
-            {
-                GameObject iconParent = GameObject.FindGameObjectWithTag("Panel_" + GetPanelID());
-                
-                if (iconParent != null)
-                {
-                    CreateView(iconParent);
-                }
-            }
+
         }
     }
 }

@@ -14,13 +14,7 @@ namespace Widgets
         {
             textMeshPro = gameObject.AddComponent<TextMeshProUGUI>();
         }
-
-        public void Init(TextWidgetTemplate textWidgetTemplate, Widget childWidget)
-        {   
-            this.childWidget = childWidget;
-            ChangeMessage(textWidgetTemplate);
-        }
-
+        
         public override void HideView()
         {
             textMeshPro.enabled = false;
@@ -36,6 +30,12 @@ namespace Widgets
             textMeshPro.text = incomingMessageTemplate.messageToDisplay;
             textMeshPro.color = incomingMessageTemplate.textColor;
             textMeshPro.fontSize = incomingMessageTemplate.textFontSize;
+        }
+
+        public override void Init(Widget widget)
+        {
+            SetChildWidget(widget.childWidget);
+            ChangeMessage(((TextWidget)widget).currentlyDisplayedMessage);
         }
     }
 }

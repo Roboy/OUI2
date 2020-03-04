@@ -122,5 +122,10 @@ namespace Widgets
         {
             gameObject.SetActive(false);
         }
+
+        public override void Init(Widget widget)
+        {
+            // throw new System.NotImplementedException();
+        }
     }
 }

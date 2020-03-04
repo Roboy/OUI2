@@ -11,9 +11,7 @@ namespace Widgets
 
         public List<float> datapoints;
         public float[] datapointsArray;
-
-        GraphView view;
-
+        
         public void Awake()
         {
             datapoints = new List<float>();
@@ -47,41 +45,18 @@ namespace Widgets
 
             if (view != null)
             {
-                view.UpdateView(this);
-            }
-        }
-
-        public override void CreateView(GameObject viewParent)
-        {
-            GameObject graphGameObject = new GameObject();
-            graphGameObject.transform.SetParent(viewParent.transform, false);
-            graphGameObject.name = gameObject.name + "View";
-            view = graphGameObject.AddComponent<GraphView>();
-            view.Init(datapoints, childWidget != null ? childWidget : null, name, color);
-            
-            if (isChildWidget)
-            {
-                view.HideView();
+                ((GraphView)view).UpdateView(this);
             }
         }
 
         protected override void UpdateInClass()
         {
-            // This is true, everytime the HUD scene changes
-            if (view == null)
-            {
-                GameObject graphParent = GameObject.FindGameObjectWithTag("Panel_" + GetPanelID());
 
-                if (graphParent != null)
-                {
-                    CreateView(graphParent);
-                }
-            }
         }
 
-        public override View GetView()
+        public override View AddViewComponent(GameObject viewGameObject)
         {
-            return view;
+            return viewGameObject.AddComponent<GraphView>();
         }
 
         public struct Datapoint

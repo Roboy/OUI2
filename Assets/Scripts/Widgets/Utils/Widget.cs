@@ -11,6 +11,8 @@ namespace Widgets
         public int childWidgetId;
         public Widget childWidget;
 
+        protected View view;
+
         protected bool isChildWidget = false;
 
         public void Init(RosJsonMessage context)
@@ -60,10 +62,10 @@ namespace Widgets
                 SearchAndSetChild();
             }
             
-            // This is true, everytime the HUD scene changes
+            // This is true, everytime the HUD is destroyed
             if (GetView() == null)
             {
-                RecreateView();
+                TryToRecreateView();
             }
 
             UpdateInClass();
@@ -73,9 +75,21 @@ namespace Widgets
 
         public abstract void ProcessRosMessage(RosJsonMessage rosMessage);
 
-        public abstract void CreateView(GameObject viewParent);
+        public void CreateView(GameObject viewParent)
+        {
+            GameObject viewGameObject = new GameObject();
+            viewGameObject.transform.SetParent(viewParent.transform, false);
+            viewGameObject.name = gameObject.name + "View";
+            view = AddViewComponent(viewGameObject);
+            view.Init(this);
 
-        private void RecreateView()
+            if (isChildWidget)
+            {
+                view.HideView();
+            }
+        }
+
+        private void TryToRecreateView()
         {
             GameObject textParent = GameObject.FindGameObjectWithTag("Panel_" + GetPanelID());
             if (textParent != null)
@@ -84,6 +98,11 @@ namespace Widgets
             }
         }
 
-        public abstract View GetView();
+        public View GetView()
+        {
+            return view;
+        }
+
+        public abstract View AddViewComponent(GameObject viewGameObject);
     }
 }

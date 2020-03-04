@@ -68,7 +68,7 @@ public class StateManager : Singleton<StateManager> {
         GameObject constructObjects = GameObject.FindGameObjectWithTag("ConstructObjects");
         GameObject roboy = GameObject.FindGameObjectWithTag("Roboy");
 
-        roboy.transform.position = cameraOrigin.position + new Vector3(0f, 1.5f, 0f);
+        roboy.transform.position = cameraOrigin.position + new Vector3(0f, 1.4f, 0f);
         roboy.transform.rotation = Quaternion.Euler(roboy.transform.rotation.eulerAngles + cameraOrigin.rotation.eulerAngles);
 
         GameObject.FindGameObjectWithTag("SubMenu3D").transform.SetParent(cameraOrigin, false);

@@ -32,6 +32,11 @@ namespace Widgets
             }
         }
 
+        public void AttachCurvedUI()
+        {
+            gameObject.AddComponent<CurvedUI.CurvedUIVertexEffect>();
+        }
+
         public void OnSelectionExit()
         {
             timer = 0;

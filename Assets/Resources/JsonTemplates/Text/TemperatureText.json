@@ -4,6 +4,7 @@
 	"title": "TemperatureText",
 	"widgetPosition": "right",
 	"childWidgetId": 1,
+	"relativeChildPosition": "fixedCenter",
 	"textMessage": "20°C",
 	"textFontSize": 20,
 	"textColor": [ 255, 255, 255, 255 ]

@@ -31,6 +31,7 @@ namespace Widgets
         public override void Init(Widget widget)
         {
             SetChildWidget(widget.childWidget);
+            AttachCurvedUI();
             SetIcon(((IconWidget)widget).currentIcon);
         }
     }

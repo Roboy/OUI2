@@ -4,6 +4,7 @@
 	"title": "SenseGloveIcon",
 	"widgetPosition": "top",
 	"childWidgetId": 31,
+	"relativeChildPosition": "bottom",
 	"icons": [ "SenseGlove_0", "SenseGlove_1" ],
 	"currentIcon": "SenseGlove_0"
 }

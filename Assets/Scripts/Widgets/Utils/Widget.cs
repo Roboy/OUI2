@@ -10,7 +10,8 @@ namespace Widgets
         private RosJsonMessage context;
         public int childWidgetId;
         public Widget childWidget;
-
+        public RelativeChildPosition relativeChildPosition;
+        
         protected View view;
 
         public void Init(RosJsonMessage context)
@@ -19,6 +20,7 @@ namespace Widgets
             id = context.id;
             childWidgetId = context.childWidgetId;
             position = WidgetUtility.StringToWidgetPosition(context.widgetPosition);
+            relativeChildPosition = WidgetUtility.StringToRelativeChildPosition(context.relativeChildPosition);
         }
 
         public int GetID()

@@ -23,7 +23,7 @@ namespace Widgets
             graph.AddComponent<ChartAndGraph.HorizontalAxis>(); // todo: should be hand made
             graph.AddComponent<ChartAndGraph.SensitivityControl>();
             graph.AddComponent<GraphManager>();
-            graph.AddComponent<CurvedUI.CurvedUIVertexEffect>();
+            AttachCurvedUI();
             return graph;
         }
 

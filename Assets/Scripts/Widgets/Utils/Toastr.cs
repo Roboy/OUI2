@@ -27,6 +27,8 @@ namespace Widgets
             textMeshPro.SetText(msg);
             textMeshPro.fontSize = fontSize;
             textMeshPro.color = color;
+
+            gameObject.AddComponent<CurvedUI.CurvedUIVertexEffect>();
         }
 
         public void SlerpUp(float offsetInY, float timeOffset)

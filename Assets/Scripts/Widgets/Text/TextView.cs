@@ -35,6 +35,7 @@ namespace Widgets
         public override void Init(Widget widget)
         {
             SetChildWidget(widget.childWidget);
+            AttachCurvedUI();
             ChangeMessage(((TextWidget)widget).currentlyDisplayedMessage);
         }
     }

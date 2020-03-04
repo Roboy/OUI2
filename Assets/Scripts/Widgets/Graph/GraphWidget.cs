@@ -13,7 +13,6 @@ namespace Widgets
         public int numXLabels = 2;
         public int numYLabels = 3;
 
-
         public List<Datapoint> datapoints;
         public Datapoint[] datapointsArray;
         

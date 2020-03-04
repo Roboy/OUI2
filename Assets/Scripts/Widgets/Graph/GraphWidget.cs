@@ -14,7 +14,6 @@ namespace Widgets
         public int numYLabels = 3;
 
         public List<Datapoint> datapoints;
-        public Datapoint[] datapointsArray;
         
         public void Awake()
         {
@@ -56,8 +55,6 @@ namespace Widgets
             }
 
             datapoints.Add(newDatapoint);
-
-            datapointsArray = datapoints.ToArray();
 
             if (view != null)
             {

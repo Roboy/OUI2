@@ -16,6 +16,8 @@ namespace Widgets
         #endregion
 
         #region Graph
+        // Time passed in ms since 1/1/1970
+        public int graphDatapointTime;
         public float graphDatapoint;
         public byte[] graphColor;
         public int xDivisionUnits;

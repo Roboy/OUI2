@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +29,8 @@ namespace Widgets
 
         //public void Init(List<float> dataPoints, Widget childWidget, string graphName, Color color)
         public override void Init(Widget widget)
-        {
+        { 
+            gameObject.AddComponent<CurvedUI.CurvedUIVertexEffect>();
             GraphWidget graphWidget = (GraphWidget)widget;
             SetChildWidget(graphWidget.childWidget);
         
@@ -39,10 +41,10 @@ namespace Widgets
             graphManager.SetColor(graphWidget.name, graphWidget.color);
             graphManager.SetNumLabelsShownX(graphWidget.numXLabels);
             graphManager.SetNumLabelsShownY(graphWidget.numYLabels);
-            foreach (float data in graphWidget.datapoints)
+            foreach (GraphWidget.Datapoint data in graphWidget.datapoints)
             {
-                graphManager.AddDataPoint(graphWidget.name, System.DateTime.Now,
-                    data);
+                graphManager.AddDataPoint(graphWidget.name, data.time,
+                    data.data);
             }
 
             /*
@@ -65,8 +67,8 @@ namespace Widgets
             graphManager.SetNumLabelsShownY(graphWidget.numYLabels);
             if (graphWidget.datapoints.Count > 0)
             {
-                graphManager.AddDataPoint(graphWidget.name, System.DateTime.Now,
-                    graphWidget.datapoints[graphWidget.datapoints.Count - 1]);
+                GraphWidget.Datapoint dp = graphWidget.datapoints[graphWidget.datapoints.Count - 1];
+                graphManager.AddDataPoint(graphWidget.name, dp.time, dp.data);
                     //graphWidget.datapoints.ToArray()[graphWidget.datapoints.Count - 1]);
             }
             // Debug.Log("View updated");

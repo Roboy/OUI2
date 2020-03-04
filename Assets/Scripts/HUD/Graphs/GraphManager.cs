@@ -44,6 +44,7 @@ namespace Widgets
             {
                 verticalAxis = graph.GetComponent<VerticalAxis>();
                 horizontalAxis = graph.GetComponent<HorizontalAxis>();
+                horizontalAxis.Format = AxisFormat.Time;
             }
 
             //graph.DataSource.AddCategory(topic, new Material(Shader.Find("Standard")), 20, new MaterialTiling(false, 20), null, true, null, 20);

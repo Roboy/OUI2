@@ -2,7 +2,7 @@
 	"id": 31,
 	"type": "Text",
 	"title": "SenseGloveInfo",
-	"panelId": 1,
+	"widgetPosition": "child",
 	"textMessage": "SenseGlove active\n20% battery",
 	"textFontSize": 20,
 	"textColor": [ 255, 255, 255, 255 ]

@@ -119,7 +119,7 @@ namespace Widgets
 
         private void PublishToastrDemoMessage()
         {
-            RosJsonMessage demoMessage = RosJsonMessage.CreateToastrMessage(10, "Hello Roboy");
+            RosJsonMessage demoMessage = RosJsonMessage.CreateToastrMessage(10, "Hello Roboy", 2);
             PublishMessage(demoMessage);
         }
 

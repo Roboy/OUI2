@@ -1,8 +1,8 @@
 {
 	"id": 1,
 	"type": "Graph",
-	"panelId": 2,
-	"title": "Temperature",
+	"title": "TemperatureGraph",
+	"widgetPosition": "child",
 	"graphColor": [ 255, 255, 255, 255 ],
 	"graphDatapoint": 10
 }

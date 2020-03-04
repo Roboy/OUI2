@@ -5,7 +5,7 @@ namespace Widgets
     public abstract class Widget : MonoBehaviour
     {
         [SerializeField] private int id;
-        [SerializeField] private int panelId;
+        [SerializeField] private WidgetPosition position;
 
         private RosJsonMessage context;
         public int childWidgetId;
@@ -13,14 +13,12 @@ namespace Widgets
 
         protected View view;
 
-        protected bool isChildWidget = false;
-
         public void Init(RosJsonMessage context)
         {
             this.context = context;
             id = context.id;
             childWidgetId = context.childWidgetId;
-            panelId = context.panelId;
+            position = WidgetUtility.StringToWidgetPosition(context.widgetPosition);
         }
 
         public int GetID()
@@ -28,9 +26,9 @@ namespace Widgets
             return id;
         }
 
-        public int GetPanelID()
+        public WidgetPosition GetWidgetPosition()
         {
-            return panelId;
+            return position;
         }
 
         public RosJsonMessage GetContext()
@@ -38,16 +36,9 @@ namespace Widgets
             return context;
         }
 
-        public void SetIsChildWidget()
-        {
-            isChildWidget = true;
-        }
-
         private void SearchAndSetChild()
         {
             childWidget = Manager.Instance.FindWidgetWithID(childWidgetId);
-
-            childWidget.SetIsChildWidget();
 
             if (childWidget == null)
             {
@@ -83,7 +74,7 @@ namespace Widgets
             view = AddViewComponent(viewGameObject);
             view.Init(this);
 
-            if (isChildWidget)
+            if (position == WidgetPosition.Child)
             {
                 view.HideView();
             }
@@ -91,7 +82,7 @@ namespace Widgets
 
         private void TryToRecreateView()
         {
-            GameObject textParent = GameObject.FindGameObjectWithTag("Panel_" + GetPanelID());
+            GameObject textParent = GameObject.FindGameObjectWithTag("Widgets" + GetWidgetPosition());
             if (textParent != null)
             {
                 CreateView(textParent);

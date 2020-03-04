@@ -2,7 +2,7 @@
 	"id": 30,
 	"type": "Text",
 	"title": "TemperatureText",
-	"panelId": 1,
+	"widgetPosition": "right",
 	"childWidgetId": 1,
 	"textMessage": "20°C",
 	"textFontSize": 20,

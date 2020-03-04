@@ -1,9 +1,0 @@
-{
-	"id": 22,
-	"type": "Icon",
-	"title": "IconTest3",
-	"panelId": 0,
-	"childWidgetId": 31,
-	"icons": [ "SenseGlove_0", "SenseGlove_1" ],
-	"currentIcon": "SenseGlove_1"
-}

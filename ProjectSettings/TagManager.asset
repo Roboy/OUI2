@@ -19,6 +19,14 @@ TagManager:
   - ConstructObjects
   - SenseGloveManager
   - Panel_2
+  - Roboy
+  - RoboyPart
+  - WidgetsTop
+  - WidgetsBottom
+  - WidgetsLeft
+  - WidgetsRight
+  - WidgetsCenter
+  - WidgetsChild
   layers:
   - Default
   - TransparentFX

@@ -1,8 +1,9 @@
 {
 	"id": 20,
 	"type": "Icon",
-	"title": "IconTest",
-	"panelId": 0,
+	"title": "SenseGloveIcon",
+	"widgetPosition": "top",
+	"childWidgetId": 31,
 	"icons": [ "SenseGlove_0", "SenseGlove_1" ],
 	"currentIcon": "SenseGlove_0"
 }

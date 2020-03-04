@@ -37,5 +37,35 @@ namespace Widgets
         {
             return uint.Parse(hexString, System.Globalization.NumberStyles.HexNumber);
         }
+
+        public static WidgetPosition StringToWidgetPosition(string widgetPositionAsString)
+        {
+            switch (widgetPositionAsString)
+            {
+                case "top":
+                    return WidgetPosition.Top;
+
+                case "left":
+                    return WidgetPosition.Left;
+
+                case "right":
+                    return WidgetPosition.Right;
+
+                case "bottom":
+                    return WidgetPosition.Bottom;
+
+                case "center":
+                    return WidgetPosition.Center;
+
+                case "child":
+                    return WidgetPosition.Child;
+
+                default:
+                    Debug.LogWarning("Widget position " + widgetPositionAsString + " not known.");
+                    return WidgetPosition.Incorrect;
+            }
+        }
     }
+
+    public enum WidgetPosition { Top, Left, Right, Center, Bottom, Child, Incorrect };
 }

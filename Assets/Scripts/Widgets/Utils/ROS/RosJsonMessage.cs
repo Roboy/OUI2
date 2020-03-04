@@ -10,7 +10,7 @@ namespace Widgets
         #region General        
         public string title;
         public string type;
-        public int panelId;
+        public string widgetPosition;
         public int childWidgetId;
         public int timestamp;
         #endregion
@@ -53,13 +53,10 @@ namespace Widgets
             this.currentIcon = currentIcon;
         }
 
-        public RosJsonMessage(int id, string title, string type, int panelId, string toastrMessage, int toastrFontSize, byte[] toastrColor, float toastrDuration) : this(id, title)
+        private RosJsonMessage(int id, string toastrMessage, float toastrDuration)
         {
-            this.type = type;
-            this.panelId = panelId;
+            this.id = id;
             this.toastrMessage = toastrMessage;
-            this.toastrFontSize = toastrFontSize;
-            this.toastrColor = toastrColor;
             this.toastrDuration = toastrDuration;
         }
 
@@ -73,9 +70,9 @@ namespace Widgets
             return new RosJsonMessage(id, currentIcon);
         }
 
-        public static RosJsonMessage CreateToastrMessage(int id, string text)
+        public static RosJsonMessage CreateToastrMessage(int id, string text, float duration)
         {
-            return new RosJsonMessage(id, text, null, 0, text, 0, null, 0);
+            return new RosJsonMessage(id, text, duration);
         }
     }
 }

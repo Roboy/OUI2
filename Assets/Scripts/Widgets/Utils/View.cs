@@ -5,7 +5,7 @@ namespace Widgets
 {
     public abstract class View : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        private Widget childWidget;
+        public Widget childWidget;
         public View parentView;
 
         public float timer;

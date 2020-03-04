@@ -27,8 +27,9 @@ namespace Widgets
         }
 
         //public void Init(List<float> dataPoints, Widget childWidget, string graphName, Color color)
-        public void Init(GraphWidget graphWidget)
+        public override void Init(Widget widget)
         {
+            GraphWidget graphWidget = (GraphWidget)widget;
             SetChildWidget(graphWidget.childWidget);
         
             GameObject graph = CreateGraph();
@@ -126,11 +127,6 @@ namespace Widgets
         public override void HideView()
         {
             gameObject.SetActive(false);
-        }
-
-        public override void Init(Widget widget)
-        {
-            // throw new System.NotImplementedException();
         }
     }
 }

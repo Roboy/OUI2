@@ -4,18 +4,11 @@ namespace Widgets
 {
     public class TextWidget : Widget
     {
-        TextView view;
-
         public Color color;
         public int fontSize;
 
         public TextWidgetTemplate currentlyDisplayedMessage;
-
-        public override View GetView()
-        {
-            return view;
-        }
-
+        
         public override void ProcessRosMessage(RosJsonMessage rosMessage)
         {
             TextWidgetTemplate incomingMessageTemplate = new TextWidgetTemplate(rosMessage.textMessage, WidgetUtility.BytesToColor(rosMessage.textColor), rosMessage.textFontSize);
@@ -52,26 +45,17 @@ namespace Widgets
 
             currentlyDisplayedMessage = incomingMessageTemplate;
 
-            view.ChangeMessage(incomingMessageTemplate);
-        }
-
-        public override void CreateView(GameObject viewParent)
-        {
-            GameObject textGameObject = new GameObject();
-            textGameObject.transform.SetParent(viewParent.transform, false);
-            textGameObject.name = gameObject.name + "View";
-            view = textGameObject.AddComponent<TextView>();
-            view.Init(currentlyDisplayedMessage, childWidget);
-
-            if (isChildWidget)
-            {
-                view.HideView();
-            }
+            ((TextView)view).ChangeMessage(incomingMessageTemplate);
         }
 
         protected override void UpdateInClass()
         {
 
+        }
+
+        public override View AddViewComponent(GameObject viewGameObject)
+        {
+            return viewGameObject.AddComponent<TextView>();
         }
 
         public struct TextWidgetTemplate

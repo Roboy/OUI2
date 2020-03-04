@@ -15,11 +15,11 @@ namespace Widgets
             toastrQueue = new Queue<Toastr>();
         }
 
-        public void Init(ToastrTemplate[] activeToastr, Widget childWidget)
+        public override void Init(Widget widget)
         {
-            SetChildWidget(childWidget);
+            SetChildWidget(widget.childWidget);
 
-            foreach (ToastrTemplate toastrTemplate in activeToastr)
+            foreach (ToastrTemplate toastrTemplate in ((ToastrWidget)widget).toastrActiveQueue.ToArray())
             {
                 CreateNewToastr(toastrTemplate);
             }
@@ -69,5 +69,6 @@ namespace Widgets
         {
             Debug.LogWarning("Toastr widget can not be hidden.");
         }
+
     }
 }

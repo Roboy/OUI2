@@ -5,13 +5,15 @@ namespace Widgets
 {
     public abstract class View : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        public Widget childWidget;
+        private Widget childWidget;
         public View parentView;
 
         public float timer;
         float duration = 0.5f;
 
         public bool timerActive = false;
+
+        public abstract void Init(Widget widget);
 
         public void OnPointerEnter(PointerEventData eventData)
         {

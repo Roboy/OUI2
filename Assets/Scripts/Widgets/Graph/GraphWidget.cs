@@ -6,12 +6,16 @@ namespace Widgets
 {
     public class GraphWidget : Widget
     {
-        public readonly int SIZE = 10;
+        public readonly int SIZE = 100;
 
+        public string unit;
         public Color color = Color.white;
 
         public int numXLabels = 2;
         public int numYLabels = 3;
+
+        public bool showCompleteHistory;
+
 
         public List<Datapoint> datapoints;
         
@@ -22,6 +26,7 @@ namespace Widgets
 
         public new void Init(RosJsonMessage context)
         {
+            unit = context.unit;
             color = WidgetUtility.BytesToColor(context.graphColor);
             numXLabels = context.xDivisionUnits;
             numYLabels = context.yDivisionUnits;

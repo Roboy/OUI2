@@ -18,6 +18,8 @@ namespace Widgets
         #region Graph
         public float graphDatapoint;
         public byte[] graphColor;
+        public int xDivisionUnits;
+        public int yDivisionUnits;
         #endregion
 
         #region Toastr

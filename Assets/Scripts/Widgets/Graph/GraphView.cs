@@ -26,18 +26,21 @@ namespace Widgets
             return graph;
         }
 
-        public void Init(List<float> dataPoints, Widget childWidget, string graphName, Color color)
+        //public void Init(List<float> dataPoints, Widget childWidget, string graphName, Color color)
+        public void Init(GraphWidget graphWidget)
         {
-            SetChildWidget(childWidget);
+            SetChildWidget(graphWidget.childWidget);
         
             GameObject graph = CreateGraph();
             graphManager = graph.GetComponent<GraphManager>();
 
-            graphManager.Init(graphName);
-            SetColor(graphName, color);
-            foreach (float data in dataPoints)
+            graphManager.Init(graphWidget.name);
+            graphManager.SetColor(graphWidget.name, graphWidget.color);
+            graphManager.SetNumLabelsShownX(graphWidget.numXLabels);
+            graphManager.SetNumLabelsShownY(graphWidget.numYLabels);
+            foreach (float data in graphWidget.datapoints)
             {
-                graphManager.AddDataPoint(graphName, System.DateTime.Now,
+                graphManager.AddDataPoint(graphWidget.name, System.DateTime.Now,
                     data);
             }
 
@@ -56,7 +59,9 @@ namespace Widgets
         {
             GraphWidget graphWidget = (GraphWidget)widget;
             //SetDetailedPanelPosition(1); // graphModel.detailedPanelPos
-            SetColor(graphWidget.name, graphWidget.color);
+            graphManager.SetColor(graphWidget.name, graphWidget.color);
+            graphManager.SetNumLabelsShownX(graphWidget.numXLabels);
+            graphManager.SetNumLabelsShownY(graphWidget.numYLabels);
             if (graphWidget.datapoints.Count > 0)
             {
                 graphManager.AddDataPoint(graphWidget.name, System.DateTime.Now,
@@ -107,11 +112,11 @@ namespace Widgets
             // TODO
         }
 
-        private void SetColor(string title, Color col)
+        /*private void SetColor(string title, Color col)
         {
             // TODO: parse Color
             graphManager.SetColor(title, col);
-        }
+        }*/
 
         public override void ShowView()
         {

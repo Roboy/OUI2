@@ -19,9 +19,10 @@ namespace Widgets
 
         #region Graph
         // Time passed in ms since 1/1/1970
-        public int graphTimestamp;  // MANDATORY FOR GRAPH
+        public double graphTimestamp;  // MANDATORY FOR GRAPH
         public float graphValue;    // MANDATORY FOR GRAPH
         public byte[] graphColor;
+        public string graphTitle;
         public int xDivisionUnits;
         public int yDivisionUnits;
         public bool showCompleteHistory;
@@ -51,7 +52,7 @@ namespace Widgets
             this.id = id;
             this.graphValue = graphDatapoint;
             this.graphColor = graphColor;
-            this.graphDatapointTime = graphTimestamp;
+            this.graphTimestamp = graphTimestamp;
         }
 
         private RosJsonMessage(int id, string currentIcon)

@@ -28,6 +28,7 @@ namespace Widgets
             fontSize = context.textFontSize;
 
             TextWidgetTemplate incomingMessageTemplate = new TextWidgetTemplate(context.textMessage, WidgetUtility.BytesToColor(context.textColor), context.textFontSize);
+            currentlyDisplayedMessage = incomingMessageTemplate;
 
             base.Init(context);
         }
@@ -60,7 +61,7 @@ namespace Widgets
             textGameObject.transform.SetParent(viewParent.transform, false);
             textGameObject.name = gameObject.name + "View";
             view = textGameObject.AddComponent<TextView>();
-            view.Init(currentlyDisplayedMessage, childWidget != null ? childWidget : null);
+            view.Init(currentlyDisplayedMessage, childWidget);
 
             if (isChildWidget)
             {
@@ -70,15 +71,7 @@ namespace Widgets
 
         protected override void UpdateInClass()
         {
-            // This is true, everytime the HUD scene changes
-            if (view == null)
-            {
-                GameObject textParent = GameObject.FindGameObjectWithTag("Panel_" + GetPanelID());
-                if (textParent != null)
-                {
-                    CreateView(textParent);
-                }
-            }
+
         }
 
         public struct TextWidgetTemplate

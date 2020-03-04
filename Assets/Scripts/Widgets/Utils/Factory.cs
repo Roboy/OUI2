@@ -149,12 +149,10 @@ namespace Widgets
                     taskbarWidgets.Add(iconWidget);                    
                     return iconWidget;
                     
-                /* For Later
-                 
                 case "Text":
-                    widget = CreateToastrWidget(widgetContext);
-                    break;
-                */
+                    TextWidget textWidget = widgetGameObject.AddComponent<TextWidget>();
+                    textWidget.Init(widgetContext);
+                    return textWidget;
 
                 default:
                     Debug.LogWarning("Type not defined: " + widgetContext.type);

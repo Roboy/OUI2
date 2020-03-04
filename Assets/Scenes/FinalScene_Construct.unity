@@ -277,6 +277,11 @@ PrefabInstance:
       propertyPath: onPress.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: InitialState
       objectReference: {fileID: 0}
+    - target: {fileID: 3886669421045895514, guid: 46fd8a40a1749f945b96bcb0f67eabaf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46fd8a40a1749f945b96bcb0f67eabaf, type: 3}
 --- !u!4 &420913494 stripped
@@ -975,6 +980,11 @@ PrefabInstance:
     - target: {fileID: 6355931944743230753, guid: 44a3e778eb89642478c6cbd71e8d4cbb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6356620087723344751, guid: 44a3e778eb89642478c6cbd71e8d4cbb,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

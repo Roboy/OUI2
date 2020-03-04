@@ -88,16 +88,6 @@ namespace Widgets
                     }
                 }
             }
-
-            // This is true, everytime the HUD scene changes
-            if (view == null)
-            {
-                GameObject toastrParent = GameObject.FindGameObjectWithTag("Panel_" + GetPanelID());
-                if (toastrParent != null)
-                {
-                    CreateView(toastrParent);
-                }
-            }
         }
 
         private void ResetTimer()

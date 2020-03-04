@@ -125,12 +125,12 @@ public class AdditiveSceneManager : MonoBehaviour
     /// </summary>
     /// <param name="beforeSceneUnload">Handler executed before scene is unloaded. If null, default handler is executed.</param>
     /// <param name="onSceneUnload">Handler executed after scene is unloaded. If null, default handler is executed.</param>
-    public IEnumerator UnloadScene(BeforeSceneUnloadDelegate beforeSceneUnload, OnSceneUnloadDelegate onSceneUnload)
+    IEnumerator UnloadScene(BeforeSceneUnloadDelegate beforeSceneUnload, OnSceneUnloadDelegate onSceneUnload)
     {
         if (currentScene == Scenes.NONE)
         {
             //throw new Exception("There is no scene loaded.");
-            yield return null;
+            yield break;
         }
 
         String sceneName = SceneNameForScene(currentScene);
@@ -141,7 +141,8 @@ public class AdditiveSceneManager : MonoBehaviour
             } else { 
                 DefaultBeforeSceneUnload();
             }
-            AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(sceneName);
+            // bool unloadCompleted = SceneManager.UnloadScene(sceneName);
+            AsyncOperation asyncUnload = SceneManager.UnloadSceneAsync(sceneName, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
             /*while (!asyncUnload.isDone)
             {
                 yield return null;

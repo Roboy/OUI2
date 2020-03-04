@@ -62,7 +62,7 @@ public class StateManager : Singleton<StateManager>
 
         public void Exit()
         {
-           owner.additiveSceneManager.TriggerUnloadScene(null, null);
+           //owner.additiveSceneManager.TriggerUnloadScene(null, null);
         }
 
         public IState GoToNextState()
@@ -91,7 +91,7 @@ public class StateManager : Singleton<StateManager>
 
         public void Exit()
         {
-            owner.additiveSceneManager.TriggerUnloadScene(null, null);
+           // owner.additiveSceneManager.TriggerUnloadScene(null, null);
         }
 
         public IState GoToNextState()

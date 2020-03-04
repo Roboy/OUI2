@@ -13,6 +13,7 @@ namespace Widgets
         private void Awake()
         {
             toastrQueue = new Queue<Toastr>();
+            
         }
 
         public override void Init(Widget widget)
@@ -23,6 +24,8 @@ namespace Widgets
             {
                 CreateNewToastr(toastrTemplate);
             }
+
+            AttachCurvedUI();
         }
 
         public void CreateNewToastr(ToastrTemplate toastrToInstantiate)

@@ -11,6 +11,7 @@ namespace Widgets
         public string title;
         public string type;
         public string widgetPosition;
+        public string relativeChildPosition;
         public int childWidgetId;
         public int timestamp;
         #endregion

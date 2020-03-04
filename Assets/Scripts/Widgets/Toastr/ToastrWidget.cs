@@ -11,10 +11,10 @@ namespace Widgets
         public float duration;
         public Color color;
         public int fontSize;
-
-        public float timer;
-
+        
         static int counter = 0;
+
+        private Timer timer;
 
         public override void ProcessRosMessage(RosJsonMessage rosMessage)
         {
@@ -25,7 +25,7 @@ namespace Widgets
         {
             toastrToInstantiateQueue = new Queue<ToastrTemplate>();
             toastrActiveQueue = new Queue<ToastrTemplate>();
-            ResetTimer();
+            timer = new Timer();
         }
 
         public new void Init(RosJsonMessage context)
@@ -33,7 +33,7 @@ namespace Widgets
             duration = context.toastrDuration;
             color = WidgetUtility.BytesToColor(context.toastrColor);
             fontSize = context.toastrFontSize;
-
+            
             base.Init(context);
         }
 
@@ -71,25 +71,28 @@ namespace Widgets
                     ToastrTemplate toastrToInstantiate = toastrToInstantiateQueue.Dequeue();
                     toastrActiveQueue.Enqueue(toastrToInstantiate);
                     ((ToastrView)view).CreateNewToastr(toastrToInstantiate);
+
+                    if (toastrActiveQueue.Count == 1)
+                    {
+                        timer.SetTimer(toastrActiveQueue.Peek().toastrDuration, DestroyToastr);
+                    }
                 }
 
                 if (toastrActiveQueue.Count != 0)
                 {
-                    timer += Time.deltaTime;
-
-                    if (timer >= toastrActiveQueue.Peek().toastrDuration)
-                    {
-                        ((ToastrView)view).DestroyTopToastr();
-                        toastrActiveQueue.Dequeue();                        
-                        ResetTimer();
-                    }
+                    timer.LetTimePass(Time.deltaTime);
                 }
             }
         }
 
-        private void ResetTimer()
+        private void DestroyToastr()
         {
-            timer = 0;
+            ((ToastrView)view).DestroyTopToastr();
+            toastrActiveQueue.Dequeue();
+            if (toastrActiveQueue.Count != 0)
+            {
+                timer.SetTimer(toastrActiveQueue.Peek().toastrDuration, DestroyToastr);
+            }
         }
 
         private bool IsHudActive()

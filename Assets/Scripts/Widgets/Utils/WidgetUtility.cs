@@ -65,7 +65,36 @@ namespace Widgets
                     return WidgetPosition.Incorrect;
             }
         }
+
+        public static RelativeChildPosition StringToRelativeChildPosition(string relativeChildPositionAsString)
+        {
+            switch (relativeChildPositionAsString)
+            {
+                case "top":
+                    return RelativeChildPosition.Top;
+
+                case "left":
+                    return RelativeChildPosition.Left;
+
+                case "right":
+                    return RelativeChildPosition.Right;
+
+                case "bottom":
+                    return RelativeChildPosition.Bottom;
+
+                case "fixedCenter":
+                    return RelativeChildPosition.FixedCenter;
+
+                case null:
+                    return RelativeChildPosition.Incorrect; 
+                    
+                default:
+                    Debug.LogWarning("Relative child position " + relativeChildPositionAsString + " not known.");
+                    return RelativeChildPosition.Incorrect;
+            }
+        }
     }
 
     public enum WidgetPosition { Top, Left, Right, Center, Bottom, Child, Incorrect };
+    public enum RelativeChildPosition { Top, Left, Right, FixedCenter, Bottom, Incorrect };
 }

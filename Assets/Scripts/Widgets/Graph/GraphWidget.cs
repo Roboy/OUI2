@@ -9,6 +9,9 @@ namespace Widgets
 
         public Color color = Color.white;
 
+        public int numXLabels = 2;
+        public int numYLabels = 3;
+
         public List<float> datapoints;
         public float[] datapointsArray;
         
@@ -20,6 +23,8 @@ namespace Widgets
         public new void Init(RosJsonMessage context)
         {
             color = WidgetUtility.BytesToColor(context.graphColor);
+            numXLabels = context.xDivisionUnits;
+            numYLabels = context.yDivisionUnits;
 
             base.Init(context);
         }

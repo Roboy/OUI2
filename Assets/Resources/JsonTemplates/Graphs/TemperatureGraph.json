@@ -4,5 +4,7 @@
 	"panelId": 2,
 	"title": "Temperature",
 	"graphColor": [ 255, 255, 255, 255 ],
-	"graphDatapoint": 10
+	"graphDatapoint": 10,
+	"xDivisionUnits": 3,
+	"yDivisionUnits": 4
 }

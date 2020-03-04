@@ -20,17 +20,17 @@ namespace Widgets
             return view;
         }
 
-        public void Init(RosJsonMessage rosJsonMessage, Dictionary<string, Texture2D> icons)
+        public void Init(RosJsonMessage context, Dictionary<string, Texture2D> icons)
         {
             this.icons = icons;
             iconsArray = new Texture2D[icons.Count];
             icons.Values.CopyTo(iconsArray, 0);
 
-            childWidgetId = rosJsonMessage.childWidgetId;
+            childWidgetId = context.childWidgetId;
 
-            ProcessRosMessage(rosJsonMessage);
+            ProcessRosMessage(context);
 
-            base.Init(rosJsonMessage);
+            base.Init(context);
         }
 
         public override void ProcessRosMessage(RosJsonMessage rosMessage)
@@ -48,7 +48,7 @@ namespace Widgets
             }
         }
 
-        public override void RestoreViews(GameObject iconParent)
+        public override void CreateView(GameObject iconParent)
         {
             GameObject iconGameObject = new GameObject();
             iconGameObject.transform.SetParent(iconParent.transform, false);
@@ -71,7 +71,7 @@ namespace Widgets
                 
                 if (iconParent != null)
                 {
-                    RestoreViews(iconParent);
+                    CreateView(iconParent);
                 }
             }
         }

@@ -13,12 +13,12 @@ namespace Widgets
 
         protected bool isChildWidget = false;
 
-        public void Init(RosJsonMessage RosJsonMessage)
+        public void Init(RosJsonMessage context)
         {
-            context = RosJsonMessage;
-            id = RosJsonMessage.id;
-            childWidgetId = RosJsonMessage.childWidgetId;
-            panelId = RosJsonMessage.panelId;
+            this.context = context;
+            id = context.id;
+            childWidgetId = context.childWidgetId;
+            panelId = context.panelId;
         }
 
         public int GetID()
@@ -41,18 +41,29 @@ namespace Widgets
             isChildWidget = true;
         }
 
+        private void SearchAndSetChild()
+        {
+            childWidget = Manager.Instance.FindWidgetWithID(childWidgetId);
+
+            childWidget.SetIsChildWidget();
+
+            if (childWidget == null)
+            {
+                Debug.LogWarning("Child widget not found.");
+            }
+        }
+
         private void Update()
         {
             if (childWidget == null && childWidgetId != 0)
             {
-                childWidget = Manager.Instance.FindWidgetWithID(childWidgetId);
-
-                childWidget.SetIsChildWidget();
-
-                if (childWidget == null)
-                {
-                    Debug.LogWarning("Child widget not found.");
-                }
+                SearchAndSetChild();
+            }
+            
+            // This is true, everytime the HUD scene changes
+            if (GetView() == null)
+            {
+                RecreateView();
             }
 
             UpdateInClass();
@@ -62,7 +73,16 @@ namespace Widgets
 
         public abstract void ProcessRosMessage(RosJsonMessage rosMessage);
 
-        public abstract void RestoreViews(GameObject viewParent);
+        public abstract void CreateView(GameObject viewParent);
+
+        private void RecreateView()
+        {
+            GameObject textParent = GameObject.FindGameObjectWithTag("Panel_" + GetPanelID());
+            if (textParent != null)
+            {
+                CreateView(textParent);
+            }
+        }
 
         public abstract View GetView();
     }

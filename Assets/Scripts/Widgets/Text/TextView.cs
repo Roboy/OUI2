@@ -1,11 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
+using static Widgets.TextWidget;
 
 namespace Widgets
 {
     public class TextView : View
     {
+        TextMeshProUGUI textMeshPro;
+
+        public void Init(TextWidgetTemplate textWidgetTemplate, Widget childWidget)
+        {
+            this.childWidget = childWidget;
+            ChangeMessage(textWidgetTemplate);
+        }
+
         public override void HideView()
         {
             throw new System.NotImplementedException();
@@ -16,21 +24,11 @@ namespace Widgets
             throw new System.NotImplementedException();
         }
 
-        // Start is called before the first frame update
-        void Start()
+        public void ChangeMessage(TextWidgetTemplate incomingMessageTemplate)
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
-        public void ChangeMessage()
-        {
-
+            textMeshPro.text = incomingMessageTemplate.messageToDisplay;
+            textMeshPro.color = incomingMessageTemplate.textColor;
+            textMeshPro.fontSize = incomingMessageTemplate.textFontSize;
         }
     }
 }

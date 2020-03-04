@@ -30,13 +30,13 @@ namespace Widgets
             ResetTimer();
         }
 
-        public new void Init(RosJsonMessage rosJsonMessage)
+        public new void Init(RosJsonMessage context)
         {
-            duration = rosJsonMessage.toastrDuration;
-            color = WidgetUtility.BytesToColor(rosJsonMessage.toastrColor);
-            fontSize = rosJsonMessage.toastrFontSize;
+            duration = context.toastrDuration;
+            color = WidgetUtility.BytesToColor(context.toastrColor);
+            fontSize = context.toastrFontSize;
 
-            base.Init(rosJsonMessage);
+            base.Init(context);
         }
 
         private void EnqueueNewMessage(string toastrMessage, float toastrDuration, Color toastrColor, int toastrFontSize)
@@ -95,7 +95,7 @@ namespace Widgets
                 GameObject toastrParent = GameObject.FindGameObjectWithTag("Panel_" + GetPanelID());
                 if (toastrParent != null)
                 {
-                    RestoreViews(toastrParent);
+                    CreateView(toastrParent);
                 }
             }
         }
@@ -115,7 +115,7 @@ namespace Widgets
             return (toastrToInstantiateQueue.Count != 0);
         }
 
-        public override void RestoreViews(GameObject viewParent)
+        public override void CreateView(GameObject viewParent)
         {
             ResetTimer();
             

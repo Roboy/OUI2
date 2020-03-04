@@ -8,16 +8,25 @@ namespace Widgets
         public Widget childWidget;
         public View parentView;
 
-        public float timer;
-        float duration = 0.5f;
+        private RelativeChildPosition relativeChildPosition;
+
+        private Timer timer;
+        // float duration = 0.5f;
 
         public bool timerActive = false;
 
         public abstract void Init(Widget widget);
 
+        public void Init(RelativeChildPosition relativeChildPosition)
+        {
+            // AttachCurvedUI();
+            SetRelativeChildPosition(relativeChildPosition);
+            timer = new Timer();
+        }
+
         public void OnSelectionEnter()
         {
-            timer = 0;
+            timer.SetTimer(0.5f, TimeIsUp);
             timerActive = false;
 
             if (parentView != null)
@@ -28,7 +37,7 @@ namespace Widgets
             if (childWidget != null)
             {
                 childWidget.GetView().SetParentView(this);
-                childWidget.GetView().ShowView();
+                childWidget.GetView().ShowView(relativeChildPosition);
             }
         }
 
@@ -37,9 +46,14 @@ namespace Widgets
             gameObject.AddComponent<CurvedUI.CurvedUIVertexEffect>();
         }
 
+        public void SetRelativeChildPosition(RelativeChildPosition relativeChildPosition)
+        {
+            this.relativeChildPosition = relativeChildPosition;
+        }
+
         public void OnSelectionExit()
         {
-            timer = 0;
+            timer.ResetTimer();
             timerActive = true;
         }
 
@@ -59,7 +73,7 @@ namespace Widgets
             timerActive = false;
         }
 
-        public abstract void ShowView();
+        public abstract void ShowView(RelativeChildPosition relativeChildPosition);
 
         public abstract void HideView();
 
@@ -77,12 +91,7 @@ namespace Widgets
         {
             if (timerActive)
             {
-                timer += Time.deltaTime;
-
-                if (timer >= duration)
-                {
-                    TimeIsUp();
-                }
+                timer.LetTimePass(Time.deltaTime);
             }
         }
 

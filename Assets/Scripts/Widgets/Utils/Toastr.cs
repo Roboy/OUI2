@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Widgets
 {   
@@ -9,11 +10,12 @@ namespace Widgets
         public Color color;
         public int fontSize;
 
+        private readonly float SLERP_DURATION = 0.5f;
+
         private bool slerpActive = false;
         private Vector3 localSlerpStartPos;
         private Vector3 localSlerpStopPos;
-        private float timer;
-        private float duration = 1.0f;
+        private Timer timer;
 
         TextMeshProUGUI textMeshPro;
 
@@ -28,6 +30,8 @@ namespace Widgets
             textMeshPro.fontSize = fontSize;
             textMeshPro.color = color;
 
+            timer = new Timer();
+
             gameObject.AddComponent<CurvedUI.CurvedUIVertexEffect>();
         }
 
@@ -35,8 +39,7 @@ namespace Widgets
         {
             localSlerpStartPos = transform.localPosition;
             localSlerpStopPos = transform.localPosition + new Vector3(0, offsetInY, 0);
-
-            timer = 0 - timeOffset;
+            timer.SetTimer(SLERP_DURATION + timeOffset, StopSlerp);
             slerpActive = true;
         }
 
@@ -44,15 +47,15 @@ namespace Widgets
         {
             if (slerpActive)
             {
-                timer += Time.deltaTime;
+                timer.LetTimePass(Time.deltaTime);
 
-                transform.localPosition = Vector3.Slerp(localSlerpStartPos, localSlerpStopPos, timer/duration);
-
-                if (timer >= duration)
-                {
-                    slerpActive = false;
-                }
+                transform.localPosition = Vector3.Slerp(localSlerpStartPos, localSlerpStopPos, timer.GetFraction());
             }
+        }
+
+        public void StopSlerp()
+        {
+            slerpActive = false;
         }
     }
 }

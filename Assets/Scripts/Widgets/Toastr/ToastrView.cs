@@ -13,7 +13,6 @@ namespace Widgets
         private void Awake()
         {
             toastrQueue = new Queue<Toastr>();
-            
         }
 
         public override void Init(Widget widget)
@@ -25,7 +24,7 @@ namespace Widgets
                 CreateNewToastr(toastrTemplate);
             }
 
-            AttachCurvedUI();
+            Init(widget.relativeChildPosition);
         }
 
         public void CreateNewToastr(ToastrTemplate toastrToInstantiate)
@@ -62,7 +61,7 @@ namespace Widgets
         }
 
         // TODO: hide new toastr as well
-        public override void ShowView()
+        public override void ShowView(RelativeChildPosition relativeChildPosition)
         {
 
         }

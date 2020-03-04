@@ -7,6 +7,8 @@ namespace Widgets
 {
     public class TextView : View
     {
+        private readonly float RELATIVE_OFFSET = 100.0f;
+
         TextMeshProUGUI textMeshPro;
         RawImage image;
 
@@ -20,9 +22,37 @@ namespace Widgets
             textMeshPro.enabled = false;
         }
 
-        public override void ShowView()
+        public override void ShowView(RelativeChildPosition relativeChildPosition)
         {
             textMeshPro.enabled = true;
+
+            Vector3 offsetVector = Vector3.zero;
+
+            switch (relativeChildPosition)
+            {
+                case RelativeChildPosition.Bottom:
+                    offsetVector = Vector3.down * RELATIVE_OFFSET;
+                    break;
+                case RelativeChildPosition.Top:
+                    offsetVector = Vector3.up * RELATIVE_OFFSET;
+                    break;
+                case RelativeChildPosition.Left:
+                    offsetVector = Vector3.left * RELATIVE_OFFSET;
+                    break;
+                case RelativeChildPosition.Right:
+                    offsetVector = Vector3.right * RELATIVE_OFFSET;
+                    break;
+                case RelativeChildPosition.FixedCenter:
+                    return;
+                case RelativeChildPosition.Incorrect:                    
+                    return;
+            }
+
+            gameObject.AddComponent<CurvedUI.CurvedUIVertexEffect>();
+
+            transform.SetParent(parentView.transform, false);
+
+            transform.localPosition = offsetVector;
         }
 
         public void ChangeMessage(TextWidgetTemplate incomingMessageTemplate)
@@ -35,8 +65,9 @@ namespace Widgets
         public override void Init(Widget widget)
         {
             SetChildWidget(widget.childWidget);
-            AttachCurvedUI();
             ChangeMessage(((TextWidget)widget).currentlyDisplayedMessage);
+
+            Init(widget.relativeChildPosition);
         }
     }
 }

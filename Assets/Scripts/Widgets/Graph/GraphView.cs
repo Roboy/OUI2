@@ -23,7 +23,7 @@ namespace Widgets
             graph.AddComponent<ChartAndGraph.HorizontalAxis>(); // todo: should be hand made
             graph.AddComponent<ChartAndGraph.SensitivityControl>();
             graph.AddComponent<GraphManager>();
-            AttachCurvedUI();
+            graph.AddComponent<CurvedUI.CurvedUIVertexEffect>();
             return graph;
         }
 
@@ -46,6 +46,8 @@ namespace Widgets
                 graphManager.AddDataPoint(graphWidget.name, data.time,
                     data.data);
             }
+
+            Init(widget.relativeChildPosition);
 
             /*
             //iconManager = GetComponent<IconStateManager>();
@@ -121,7 +123,7 @@ namespace Widgets
             graphManager.SetColor(title, col);
         }*/
 
-        public override void ShowView()
+        public override void ShowView(RelativeChildPosition relativeChildPosition)
         {
             gameObject.SetActive(true);
         }

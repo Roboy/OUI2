@@ -18,7 +18,7 @@ namespace Widgets
             image.texture = iconTexture;
         }
 
-        public override void ShowView()
+        public override void ShowView(RelativeChildPosition relativeChildPosition)
         {
             image.enabled = true;
         }
@@ -30,9 +30,10 @@ namespace Widgets
 
         public override void Init(Widget widget)
         {
-            SetChildWidget(widget.childWidget);
-            AttachCurvedUI();
+            SetChildWidget(widget.childWidget);            
             SetIcon(((IconWidget)widget).currentIcon);
+
+            Init(widget.relativeChildPosition);
         }
     }
 }

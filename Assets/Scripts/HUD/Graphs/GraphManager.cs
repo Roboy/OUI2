@@ -10,7 +10,7 @@ namespace Widgets
 {
     public class GraphManager : MonoBehaviour
     {
-        public Material graphFill;
+        public Material lineMaterial;
 
         private GraphChart graph;
         private VerticalAxis verticalAxis;
@@ -36,8 +36,9 @@ namespace Widgets
                 Debug.LogWarning("No GraphChart found! Place this script into a graph chart!");
                 return;
             }
-            
-            graph.DataSource.AddCategory(topic, new Material(Shader.Find("Chart/Canvas/Solid")), 20, new MaterialTiling(false, 20), null, true, null, 20);
+
+            lineMaterial = new Material(Shader.Find("Chart/Canvas/Solid"));
+            graph.DataSource.AddCategory(topic, lineMaterial, 20, new MaterialTiling(false, 20), null, true, null, 20);
             //graph.DataSource.AddCategory(topic, new Material(Shader.Find("Standard")), 20, new MaterialTiling(false, 20), null, true, null, 20);
             //CustomizeGraph("");
             //SetNumLabelsShownX(3);
@@ -84,7 +85,7 @@ namespace Widgets
         public void SetColor(string topic, Color c)
         {
             //Material fill = new Material(graphFill);
-            Material fill = new Material(Shader.Find("Chart/Canvas/Solid"));
+            Material fill = new Material(lineMaterial);
             fill.color = c;
             // print(c.ToString());
             graph.DataSource.SetCategoryLine(topic, fill, 5, new MaterialTiling(false, 0));

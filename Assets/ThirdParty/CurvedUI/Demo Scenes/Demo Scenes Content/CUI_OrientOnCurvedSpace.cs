@@ -5,7 +5,7 @@ namespace CurvedUI
 {
     public class CUI_OrientOnCurvedSpace : MonoBehaviour
     {
-
+        public bool IsStatic;
         public CurvedUISettings mySettings;
 
 
@@ -15,11 +15,19 @@ namespace CurvedUI
 
             mySettings = GetComponentInParent<CurvedUISettings>();
 
-
+            UpdatePosition();
         }
 
         // Update is called once per frame
         void Update()
+        {
+            if (!IsStatic)
+            {
+                UpdatePosition();
+            }
+        }
+
+        void UpdatePosition()
         {
             Vector3 positionInCanvasSpace = mySettings.transform.worldToLocalMatrix.MultiplyPoint3x4(this.transform.parent.position);
             transform.position = mySettings.CanvasToCurvedCanvas(positionInCanvasSpace);

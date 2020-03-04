@@ -10,7 +10,7 @@ public class EyeGaze : MonoBehaviour, IGazeFocusable
     // Start is called before the first frame update
     void Start()
     {
-        ism = this.GetComponent<IconStateManager>();
+        ism = this.transform.parent.GetComponent<IconStateManager>();
     }
 
     // Update is called once per frame

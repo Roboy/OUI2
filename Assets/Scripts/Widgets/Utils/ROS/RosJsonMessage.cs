@@ -24,6 +24,7 @@ namespace Widgets
         public byte[] graphColor;
         public int xDivisionUnits;
         public int yDivisionUnits;
+        public bool showCompleteHistory;
         #endregion
 
         #region Toastr

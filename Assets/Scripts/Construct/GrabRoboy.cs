@@ -31,7 +31,6 @@ public class GrabRoboy : MonoBehaviour
         {
             if (grab.EndInteractAllowed())
             {
-                Debug.LogError("Ending Interaction");
                 grab.EndInteraction(grab.GrabScript, true);
             }
             StateManager.Instance.GoToNextState();

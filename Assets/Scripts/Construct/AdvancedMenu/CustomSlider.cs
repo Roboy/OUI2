@@ -16,6 +16,7 @@ public class CustomSlider : MonoBehaviour
     private GameObject IntersectingObject;
     private float value;
 
+    private BuzzManager buzzManager;
     public int[] fingersRight;
     public int[] fingersLeft;
 
@@ -35,6 +36,8 @@ public class CustomSlider : MonoBehaviour
     /// </summary>
     public void Start()
     {
+        buzzManager = GameObject.FindGameObjectWithTag("SenseGloveManager").GetComponent<BuzzManager>();
+
         titleAnimator = this.transform.parent.GetChild(1).GetComponent<Animator>();
         valueAnimator = this.transform.GetChild(1).GetComponent<Animator>();
         valueText = this.transform.GetChild(1).GetChild(0).GetComponent<TextMeshPro>();
@@ -53,12 +56,12 @@ public class CustomSlider : MonoBehaviour
         {
             if(fingersRight[i] > 0)
             {
-                BuzzManager.Instance.ActivateFinger(true, i, fingersRight[i]);
+                buzzManager.ActivateFinger(true, i, fingersRight[i]);
                 fingersRight[i] = 0;
             }
             if (fingersLeft[i] > 0)
             {
-                BuzzManager.Instance.ActivateFinger(false, i, fingersLeft[i]);
+                buzzManager.ActivateFinger(false, i, fingersLeft[i]);
                 fingersLeft[i] = 0;
             }
         }

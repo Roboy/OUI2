@@ -1,0 +1,10 @@
+{
+	"id": 23,
+	"type": "Icon",
+	"title": "WifiIcon",
+	"widgetPosition": "top",
+	"childWidgetId": 33,
+	"relativeChildPosition": "bottom",
+	"icons": [ "Wifi-OFF_01a"],
+	"currentIcon": "Wifi-OFF_01a"
+}

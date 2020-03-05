@@ -3,8 +3,8 @@
 	"type": "Icon",
 	"title": "SenseGloveIcon",
 	"widgetPosition": "top",
-	"childWidgetId": 31,
+	"childWidgetId": 30,
 	"relativeChildPosition": "bottom",
-	"icons": [ "SenseGlove_0", "SenseGlove_1" ],
-	"currentIcon": "SenseGlove_0"
+	"icons": [ "Gloves-ON_01a" ],
+	"currentIcon": "Gloves-ON_01a"
 }

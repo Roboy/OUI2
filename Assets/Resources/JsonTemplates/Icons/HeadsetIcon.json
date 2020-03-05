@@ -1,0 +1,10 @@
+{
+	"id": 24,
+	"type": "Icon",
+	"title": "HeadsetIcon",
+	"widgetPosition": "top",
+	"childWidgetId": 34,
+	"relativeChildPosition": "bottom",
+	"icons": [ "VrGlasses-ON_01a"],
+	"currentIcon": "VrGlasses-ON_01a"
+}

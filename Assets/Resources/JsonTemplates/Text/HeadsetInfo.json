@@ -1,9 +1,9 @@
 {
-	"id": 30,
+	"id": 34,
 	"type": "Text",
-	"title": "SenseGloveTextinfo",
+	"title": "HeadsetTextinfo",
 	"widgetPosition": "child",
-	"textMessage": "20% battery",
+	"textMessage": "ViveProEye connected",
 	"textFontSize": 20,
 	"textColor": [ 255, 255, 255, 255 ]
 }

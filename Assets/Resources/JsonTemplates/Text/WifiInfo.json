@@ -1,9 +1,9 @@
 {
-	"id": 30,
+	"id": 33,
 	"type": "Text",
-	"title": "SenseGloveTextinfo",
+	"title": "WifiTextinfo",
 	"widgetPosition": "child",
-	"textMessage": "20% battery",
+	"textMessage": "Eduroam\n23 MBit/s",
 	"textFontSize": 20,
 	"textColor": [ 255, 255, 255, 255 ]
 }

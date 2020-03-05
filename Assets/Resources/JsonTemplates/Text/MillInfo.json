@@ -1,9 +1,9 @@
 {
-	"id": 30,
+	"id": 31,
 	"type": "Text",
-	"title": "SenseGloveTextinfo",
+	"title": "MillTextinfo",
 	"widgetPosition": "child",
-	"textMessage": "20% battery",
+	"textMessage": "Omnimill operational",
 	"textFontSize": 20,
 	"textColor": [ 255, 255, 255, 255 ]
 }

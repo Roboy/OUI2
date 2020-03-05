@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Valve.VR;
+using UnityEngine.Events;
 
 public class StateManager : Singleton<StateManager> {
     //private StateMachine stateMachine;
@@ -28,8 +29,8 @@ public class StateManager : Singleton<StateManager> {
         rightSenseGlove = GameObject.FindGameObjectWithTag("SenseGloveRight");
         leftSenseGlove.SetActive(false);
         rightSenseGlove.SetActive(false);
-
-        currentState = States.HUD;
+        currentState = States.Construct;
+        GoToNextState();
         //stateMachine = new StateMachine(new HUDState(this));
     }
 

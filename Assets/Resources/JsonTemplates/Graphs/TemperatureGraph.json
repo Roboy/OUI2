@@ -4,7 +4,6 @@
 	"title": "TemperatureGraph",
 	"widgetPosition": "child",
 	"graphColor": [ 255, 255, 255, 255 ],
-	"graphDatapoint": 10,
 	"xDivisionUnits": 3,
 	"yDivisionUnits": 4
 }

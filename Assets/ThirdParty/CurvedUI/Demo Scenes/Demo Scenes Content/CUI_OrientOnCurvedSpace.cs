@@ -14,14 +14,22 @@ namespace CurvedUI
         {
 
             mySettings = GetComponentInParent<CurvedUISettings>();
-            UpdateTransform();
+            if(mySettings != null)
+            {
+                UpdateTransform();
+            }
 
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (!IsStatic)
+            if (mySettings == null)
+            {
+                mySettings = GetComponentInParent<CurvedUISettings>();
+            }
+
+            if (!IsStatic && mySettings != null)
             {
                 UpdateTransform();
             }

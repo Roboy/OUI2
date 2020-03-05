@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Tobii.G2OM;
+using Widgets;
 
 public class EyeGaze : MonoBehaviour, IGazeFocusable
 {
-    IconStateManager ism;
+    View view;
 
     // Start is called before the first frame update
     void Start()
     {
-        ism = this.transform.parent.GetComponent<IconStateManager>();
+        view = this.GetComponentInParent<View>();
     }
 
     // Update is called once per frame
@@ -21,18 +22,12 @@ public class EyeGaze : MonoBehaviour, IGazeFocusable
 
     public void GazeFocusChanged(bool hasFocus)
     {
-        //ism.Focus(hasFocus);
-        glow(hasFocus);
-    }
-
-    public void glow(bool glow)
-    {
-        if (glow)
+        if (hasFocus)
         {
-            ism.ShowNotification();
+            view.OnSelectionEnter();
         } else
         {
-            ism.StopNotification();
+            view.OnSelectionExit();
         }
     }
 }

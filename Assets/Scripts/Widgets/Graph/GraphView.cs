@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Widgets
 {
@@ -10,12 +12,20 @@ namespace Widgets
         private IconStateManager iconManager;
         private GraphManager graphManager;
 
-        private GameObject CreateGraph()
+        private GameObject CreateGraphlikeObject()
         {
             GameObject graph = new GameObject();
             graph.transform.SetParent(transform);
             graph.AddComponent<RectTransform>();
             graph.transform.localScale = Vector3.one;
+
+            graph.AddComponent<CurvedUI.CurvedUIVertexEffect>();
+            return graph;
+        }
+
+        private GameObject CreateGraph()
+        {
+            GameObject graph = CreateGraphlikeObject();
             graph.transform.localPosition = Vector3.zero;
             ((RectTransform)(graph.transform)).sizeDelta = new Vector2(600, 300);
             graph.AddComponent<ChartAndGraph.GraphChart>();
@@ -23,8 +33,24 @@ namespace Widgets
             graph.AddComponent<ChartAndGraph.HorizontalAxis>(); // todo: should be hand made
             graph.AddComponent<ChartAndGraph.SensitivityControl>();
             graph.AddComponent<GraphManager>();
-            graph.AddComponent<CurvedUI.CurvedUIVertexEffect>();
             return graph;
+        }
+
+        private GameObject CreateGraphAdditions(GraphWidget graphWidget)
+        {
+            GameObject additions = CreateGraphlikeObject();
+            additions.transform.localPosition = Vector3.forward;
+            RectTransform rectTrans = ((RectTransform)(additions.transform));
+            //rectTrans.
+
+            TextMeshProUGUI title = additions.AddComponent<TextMeshProUGUI>();
+            title.text = graphWidget.name;
+
+            title.fontSize = 30;
+            
+            rectTrans.sizeDelta = new Vector2(650, 380);
+            additions.AddComponent<CurvedUI.CurvedUIVertexEffect>();
+            return additions;
         }
 
         //public void Init(List<float> dataPoints, Widget childWidget, string graphName, Color color)
@@ -35,9 +61,10 @@ namespace Widgets
             SetChildWidget(graphWidget.childWidget);
         
             GameObject graph = CreateGraph();
+            GameObject graphAdditions = CreateGraphAdditions(graphWidget);
             graphManager = graph.GetComponent<GraphManager>();
 
-            graphManager.Init(graphWidget.name);
+            graphManager.Init(graphWidget);
             graphManager.SetColor(graphWidget.name, graphWidget.color);
             graphManager.SetNumLabelsShownX(graphWidget.numXLabels);
             graphManager.SetNumLabelsShownY(graphWidget.numYLabels);

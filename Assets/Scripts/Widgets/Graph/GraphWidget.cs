@@ -6,15 +6,18 @@ namespace Widgets
 {
     public class GraphWidget : Widget
     {
-        public readonly int SIZE = 10;
+        public readonly int SIZE = 100;
 
+        public string unit;
         public Color color = Color.white;
 
         public int numXLabels = 2;
         public int numYLabels = 3;
 
+        public bool showCompleteHistory;
+
+
         public List<Datapoint> datapoints;
-        public Datapoint[] datapointsArray;
         
         public void Awake()
         {
@@ -23,6 +26,7 @@ namespace Widgets
 
         public new void Init(RosJsonMessage context)
         {
+            unit = context.graphTitle;
             color = WidgetUtility.BytesToColor(context.graphColor);
             numXLabels = context.xDivisionUnits;
             numYLabels = context.yDivisionUnits;
@@ -32,7 +36,7 @@ namespace Widgets
 
         public override void ProcessRosMessage(RosJsonMessage rosMessage)
         {
-            if (rosMessage.graphColor != null && rosMessage.graphColor.Length < 4)
+            if (rosMessage.graphColor != null && rosMessage.graphColor.Length == 4)
             {
                 color = WidgetUtility.BytesToColor(rosMessage.graphColor);
             }
@@ -40,7 +44,7 @@ namespace Widgets
             if (rosMessage.graphTimestamp != 0)
             {
                 System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
-                dt = epochStart.AddMilliseconds(rosMessage.graphTimestamp);
+                dt = epochStart.AddSeconds(rosMessage.graphTimestamp);
             }
             if (rosMessage.graphValue != 0)
             {
@@ -56,8 +60,6 @@ namespace Widgets
             }
 
             datapoints.Add(newDatapoint);
-
-            datapointsArray = datapoints.ToArray();
 
             if (view != null)
             {

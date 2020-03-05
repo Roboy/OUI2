@@ -20,14 +20,12 @@ namespace Widgets
         float lastTime = 0f;
         float lastX = 0f;
 
-        private readonly string success = "s";
-
         public GraphManager(GraphChart graph)
         {
             this.graph = graph;
         }
 
-        public void Init(string topic)
+        public void Init(GraphWidget graphWidget)
         {
             graph = GetComponent<GraphChart>();
             if (graph == null)
@@ -38,8 +36,10 @@ namespace Widgets
             }
 
             lineMaterial = new Material(Shader.Find("Chart/Canvas/Solid"));
-            graph.DataSource.AddCategory(topic, lineMaterial, 20, new MaterialTiling(false, 20), null, true, null, 20);
+            graph.DataSource.AddCategory(graphWidget.name, lineMaterial, 20, new MaterialTiling(false, 20), null, true, null, 20);
 
+            graph.AutoScrollHorizontally = true;
+            graph.DataSource.AutomaticHorizontalView = graphWidget.showCompleteHistory;
             if (verticalAxis == null)
             {
                 verticalAxis = graph.GetComponent<VerticalAxis>();
@@ -79,26 +79,24 @@ namespace Widgets
             //graph.DataSource.AddCategory();
         }
 
-        public string SetNumLabelsShownX(int num)
+        public void SetNumLabelsShownX(int num)
         {
             if (num < 0 || num > 10)
             {
-                return "Invalid Amount of Labels on X Axis";
+                Debug.LogWarning("Invalid Amount of Labels on X Axis");
             }
             horizontalAxis.MainDivisions.Total = num;
             horizontalAxis.SubDivisions.Total = 1;
-            return success;
         }
 
-        public string SetNumLabelsShownY(int num)
+        public void SetNumLabelsShownY(int num)
         {
             if (num <= 0 || num >= 10)
             {
-                return "Invalid Amount of Labels on Y Axis";
+                Debug.LogWarning("Invalid Amount of Labels on Y Axis");
             }
             verticalAxis.MainDivisions.Total = num;
             verticalAxis.SubDivisions.Total = 1;
-            return success;
         }
 
         public void AddDataPoint(string topic, DateTime time, float val)

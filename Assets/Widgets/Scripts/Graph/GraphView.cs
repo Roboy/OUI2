@@ -62,10 +62,10 @@ namespace Widgets
             GraphWidget graphWidget = (GraphWidget)widget;
             SetChildWidget(graphWidget.childWidget);
 
-            GameObject graph = Instantiate(Factory.Instance.widgetPrefabs["CompleteGraph"]);
+            GameObject graph = Instantiate(Factory.Instance.graphDesignPrefab);
             graph.transform.SetParent(transform);
-            graph.transform.localScale = Vector3.one;
-            graph.transform.localPosition = Vector3.zero;
+            graph.transform.localScale = Vector3.one * 0.7f;
+            graph.transform.localPosition = Vector3.down * 45;
 
 
             //GameObject graph = CreateGraph();

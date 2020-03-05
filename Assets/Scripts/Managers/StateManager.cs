@@ -59,24 +59,29 @@ public class StateManager : Singleton<StateManager> {
     void DelegateAfterConstructLoad()
     {
         Transform cameraOrigin = GameObject.FindGameObjectWithTag("CameraOrigin").transform;
+        Transform constructObjects = GameObject.FindGameObjectWithTag("ConstructObjects").transform;
+        Transform roboy = GameObject.FindGameObjectWithTag("Roboy").transform;
         Transform leftSenseGlove = GameObject.FindGameObjectWithTag("SenseGloveLeft").transform;
+        Transform rightSenseGlove = GameObject.FindGameObjectWithTag("SenseGloveRight").transform;
+        
+        
+        rightSenseGlove.SetParent(cameraOrigin, false);
+        //rightSenseGlove.GetChild(0).GetComponent<SenseGlove_Object>().LinkToGlove(rightSenseGlove.GetChild(0).GetComponent<SenseGlove_Object>().GloveIndex);
         leftSenseGlove.SetParent(cameraOrigin, false);
+        //leftSenseGlove.GetChild(0).GetComponent<SenseGlove_Object>().LinkToGlove(leftSenseGlove.GetChild(0).GetComponent<SenseGlove_Object>().GloveIndex);
         leftSenseGlove.GetChild(1).GetComponent<ShowOpenMenuButton>().CompareObject = cameraOrigin;
         leftSenseGlove.GetComponent<SteamVR_TrackedObject>().enabled = true;
-        GameObject.FindGameObjectWithTag("SenseGloveRight").transform.SetParent(cameraOrigin, false);
+        
+        roboy.position = cameraOrigin.position + new Vector3(0f, 1.4f, 0f);
+        roboy.rotation = Quaternion.Euler(roboy.rotation.eulerAngles + cameraOrigin.rotation.eulerAngles);
 
-        GameObject constructObjects = GameObject.FindGameObjectWithTag("ConstructObjects");
-        GameObject roboy = GameObject.FindGameObjectWithTag("Roboy");
-
-        roboy.transform.position = cameraOrigin.position + new Vector3(0f, 1.4f, 0f);
-        roboy.transform.rotation = Quaternion.Euler(roboy.transform.rotation.eulerAngles + cameraOrigin.rotation.eulerAngles);
-
-        GameObject.FindGameObjectWithTag("SubMenu3D").transform.SetParent(cameraOrigin, false);
+        constructObjects.GetChild(0).SetParent(cameraOrigin, false);
+        //GameObject.FindGameObjectWithTag("SubMenu3D").transform.SetParent(cameraOrigin, false);
         /*Transform constructObjects = GameObject.FindGameObjectWithTag("ConstructObjects").transform;
         Transform roboy = constructObjects.GetChild(0);
         roboy.position = cameraOrigin.position + new Vector3(0f, 1.5f, 0f);
         roboy.rotation = Quaternion.Euler(roboy.rotation.eulerAngles + cameraOrigin.rotation.eulerAngles);
-        constructObjects.GetChild(1).SetParent(cameraOrigin, false);*/
+        */
     }
 
     void DelegateOnConstructUnload()

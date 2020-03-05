@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< master
 guid: 3bb326c5eaa6136409720fdb3213a017
+=======
+guid: 677a4d88e56faf94295d93532c0c823b
+>>>>>>> Integrate Eye Tracking SDKs, scripts and prefab
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

@@ -176,7 +176,7 @@ MonoBehaviour:
   shape: 0
   quality: 3
   interactable: 1
-  blocksRaycasts: 1
+  blocksRaycasts: 0
   raycastMyLayerOnly: 1
   forceUseBoxCollider: 0
   angle: 90

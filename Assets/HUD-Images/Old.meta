@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< master
 guid: 3a6a3f872acdea946b4d8de520dead37
+=======
+guid: c9f1a7df0b6185147920f8ffcaeb1827
+>>>>>>> Integrate Eye Tracking SDKs, scripts and prefab
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

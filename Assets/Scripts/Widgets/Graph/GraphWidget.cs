@@ -26,7 +26,6 @@ namespace Widgets
 
         public new void Init(RosJsonMessage context)
         {
-            unit = context.graphTitle;
             color = WidgetUtility.BytesToColor(context.graphColor);
             numXLabels = context.xDivisionUnits;
             numYLabels = context.yDivisionUnits;
@@ -44,7 +43,7 @@ namespace Widgets
             if (rosMessage.graphTimestamp != 0)
             {
                 System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
-                dt = epochStart.AddMilliseconds(rosMessage.graphTimestamp);
+                dt = epochStart.AddSeconds(rosMessage.graphTimestamp);
             }
             if (rosMessage.graphValue != 0)
             {

@@ -22,7 +22,6 @@ namespace Widgets
         public double graphTimestamp;  // MANDATORY FOR GRAPH
         public float graphValue;    // MANDATORY FOR GRAPH
         public byte[] graphColor;
-        public string graphTitle;
         public int xDivisionUnits;
         public int yDivisionUnits;
         public bool showCompleteHistory;

@@ -45,11 +45,6 @@ namespace Widgets
 
             TextMeshProUGUI title = additions.AddComponent<TextMeshProUGUI>();
             title.text = graphWidget.name;
-            if (graphWidget.unit == null)
-            {
-                title.text += " in " + graphWidget.unit;
-            }
-            title.text += " over the last 10s";
 
             title.fontSize = 30;
             

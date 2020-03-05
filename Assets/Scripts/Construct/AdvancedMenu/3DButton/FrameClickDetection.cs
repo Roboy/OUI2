@@ -51,7 +51,6 @@ public class FrameClickDetection : MonoBehaviour
     {
         if (pressurePlateCollider.Equals(other))
         {
-            Debug.Log("Frame TriggerEnter: " + other.name);
             if (!wait)
             { 
                 press();

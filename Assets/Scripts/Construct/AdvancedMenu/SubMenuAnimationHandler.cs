@@ -48,9 +48,7 @@ public class SubMenuAnimationHandler : MonoBehaviour
         }
         if (HookToOpenMenuButton)
         {
-            Debug.LogError(GameObject.FindGameObjectWithTag("SenseGloveLeft").transform.GetChild(1).GetChild(1).name);
             GameObject.FindGameObjectWithTag("SenseGloveLeft").transform.GetChild(1).GetChild(1).GetComponent<FrameClickDetection>().onPress[0].AddListener(new UnityAction(FadeIn));
-            Debug.LogError(GameObject.FindGameObjectWithTag("SenseGloveLeft").transform.GetChild(1).GetChild(1).GetComponent<FrameClickDetection>().onPress);
         }
 
         currentState = -1;

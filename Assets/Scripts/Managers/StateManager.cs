@@ -8,8 +8,6 @@ public class StateManager : Singleton<StateManager> {
     //private StateMachine stateMachine;
     private States currentState;
 
-    delegate void MakeTransition(); // What is this for?
-
     AdditiveSceneManager additiveSceneManager;
     TransitionManager transitionManager;
     GameObject leftSenseGlove;
@@ -117,7 +115,8 @@ public class StateManager : Singleton<StateManager> {
                 Destroy(cameraOrigin.GetChild(i).gameObject);
             }
         }
-
+        leftSenseGlove.GetComponentInChildren<SenseGlove_Object>().StopBrakes();
+        rightSenseGlove.GetComponentInChildren<SenseGlove_Object>().StopBrakes();
         leftSenseGlove.SetActive(false);
         rightSenseGlove.SetActive(false);
     }

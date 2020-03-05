@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+<<<<<<< master
 guid: 3bb326c5eaa6136409720fdb3213a017
+=======
+guid: 677a4d88e56faf94295d93532c0c823b
+>>>>>>> Integrate Eye Tracking SDKs, scripts and prefab
+=======
+guid: 677a4d88e56faf94295d93532c0c823b
+>>>>>>> OUI2-101_integrate_eye_tracking_with_updated_hud_view
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

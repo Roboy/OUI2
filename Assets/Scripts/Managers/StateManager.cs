@@ -11,6 +11,8 @@ public class StateManager : Singleton<StateManager> {
 
     AdditiveSceneManager additiveSceneManager;
     TransitionManager transitionManager;
+    GameObject leftSenseGlove;
+    GameObject rightSenseGlove;
 
     public enum States
     {
@@ -22,6 +24,11 @@ public class StateManager : Singleton<StateManager> {
         additiveSceneManager = GameObject.FindGameObjectWithTag("AdditiveSceneManager").GetComponent<AdditiveSceneManager>();
         transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
 
+        leftSenseGlove = GameObject.FindGameObjectWithTag("SenseGloveLeft");
+        rightSenseGlove = GameObject.FindGameObjectWithTag("SenseGloveRight");
+        leftSenseGlove.SetActive(false);
+        rightSenseGlove.SetActive(false);
+
         currentState = States.HUD;
         //stateMachine = new StateMachine(new HUDState(this));
     }
@@ -30,7 +37,7 @@ public class StateManager : Singleton<StateManager> {
         switch (currentState)
         {
             case States.HUD:
-                additiveSceneManager.ChangeScene(Scenes.CONSTRUCT, null, null, null, DelegateAfterConstructLoad);
+                additiveSceneManager.ChangeScene(Scenes.CONSTRUCT, null, null, DelegateBeforeConstructLoad, DelegateAfterConstructLoad);
                 currentState = States.Construct;
                 break;
             case States.Construct:
@@ -56,22 +63,33 @@ public class StateManager : Singleton<StateManager> {
     }
 
     #region Delegates
+    void DelegateBeforeConstructLoad()
+    {
+        leftSenseGlove.SetActive(true);
+        rightSenseGlove.SetActive(true);
+    }
+
     void DelegateAfterConstructLoad()
     {
         Transform cameraOrigin = GameObject.FindGameObjectWithTag("CameraOrigin").transform;
         Transform constructObjects = GameObject.FindGameObjectWithTag("ConstructObjects").transform;
         Transform roboy = GameObject.FindGameObjectWithTag("Roboy").transform;
-        Transform leftSenseGlove = GameObject.FindGameObjectWithTag("SenseGloveLeft").transform;
+        /*Transform leftSenseGlove = GameObject.FindGameObjectWithTag("SenseGloveLeft").transform;
         Transform rightSenseGlove = GameObject.FindGameObjectWithTag("SenseGloveRight").transform;
         
-        
         rightSenseGlove.SetParent(cameraOrigin, false);
-        //rightSenseGlove.GetChild(0).GetComponent<SenseGlove_Object>().LinkToGlove(rightSenseGlove.GetChild(0).GetComponent<SenseGlove_Object>().GloveIndex);
+        if (!rightSenseGlove.GetComponentInChildren<SenseGlove_Object>().GloveReady)
+        {
+            rightSenseGlove.GetChild(0).GetComponent<SenseGlove_Object>().LinkToGlove(rightSenseGlove.GetChild(0).GetComponent<SenseGlove_Object>().GloveIndex);
+        }
         leftSenseGlove.SetParent(cameraOrigin, false);
-        //leftSenseGlove.GetChild(0).GetComponent<SenseGlove_Object>().LinkToGlove(leftSenseGlove.GetChild(0).GetComponent<SenseGlove_Object>().GloveIndex);
+        if(!leftSenseGlove.GetComponentInChildren<SenseGlove_Object>().GloveReady)
+        {
+            leftSenseGlove.GetComponentInChildren<SenseGlove_Object>().LinkToGlove(leftSenseGlove.GetComponentInChildren<SenseGlove_Object>().GloveIndex);
+        }
         leftSenseGlove.GetChild(1).GetComponent<ShowOpenMenuButton>().CompareObject = cameraOrigin;
         leftSenseGlove.GetComponent<SteamVR_TrackedObject>().enabled = true;
-        
+        */
         roboy.position = cameraOrigin.position + new Vector3(0f, 1.4f, 0f);
         roboy.rotation = Quaternion.Euler(roboy.rotation.eulerAngles + cameraOrigin.rotation.eulerAngles);
 
@@ -86,16 +104,21 @@ public class StateManager : Singleton<StateManager> {
 
     void DelegateOnConstructUnload()
     {
+        /*Destroy(GameObject.FindObjectOfType<SenseGlove_DeviceManager>().gameObject);
         Destroy(GameObject.FindGameObjectWithTag("SenseGloveLeft"));
-        Destroy(GameObject.FindGameObjectWithTag("SenseGloveRight"));
+        Destroy(GameObject.FindGameObjectWithTag("SenseGloveRight"));*/
         Transform cameraOrigin = GameObject.FindGameObjectWithTag("CameraOrigin").transform;
         for(int i = 0; i < cameraOrigin.childCount; i++)
         {
             if (cameraOrigin.GetChild(i).CompareTag("SubMenu3D"))
             {
+                cameraOrigin.GetChild(i).GetComponentInChildren<SubMenuAnimationHandler>().FadeOut();
                 Destroy(cameraOrigin.GetChild(i).gameObject);
             }
         }
+
+        leftSenseGlove.SetActive(false);
+        rightSenseGlove.SetActive(false);
     }
     #endregion
 

@@ -187,6 +187,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4378067501918587144, guid: d034aafbab27b384495a0baef5638763,
+        type: 3}
+      propertyPath: blocksRaycasts
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4378067501918587147, guid: d034aafbab27b384495a0baef5638763,
         type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -217,11 +222,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.a
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4378067501918587144, guid: d034aafbab27b384495a0baef5638763,
-        type: 3}
-      propertyPath: blocksRaycasts
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d034aafbab27b384495a0baef5638763, type: 3}

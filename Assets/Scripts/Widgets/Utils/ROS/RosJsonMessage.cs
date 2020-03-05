@@ -19,11 +19,13 @@ namespace Widgets
 
         #region Graph
         // Time passed in ms since 1/1/1970
-        public int graphTimestamp;  // MANDATORY FOR GRAPH
+        public double graphTimestamp;  // MANDATORY FOR GRAPH
         public float graphValue;    // MANDATORY FOR GRAPH
         public byte[] graphColor;
+        public string graphTitle;
         public int xDivisionUnits;
         public int yDivisionUnits;
+        public bool showCompleteHistory;
         #endregion
 
         #region Toastr
@@ -45,12 +47,12 @@ namespace Widgets
         #endregion
         
 
-        private RosJsonMessage(int id, float graphDatapoint, int timestamp, byte[] graphColor)
+        private RosJsonMessage(int id, float graphDatapoint, double graphTimestamp, byte[] graphColor)
         {
             this.id = id;
             this.graphValue = graphDatapoint;
             this.graphColor = graphColor;
-            this.timestamp = timestamp;
+            this.graphTimestamp = graphTimestamp;
         }
 
         private RosJsonMessage(int id, string currentIcon)
@@ -66,7 +68,7 @@ namespace Widgets
             this.toastrDuration = toastrDuration;
         }
 
-        public static RosJsonMessage CreateGraphMessage(int id, float graphDatapoint, int timestamp, byte[] graphColor)
+        public static RosJsonMessage CreateGraphMessage(int id, float graphDatapoint, double timestamp, byte[] graphColor)
         {
             return new RosJsonMessage(id, graphDatapoint, timestamp, graphColor);
         }

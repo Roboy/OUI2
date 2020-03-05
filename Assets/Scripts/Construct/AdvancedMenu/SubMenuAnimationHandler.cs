@@ -23,6 +23,7 @@ public class SubMenuAnimationHandler : MonoBehaviour
 
     public bool MButtonTransition;
     public bool IsNested = false;
+    public bool HookToOpenMenuButton = false;
     public bool AcivateOnFadeOut;
     public GameObject ElementToActivate;
     private int currentState;
@@ -33,9 +34,23 @@ public class SubMenuAnimationHandler : MonoBehaviour
 
     private Animator animator;
 
-    // Start is called before the first frame update
+    private void OnDestroy()
+    {
+        GameObject.FindGameObjectWithTag("SenseGloveLeft").transform.GetChild(1).GetChild(1).GetComponent<FrameClickDetection>().onPress[0].RemoveListener(FadeIn);
+    }
+
     void Start()
     {
+        // Dirty Engineering for final Demo, necessary because SenseGloves not in same Scene
+        if(AcivateOnFadeOut && ElementToActivate == null)
+        {
+            ElementToActivate = GameObject.FindGameObjectWithTag("SenseGloveLeft").transform.GetChild(1).gameObject;
+        }
+        if (HookToOpenMenuButton)
+        {
+            GameObject.FindGameObjectWithTag("SenseGloveLeft").transform.GetChild(1).GetChild(1).GetComponent<FrameClickDetection>().onPress[0].AddListener(new UnityAction(FadeIn));
+        }
+
         currentState = -1;
         newRequest = false;
         fadeIn = true;

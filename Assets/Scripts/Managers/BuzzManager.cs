@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuzzManager : Singleton<BuzzManager>
+public class BuzzManager : MonoBehaviour
 {
     public bool RightHand;
     public bool LeftHand;

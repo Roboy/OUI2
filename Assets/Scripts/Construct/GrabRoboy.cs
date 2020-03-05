@@ -17,17 +17,29 @@ public class GrabRoboy : MonoBehaviour
         grab = this.GetComponent<SenseGlove_Grabable>();
     }
 
+    private void Update()
+    {
+        if(this.transform.localPosition != defaultPos && !grab.IsInteracting())
+        {
+            ResetTransform();
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.name == "TargetZoneStartTransition")
         {
-            StateManager.Instance.GoToNextState();
             if (grab.EndInteractAllowed())
             {
                 grab.EndInteraction(grab.GrabScript, true);
-                this.transform.localPosition = defaultPos;
-                this.transform.localRotation = defaultRot;
             }
+            StateManager.Instance.GoToNextState();
         }
+    }
+
+    void ResetTransform()
+    {
+        this.transform.localPosition = defaultPos;
+        this.transform.localRotation = defaultRot;
     }
 }

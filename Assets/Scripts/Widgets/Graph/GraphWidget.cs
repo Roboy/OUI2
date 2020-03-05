@@ -26,6 +26,7 @@ namespace Widgets
 
         public new void Init(RosJsonMessage context)
         {
+            unit = context.graphTitle;
             color = WidgetUtility.BytesToColor(context.graphColor);
             numXLabels = context.xDivisionUnits;
             numYLabels = context.yDivisionUnits;

@@ -28,7 +28,7 @@ namespace Widgets
                 CreateNewToastr(toastrTemplate);
             }
 
-            Init(widget.relativeChildPosition);
+            Init(widget.relativeChildPosition, widget.GetContext().unfoldChildDwellTimer);
         }
 
         public void CreateNewToastr(ToastrTemplate toastrToInstantiate)

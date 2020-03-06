@@ -12,6 +12,8 @@ namespace Widgets
         private IconStateManager iconManager;
         private GraphManager graphManager;
 
+        private readonly float RELATIVE_OFFSET = 100.0f;
+
         private GameObject CreateGraphlikeObject()
         {
             GameObject graph = new GameObject();
@@ -82,7 +84,7 @@ namespace Widgets
                     data.data);
             }
 
-            Init(widget.relativeChildPosition);
+            Init(widget.relativeChildPosition, widget.GetContext().unfoldChildDwellTimer);
 
             /*
             //iconManager = GetComponent<IconStateManager>();
@@ -161,6 +163,37 @@ namespace Widgets
         public override void ShowView(RelativeChildPosition relativeChildPosition)
         {
             gameObject.SetActive(true);
+
+
+
+            Vector3 offsetVector = Vector3.zero;
+
+            switch (relativeChildPosition)
+            {
+                case RelativeChildPosition.Bottom:
+                    offsetVector = Vector3.down * RELATIVE_OFFSET;
+                    break;
+                case RelativeChildPosition.Top:
+                    offsetVector = Vector3.up * RELATIVE_OFFSET;
+                    break;
+                case RelativeChildPosition.Left:
+                    offsetVector = Vector3.left * RELATIVE_OFFSET;
+                    break;
+                case RelativeChildPosition.Right:
+                    offsetVector = Vector3.right * RELATIVE_OFFSET;
+                    break;
+                case RelativeChildPosition.FixedCenter:
+                    transform.SetParent(GameObject.FindGameObjectWithTag("WidgetsCenter").transform, false);
+                    return;
+                case RelativeChildPosition.Incorrect:
+                    return;
+            }
+
+            gameObject.AddComponent<CurvedUI.CurvedUIVertexEffect>();
+
+            transform.SetParent(parentView.transform, false);
+
+            transform.localPosition = offsetVector;
         }
 
         public override void HideView()

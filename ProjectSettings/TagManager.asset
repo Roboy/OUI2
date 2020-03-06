@@ -28,6 +28,8 @@ TagManager:
   - WidgetsCenter
   - WidgetsChild
   - FinalScenePlaceholder
+  - FinalsDemoScriptManager
+  - Trash
   layers:
   - Default
   - TransparentFX

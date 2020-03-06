@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 <<<<<<< HEAD
+<<<<<<< Updated upstream
+guid: dc9b77de28a606d4b8cebc9df80e5874
+=======
+guid: 21a5f2640987cb64b82de9a887013975
+>>>>>>> Stashed changes
+=======
+<<<<<<< HEAD
 <<<<<<< master
 guid: dc9b77de28a606d4b8cebc9df80e5874
 =======
@@ -8,6 +15,7 @@ guid: 42326944da5721f4dabe5e027693be85
 =======
 guid: 42326944da5721f4dabe5e027693be85
 >>>>>>> OUI2-101_integrate_eye_tracking_with_updated_hud_view
+>>>>>>> master
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

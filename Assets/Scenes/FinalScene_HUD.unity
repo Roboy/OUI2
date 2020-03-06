@@ -190,7 +190,7 @@ PrefabInstance:
     - target: {fileID: 4378067501918587144, guid: d034aafbab27b384495a0baef5638763,
         type: 3}
       propertyPath: blocksRaycasts
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4378067501918587147, guid: d034aafbab27b384495a0baef5638763,
         type: 3}
@@ -294,8 +294,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoNotTesselate: 0
-  savedPos: {x: 0, y: 0, z: 0}
-  savedUp: {x: 0, y: 0, z: 0}
+  savedPos: {x: 0, y: -170, z: 6.9999695}
+  savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 100, y: 100}
   savedColor: {r: 0.882353, g: 0.882353, b: 0.882353, a: 1}
   savedTextUV0: {x: 0, y: 0}

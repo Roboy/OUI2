@@ -8,7 +8,7 @@ namespace Widgets
     {
         public readonly int SIZE = 100;
 
-        public string unit;
+        public string graphTitle;
         public Color color = Color.white;
 
         public int numXLabels = 2;
@@ -26,7 +26,7 @@ namespace Widgets
 
         public new void Init(RosJsonMessage context, GameObject viewDesignPrefab)
         {
-            unit = context.graphTitle;
+            graphTitle = context.graphTitle;
             color = WidgetUtility.BytesToColor(context.graphColor);
             numXLabels = context.xDivisionUnits;
             numYLabels = context.yDivisionUnits;

@@ -26,6 +26,7 @@ namespace Widgets
         private GameObject CreateGraph()
         {
             GameObject graph = CreateGraphlikeObject();
+            graph.name = "Graph";
             graph.transform.localPosition = Vector3.zero;
             ((RectTransform)(graph.transform)).sizeDelta = new Vector2(600, 300);
             graph.AddComponent<ChartAndGraph.GraphChart>();
@@ -39,6 +40,7 @@ namespace Widgets
         private GameObject CreateGraphAdditions(GraphWidget graphWidget)
         {
             GameObject additions = CreateGraphlikeObject();
+            additions.name = "Additions";
             additions.transform.localPosition = Vector3.forward;
             RectTransform rectTrans = ((RectTransform)(additions.transform));
             //rectTrans.
@@ -59,10 +61,16 @@ namespace Widgets
             gameObject.AddComponent<CurvedUI.CurvedUIVertexEffect>();
             GraphWidget graphWidget = (GraphWidget)widget;
             SetChildWidget(graphWidget.childWidget);
-        
-            GameObject graph = CreateGraph();
-            GameObject graphAdditions = CreateGraphAdditions(graphWidget);
-            graphManager = graph.GetComponent<GraphManager>();
+
+            GameObject graph = Instantiate(Factory.Instance.graphDesignPrefab);
+            graph.transform.SetParent(transform);
+            graph.transform.localScale = Vector3.one * 0.7f;
+            graph.transform.localPosition = Vector3.down * 45;
+
+
+            //GameObject graph = CreateGraph();
+            //GameObject graphAdditions = CreateGraphAdditions(graphWidget);
+            graphManager = graph.GetComponentInChildren<GraphManager>();
 
             graphManager.Init(graphWidget);
             graphManager.SetColor(graphWidget.name, graphWidget.color);

@@ -5,6 +5,6 @@
 	"widgetPosition": "top",
 	"childWidgetId": 30,
 	"relativeChildPosition": "bottom",
-	"icons": [ "Gloves" ],
-	"currentIcon": "Gloves"
+	"icons": [ "GlovesGreen", "GlovesYellow", "GlovesRed" ],
+	"currentIcon": "GlovesGreen"
 }

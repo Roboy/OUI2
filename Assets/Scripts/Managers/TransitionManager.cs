@@ -61,7 +61,7 @@ public class TransitionManager : MonoBehaviour
 
         if(slerpStart != Vector3.zero || slerpStop != Vector3.zero)
         {
-            cameraOrigin.transform.localPosition = Vector3.Slerp(slerpStart, slerpStop, slerpTimer.GetFraction());
+            cameraOrigin.transform.position = Vector3.Lerp(slerpStart, slerpStop, slerpTimer.GetFraction());
             slerpTimer.LetTimePass(Time.deltaTime);
         }
     }
@@ -76,13 +76,23 @@ public class TransitionManager : MonoBehaviour
     /// </summary>
     public void StartTransition(bool forward)
     {
+        Debug.LogError("Hallo");
         this.isLerping = true;
         GetComponent<VestPlayer>().playTact();
         GetComponent<AudioSource>().Play();
 
         slerpTimer.SetTimer(2.0f, ResetTimer);
-        slerpStart = cameraOrigin.transform.localPosition;
-        slerpStop = new Vector3(cameraOrigin.transform.localPosition.x, cameraOrigin.transform.localPosition.y, cameraOrigin.transform.localPosition.z + (forward ? 1.5f : -1.5f));
+        slerpStart = cameraOrigin.transform.position;
+        slerpStop = cameraOrigin.transform.position + cameraOrigin.transform.forward * (forward ? 1.5f : -1.5f);
+        //slerpStop = new Vector3(cameraOrigin.transform.localPosition.x, cameraOrigin.transform.localPosition.y, cameraOrigin.transform.localPosition.z - 1.5f);
+        /*if (forward)
+        {
+            slerpStop = cameraOrigin.transform.position + cameraOrigin.transform.forward * 1.5f;
+        } else
+        {
+            slerpStop = cameraOrigin.transform.position + cameraOrigin.transform.forward * (-1.5f);
+        }*/
+        //(forward ? 1.5f : -1.5f));
     }
 
     public void ResetTimer()

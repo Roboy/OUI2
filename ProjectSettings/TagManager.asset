@@ -30,6 +30,9 @@ TagManager:
   - FinalScenePlaceholder
   - FinalsDemoScriptManager
   - Trash
+  - ConstructFX
+  - ConstructFXArt
+  - ConstructFXManager
   layers:
   - Default
   - TransparentFX

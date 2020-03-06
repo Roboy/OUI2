@@ -71,36 +71,34 @@ public class TransitionManager : MonoBehaviour
     GameObject cameraOrigin;
     Vector3 slerpStart;
     Vector3 slerpStop;
+    bool currentSceneHUD;
     /// <summary>
     /// Starts visual transition animation between scenes.
     /// </summary>
-    public void StartTransition(bool forward)
+    public void StartTransition(bool hud)
     {
-        Debug.LogError("Hallo");
         this.isLerping = true;
         GetComponent<VestPlayer>().playTact();
         GetComponent<AudioSource>().Play();
 
         slerpTimer.SetTimer(2.0f, ResetTimer);
         slerpStart = cameraOrigin.transform.position;
-        slerpStop = cameraOrigin.transform.position + cameraOrigin.transform.forward * (forward ? 1.5f : -1.5f);
-        //slerpStop = new Vector3(cameraOrigin.transform.localPosition.x, cameraOrigin.transform.localPosition.y, cameraOrigin.transform.localPosition.z - 1.5f);
-        /*if (forward)
-        {
-            slerpStop = cameraOrigin.transform.position + cameraOrigin.transform.forward * 1.5f;
-        } else
-        {
-            slerpStop = cameraOrigin.transform.position + cameraOrigin.transform.forward * (-1.5f);
-        }*/
-        //(forward ? 1.5f : -1.5f));
+        slerpStop = cameraOrigin.transform.position + cameraOrigin.transform.forward * (hud ? 1.5f : -1.5f);
+        currentSceneHUD = hud;
     }
 
     public void ResetTimer()
     {
-        AnchorTransform[] anchorTransforms = GameObject.FindObjectsOfType<AnchorTransform>();
-        for(int i = 0; i < anchorTransforms.Length; i++)
+        if (currentSceneHUD)
         {
-            anchorTransforms[i].ResetAnchor();
+            Destroy(GameObject.FindGameObjectWithTag("Roboy"));
+        } else
+        {
+            AnchorTransform[] anchorTransforms = GameObject.FindObjectsOfType<AnchorTransform>();
+            for (int i = 0; i < anchorTransforms.Length; i++)
+            {
+                anchorTransforms[i].ResetAnchor();
+            }
         }
         slerpStart = Vector3.zero;
         slerpStop = Vector3.zero;

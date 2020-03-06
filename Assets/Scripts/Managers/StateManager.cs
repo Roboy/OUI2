@@ -98,6 +98,7 @@ public class StateManager : Singleton<StateManager> {
             leftSenseGlove.GetChild(1).GetComponent<ShowOpenMenuButton>().CompareObject = cameraOrigin;
             leftSenseGlove.GetComponent<SteamVR_TrackedObject>().enabled = true;
             */
+            roboy.SetParent(GameObject.FindGameObjectWithTag("FinalScenePlaceholder").transform);
             roboy.position = cameraOrigin.position + new Vector3(0f, 1.4f, 0f);
             roboy.rotation = Quaternion.Euler(roboy.rotation.eulerAngles + cameraOrigin.rotation.eulerAngles);
 

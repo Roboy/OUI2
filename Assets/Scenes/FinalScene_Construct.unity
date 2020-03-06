@@ -519,7 +519,7 @@ PrefabInstance:
     - target: {fileID: 3040968133687722740, guid: f351ccdc0bed1874aa1b876165e284c4,
         type: 3}
       propertyPath: isToggle
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5722214210985517345, guid: f351ccdc0bed1874aa1b876165e284c4,
         type: 3}

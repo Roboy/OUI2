@@ -42,10 +42,10 @@ namespace Widgets
                     offsetVector = Vector3.up * RELATIVE_OFFSET;
                     break;
                 case RelativeChildPosition.Left:
-                    offsetVector = Vector3.left * RELATIVE_OFFSET;
+                    offsetVector = Vector3.left * RELATIVE_OFFSET * 2;
                     break;
                 case RelativeChildPosition.Right:
-                    offsetVector = Vector3.right * RELATIVE_OFFSET;
+                    offsetVector = Vector3.right * RELATIVE_OFFSET * 2;
                     break;
                 case RelativeChildPosition.FixedCenter:
                     transform.SetParent(GameObject.FindGameObjectWithTag("WidgetsCenter").transform, false);

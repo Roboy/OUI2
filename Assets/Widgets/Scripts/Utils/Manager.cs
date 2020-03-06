@@ -44,6 +44,12 @@ namespace Widgets
 
         private void ForwardMessageToWidget(RosJsonMessage rosMessage)
         {
+            if (rosMessage == null)
+            {
+                Debug.LogWarning("RosMessage was null");
+                return;
+            }
+
             Widget widget = FindWidgetWithID(rosMessage.id);
 
             if (widget == null)

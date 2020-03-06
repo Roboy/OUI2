@@ -5,7 +5,7 @@
 	"widgetPosition": "right",
 	"childWidgetId": 1,
 	"relativeChildPosition": "fixedCenter",
-	"unfoldChildDwellTimer": 3.0,
+	"unfoldChildDwellTimer": 1.5,
 	"textMessage": "Temperature:\n20 C",
 	"textFontSize": 30,
 	"textColor": [ 255, 255, 255, 255 ]

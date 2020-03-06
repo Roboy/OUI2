@@ -74,6 +74,7 @@ namespace Widgets
 
             graphManager.Init(graphWidget);
             graphManager.SetColor(graphWidget.name, graphWidget.color);
+            print(graphWidget.numXLabels);
             graphManager.SetNumLabelsShownX(graphWidget.numXLabels);
             graphManager.SetNumLabelsShownY(graphWidget.numYLabels);
             foreach (GraphWidget.Datapoint data in graphWidget.datapoints)

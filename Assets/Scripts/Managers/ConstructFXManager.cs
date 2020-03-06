@@ -17,16 +17,6 @@ public class ConstructFXManager : MonoBehaviour {
         constructEffectObjectsArt = GameObject.FindGameObjectsWithTag("ConstructFXArt");
     }
 
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.P)) {
-            ToggleEffects(true);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.T)) {
-            ToggleEffects(false);
-        }
-    }
-
     public void ToggleEffects(bool effectActive) {
         foreach (var constructEffectObject in constructEffectObjects) {
             MeshRenderer meshRenderer = constructEffectObject.GetComponent<MeshRenderer>();

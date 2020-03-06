@@ -135,8 +135,11 @@ namespace Widgets
             keepChildUnfoldedTimer.ResetTimer();
             keepChildUnfolded = true;
 
-            dwellTimerActive = false;
-            dwellTimerImage.fillAmount = 0.0f;
+            if (useDwellTimer)
+            {
+                dwellTimerActive = false;
+                dwellTimerImage.fillAmount = 0.0f;
+            }
         }
 
         public void SetRelativeChildPosition(RelativeChildPosition relativeChildPosition)

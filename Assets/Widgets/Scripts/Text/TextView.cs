@@ -31,7 +31,6 @@ namespace Widgets
                 image.enabled = true;
             }
 
-
             Vector3 offsetVector = Vector3.zero;
 
             switch (relativeChildPosition)
@@ -49,6 +48,7 @@ namespace Widgets
                     offsetVector = Vector3.right * RELATIVE_OFFSET;
                     break;
                 case RelativeChildPosition.FixedCenter:
+                    transform.SetParent(GameObject.FindGameObjectWithTag("WidgetsCenter").transform, false);
                     return;
                 case RelativeChildPosition.Incorrect:                    
                     return;

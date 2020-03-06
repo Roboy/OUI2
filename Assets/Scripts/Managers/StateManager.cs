@@ -10,6 +10,7 @@ public class StateManager : Singleton<StateManager> {
     private States currentState;
 
     AdditiveSceneManager additiveSceneManager;
+    ConstructFXManager constructFXManager;
     TransitionManager transitionManager;
     GameObject leftSenseGlove;
     GameObject rightSenseGlove;
@@ -21,6 +22,7 @@ public class StateManager : Singleton<StateManager> {
 
     // Start is called before the first frame update
     void Start() {
+        constructFXManager = GameObject.FindGameObjectWithTag("ConstructFXManager").GetComponent<ConstructFXManager>();
         additiveSceneManager = GameObject.FindGameObjectWithTag("AdditiveSceneManager").GetComponent<AdditiveSceneManager>();
         transitionManager = GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>();
 
@@ -109,6 +111,8 @@ public class StateManager : Singleton<StateManager> {
             roboy.position = cameraOrigin.position + new Vector3(0f, 1.5f, 0f);
             roboy.rotation = Quaternion.Euler(roboy.rotation.eulerAngles + cameraOrigin.rotation.eulerAngles);
             */
+
+            constructFXManager.toggleEffects();
         }
     }
 
@@ -132,6 +136,8 @@ public class StateManager : Singleton<StateManager> {
             rightSenseGlove.GetComponentInChildren<SenseGlove_Object>().StopBrakes();
             leftSenseGlove.SetActive(false);
             rightSenseGlove.SetActive(false);
+
+            constructFXManager.toggleEffects();
         }
     }
     #endregion

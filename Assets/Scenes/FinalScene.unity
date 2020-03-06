@@ -127,83 +127,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8896569798388738510}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &252494935
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 252494940}
-  - component: {fileID: 252494939}
-  - component: {fileID: 252494938}
-  m_Layer: 0
-  m_Name: Model_Head (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!23 &252494938
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 252494935}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: df6ba1509fc02884da8b129c6659ac5a, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &252494939
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 252494935}
-  m_Mesh: {fileID: 4300000, guid: 7bac3fe7767cb434288487698313bf43, type: 3}
---- !u!4 &252494940
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 252494935}
-  m_LocalRotation: {x: -0.68467635, y: 0.17668694, z: 0.17668694, w: 0.68467635}
-  m_LocalPosition: {x: 0, y: 0.486, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: -90.00001, y: 28.94, z: 0}
 --- !u!1 &256925408 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4477314025499737569, guid: 46fd8a40a1749f945b96bcb0f67eabaf,
@@ -759,8 +682,8 @@ GameObject:
   - component: {fileID: 1534220422}
   - component: {fileID: 1534220423}
   m_Layer: 0
-  m_Name: EffectManager
-  m_TagString: Untagged
+  m_Name: ConstructFXManager
+  m_TagString: ConstructFXManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1000,72 +923,72 @@ PrefabInstance:
     - target: {fileID: 3657889359756233581, guid: 0df5568388e85634b86118da53004450,
         type: 3}
       propertyPath: m_TagString
-      value: ConstructFX
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3657889359727365892, guid: 0df5568388e85634b86118da53004450,
         type: 3}
       propertyPath: m_TagString
-      value: ConstructFX
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3657889359820784300, guid: 0df5568388e85634b86118da53004450,
         type: 3}
       propertyPath: m_TagString
-      value: ConstructFX
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3657889360060079024, guid: 0df5568388e85634b86118da53004450,
         type: 3}
       propertyPath: m_TagString
-      value: ConstructFX
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3657889360073007072, guid: 0df5568388e85634b86118da53004450,
         type: 3}
       propertyPath: m_TagString
-      value: ConstructFX
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3657889360100518753, guid: 0df5568388e85634b86118da53004450,
         type: 3}
       propertyPath: m_TagString
-      value: ConstructFX
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3657889360191047347, guid: 0df5568388e85634b86118da53004450,
         type: 3}
       propertyPath: m_TagString
-      value: ConstructFX
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3657889360533252205, guid: 0df5568388e85634b86118da53004450,
         type: 3}
       propertyPath: m_TagString
-      value: ConstructFX
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3657889360586433871, guid: 0df5568388e85634b86118da53004450,
         type: 3}
       propertyPath: m_TagString
-      value: ConstructFX
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3657889360710117575, guid: 0df5568388e85634b86118da53004450,
         type: 3}
       propertyPath: m_TagString
-      value: ConstructFX
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3657889360849714232, guid: 0df5568388e85634b86118da53004450,
         type: 3}
       propertyPath: m_TagString
-      value: ConstructFX
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3657889360904849682, guid: 0df5568388e85634b86118da53004450,
         type: 3}
       propertyPath: m_TagString
-      value: ConstructFX
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3657889361022657687, guid: 0df5568388e85634b86118da53004450,
         type: 3}
       propertyPath: m_TagString
-      value: ConstructFX
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3657889361086780049, guid: 0df5568388e85634b86118da53004450,
         type: 3}
       propertyPath: m_TagString
-      value: ConstructFX
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3657889361181970457, guid: 0df5568388e85634b86118da53004450,
         type: 3}
@@ -1080,17 +1003,17 @@ PrefabInstance:
     - target: {fileID: 3657889361222087803, guid: 0df5568388e85634b86118da53004450,
         type: 3}
       propertyPath: m_TagString
-      value: ConstructFX
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3657889361501409833, guid: 0df5568388e85634b86118da53004450,
         type: 3}
       propertyPath: m_TagString
-      value: ConstructFX
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3657889361542119878, guid: 0df5568388e85634b86118da53004450,
         type: 3}
       propertyPath: m_TagString
-      value: ConstructFX
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3658159195982673314, guid: 0df5568388e85634b86118da53004450,
         type: 3}
@@ -1521,6 +1444,366 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884151643328013, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884151438516988, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884151338375958, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884151403958773, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884151382556254, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884151381232370, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884152307931832, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884152152268195, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884152033550115, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884151848358318, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884151913534046, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884152812441150, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884152799621738, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884152864923295, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884152542792872, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884153356706185, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884152903320734, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658884152986467487, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541628810578, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541455272637, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541507836889, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541494161337, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541499848371, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541871826098, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541915143620, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541081189325, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541077080374, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541059289802, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541039122398, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541148172267, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541120572735, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541088166012, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540952773624, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540960541654, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541347180352, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541319358362, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541372272955, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541210235162, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541272688281, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541268003821, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541260756323, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435541249200669, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540514094158, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540515954469, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540485008017, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540359928472, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540449223670, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540425632448, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540800325564, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540757508477, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540844889619, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540634120135, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540633989669, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540633607829, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540626472079, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540732330573, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435539996062359, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435539960780982, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540064526615, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540059581643, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540011944361, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540025471293, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435539848938008, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435539851472037, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435539830171338, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435539824689741, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435539822886341, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435539929572027, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540227784568, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540111042650, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540079033658, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3658435540165760566, guid: 0df5568388e85634b86118da53004450,
+        type: 3}
+      propertyPath: m_TagString
+      value: ConstructFX
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0df5568388e85634b86118da53004450, type: 3}

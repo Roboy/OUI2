@@ -30,6 +30,7 @@ TagManager:
   - ConstructFX
   - ConstructFXArt
   - FinalScenePlaceholder
+  - ConstructFXManager
   layers:
   - Default
   - TransparentFX

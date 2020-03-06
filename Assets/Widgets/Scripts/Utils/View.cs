@@ -1,67 +1,78 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Widgets
 {
     public abstract class View : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
+        public float keepOpenDuration = 0.5f;
+        public float dwellTimerDuration;
+
         public Widget childWidget;
         public View parentView;
+        public Image dwellTimerImage;
 
         private RelativeChildPosition relativeChildPosition;
 
-        private Timer timer;
-        // float duration = 0.5f;
+        private Timer keepChildUnfoldedTimer;
+        private Timer dwellTimer;
 
-        public bool timerActive = false;
+        public bool keepChildUnfolded = false;
+        public bool dwellTimerActive = false;
 
         public abstract void Init(Widget widget);
 
-        public void Init(RelativeChildPosition relativeChildPosition)
+        #region FLAGS
+        public bool isLookedAt = false;
+        public bool childIsActive = false;
+        public bool useDwellTimer = false;
+        #endregion
+
+        public void Init(RelativeChildPosition relativeChildPosition, float dwellTimerDuration)
         {
-            // AttachCurvedUI();
             SetRelativeChildPosition(relativeChildPosition);
-            timer = new Timer();
+            this.dwellTimerDuration = dwellTimerDuration;
+
+            if (dwellTimerDuration > 0)
+            {
+                useDwellTimer = true;
+            }
+
+            dwellTimerImage = gameObject.GetComponentInChildren<Image>();
+            
+            keepChildUnfoldedTimer = new Timer();
+            dwellTimer = new Timer();
         }
 
-        public void OnSelectionEnter()
+        public void UnfoldChild()
         {
-            timer.SetTimer(0.5f, TimeIsUp);
-            timerActive = false;
+            childIsActive = true;
 
+            /*
             if (parentView != null)
             {
                 parentView.OnSelectionEnter();
             }
+            */
 
             if (childWidget != null)
             {
                 childWidget.GetView().SetParentView(this);
                 childWidget.GetView().ShowView(relativeChildPosition);
             }
+
+            dwellTimerActive = false;
         }
 
-        public void AttachCurvedUI()
+        public void FoldChildIn()
         {
-            gameObject.AddComponent<CurvedUI.CurvedUIVertexEffect>();
-        }
+            childIsActive = false;
 
-        public void SetRelativeChildPosition(RelativeChildPosition relativeChildPosition)
-        {
-            this.relativeChildPosition = relativeChildPosition;
-        }
-
-        public void OnSelectionExit()
-        {
-            timer.ResetTimer();
-            timerActive = true;
-        }
-
-        private void TimeIsUp()
-        {
             if (parentView != null)
             {
                 parentView.OnSelectionExit();
+                ResetDwellTimer();
             }
 
             if (childWidget != null)
@@ -70,7 +81,67 @@ namespace Widgets
                 childWidget.GetView().HideView();
             }
 
-            timerActive = false;
+            keepChildUnfolded = false;
+        }
+
+        public void ResetDwellTimer()
+        {
+            dwellTimer.ResetTimer();
+            dwellTimerActive = false;
+        }
+
+        public void OnSelectionChildEnter()
+        {
+            keepChildUnfolded = false;
+        }
+
+        public void OnSelectionChildExit()
+        {
+            keepChildUnfolded = true;
+        }
+
+        public void OnSelectionEnter()
+        {
+            isLookedAt = true;
+
+            keepChildUnfoldedTimer.SetTimer(keepOpenDuration, FoldChildIn);
+            keepChildUnfolded = false;
+
+            if (parentView != null)
+            {
+                parentView.OnSelectionChildEnter();
+            }
+
+            if (useDwellTimer)
+            {
+                dwellTimer.SetTimer(dwellTimerDuration, UnfoldChild);
+                dwellTimerActive = true;
+            }
+            else
+            {
+                UnfoldChild();
+            }
+        }
+
+        public void OnSelectionExit()
+        {
+            isLookedAt = false;
+
+            if (parentView != null)
+            {
+                OnSelectionChildExit();
+            }
+
+            keepChildUnfoldedTimer.ResetTimer();
+            keepChildUnfolded = true;
+
+            dwellTimerActive = false;
+            dwellTimerImage.fillAmount = 0.0f;
+        }
+
+        public void SetRelativeChildPosition(RelativeChildPosition relativeChildPosition)
+        {
+            this.relativeChildPosition = relativeChildPosition;
         }
 
         public abstract void ShowView(RelativeChildPosition relativeChildPosition);
@@ -89,9 +160,18 @@ namespace Widgets
 
         public void Update()
         {
-            if (timerActive)
+            // Folding child in again timer
+            if (keepChildUnfolded)
             {
-                timer.LetTimePass(Time.deltaTime);
+                keepChildUnfoldedTimer.LetTimePass(Time.deltaTime);
+            }
+
+            // Fold child out dwell timer
+            if (isLookedAt && useDwellTimer)
+            {
+                dwellTimer.LetTimePass(Time.deltaTime);
+
+                dwellTimerImage.fillAmount = dwellTimer.GetFraction();
             }
         }
 

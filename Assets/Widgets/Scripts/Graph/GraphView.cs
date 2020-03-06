@@ -82,7 +82,7 @@ namespace Widgets
                     data.data);
             }
 
-            Init(widget.relativeChildPosition);
+            Init(widget.relativeChildPosition, widget.GetContext().unfoldChildDwellTimer);
 
             /*
             //iconManager = GetComponent<IconStateManager>();

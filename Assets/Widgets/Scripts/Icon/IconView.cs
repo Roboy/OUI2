@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Widgets
@@ -32,7 +31,7 @@ namespace Widgets
             SetChildWidget(widget.childWidget);            
             SetIcon(((IconWidget)widget).currentIcon);
 
-            Init(widget.relativeChildPosition);
+            Init(widget.relativeChildPosition, widget.GetContext().unfoldChildDwellTimer);
         }
     }
 }

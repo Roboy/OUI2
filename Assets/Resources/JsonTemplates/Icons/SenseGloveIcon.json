@@ -5,6 +5,7 @@
 	"widgetPosition": "top",
 	"childWidgetId": 30,
 	"relativeChildPosition": "bottom",
-	"icons": [ "Gloves-ON_01a" ],
-	"currentIcon": "Gloves-ON_01a"
+	"unfoldChildDwellTimer": 1.0,
+	"icons": [ "GlovesGreen", "GlovesYellow", "GlovesRed" ],
+	"currentIcon": "GlovesGreen"
 }

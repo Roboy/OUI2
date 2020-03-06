@@ -33,14 +33,15 @@ public class StateManager : Singleton<StateManager> {
     }
 
     public void GoToNextState() {
-        GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>().StartTransition();
         switch (currentState)
         {
             case States.HUD:
+                GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>().StartTransition(false);
                 additiveSceneManager.ChangeScene(Scenes.CONSTRUCT, null, null, DelegateBeforeConstructLoad, DelegateAfterConstructLoad);
                 currentState = States.Construct;
                 break;
             case States.Construct:
+                GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>().StartTransition(true);
                 additiveSceneManager.ChangeScene(Scenes.HUD, null, DelegateOnConstructUnload, null, null);
                 currentState = States.HUD;
                 break;

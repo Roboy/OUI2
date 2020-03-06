@@ -29,9 +29,6 @@ public class TransitionManager : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A)) {
-            StartTransition();
-        }
         if (isLerping)
         {
             curTime += Time.deltaTime;
@@ -77,7 +74,7 @@ public class TransitionManager : MonoBehaviour
     /// <summary>
     /// Starts visual transition animation between scenes.
     /// </summary>
-    public void StartTransition()
+    public void StartTransition(bool forward)
     {
         this.isLerping = true;
         GetComponent<VestPlayer>().playTact();
@@ -85,7 +82,7 @@ public class TransitionManager : MonoBehaviour
 
         slerpTimer.SetTimer(2.0f, ResetTimer);
         slerpStart = cameraOrigin.transform.localPosition;
-        slerpStop = new Vector3(cameraOrigin.transform.localPosition.x, cameraOrigin.transform.localPosition.y, cameraOrigin.transform.localPosition.z - 5.0f);
+        slerpStop = new Vector3(cameraOrigin.transform.localPosition.x, cameraOrigin.transform.localPosition.y, cameraOrigin.transform.localPosition.z + (forward ? 5.0f : -5.0f));
     }
 
     public void ResetTimer()

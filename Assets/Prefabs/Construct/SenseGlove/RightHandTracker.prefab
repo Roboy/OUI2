@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RightHandTracker
       objectReference: {fileID: 0}
+    - target: {fileID: 4069970216618131765, guid: e7db80a5e4d91904abc165996fab5b91,
+        type: 3}
+      propertyPath: index
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5641627843154476491, guid: e7db80a5e4d91904abc165996fab5b91,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,6 +72,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5641627842190505508, guid: e7db80a5e4d91904abc165996fab5b91,
+        type: 3}
+      propertyPath: m_Name
+      value: thumbMatchColliderRight
+      objectReference: {fileID: 0}
+    - target: {fileID: 5641627843106048031, guid: e7db80a5e4d91904abc165996fab5b91,
+        type: 3}
+      propertyPath: m_Name
+      value: indexMatchColliderRight
+      objectReference: {fileID: 0}
     - target: {fileID: 5641627841171957769, guid: e7db80a5e4d91904abc165996fab5b91,
         type: 3}
       propertyPath: m_Name
@@ -82,20 +97,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ringMatchColliderRight
       objectReference: {fileID: 0}
-    - target: {fileID: 5641627842190505508, guid: e7db80a5e4d91904abc165996fab5b91,
-        type: 3}
-      propertyPath: m_Name
-      value: thumbMatchColliderRight
-      objectReference: {fileID: 0}
-    - target: {fileID: 5641627843106048031, guid: e7db80a5e4d91904abc165996fab5b91,
-        type: 3}
-      propertyPath: m_Name
-      value: indexMatchColliderRight
-      objectReference: {fileID: 0}
-    - target: {fileID: 4069970216618131765, guid: e7db80a5e4d91904abc165996fab5b91,
-        type: 3}
-      propertyPath: index
-      value: 3
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5754762413341038895, guid: e7db80a5e4d91904abc165996fab5b91, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e7db80a5e4d91904abc165996fab5b91, type: 3}

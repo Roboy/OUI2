@@ -1,0 +1,8 @@
+{
+	"id": 29,
+	"type": "Icon",
+	"title": "SmellIcon",
+	"widgetPosition": "left",
+	"icons": [ "Empty", "Wodka", "Raisins", "Isopropanol", "RedWine", "OrangeJuice" ],
+	"currentIcon": "Empty"
+}

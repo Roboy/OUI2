@@ -36,8 +36,8 @@ namespace Widgets
 
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                Widget iconTestWidget = FindWidgetWithID(20);
-                iconTestWidget.GetContext().currentIcon = "SenseGlove_1";
+                Widget iconTestWidget = FindWidgetWithID(29);
+                iconTestWidget.GetContext().currentIcon = "RedWine";
                 iconTestWidget.ProcessRosMessage(iconTestWidget.GetContext());
             }
         }

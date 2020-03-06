@@ -10,18 +10,27 @@ namespace Widgets
         private readonly float RELATIVE_OFFSET = 100.0f;
 
         TextMeshProUGUI textMeshPro;
-        RawImage image;
+        RawImage[] images;
                 
         public override void HideView()
         {
             textMeshPro.enabled = false;
-            image.enabled = false;
+
+            foreach (RawImage image in images)
+            {
+                image.enabled = false;
+            }
         }
 
         public override void ShowView(RelativeChildPosition relativeChildPosition)
         {
             textMeshPro.enabled = true;
-            image.enabled = true;
+
+            foreach (RawImage image in images)
+            {
+                image.enabled = true;
+            }
+
 
             Vector3 offsetVector = Vector3.zero;
 
@@ -63,7 +72,7 @@ namespace Widgets
         {
             GameObject viewDesign = Instantiate(widget.viewDesignPrefab);
             viewDesign.transform.SetParent(this.transform, false);
-            image = gameObject.GetComponentInChildren<RawImage>();
+            images = gameObject.GetComponentsInChildren<RawImage>();
             textMeshPro = gameObject.GetComponentInChildren<TextMeshProUGUI>();
 
             SetChildWidget(widget.childWidget);

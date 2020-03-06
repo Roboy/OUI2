@@ -29,6 +29,8 @@ namespace Widgets
             timer.SetTimer(0.5f, TimeIsUp);
             timerActive = false;
 
+            print("ENTER");
+
             if (parentView != null)
             {
                 parentView.OnSelectionEnter();

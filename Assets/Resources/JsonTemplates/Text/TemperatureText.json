@@ -1,0 +1,11 @@
+{
+	"id": 37,
+	"type": "Text",
+	"title": "TemperatureText",
+	"widgetPosition": "right",
+	"childWidgetId": 1,
+	"relativeChildPosition": "fixedCenter",
+	"textMessage": "Temperature:\n20 C",
+	"textFontSize": 30,
+	"textColor": [ 255, 255, 255, 255 ]
+}

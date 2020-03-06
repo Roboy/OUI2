@@ -5,6 +5,7 @@
 	"widgetPosition": "top",
 	"childWidgetId": 33,
 	"relativeChildPosition": "bottom",
+	"unfoldChildDwellTimer": 1.0,
 	"icons": [ "WifiGreen", "WifiYellow", "WifiRed" ],
 	"currentIcon": "WifiGreen"
 }

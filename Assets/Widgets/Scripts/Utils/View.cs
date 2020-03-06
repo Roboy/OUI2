@@ -7,8 +7,7 @@ namespace Widgets
     public abstract class View : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public float keepOpenDuration = 0.5f;
-        public float dwellTimerDuration = 1f;
-        public bool useDwellTimer = false;
+        public float dwellTimerDuration;
 
         public Widget childWidget;
         public View parentView;
@@ -23,6 +22,12 @@ namespace Widgets
         public bool dwellTimerActive = false;
 
         public abstract void Init(Widget widget);
+
+        #region FLAGS
+        public bool isLookedAt = false;
+        public bool childIsActive = false;
+        public bool useDwellTimer = false;
+        #endregion
 
         public void Init(RelativeChildPosition relativeChildPosition, float dwellTimerDuration)
         {
@@ -42,10 +47,14 @@ namespace Widgets
 
         public void UnfoldChild()
         {
+            childIsActive = true;
+
+            /*
             if (parentView != null)
             {
                 parentView.OnSelectionEnter();
             }
+            */
 
             if (childWidget != null)
             {
@@ -58,6 +67,8 @@ namespace Widgets
 
         public void FoldChildIn()
         {
+            childIsActive = false;
+
             if (parentView != null)
             {
                 parentView.OnSelectionExit();
@@ -79,17 +90,48 @@ namespace Widgets
             dwellTimerActive = false;
         }
 
+        public void OnSelectionChildEnter()
+        {
+            keepChildUnfolded = false;
+        }
+
+        public void OnSelectionChildExit()
+        {
+            keepChildUnfolded = true;
+        }
+
         public void OnSelectionEnter()
         {
+            isLookedAt = true;
+
             keepChildUnfoldedTimer.SetTimer(keepOpenDuration, FoldChildIn);
             keepChildUnfolded = false;
 
-            dwellTimer.SetTimer(dwellTimerDuration, UnfoldChild);
-            dwellTimerActive = true;
+            if (parentView != null)
+            {
+                parentView.OnSelectionChildEnter();
+            }
+
+            if (useDwellTimer)
+            {
+                dwellTimer.SetTimer(dwellTimerDuration, UnfoldChild);
+                dwellTimerActive = true;
+            }
+            else
+            {
+                UnfoldChild();
+            }
         }
 
         public void OnSelectionExit()
         {
+            isLookedAt = false;
+
+            if (parentView != null)
+            {
+                OnSelectionChildExit();
+            }
+
             keepChildUnfoldedTimer.ResetTimer();
             keepChildUnfolded = true;
 
@@ -118,12 +160,14 @@ namespace Widgets
 
         public void Update()
         {
+            // Folding child in again timer
             if (keepChildUnfolded)
             {
                 keepChildUnfoldedTimer.LetTimePass(Time.deltaTime);
             }
 
-            if (dwellTimerActive && useDwellTimer)
+            // Fold child out dwell timer
+            if (isLookedAt && useDwellTimer)
             {
                 dwellTimer.LetTimePass(Time.deltaTime);
 

@@ -11,8 +11,6 @@ namespace Widgets
         public float duration;
         public Color color;
         public int fontSize;
-        
-        static int counter = 0;
 
         private Timer timer;
 
@@ -59,7 +57,7 @@ namespace Widgets
                 toastrFontSize = fontSize;
             }
 
-            toastrToInstantiateQueue.Enqueue(new ToastrTemplate(toastrMessage + " " + counter++, toastrDuration, toastrColor, toastrFontSize));
+            toastrToInstantiateQueue.Enqueue(new ToastrTemplate(toastrMessage, toastrDuration, toastrColor, toastrFontSize));
         }
 
         protected override void UpdateInClass()

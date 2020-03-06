@@ -1,0 +1,8 @@
+{
+	"id": 27,
+	"type": "Icon",
+	"title": "HeadsetIcon",
+	"widgetPosition": "left",
+	"icons": [ "Wodka", "RedWine", "OrangeJuice", "Empty" ],
+	"currentIcon": "Wodka"
+}

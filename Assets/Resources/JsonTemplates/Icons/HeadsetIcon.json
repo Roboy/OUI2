@@ -5,6 +5,6 @@
 	"widgetPosition": "top",
 	"childWidgetId": 34,
 	"relativeChildPosition": "bottom",
-	"icons": [ "VrGlasses-ON_01a"],
-	"currentIcon": "VrGlasses-ON_01a"
+	"icons": [ "Headset" ],
+	"currentIcon": "Headset"
 }

@@ -5,6 +5,6 @@
 	"widgetPosition": "top",
 	"childWidgetId": 31,
 	"relativeChildPosition": "bottom",
-	"icons": [ "Mill-ON_01a" ],
-	"currentIcon": "Mill-ON_01a"
+	"icons": [ "Mill" ],
+	"currentIcon": "Mill"
 }

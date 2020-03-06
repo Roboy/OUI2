@@ -223,7 +223,28 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 3803745302935472180, guid: d034aafbab27b384495a0baef5638763,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.03529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 3803745302935472180, guid: d034aafbab27b384495a0baef5638763,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.21385717
+      objectReference: {fileID: 0}
+    - target: {fileID: 3803745302935472180, guid: d034aafbab27b384495a0baef5638763,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.6698113
+      objectReference: {fileID: 0}
+    - target: {fileID: 3803745302935472180, guid: d034aafbab27b384495a0baef5638763,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.091625154
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 3803745302935472180, guid: d034aafbab27b384495a0baef5638763, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d034aafbab27b384495a0baef5638763, type: 3}
 --- !u!1 &4378067501885701393 stripped
 GameObject:
@@ -259,7 +280,7 @@ MonoBehaviour:
   savedPos: {x: 0, y: -170, z: 6.9999695}
   savedUp: {x: 0, y: 1, z: 0}
   savedRectSize: {x: 100, y: 100}
-  savedColor: {r: 1, g: 1, b: 1, a: 0}
+  savedColor: {r: 0.21385717, g: 0.6698113, b: 0.091625154, a: 0.03529412}
   savedTextUV0: {x: 0, y: 0}
   savedFill: 0
 --- !u!114 &4378067501885701397

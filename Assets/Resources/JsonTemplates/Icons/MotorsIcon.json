@@ -5,6 +5,6 @@
 	"widgetPosition": "top",
 	"childWidgetId": 32,
 	"relativeChildPosition": "bottom",
-	"icons": [ "Servo-ON_01a" ],
-	"currentIcon": "Servo-ON_01a"
+	"icons": [ "Motors" ],
+	"currentIcon": "Motors"
 }

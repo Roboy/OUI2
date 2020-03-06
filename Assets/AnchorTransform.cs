@@ -67,9 +67,6 @@ public class AnchorTransform : MonoBehaviour
             }
             oldRot = FollowObject.rotation;
             oldPos = FollowObject.position;
-            Vector3 computeWorldPos = (this.transform.parent.position + worldOffsetToParent);
-            bool same = computeWorldPos == this.transform.position;
-            Debug.LogError(same.ToString() + ": " + computeWorldPos.ToString() + this.transform.position.ToString());
         }
     }
 

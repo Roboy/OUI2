@@ -5,6 +5,7 @@ using Valve.VR;
 using UnityEngine.Events;
 
 public class StateManager : Singleton<StateManager> {
+    public bool KillConstruct;
     //private StateMachine stateMachine;
     private States currentState;
 
@@ -27,8 +28,9 @@ public class StateManager : Singleton<StateManager> {
         rightSenseGlove = GameObject.FindGameObjectWithTag("SenseGloveRight");
         leftSenseGlove.SetActive(false);
         rightSenseGlove.SetActive(false);
+        additiveSceneManager.ChangeScene(Scenes.CONSTRUCT, null, null, DelegateBeforeConstructLoad, DelegateAfterConstructLoad);
         currentState = States.Construct;
-        GoToNextState();
+
         //stateMachine = new StateMachine(new HUDState(this));
     }
 
@@ -65,61 +67,70 @@ public class StateManager : Singleton<StateManager> {
     #region Delegates
     void DelegateBeforeConstructLoad()
     {
-        leftSenseGlove.SetActive(true);
-        rightSenseGlove.SetActive(true);
+        if (!KillConstruct)
+        {
+            leftSenseGlove.SetActive(true);
+            rightSenseGlove.SetActive(true);
+        }
     }
 
     void DelegateAfterConstructLoad()
     {
-        Transform cameraOrigin = GameObject.FindGameObjectWithTag("CameraOrigin").transform;
-        Transform constructObjects = GameObject.FindGameObjectWithTag("ConstructObjects").transform;
-        Transform roboy = GameObject.FindGameObjectWithTag("Roboy").transform;
-        /*Transform leftSenseGlove = GameObject.FindGameObjectWithTag("SenseGloveLeft").transform;
-        Transform rightSenseGlove = GameObject.FindGameObjectWithTag("SenseGloveRight").transform;
-        
-        rightSenseGlove.SetParent(cameraOrigin, false);
-        if (!rightSenseGlove.GetComponentInChildren<SenseGlove_Object>().GloveReady)
+        if (!KillConstruct)
         {
-            rightSenseGlove.GetChild(0).GetComponent<SenseGlove_Object>().LinkToGlove(rightSenseGlove.GetChild(0).GetComponent<SenseGlove_Object>().GloveIndex);
-        }
-        leftSenseGlove.SetParent(cameraOrigin, false);
-        if(!leftSenseGlove.GetComponentInChildren<SenseGlove_Object>().GloveReady)
-        {
-            leftSenseGlove.GetComponentInChildren<SenseGlove_Object>().LinkToGlove(leftSenseGlove.GetComponentInChildren<SenseGlove_Object>().GloveIndex);
-        }
-        leftSenseGlove.GetChild(1).GetComponent<ShowOpenMenuButton>().CompareObject = cameraOrigin;
-        leftSenseGlove.GetComponent<SteamVR_TrackedObject>().enabled = true;
-        */
-        roboy.position = cameraOrigin.position + new Vector3(0f, 1.4f, 0f);
-        roboy.rotation = Quaternion.Euler(roboy.rotation.eulerAngles + cameraOrigin.rotation.eulerAngles);
+            Transform cameraOrigin = GameObject.FindGameObjectWithTag("CameraOrigin").transform;
+            Transform constructObjects = GameObject.FindGameObjectWithTag("ConstructObjects").transform;
+            Transform roboy = GameObject.FindGameObjectWithTag("Roboy").transform;
+            /*Transform leftSenseGlove = GameObject.FindGameObjectWithTag("SenseGloveLeft").transform;
+            Transform rightSenseGlove = GameObject.FindGameObjectWithTag("SenseGloveRight").transform;
 
-        constructObjects.GetChild(0).SetParent(cameraOrigin, false);
-        //GameObject.FindGameObjectWithTag("SubMenu3D").transform.SetParent(cameraOrigin, false);
-        /*Transform constructObjects = GameObject.FindGameObjectWithTag("ConstructObjects").transform;
-        Transform roboy = constructObjects.GetChild(0);
-        roboy.position = cameraOrigin.position + new Vector3(0f, 1.5f, 0f);
-        roboy.rotation = Quaternion.Euler(roboy.rotation.eulerAngles + cameraOrigin.rotation.eulerAngles);
-        */
+            rightSenseGlove.SetParent(cameraOrigin, false);
+            if (!rightSenseGlove.GetComponentInChildren<SenseGlove_Object>().GloveReady)
+            {
+                rightSenseGlove.GetChild(0).GetComponent<SenseGlove_Object>().LinkToGlove(rightSenseGlove.GetChild(0).GetComponent<SenseGlove_Object>().GloveIndex);
+            }
+            leftSenseGlove.SetParent(cameraOrigin, false);
+            if(!leftSenseGlove.GetComponentInChildren<SenseGlove_Object>().GloveReady)
+            {
+                leftSenseGlove.GetComponentInChildren<SenseGlove_Object>().LinkToGlove(leftSenseGlove.GetComponentInChildren<SenseGlove_Object>().GloveIndex);
+            }
+            leftSenseGlove.GetChild(1).GetComponent<ShowOpenMenuButton>().CompareObject = cameraOrigin;
+            leftSenseGlove.GetComponent<SteamVR_TrackedObject>().enabled = true;
+            */
+            roboy.position = cameraOrigin.position + new Vector3(0f, 1.4f, 0f);
+            roboy.rotation = Quaternion.Euler(roboy.rotation.eulerAngles + cameraOrigin.rotation.eulerAngles);
+
+            constructObjects.GetChild(0).SetParent(cameraOrigin, false);
+            //GameObject.FindGameObjectWithTag("SubMenu3D").transform.SetParent(cameraOrigin, false);
+            /*Transform constructObjects = GameObject.FindGameObjectWithTag("ConstructObjects").transform;
+            Transform roboy = constructObjects.GetChild(0);
+            roboy.position = cameraOrigin.position + new Vector3(0f, 1.5f, 0f);
+            roboy.rotation = Quaternion.Euler(roboy.rotation.eulerAngles + cameraOrigin.rotation.eulerAngles);
+            */
+        }
     }
 
     void DelegateOnConstructUnload()
     {
-        /*Destroy(GameObject.FindObjectOfType<SenseGlove_DeviceManager>().gameObject);
-        Destroy(GameObject.FindGameObjectWithTag("SenseGloveLeft"));
-        Destroy(GameObject.FindGameObjectWithTag("SenseGloveRight"));*/
-        Transform cameraOrigin = GameObject.FindGameObjectWithTag("CameraOrigin").transform;
-        for(int i = 0; i < cameraOrigin.childCount; i++)
+        if (!KillConstruct)
         {
-            if (cameraOrigin.GetChild(i).CompareTag("SubMenu3D"))
+            /*Destroy(GameObject.FindObjectOfType<SenseGlove_DeviceManager>().gameObject);
+            Destroy(GameObject.FindGameObjectWithTag("SenseGloveLeft"));
+            Destroy(GameObject.FindGameObjectWithTag("SenseGloveRight"));*/
+            Transform cameraOrigin = GameObject.FindGameObjectWithTag("CameraOrigin").transform;
+            for (int i = 0; i < cameraOrigin.childCount; i++)
             {
-                cameraOrigin.GetChild(i).GetComponentInChildren<SubMenuAnimationHandler>().FadeOut();
-                Destroy(cameraOrigin.GetChild(i).gameObject);
+                if (cameraOrigin.GetChild(i).CompareTag("SubMenu3D"))
+                {
+                    cameraOrigin.GetChild(i).GetComponentInChildren<SubMenuAnimationHandler>().FadeOut();
+                    Destroy(cameraOrigin.GetChild(i).gameObject);
+                }
             }
+            leftSenseGlove.GetComponentInChildren<SenseGlove_Object>().StopBrakes();
+            rightSenseGlove.GetComponentInChildren<SenseGlove_Object>().StopBrakes();
+            leftSenseGlove.SetActive(false);
+            rightSenseGlove.SetActive(false);
         }
-        leftSenseGlove.GetComponentInChildren<SenseGlove_Object>().StopBrakes();
-        rightSenseGlove.GetComponentInChildren<SenseGlove_Object>().StopBrakes();
-        leftSenseGlove.SetActive(false);
-        rightSenseGlove.SetActive(false);
     }
     #endregion
 

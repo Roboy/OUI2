@@ -84,7 +84,7 @@ public class TransitionManager : MonoBehaviour
 
         slerpTimer.SetTimer(2.0f, ResetTimer);
         slerpStart = cameraOrigin.transform.localPosition;
-        slerpStop = new Vector3(cameraOrigin.transform.localPosition.x, cameraOrigin.transform.localPosition.y, cameraOrigin.transform.localPosition.z - 3.0f);
+        slerpStop = new Vector3(cameraOrigin.transform.localPosition.x, cameraOrigin.transform.localPosition.y, cameraOrigin.transform.localPosition.z - 1.5f);
     }
 
     public void ResetTimer()

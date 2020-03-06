@@ -29,9 +29,6 @@ public class TransitionManager : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A)) {
-            StartTransition();
-        }
         if (isLerping)
         {
             curTime += Time.deltaTime;
@@ -64,7 +61,7 @@ public class TransitionManager : MonoBehaviour
 
         if(slerpStart != Vector3.zero || slerpStop != Vector3.zero)
         {
-            cameraOrigin.transform.localPosition = Vector3.Slerp(slerpStart, slerpStop, slerpTimer.GetFraction());
+            cameraOrigin.transform.position = Vector3.Lerp(slerpStart, slerpStop, slerpTimer.GetFraction());
             slerpTimer.LetTimePass(Time.deltaTime);
         }
     }
@@ -74,22 +71,35 @@ public class TransitionManager : MonoBehaviour
     GameObject cameraOrigin;
     Vector3 slerpStart;
     Vector3 slerpStop;
+    bool currentSceneHUD;
     /// <summary>
     /// Starts visual transition animation between scenes.
     /// </summary>
-    public void StartTransition()
+    public void StartTransition(bool hud)
     {
         this.isLerping = true;
         GetComponent<VestPlayer>().playTact();
         GetComponent<AudioSource>().Play();
 
         slerpTimer.SetTimer(2.0f, ResetTimer);
-        slerpStart = cameraOrigin.transform.localPosition;
-        slerpStop = new Vector3(cameraOrigin.transform.localPosition.x, cameraOrigin.transform.localPosition.y, cameraOrigin.transform.localPosition.z - 5.0f);
+        slerpStart = cameraOrigin.transform.position;
+        slerpStop = cameraOrigin.transform.position + cameraOrigin.transform.forward * (hud ? 1.5f : -1.5f);
+        currentSceneHUD = hud;
     }
 
     public void ResetTimer()
     {
+        if (currentSceneHUD)
+        {
+            Destroy(GameObject.FindGameObjectWithTag("Roboy"));
+        } else
+        {
+            AnchorTransform[] anchorTransforms = GameObject.FindObjectsOfType<AnchorTransform>();
+            for (int i = 0; i < anchorTransforms.Length; i++)
+            {
+                anchorTransforms[i].ResetAnchor();
+            }
+        }
         slerpStart = Vector3.zero;
         slerpStop = Vector3.zero;
         slerpTimer.ResetTimer();

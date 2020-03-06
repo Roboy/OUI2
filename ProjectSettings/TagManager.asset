@@ -29,6 +29,7 @@ TagManager:
   - WidgetsChild
   - ConstructFX
   - ConstructFXArt
+  - FinalScenePlaceholder
   layers:
   - Default
   - TransparentFX

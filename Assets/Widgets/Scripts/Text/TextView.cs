@@ -9,7 +9,7 @@ namespace Widgets
     {
         private readonly float RELATIVE_OFFSET = 100.0f;
 
-        TextMeshProUGUI textMeshPro;
+        public TextMeshProUGUI textMeshPro;
         RawImage image;
                 
         public override void HideView()

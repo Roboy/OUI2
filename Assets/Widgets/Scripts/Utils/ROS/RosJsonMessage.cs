@@ -61,14 +61,33 @@ namespace Widgets
             this.currentIcon = currentIcon;
         }
 
-        private RosJsonMessage(int id, string toastrMessage, float toastrDuration)
+        private RosJsonMessage(int id, string toastrMessage, float toastrDuration, byte[] col)
         {
             this.id = id;
             this.toastrMessage = toastrMessage;
             this.toastrDuration = toastrDuration;
+            this.toastrColor = col;
         }
 
-        public static RosJsonMessage CreateGraphMessage(int id, float graphDatapoint, double timestamp, byte[] graphColor)
+        public RosJsonMessage(int id, string title, string type, string widgetPosition, string relativeChildPosition, int childWidgetId, string textMessage, int textFontSize, byte[] textColor) : this(id, title)
+        {
+            this.type = type;
+            this.widgetPosition = widgetPosition;
+            this.relativeChildPosition = relativeChildPosition;
+            this.childWidgetId = childWidgetId;
+            this.textMessage = textMessage;
+            this.textFontSize = textFontSize;
+            this.textColor = textColor;
+        }
+
+        public static RosJsonMessage CreateTextMessage(int id, string title, string type, string widgetPosition,
+            string relativeChildPosition, int childWidgetId, string textMessage, int textFontSize, byte[] textColor)
+        {
+            return new RosJsonMessage(id, title, type, widgetPosition, relativeChildPosition,
+                childWidgetId, textMessage, textFontSize, textColor);
+        }
+
+            public static RosJsonMessage CreateGraphMessage(int id, float graphDatapoint, double timestamp, byte[] graphColor)
         {
             return new RosJsonMessage(id, graphDatapoint, timestamp, graphColor);
         }
@@ -78,9 +97,9 @@ namespace Widgets
             return new RosJsonMessage(id, currentIcon);
         }
 
-        public static RosJsonMessage CreateToastrMessage(int id, string text, float duration)
+        public static RosJsonMessage CreateToastrMessage(int id, string text, float duration, byte[] col)
         {
-            return new RosJsonMessage(id, text, duration);
+            return new RosJsonMessage(id, text, duration, col);
         }
     }
 }

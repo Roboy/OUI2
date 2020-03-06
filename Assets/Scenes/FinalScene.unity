@@ -133,6 +133,53 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1267647163}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &329312724
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 329312725}
+  - component: {fileID: 329312726}
+  m_Layer: 0
+  m_Name: FinalsDemoScriptManager
+  m_TagString: FinalsDemoScriptManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &329312725
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329312724}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 861750288}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &329312726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329312724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e9d3a3eb6028744af9ca2a0f2bce8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TrashBin: {fileID: 65423571098644070, guid: 9bff27469c89c9440a2de13794d595ed, type: 3}
+  TrashCube: {fileID: 8467620798328199860, guid: 13895ecc4b113f345a7719dbac69a239,
+    type: 3}
+  NumberOfCubes: 10
 --- !u!114 &590464033 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7598908364489136654, guid: 46fd8a40a1749f945b96bcb0f67eabaf,
@@ -353,6 +400,7 @@ Transform:
   - {fileID: 1001686985}
   - {fileID: 86932825}
   - {fileID: 1702926443}
+  - {fileID: 329312725}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

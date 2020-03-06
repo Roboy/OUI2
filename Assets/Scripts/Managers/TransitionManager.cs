@@ -21,6 +21,7 @@ public class TransitionManager : MonoBehaviour
     void Start()
     {
         this.postProcessVolume = GetComponent<PostProcessVolume>();
+        this.cameraOrigin = GameObject.FindGameObjectWithTag("CameraOrigin");
     }
 
     /// <summary>
@@ -60,8 +61,19 @@ public class TransitionManager : MonoBehaviour
                 }
             }
         }
+
+        if(slerpStart != Vector3.zero || slerpStop != Vector3.zero)
+        {
+            cameraOrigin.transform.localPosition = Vector3.Slerp(slerpStart, slerpStop, slerpTimer.GetFraction());
+            slerpTimer.LetTimePass(Time.deltaTime);
+        }
     }
 
+
+    Timer slerpTimer = new Timer();
+    GameObject cameraOrigin;
+    Vector3 slerpStart;
+    Vector3 slerpStop;
     /// <summary>
     /// Starts visual transition animation between scenes.
     /// </summary>
@@ -69,5 +81,16 @@ public class TransitionManager : MonoBehaviour
     {
         this.isLerping = true;
         GetComponent<VestPlayer>().playTact();
+
+        slerpTimer.SetTimer(2.0f, ResetTimer);
+        slerpStart = cameraOrigin.transform.localPosition;
+        slerpStop = new Vector3(cameraOrigin.transform.localPosition.x, cameraOrigin.transform.localPosition.y, cameraOrigin.transform.localPosition.z - 5.0f);
+    }
+
+    public void ResetTimer()
+    {
+        slerpStart = Vector3.zero;
+        slerpStop = Vector3.zero;
+        slerpTimer.ResetTimer();
     }
 }

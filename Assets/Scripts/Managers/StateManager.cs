@@ -33,6 +33,7 @@ public class StateManager : Singleton<StateManager> {
     }
 
     public void GoToNextState() {
+        GameObject.FindGameObjectWithTag("TransitionManager").GetComponent<TransitionManager>().StartTransition();
         switch (currentState)
         {
             case States.HUD:

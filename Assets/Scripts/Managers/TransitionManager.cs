@@ -81,6 +81,7 @@ public class TransitionManager : MonoBehaviour
     {
         this.isLerping = true;
         GetComponent<VestPlayer>().playTact();
+        GetComponent<AudioSource>().Play();
 
         slerpTimer.SetTimer(2.0f, ResetTimer);
         slerpStart = cameraOrigin.transform.localPosition;

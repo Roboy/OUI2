@@ -28,7 +28,7 @@ public class CustomSlider : MonoBehaviour
 
     private void Reset()
     {
-        defaultValue = 100f;
+        defaultValue = 0f;
     }
 
     /// <summary>

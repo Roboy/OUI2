@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UpdateTag : MonoBehaviour
 {
     public void updateTag(string name)
     {
-        this.transform.GetChild(1).GetComponent<TextMesh>().text = name;
+        /*this.transform.GetChild(1).GetComponent<TextMesh>().text = name;
 
         Transform plate = this.transform.GetChild(0);
         Vector3 scale = plate.localScale;
@@ -16,8 +17,9 @@ public class UpdateTag : MonoBehaviour
         } else
         {
             plate.localScale = new Vector3(0.065f, scale.y, scale.z);
-        }
+        }*/
 
-        
+        this.GetComponent<TextMeshPro>().text = name;
+
     }
 }

@@ -3,6 +3,6 @@
 	"type": "Icon",
 	"title": "HeadsetIcon",
 	"widgetPosition": "left",
-	"icons": [ "Wodka", "RedWine", "OrangeJuice", "Empty" ],
+	"icons": [ "Wodka", "RedWine", "OrangeJuice", "Isopropanol", "Raisins", "Empty" ],
 	"currentIcon": "Wodka"
 }

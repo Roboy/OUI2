@@ -112,7 +112,7 @@ public class StateManager : Singleton<StateManager> {
             roboy.rotation = Quaternion.Euler(roboy.rotation.eulerAngles + cameraOrigin.rotation.eulerAngles);
             */
 
-            constructFXManager.toggleEffects();
+            constructFXManager.ToggleEffects(true);
         }
     }
 
@@ -137,7 +137,7 @@ public class StateManager : Singleton<StateManager> {
             leftSenseGlove.SetActive(false);
             rightSenseGlove.SetActive(false);
 
-            constructFXManager.toggleEffects();
+            constructFXManager.ToggleEffects(false);
         }
     }
     #endregion

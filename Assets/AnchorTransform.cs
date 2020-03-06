@@ -9,6 +9,7 @@ public class AnchorTransform : MonoBehaviour
     public bool Follow;
     public Transform FollowObject;
     SpringJoint spring;
+    Vector3 worldOffsetToParent;
     Vector3 oldPos;
     Quaternion oldRot;
 
@@ -20,6 +21,8 @@ public class AnchorTransform : MonoBehaviour
             FollowObject = GameObject.FindGameObjectWithTag("CameraOrigin").transform;
         }
         oldPos = FollowObject.position;
+        worldOffsetToParent = this.transform.position - this.transform.parent.position;
+        ResetAnchor();
     }
 
     void FixedUpdate()
@@ -64,6 +67,14 @@ public class AnchorTransform : MonoBehaviour
             }
             oldRot = FollowObject.rotation;
             oldPos = FollowObject.position;
+            Vector3 computeWorldPos = (this.transform.parent.position + worldOffsetToParent);
+            bool same = computeWorldPos == this.transform.position;
+            Debug.LogError(same.ToString() + ": " + computeWorldPos.ToString() + this.transform.position.ToString());
         }
+    }
+
+    public void ResetAnchor()
+    {
+        spring.connectedAnchor = this.transform.parent.position + worldOffsetToParent;
     }
 }

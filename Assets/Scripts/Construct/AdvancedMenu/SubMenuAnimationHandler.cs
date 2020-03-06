@@ -29,6 +29,7 @@ public class SubMenuAnimationHandler : MonoBehaviour
     private int currentState;
     private bool newRequest;
     private bool fadeIn;
+    private FrameClickDetection openMenuButton;
 
     List<InteractionPrefab> interactionPrefabs;
 
@@ -36,7 +37,10 @@ public class SubMenuAnimationHandler : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameObject.FindGameObjectWithTag("SenseGloveLeft").transform.GetChild(1).GetChild(1).GetComponent<FrameClickDetection>().onPress[0].RemoveListener(FadeIn);
+        if (HookToOpenMenuButton)
+        {
+            openMenuButton.onPress[0].RemoveListener(FadeIn);
+        }
     }
 
     void Start()
@@ -48,7 +52,16 @@ public class SubMenuAnimationHandler : MonoBehaviour
         }
         if (HookToOpenMenuButton)
         {
-            GameObject.FindGameObjectWithTag("SenseGloveLeft").transform.GetChild(1).GetChild(1).GetComponent<FrameClickDetection>().onPress[0].AddListener(new UnityAction(FadeIn));
+            openMenuButton = GameObject.FindGameObjectWithTag("SenseGloveLeft").transform.GetChild(1).GetChild(1).GetComponent<FrameClickDetection>();
+            if(openMenuButton != null)
+            {
+                openMenuButton.onPress[0].AddListener(new UnityAction(FadeIn));
+            } else
+            {
+                Debug.LogError("SenseGloveLeft not found during Start.");
+                HookToOpenMenuButton = false;
+            }
+            
         }
 
         currentState = -1;

@@ -133,6 +133,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5804087892473008317, guid: d034aafbab27b384495a0baef5638763,
+        type: 3}
+      propertyPath: m_text
+      value: Smell
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804087892473008317, guid: d034aafbab27b384495a0baef5638763,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 

@@ -19,7 +19,7 @@ public class DemoMock : MockUtility
                     new byte[] { 255, 40, 15, 255 });
                 rosPublisher.PublishMessage(toastrMessage);
                 //RosJsonMessage iconMessage = RosJsonMessage.CreateIconMessage(20, "Gloves-OFF_01a");
-                RosJsonMessage iconMessage = RosJsonMessage.CreateIconMessage(20, "GlovesGreen");
+                RosJsonMessage iconMessage = RosJsonMessage.CreateIconMessage(20, "GlovesRed");
                 // GlovesYellow GlovesRed
                 rosPublisher.PublishMessage(iconMessage);
                 RosJsonMessage textMessage = RosJsonMessage.CreateTextMessage(30, "Senseglove disconnected", "Text", "Child",
@@ -32,7 +32,7 @@ public class DemoMock : MockUtility
                     new byte[] { 100, 250, 10 , 255});
                 rosPublisher.PublishMessage(toastrMessage);
                 //RosJsonMessage iconMessage = RosJsonMessage.CreateIconMessage(20, "Gloves-ON_01a");
-                RosJsonMessage iconMessage = RosJsonMessage.CreateIconMessage(20, "GlovesRed");
+                RosJsonMessage iconMessage = RosJsonMessage.CreateIconMessage(20, "GlovesGreen");
                 rosPublisher.PublishMessage(iconMessage);
                 RosJsonMessage textMessage = RosJsonMessage.CreateTextMessage(30, "Senseglove connected", "Text", "Child",
                     "Bottom", 0, "Connected\nSensegloves fully functioning", 0, null);

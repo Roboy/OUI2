@@ -1,36 +1,47 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Widgets
 {
     public abstract class View : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
+        public float keepOpenDuration = 0.5f;
+        public float dwellTimerDuration = 1f;
+        public bool useDwellTimer = false;
+
         public Widget childWidget;
         public View parentView;
+        public Image dwellTimerImage;
 
         private RelativeChildPosition relativeChildPosition;
 
-        private Timer timer;
-        // float duration = 0.5f;
+        private Timer keepChildUnfoldedTimer;
+        private Timer dwellTimer;
 
-        public bool timerActive = false;
+        public bool keepChildUnfolded = false;
+        public bool dwellTimerActive = false;
 
         public abstract void Init(Widget widget);
 
-        public void Init(RelativeChildPosition relativeChildPosition)
+        public void Init(RelativeChildPosition relativeChildPosition, float dwellTimerDuration)
         {
-            // AttachCurvedUI();
             SetRelativeChildPosition(relativeChildPosition);
-            timer = new Timer();
+            this.dwellTimerDuration = dwellTimerDuration;
+
+            if (dwellTimerDuration > 0)
+            {
+                useDwellTimer = true;
+            }
+
+            dwellTimerImage = gameObject.GetComponentInChildren<Image>();
+            
+            keepChildUnfoldedTimer = new Timer();
+            dwellTimer = new Timer();
         }
 
-        public void OnSelectionEnter()
+        public void UnfoldChild()
         {
-            timer.SetTimer(0.5f, TimeIsUp);
-            timerActive = false;
-
-            print("ENTER");
-
             if (parentView != null)
             {
                 parentView.OnSelectionEnter();
@@ -41,29 +52,16 @@ namespace Widgets
                 childWidget.GetView().SetParentView(this);
                 childWidget.GetView().ShowView(relativeChildPosition);
             }
+
+            dwellTimerActive = false;
         }
 
-        public void AttachCurvedUI()
-        {
-            gameObject.AddComponent<CurvedUI.CurvedUIVertexEffect>();
-        }
-
-        public void SetRelativeChildPosition(RelativeChildPosition relativeChildPosition)
-        {
-            this.relativeChildPosition = relativeChildPosition;
-        }
-
-        public void OnSelectionExit()
-        {
-            timer.ResetTimer();
-            timerActive = true;
-        }
-
-        private void TimeIsUp()
+        public void FoldChildIn()
         {
             if (parentView != null)
             {
                 parentView.OnSelectionExit();
+                ResetDwellTimer();
             }
 
             if (childWidget != null)
@@ -72,7 +70,36 @@ namespace Widgets
                 childWidget.GetView().HideView();
             }
 
-            timerActive = false;
+            keepChildUnfolded = false;
+        }
+
+        public void ResetDwellTimer()
+        {
+            dwellTimer.ResetTimer();
+            dwellTimerActive = false;
+        }
+
+        public void OnSelectionEnter()
+        {
+            keepChildUnfoldedTimer.SetTimer(keepOpenDuration, FoldChildIn);
+            keepChildUnfolded = false;
+
+            dwellTimer.SetTimer(dwellTimerDuration, UnfoldChild);
+            dwellTimerActive = true;
+        }
+
+        public void OnSelectionExit()
+        {
+            keepChildUnfoldedTimer.ResetTimer();
+            keepChildUnfolded = true;
+
+            dwellTimerActive = false;
+            dwellTimerImage.fillAmount = 0.0f;
+        }
+
+        public void SetRelativeChildPosition(RelativeChildPosition relativeChildPosition)
+        {
+            this.relativeChildPosition = relativeChildPosition;
         }
 
         public abstract void ShowView(RelativeChildPosition relativeChildPosition);
@@ -91,9 +118,16 @@ namespace Widgets
 
         public void Update()
         {
-            if (timerActive)
+            if (keepChildUnfolded)
             {
-                timer.LetTimePass(Time.deltaTime);
+                keepChildUnfoldedTimer.LetTimePass(Time.deltaTime);
+            }
+
+            if (dwellTimerActive && useDwellTimer)
+            {
+                dwellTimer.LetTimePass(Time.deltaTime);
+
+                dwellTimerImage.fillAmount = dwellTimer.GetFraction();
             }
         }
 

@@ -13,6 +13,7 @@ namespace Widgets
         public string type;
         public string widgetPosition;
         public string relativeChildPosition;
+        public float unfoldChildDwellTimer;
         public int childWidgetId;
         public int timestamp;
         #endregion

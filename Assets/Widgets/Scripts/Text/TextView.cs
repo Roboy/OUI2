@@ -78,7 +78,7 @@ namespace Widgets
             SetChildWidget(widget.childWidget);
             ChangeMessage(((TextWidget)widget).currentlyDisplayedMessage);
 
-            Init(widget.relativeChildPosition);
+            Init(widget.relativeChildPosition, widget.GetContext().unfoldChildDwellTimer);
         }
     }
 }

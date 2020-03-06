@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class ConstructFXManager : MonoBehaviour {
     [SerializeField] private Material constructEffectMaterial;
-    [SerializeField] private Material constructEffectMaterialArt;
 
     private GameObject[] constructEffectObjects;
 
@@ -17,30 +17,48 @@ public class ConstructFXManager : MonoBehaviour {
         constructEffectObjectsArt = GameObject.FindGameObjectsWithTag("ConstructFXArt");
     }
 
-    public void toggleEffects() {
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.P)) {
+            ToggleEffects(true);
+        }
+        
+        if (Input.GetKeyDown(KeyCode.T)) {
+            ToggleEffects(false);
+        }
+    }
+
+    public void ToggleEffects(bool effectActive) {
         foreach (var constructEffectObject in constructEffectObjects) {
             MeshRenderer meshRenderer = constructEffectObject.GetComponent<MeshRenderer>();
 
             Material prevMaterial = meshRenderer.materials[0];
 
 
-            if (meshRenderer.materials.Length == 1) {
-                // In this case, normal mode is currently activated. Only standard material.
-                meshRenderer.materials = new Material[] {
-                    prevMaterial,
-                    constructEffectMaterial
-                };
+            if (effectActive) {
+                Material[] tmpMaterials = new Material[meshRenderer.materials.Length + 1];
+                for (int i = 0; i < meshRenderer.materials.Length; i++) {
+                    tmpMaterials[i] = meshRenderer.materials[i];
+                }
+
+                tmpMaterials[meshRenderer.materials.Length] = constructEffectMaterial;
+
+                meshRenderer.materials = tmpMaterials;
             }
             else {
-                // In this case, construct mode is currently activated.
-                meshRenderer.materials = new Material[] {
-                    prevMaterial
-                };
+                Material[] tmpMaterials = new Material[meshRenderer.materials.Length - 1];
+                for (int i = 0; i < meshRenderer.materials.Length - 1; i++) {
+                    tmpMaterials[i] = meshRenderer.materials[i];
+                }
+                meshRenderer.materials = tmpMaterials;
             }
         }
 
         foreach (var constructEffectObject in constructEffectObjectsArt) {
             constructEffectObject.SetActive(!constructEffectObject.activeSelf);
         }
+    }
+
+    Material addToArr(Material material) {
+        return material;
     }
 }

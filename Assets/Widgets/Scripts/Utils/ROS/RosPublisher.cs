@@ -49,7 +49,7 @@ namespace Widgets
             }
         }
 
-        private void PublishMessage(RosJsonMessage demoMessage)
+        public void PublishMessage(RosJsonMessage demoMessage)
         {
             string jsonString = JsonUtility.ToJson(demoMessage);
             RosSharp.RosBridgeClient.Messages.Standard.String tmpMessage = new RosSharp.RosBridgeClient.Messages.Standard.String(jsonString);
@@ -119,7 +119,7 @@ namespace Widgets
 
         private void PublishToastrDemoMessage()
         {
-            RosJsonMessage demoMessage = RosJsonMessage.CreateToastrMessage(10, "Hello Roboy", 2);
+            RosJsonMessage demoMessage = RosJsonMessage.CreateToastrMessage(10, "Hello Roboy", 2, null);
             PublishMessage(demoMessage);
         }
 

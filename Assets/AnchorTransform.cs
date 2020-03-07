@@ -9,7 +9,7 @@ public class AnchorTransform : MonoBehaviour
     public bool Follow;
     public Transform FollowObject;
     SpringJoint spring;
-    Vector3 worldOffsetToParent;
+    Vector3 defaultLocalPos;
     Vector3 oldPos;
     Quaternion oldRot;
 
@@ -22,8 +22,16 @@ public class AnchorTransform : MonoBehaviour
             //FollowObject = GameObject.FindGameObjectWithTag("KatVRWalker").transform;
         }
         oldPos = FollowObject.position;
-        worldOffsetToParent = this.transform.position - this.transform.parent.position;
+        defaultLocalPos = this.transform.localPosition;
         ResetAnchor();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            ResetAnchor();
+        }
     }
 
     void FixedUpdate()
@@ -73,6 +81,7 @@ public class AnchorTransform : MonoBehaviour
 
     public void ResetAnchor()
     {
-        spring.connectedAnchor = this.transform.parent.position + worldOffsetToParent;
+        this.transform.localPosition = defaultLocalPos;
+        spring.connectedAnchor = this.transform.position;
     }
 }

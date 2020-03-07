@@ -121,6 +121,46 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &39221333 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8461539073945142531, guid: b128197366bdbbd428de18083cbebd2f,
+    type: 3}
+  m_PrefabInstance: {fileID: 8460182421058961999}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &39221334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39221333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bca9ccf900ccc84c887d783321d27e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _head: {fileID: 0}
+  _ears: {fileID: 0}
+  wireframe: 1
+--- !u!114 &39221335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39221333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4858454a44b54ce41b642bee188e70d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackpadMovement:
+    actionPath: /actions/oui/in/move
+    needsReinit: 0
+  triggerClick:
+    actionPath: /actions/oui/in/trigger
+    needsReinit: 0
+  handType: 0
 --- !u!4 &86932825 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8896569798469850263, guid: a89fe9b31a87eea4e950417414784a4a,
@@ -405,6 +445,73 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &864877313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 864877314}
+  - component: {fileID: 864877316}
+  - component: {fileID: 864877315}
+  m_Layer: 8
+  m_Name: Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &864877314
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864877313}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4641108719142276}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &864877315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864877313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0dbd88d93c7ac94ea2eeadb3cfe48ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TriggerClick:
+    actionPath: /actions/default/in/GrabPinch
+    needsReinit: 0
+  LeftClick:
+    actionPath: /actions/default/in/SnapTurnLeft
+    needsReinit: 0
+  RightClick:
+    actionPath: /actions/default/in/SnapTurnRight
+    needsReinit: 0
+--- !u!114 &864877316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864877313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d37c2cf88f7c59f4c8cf5d3812568143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 7
+  origin: {fileID: 0}
 --- !u!1 &1001686984
 GameObject:
   m_ObjectHideFlags: 0
@@ -2768,6 +2875,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8256680053304792232, guid: b128197366bdbbd428de18083cbebd2f, type: 3}
     - {fileID: 8460182423073950000, guid: b128197366bdbbd428de18083cbebd2f, type: 3}
+    - {fileID: 7738221781878678163, guid: b128197366bdbbd428de18083cbebd2f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b128197366bdbbd428de18083cbebd2f, type: 3}
 --- !u!1 &8460182421058962000 stripped
 GameObject:
@@ -2787,6 +2895,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 499363672b0009743b67dab2edbedd16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedRot: 1
+  speedPos: 1
+  TriggerClick:
+    actionPath: /actions/default/in/GrabPinch
+    needsReinit: 0
+  LeftClick:
+    actionPath: /actions/default/in/SnapTurnLeft
+    needsReinit: 0
+  RightClick:
+    actionPath: /actions/default/in/SnapTurnRight
+    needsReinit: 0
 --- !u!1001 &8896569798388738510
 PrefabInstance:
   m_ObjectHideFlags: 0

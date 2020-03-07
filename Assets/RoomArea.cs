@@ -2,23 +2,111 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 public class RoomArea : MonoBehaviour
 {
-    bool IsDirty;
-    Vector3 oldPos;
-    // Start is called before the first frame update
+    public float speedRot;
+    public float speedPos;
+
+    bool moveForward;
+    bool rotateLeft;
+    bool rotateRight;
+
     void Start()
     {
+        moveForward = false;
+        rotateRight = false;
+        rotateLeft = false;
+
         IsDirty = false;
         oldPos = this.transform.position;
     }
 
-    // Update is called once per frame
-    void LateUpdate()
+    private void Update()
+    {
+        if (rotateRight)
+        {
+            transform.localEulerAngles = new Vector3(0f, transform.localEulerAngles.y + Time.deltaTime * speedRot, 0f);
+        }
+        else if (rotateLeft)
+        {
+            transform.localEulerAngles = new Vector3(0f, transform.localEulerAngles.y - Time.deltaTime * speedRot, 0f);
+        }
+        else if (moveForward)
+        {
+            Vector3 newPos = transform.position + transform.forward * Time.deltaTime * speedPos;
+            if (validatePositionInRoom(newPos, false))
+            {
+                this.transform.position = newPos;
+            }
+        }
+    }
+
+    #region move by controller
+    public SteamVR_Action_Boolean TriggerClick;
+    public SteamVR_Action_Boolean LeftClick;
+    public SteamVR_Action_Boolean RightClick;
+    private SteamVR_Input_Sources inputSource;
+
+    private void OnEnable()
+    {
+        TriggerClick.AddOnStateDownListener(TriggerDown, inputSource);
+        LeftClick.AddOnStateDownListener(LeftDown, inputSource);
+        RightClick.AddOnStateDownListener(RightDown, inputSource);
+
+        TriggerClick.AddOnStateUpListener(TriggerUp, inputSource);
+        LeftClick.AddOnStateUpListener(LeftUp, inputSource);
+        RightClick.AddOnStateUpListener(RightUp, inputSource);
+    }
+
+    private void OnDisable()
+    {
+        TriggerClick.RemoveOnStateDownListener(TriggerDown, inputSource);
+        LeftClick.RemoveOnStateDownListener(LeftDown, inputSource);
+        RightClick.RemoveOnStateDownListener(RightDown, inputSource);
+
+        TriggerClick.RemoveOnStateUpListener(TriggerUp, inputSource);
+        LeftClick.RemoveOnStateUpListener(LeftUp, inputSource);
+        RightClick.RemoveOnStateUpListener(RightUp, inputSource);
+    }
+
+    private void TriggerDown(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
+    {
+        moveForward = true;
+    }
+
+    private void TriggerUp(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
+    {
+        moveForward = false;
+    }
+
+    private void LeftDown(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
+    {
+        rotateLeft = true;
+    }
+    private void LeftUp(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
+    {
+        rotateLeft = false;
+    }
+    private void RightDown(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
+    {
+        rotateRight = true;
+    }
+    private void RightUp(SteamVR_Action_Boolean fromAction, SteamVR_Input_Sources fromSource)
+    {
+        rotateRight = false;
+    }
+#endregion
+
+    #region room scale
+    bool IsDirty;
+    Vector3 oldPos;
+
+    /*void LateUpdate()
     {
         validatePositionInRoom(this.transform.position, true);
-    }
+    }*/
 
     public bool validatePositionInRoom(Vector3 pos)
     {
@@ -27,11 +115,14 @@ public class RoomArea : MonoBehaviour
 
     private bool validatePositionInRoom(Vector3 pos, bool internalUse)
     {
+        float x = pos.x;
+        float z = pos.z;
+
+
+        /* This is the half-working bull shit, if KatVR would work
         bool lockx = false;
         bool lockz = false;
         bool result = true;
-        float x = pos.x;
-        float z = pos.z;
 
         //wall front back; z axis
         if(x <= 4.5f && z <= -34.5f)
@@ -126,9 +217,9 @@ public class RoomArea : MonoBehaviour
         if ((z <= -5.5f && z > -14.5f) && x > 14.5f) {
             result = false;
             if (internalUse) this.transform.position = new Vector3(14f, this.transform.position.y, this.transform.position.z);
-        }
-        
-        
+        }*/
+
+
         /*if((z <= -34.5f && (x <= 15.5f || x > 24.5f)) 
             || ((z <= -25.5f && z > -34.5f) && (x <= 4.5f || x > 34.5f))
             || (((z <= -14.5f && z > -25.5f) || z > -5.5f) && (x <= -4.5f || x > 4.5f))
@@ -141,7 +232,6 @@ public class RoomArea : MonoBehaviour
         //oldPos = this.transform.position;
 
 
-        /*
         if (x > -4.5f && x < 4.5f && z > -34.5 && z < 4.5)
         {
             return true;
@@ -160,8 +250,9 @@ public class RoomArea : MonoBehaviour
         if (x > 15.5f && x < 24.5f && z > -44.5 && z < -34.5)
         {
             return true;
-        }*/
+        }
 
-        return result; //!(lockx || lockz);
+        return false;//This for KatVR: result; //!(lockx || lockz);
     }
+    #endregion
 }

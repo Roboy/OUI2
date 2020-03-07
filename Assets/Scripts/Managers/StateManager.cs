@@ -74,6 +74,11 @@ public class StateManager : Singleton<StateManager> {
         {
             leftSenseGlove.SetActive(true);
             rightSenseGlove.SetActive(true);
+
+            Transform openMenuButton = leftSenseGlove.transform.GetChild(1);
+            openMenuButton.gameObject.SetActive(true);
+            openMenuButton.GetChild(0).GetComponent<ButtonRigidbodyConstraint>().InitialState();
+            openMenuButton.GetChild(1).GetComponent<FrameClickDetection>().highlightOff();
         }
     }
 
@@ -126,7 +131,7 @@ public class StateManager : Singleton<StateManager> {
             /*Destroy(GameObject.FindObjectOfType<SenseGlove_DeviceManager>().gameObject);
             Destroy(GameObject.FindGameObjectWithTag("SenseGloveLeft"));
             Destroy(GameObject.FindGameObjectWithTag("SenseGloveRight"));*/
-            Transform cameraOrigin = GameObject.FindGameObjectWithTag("CameraOrigin").transform;
+            /*Transform cameraOrigin = GameObject.FindGameObjectWithTag("CameraOrigin").transform;
             for (int i = 0; i < cameraOrigin.childCount; i++)
             {
                 if (cameraOrigin.GetChild(i).CompareTag("SubMenu3D"))
@@ -134,7 +139,8 @@ public class StateManager : Singleton<StateManager> {
                     cameraOrigin.GetChild(i).GetComponentInChildren<SubMenuAnimationHandler>().FadeOut();
                     Destroy(cameraOrigin.GetChild(i).gameObject);
                 }
-            }
+            }*/
+            Destroy(GameObject.FindGameObjectWithTag("MainMenu"));
             leftSenseGlove.GetComponentInChildren<SenseGlove_Object>().StopBrakes();
             rightSenseGlove.GetComponentInChildren<SenseGlove_Object>().StopBrakes();
             leftSenseGlove.SetActive(false);

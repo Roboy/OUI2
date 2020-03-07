@@ -2750,6 +2750,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8167467705086566844, guid: b128197366bdbbd428de18083cbebd2f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167467705086566844, guid: b128197366bdbbd428de18083cbebd2f,
+        type: 3}
+      propertyPath: m_TagString
+      value: KatVRWalker
+      objectReference: {fileID: 0}
+    - target: {fileID: 2634880165608660735, guid: b128197366bdbbd428de18083cbebd2f,
+        type: 3}
+      propertyPath: vrCameraRig
+      value: 
+      objectReference: {fileID: 4641108719142276}
     m_RemovedComponents:
     - {fileID: 8256680053304792232, guid: b128197366bdbbd428de18083cbebd2f, type: 3}
     - {fileID: 8460182423073950000, guid: b128197366bdbbd428de18083cbebd2f, type: 3}

@@ -18,7 +18,8 @@ public class AnchorTransform : MonoBehaviour
         spring = this.GetComponent<SpringJoint>();
         if(Follow && FollowObject == null)
         {
-            FollowObject = GameObject.FindGameObjectWithTag("CameraOrigin").transform;
+            Debug.LogError("FollowObject not specified.");
+            //FollowObject = GameObject.FindGameObjectWithTag("KatVRWalker").transform;
         }
         oldPos = FollowObject.position;
         worldOffsetToParent = this.transform.position - this.transform.parent.position;

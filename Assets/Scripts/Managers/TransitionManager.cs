@@ -22,6 +22,7 @@ public class TransitionManager : MonoBehaviour
     {
         this.postProcessVolume = GetComponent<PostProcessVolume>();
         this.cameraOrigin = GameObject.FindGameObjectWithTag("CameraOrigin");
+        this.walker = GameObject.FindGameObjectWithTag("KatVRWalker");
     }
 
     /// <summary>
@@ -69,6 +70,7 @@ public class TransitionManager : MonoBehaviour
 
     Timer slerpTimer = new Timer();
     GameObject cameraOrigin;
+    GameObject walker;
     Vector3 slerpStart;
     Vector3 slerpStop;
     bool currentSceneHUD;
@@ -83,7 +85,7 @@ public class TransitionManager : MonoBehaviour
 
         slerpTimer.SetTimer(2.0f, ResetTimer);
         slerpStart = cameraOrigin.transform.position;
-        slerpStop = cameraOrigin.transform.position + cameraOrigin.transform.forward * (hud ? 1.5f : -1.5f);
+        slerpStop = cameraOrigin.transform.position + walker.transform.forward * (hud ? 1.5f : -1.5f);
         currentSceneHUD = hud;
     }
 

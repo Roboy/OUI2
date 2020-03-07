@@ -33,6 +33,8 @@ TagManager:
   - ConstructFX
   - ConstructFXArt
   - ConstructFXManager
+  - KatVRWalker
+  - RoboyArms
   layers:
   - Default
   - TransparentFX

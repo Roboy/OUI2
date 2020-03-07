@@ -102,7 +102,7 @@ public class StateManager : Singleton<StateManager> {
             */
             roboy.SetParent(GameObject.FindGameObjectWithTag("FinalScenePlaceholder").transform);
             roboy.position = cameraOrigin.position + new Vector3(0f, 1.4f, 0f);
-            roboy.rotation = Quaternion.Euler(roboy.rotation.eulerAngles + cameraOrigin.rotation.eulerAngles);
+            roboy.localEulerAngles = cameraOrigin.transform.localEulerAngles;//Quaternion.Euler(roboy.rotation.eulerAngles + cameraOrigin.rotation.eulerAngles);//cameraOrigin.GetChild(1).rotation;//roboy.rotation * cameraOrigin.GetChild(1).rotation;
 
             FrameClickDetection questButton = constructObjects.GetChild(0).GetComponentInChildren<FrameClickDetection>();
             questButton.onPress[0].AddListener(GameObject.FindGameObjectWithTag("FinalsDemoScriptManager").GetComponent<FinalsDemoScriptManager>().StartQuest);

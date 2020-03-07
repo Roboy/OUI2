@@ -35,6 +35,7 @@ TagManager:
   - ConstructFXManager
   - KatVRWalker
   - RoboyArms
+  - MainMenu
   layers:
   - Default
   - TransparentFX

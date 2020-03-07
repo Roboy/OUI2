@@ -36,6 +36,8 @@ public class FinalsDemoScriptManager : MonoBehaviour
 
     public void StartQuest()
     {
+        Transform roboyArms = GameObject.FindGameObjectWithTag("RoboyArms").transform;
+        roboyArms.localEulerAngles = new Vector3(-60f, roboyArms.localEulerAngles.y, roboyArms.localEulerAngles.z);
         GameObject roboy = GameObject.FindGameObjectWithTag("Roboy");
         trashBin = Instantiate(TrashBin, roboy.transform);
         for(int i = 0; i < NumberOfCubes; i++)
@@ -46,12 +48,14 @@ public class FinalsDemoScriptManager : MonoBehaviour
 
     public void StopQuest()
     {
+        Transform roboyArms = GameObject.FindGameObjectWithTag("RoboyArms").transform;
         GameObject[] allTrashCubes = GameObject.FindGameObjectsWithTag("Trash");
         foreach (GameObject trash in allTrashCubes)
         {
             Destroy(trash);
         }
         Destroy(trashBin);
+        roboyArms.localEulerAngles = new Vector3(0f, roboyArms.localEulerAngles.y, roboyArms.localEulerAngles.z);
     }
 
     Vector3 GetRandomPositionInRoom()

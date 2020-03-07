@@ -2895,8 +2895,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 499363672b0009743b67dab2edbedd16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedRot: 1
-  speedPos: 1
+  speedRot: 80
+  speedPos: 3
   TriggerClick:
     actionPath: /actions/default/in/GrabPinch
     needsReinit: 0

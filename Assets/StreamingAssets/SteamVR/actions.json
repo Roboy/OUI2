@@ -56,7 +56,7 @@
     {
       "name": "/actions/oui/in/move",
       "type": "vector2",
-      "requirement": "mandatory"
+      "requirement": "suggested"
     },
     {
       "name": "/actions/oui/in/trigger",

@@ -85,7 +85,7 @@ public class TransitionManager : MonoBehaviour
 
         slerpTimer.SetTimer(2.0f, ResetTimer);
         slerpStart = cameraOrigin.transform.position;
-        slerpStop = cameraOrigin.transform.position + walker.transform.forward * (hud ? 1.5f : -1.5f);
+        slerpStop = cameraOrigin.transform.position + cameraOrigin.transform.forward * (hud ? 1.5f : -1.5f);//KatVR not working: walker.transform.forward * (hud ? 1.5f : -1.5f);
         currentSceneHUD = hud;
     }
 

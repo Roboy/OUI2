@@ -238,6 +238,16 @@ PrefabInstance:
       propertyPath: onPress.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7848388396979470247, guid: 0d9f30670ced4f44f81d74a7fc0f2477,
+        type: 3}
+      propertyPath: FollowObject
+      value: 
+      objectReference: {fileID: 1177512481}
+    - target: {fileID: 7848388396979470247, guid: 0d9f30670ced4f44f81d74a7fc0f2477,
+        type: 3}
+      propertyPath: Follow
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6399660823901901149, guid: 0d9f30670ced4f44f81d74a7fc0f2477,
         type: 3}
       propertyPath: m_Mesh

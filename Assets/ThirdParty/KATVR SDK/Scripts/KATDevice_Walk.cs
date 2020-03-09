@@ -103,7 +103,7 @@ namespace KATVR
             {
                 GetWalkerData(0, ref bodyYaw, ref WalkPower, ref moveDirection, ref isMoving, ref meter);
 
-                Debug.Log((int)WalkPower);
+                // Debug.Log((int)WalkPower);
 
                 int tmp = bodyYaw;
                 bodyYaw = (int)WalkPower;

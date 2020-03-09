@@ -17,7 +17,7 @@ public class FrameClickDetection : MonoBehaviour
     public Transform pressurePlateTransform;
     private MeshRenderer meshRenderer;
     public Color defaultColor;
-    private Color lightBlue;
+    private Color red;
     private bool toggle;
     #endregion
 
@@ -34,11 +34,11 @@ public class FrameClickDetection : MonoBehaviour
         pressurePlateCollider = pressurePlateTransform.GetComponent<Collider>();
         defaultColor = transform.GetChild(0).GetComponent<MeshRenderer>().material.GetColor("_Color");
 
-        lightBlue = new Color();
-        lightBlue.a = 1.0f;
-        lightBlue.b = 1.0f;
-        lightBlue.g = 0.968f;
-        lightBlue.r = 0.0f;
+        red = new Color();
+        red.a = 1.0f;
+        red.b = 0f;
+        red.g = 0.63f;
+        red.r = 1f;
     }
 
     /// <summary>
@@ -125,7 +125,7 @@ public class FrameClickDetection : MonoBehaviour
     {
         foreach(MeshRenderer childMeshRenderer in transform.GetComponentsInChildren<MeshRenderer>())
         {
-            childMeshRenderer.material.SetColor("_Color", lightBlue);
+            childMeshRenderer.material.SetColor("_Color", red);
         }
     }
 

@@ -14,7 +14,7 @@ public class FinalsDemoScriptManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        room = GameObject.FindGameObjectWithTag("CameraOrigin").GetComponent<RoomArea>();
+        room = GameObject.FindObjectOfType<RoomArea>();
         if(NumberOfCubes <= 0)
         {
             NumberOfCubes = 10;

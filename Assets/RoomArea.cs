@@ -13,6 +13,8 @@ public class RoomArea : MonoBehaviour
     bool rotateLeft;
     bool rotateRight;
 
+    Transform cameraOrigin;
+
     void Start()
     {
         moveForward = false;
@@ -21,26 +23,41 @@ public class RoomArea : MonoBehaviour
 
         IsDirty = false;
         oldPos = this.transform.position;
+
+        cameraOrigin = GameObject.FindGameObjectWithTag("CameraOrigin").transform;
     }
 
     private void Update()
     {
+        
+
         if (rotateRight)
         {
-            transform.localEulerAngles = new Vector3(0f, transform.localEulerAngles.y + Time.deltaTime * speedRot, 0f);
+            cameraOrigin.localEulerAngles = new Vector3(0f, cameraOrigin.localEulerAngles.y + Time.deltaTime * speedRot, 0f);
         }
         else if (rotateLeft)
         {
-            transform.localEulerAngles = new Vector3(0f, transform.localEulerAngles.y - Time.deltaTime * speedRot, 0f);
+            cameraOrigin.localEulerAngles = new Vector3(0f, cameraOrigin.localEulerAngles.y - Time.deltaTime * speedRot, 0f);
         }
         else if (moveForward)
         {
             Vector3 newPos = transform.position + transform.forward * Time.deltaTime * speedPos;
             if (validatePositionInRoom(newPos, false))
             {
-                this.transform.position = newPos;
+                //cameraOrigin.position = newPos;//this.transform.position = newPos;
             }
         }
+        /*else
+        {
+            Vector3 updatedPos = cameraOrigin.transform.position + (this.transform.position - oldPos);
+            if (validatePositionInRoom(updatedPos))
+            {
+                cameraOrigin.transform.position = updatedPos;
+            }
+            oldPos = this.transform.position;
+        }*/
+
+        
     }
 
     #region move by controller

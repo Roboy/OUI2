@@ -11,12 +11,19 @@ public class ConstructFXManager : MonoBehaviour {
 
     private GameObject[] constructEffectObjectsArt;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Start. Gets necessary game objects.
+    /// </summary>
     void Start() {
         constructEffectObjects = GameObject.FindGameObjectsWithTag("ConstructFX");
         constructEffectObjectsArt = GameObject.FindGameObjectsWithTag("ConstructFXArt");
     }
 
+    /// <summary>
+    /// Toggles the gallery room between normal and construct mode.
+    /// Enables (Disables) futuristic material on the walls, floor and other stuff in the room.
+    /// </summary>
+    /// <param name="effectActive">decides, whether the effect should be active afterwards</param>
     public void ToggleEffects(bool effectActive) {
         foreach (var constructEffectObject in constructEffectObjects) {
             MeshRenderer meshRenderer = constructEffectObject.GetComponent<MeshRenderer>();
@@ -39,6 +46,7 @@ public class ConstructFXManager : MonoBehaviour {
                 for (int i = 0; i < meshRenderer.materials.Length - 1; i++) {
                     tmpMaterials[i] = meshRenderer.materials[i];
                 }
+
                 meshRenderer.materials = tmpMaterials;
             }
         }
@@ -46,9 +54,5 @@ public class ConstructFXManager : MonoBehaviour {
         foreach (var constructEffectObject in constructEffectObjectsArt) {
             constructEffectObject.SetActive(!constructEffectObject.activeSelf);
         }
-    }
-
-    Material addToArr(Material material) {
-        return material;
     }
 }

@@ -6,11 +6,12 @@ using System;
 
 namespace Widgets
 {
+    /// <summary>
+    /// The RosPublisher class is mainly for mocking and debugging purposes.
+    /// </summary>
     public class RosPublisher : Publisher<RosSharp.RosBridgeClient.Messages.Standard.String>
     {
         private float temperature = 20;
-
-
         private bool started = false;
 
         /// <summary>
@@ -38,7 +39,7 @@ namespace Widgets
         }
 
         /// <summary>
-        /// Publishs the mock motor status message.
+        /// Publishs the json string as a ros message.
         /// </summary>
         /// <param name="message">message</param>
         private void PublishMessage(RosSharp.RosBridgeClient.Messages.Standard.String message)
@@ -49,6 +50,10 @@ namespace Widgets
             }
         }
 
+        /// <summary>
+        /// Publish a RosJsonMessage on ros for mocking
+        /// </summary>
+        /// <param name="demoMessage"></param>
         public void PublishMessage(RosJsonMessage demoMessage)
         {
             string jsonString = JsonUtility.ToJson(demoMessage);
@@ -58,6 +63,9 @@ namespace Widgets
             WriteMessageToFile("demoMessage", jsonString);
         }
 
+        /// <summary>
+        /// Publish a graph demo message with a random temperature
+        /// </summary>
         private void PublishGraphDemoMessage()
         {
             System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
@@ -72,26 +80,20 @@ namespace Widgets
                 col = new byte[] { 5, 10, 255, 255 };
             }
             RosJsonMessage demoMessage = RosJsonMessage.CreateGraphMessage(1, temperature, cur_time, col);
-            //string jsonString = JsonUtility.ToJson(demoMessage);
-            //RosSharp.RosBridgeClient.Messages.Standard.String tmpMessage = new RosSharp.RosBridgeClient.Messages.Standard.String(jsonString);
-            //PublishMessage(tmpMessage);
-
-            //WriteMessageToFile("demoMessage", jsonString);
             PublishMessage(demoMessage);
-
-
-            /*
-            tmpMessage.id = 2;
-            tmpMessage.data = Encoding.UTF8.GetBytes("TestNachricht");
-            PublishMessage(tmpMessage);
-            */
         }
 
+        /// <summary>
+        /// Writes the json string into a file for easier debugging
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="json">json string to be written into file</param>
+        /// <returns></returns>
         private bool WriteMessageToFile(string fileName, string json)
         {
             string filePath = Application.persistentDataPath + fileName + ".json";
 
-            print("Saved demoMessage at " + filePath); 
+            print("Saved demoMessage at " + filePath);
 
             File.WriteAllText(filePath, json);
 
@@ -100,13 +102,16 @@ namespace Widgets
 
         bool toggle = false;
 
+        /// <summary>
+        /// Sends mock messages to toggle the senseglove icon.
+        /// </summary>
         private void PublishIconDemoMessage()
         {
             RosJsonMessage demoMessage;
             if (toggle)
             {
                 demoMessage = RosJsonMessage.CreateIconMessage(20, "SenseGlove_0");
-                
+
             }
             else
             {
@@ -117,12 +122,18 @@ namespace Widgets
             toggle = !toggle;
         }
 
+        /// <summary>
+        /// Sends mock messages for a toastr.
+        /// </summary>
         private void PublishToastrDemoMessage()
         {
             RosJsonMessage demoMessage = RosJsonMessage.CreateToastrMessage(10, "Hello Roboy", 2, null);
             PublishMessage(demoMessage);
         }
 
+        /// <summary>
+        /// For keyboard input to trigger mock messages.
+        /// </summary>
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.M))
@@ -146,140 +157,6 @@ namespace Widgets
             {
                 PublishToastrDemoMessage();
             }
-
-            /*
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                float tempDiff = UnityEngine.Random.Range(0f, 5.0f);
-                temperature += tempDiff;
-                //send the message to the graph
-                PublishMessage(CreateTemperatureData(1, temperature, 0, 0, GetColor()));
-                // Same message on inspector widget id = 3
-                PublishMessage(CreateTemperatureData(3, temperature, 0, 0, GetColor()));
-                if (temperature > 40 && temperature - tempDiff <= 40)
-                {
-                    // Send a message that the temperature is critically high
-                    PublishMessage(CreateTemperatureWarningData(2, 0, 3, GetColor(), 50, "Temperature is critically high!"));
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                float tempDiff = UnityEngine.Random.Range(0f, 7.0f);
-                temperature -= tempDiff;
-                string color;
-                //send the message to the graph
-                PublishMessage(CreateTemperatureData(1, temperature, 0, 0, GetColor()));
-                // Same message on inspector widget id = 3
-                PublishMessage(CreateTemperatureData(3, temperature, 0, 0, GetColor()));
-                if (temperature < 0 && temperature + tempDiff >= 0)
-                {
-                    // Send a message that the temperature is critically high
-                    PublishMessage(CreateTemperatureWarningData(2, 0, 3, GetColor(), 50, "Temperature is critically low!"));
-                }
-            }    
-            */
         }
-
-
-        /*
-        private byte[] GetColor()
-        {
-            if (temperature > 30)
-            {
-                return new byte[] { 0xFF, 0, 0, 0xFF };
-            }
-            else if (temperature < 10)
-            {
-                return new byte[] { 0, 0, 0xFF, 0xFF };
-            }
-            else
-            {
-                return new byte[] { 0xFF, 0xFE, 0x01, 0xFF };
-            }
-        }
-
-        private RosSharp.RosBridgeClient.Messages.Standard.String CreateTemperatureData(int id, float datapoint, int pos, int detailedPanelPos, byte[] color)
-        {
-            byte[] data = new byte[(sizeof(float) + 3 * sizeof(int))];
-            int offset = 0;
-
-            offset = AppendData(data, offset, datapoint);
-            offset = AppendData(data, offset, pos);
-            offset = AppendData(data, offset, detailedPanelPos);
-            offset = AppendData(data, offset, color);
-
-            RosSharp.RosBridgeClient.Messages.Standard.String rosMessage = new RosSharp.RosBridgeClient.Messages.Standard.String();
-
-            rosMessage.id = id;
-            rosMessage.data = data;
-
-            return rosMessage;
-        }
-
-        private RosSharp.RosBridgeClient.Messages.Standard.String CreateTemperatureWarningData(int id, int pos, float duration, byte[] color, int fontSize, string msg)
-        {
-            byte[] data = new byte[(sizeof(float) + 3 * sizeof(int) + msg.Length * sizeof(char) + 1)];
-            int offset = 0;
-
-            offset = AppendData(data, offset, pos);
-            offset = AppendData(data, offset, duration);
-            offset = AppendData(data, offset, color);
-            offset = AppendData(data, offset, fontSize);
-            offset = AppendData(data, offset, msg);
-
-            RosSharp.RosBridgeClient.Messages.Standard.String rosMessage = new RosSharp.RosBridgeClient.Messages.Standard.String();
-
-            rosMessage.id = id;
-            rosMessage.data = data;
-
-            return rosMessage;
-        }
-
-        private int AppendData(byte[] data, int offset, int i)
-        {
-            byte[] newData = BitConverter.GetBytes(i);
-            Buffer.BlockCopy(newData, 0, data, offset, newData.Length);
-            return offset + sizeof(int);
-        }
-
-        private int AppendData(byte[] data, int offset, float i)
-        {
-            byte[] newData = BitConverter.GetBytes(i);
-            Buffer.BlockCopy(newData, 0, data, offset, newData.Length);
-            return offset + sizeof(float);
-        }
-
-        private int AppendData(byte[] data, int offset, byte[] i)
-        {
-            byte[] newData = i;
-            Buffer.BlockCopy(newData, 0, data, offset, newData.Length);
-            return offset + sizeof(float);
-        }
-
-        private int AppendData(byte[] data, int offset, string i)
-        {
-            MemoryStream dataStream = new MemoryStream();
-            BinaryWriter binaryWriter = new BinaryWriter(dataStream);
-            binaryWriter.Write(i);
-            byte[] newData = dataStream.ToArray();
-            Buffer.BlockCopy(newData, 0, data, offset, newData.Length);
-            return offset + newData.Length;
-
-            /*data[offset++] = BitConverter.GetBytes(i.Length)[0];
-            print(data[offset - 1]);
-            foreach (char c in i) {
-                offset = AppendData(data, offset, c);
-            }
-            return offset;
-        }
-
-        private int AppendData(byte[] data, int offset, char i)
-        {
-            byte[] newData = BitConverter.GetBytes(i);
-            Buffer.BlockCopy(newData, 0, data, offset, newData.Length);
-            return offset + sizeof(char);
-        }
-
-        */
     }
 }

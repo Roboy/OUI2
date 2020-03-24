@@ -19,13 +19,17 @@ namespace Widgets
 
         TextMeshProUGUI textMeshPro;
 
+        /// <summary>
+        /// Initializes toastr.
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="color"></param>
+        /// <param name="fontSize"></param>
         public void Init(string msg, Color color, int fontSize)
         {
             this.msg = msg;
             this.color = color;
             this.fontSize = fontSize;
-
-            // textMeshPro = gameObject.AddComponent<TextMeshProUGUI>();
 
             textMeshPro = gameObject.GetComponentInChildren<TextMeshProUGUI>();
             textMeshPro.SetText(msg);
@@ -37,6 +41,12 @@ namespace Widgets
             gameObject.AddComponent<CurvedUI.CurvedUIVertexEffect>();
         }
 
+        /// <summary>
+        /// Move the toastr upwards over time by a slerp. Called when top toastr is deleted. 
+        /// For nicer animation, a time offset is used depending on the position of the toastr to delay animation for lower toastr.
+        /// </summary>
+        /// <param name="offsetInY">How far to slerp upwards</param>
+        /// <param name="timeOffset">Delay slerp for this toastr by offset.</param>
         public void SlerpUp(float offsetInY, float timeOffset)
         {
             localSlerpStartPos = transform.localPosition;
@@ -45,6 +55,9 @@ namespace Widgets
             slerpActive = true;
         }
 
+        /// <summary>
+        /// Manage timer.
+        /// </summary>
         public void Update()
         {
             if (slerpActive)
@@ -55,6 +68,9 @@ namespace Widgets
             }
         }
 
+        /// <summary>
+        /// Set slerp flag false.
+        /// </summary>
         public void StopSlerp()
         {
             slerpActive = false;

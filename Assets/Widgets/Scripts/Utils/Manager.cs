@@ -8,12 +8,18 @@ namespace Widgets
         public List<Widget> widgets;
         public RosSubscriber rosSubscriber;
 
+        /// <summary>
+        /// Create all registered widgets from their template files.
+        /// </summary>
         void Start()
         {
             rosSubscriber = GameObject.FindGameObjectWithTag("RosManager").GetComponent<RosSubscriber>();
             widgets = Factory.Instance.CreateWidgetsAtStartup();
         }
 
+        /// <summary>
+        /// Pull new ros messages from subscriber. Also used for easy mocking.
+        /// </summary>
         void Update()
         {
             if (!rosSubscriber.IsEmpty())
@@ -42,6 +48,10 @@ namespace Widgets
             }
         }
 
+        /// <summary>
+        /// Forwared a given ros message to the widget with the corresponding id.
+        /// </summary>
+        /// <param name="rosMessage">Incoming ros message to be forwarded</param>
         private void ForwardMessageToWidget(RosJsonMessage rosMessage)
         {
             if (rosMessage == null)
@@ -61,6 +71,11 @@ namespace Widgets
             widget.ProcessRosMessage(rosMessage);
         }
 
+        /// <summary>
+        /// Search for a registered widget by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>The found widget or null</returns>
         public Widget FindWidgetWithID(int id)
         {
             foreach (Widget widget in widgets)

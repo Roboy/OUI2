@@ -72,11 +72,6 @@ namespace Widgets
 
         }
 
-        public override View AddViewComponent(GameObject viewGameObject)
-        {
-            return viewGameObject.AddComponent<GraphView>();
-        }
-
         public struct Datapoint
         {
             public DateTime time;

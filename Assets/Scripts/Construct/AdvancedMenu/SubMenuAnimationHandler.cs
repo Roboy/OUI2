@@ -22,6 +22,7 @@ public class SubMenuAnimationHandler : MonoBehaviour
     }
 
     public bool MButtonTransition;
+    //Set this to true, if there are UI elements which are not direct children of the InteractionObjects object
     public bool IsNested = false;
     public bool HookToOpenMenuButton = false;
     public bool AcivateOnFadeOut;
@@ -43,9 +44,14 @@ public class SubMenuAnimationHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Set reference to instances.
+    /// Find all UI element instances within the descendants of InteractionObjects
+    /// </summary>
     void Start()
     {
         // Dirty Engineering for final Demo, necessary because SenseGloves not in same Scene
+        // Unfortunately no 
         if(AcivateOnFadeOut && ElementToActivate == null)
         {
             ElementToActivate = GameObject.FindGameObjectWithTag("SenseGloveLeft").transform.GetChild(1).gameObject;
@@ -73,7 +79,6 @@ public class SubMenuAnimationHandler : MonoBehaviour
         interactionPrefabs.Add(new InteractionPrefab("Button3D", safemodeOnButton3D, safemodeOffButton3D));
         interactionPrefabs.Add(new InteractionPrefab("Slider3D", safemodeOnSlider3D, safemodeOffSlider3D));
 
-        //foundObjects = new List<List<GameObject>>();
         if (!IsNested)
         {
             foreach (InteractionPrefab prefab in interactionPrefabs)
@@ -101,6 +106,9 @@ public class SubMenuAnimationHandler : MonoBehaviour
         animator.SetTrigger("Go");
     }
 
+    /// <summary>
+    /// Execute menu animations.
+    /// </summary>
     private void Update()
     {
         AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
@@ -144,6 +152,12 @@ public class SubMenuAnimationHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Find all objects of a certain tag among the descendants of the parent object
+    /// </summary>
+    /// <param name="tag">The tag</param>
+    /// <param name="parent">The parent object, which descendants are checked</param>
+    /// <returns></returns>
     List<GameObject> findObjectsWithTagInAllChildren(string tag, Transform parent)
     {
         List<GameObject> list = new List<GameObject>();
@@ -160,6 +174,10 @@ public class SubMenuAnimationHandler : MonoBehaviour
         return list;
     }
 
+    /// <summary>
+    /// Enable/Disable menu
+    /// </summary>
+    /// <param name="activate">Activate, false: deactivate</param>
     private void deActivate(bool activate)
     {
         for(int i = 0; i < transform.childCount; i++)
@@ -178,11 +196,18 @@ public class SubMenuAnimationHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Public method to initiate fade in of the menu.
+    /// </summary>
     public void FadeIn()
     {
         newRequest = true;
         fadeIn = true;
     }
+    /// <summary>
+    /// Public method to initiate fade out of the menu.
+    /// If ActivateOnFadeOut it true, the ElementToActivate is enabled.
+    /// </summary>
     public void FadeOut()
     {
         newRequest = true;
@@ -199,6 +224,9 @@ public class SubMenuAnimationHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Activates the safe mode for all interaction objects, so that they can be modified by the animation.
+    /// </summary>
     private void safeModeOn()
     {
         foreach (InteractionPrefab prefab in interactionPrefabs)
@@ -206,6 +234,9 @@ public class SubMenuAnimationHandler : MonoBehaviour
             prefab.SafeModeOnAction.Invoke();
         }
     }
+    /// <summary>
+    /// Deactivate the safe mode for all interaction objects, so that they are interactable again.
+    /// </summary>
     private void safeModeOff()
     {
         foreach (InteractionPrefab prefab in interactionPrefabs)
@@ -215,6 +246,9 @@ public class SubMenuAnimationHandler : MonoBehaviour
     }
 
     #region safe mode methods for each interactionPrefab
+    /// <summary>
+    /// Put 3D Button in safe mode by disabling collider and the FrameClickDetection script.
+    /// </summary>
     private void safemodeOnButton3D()
     {
         List<GameObject> allButtons = interactionPrefabs.Find(x => x.TagName.Equals("Button3D")).FoundObjects;
@@ -227,12 +261,11 @@ public class SubMenuAnimationHandler : MonoBehaviour
 
             Transform activeArea = obj.transform.GetChild(2);
             activeArea.GetComponent<Collider>().enabled = false;
-
-            /*Transform pressurePlate = obj.transform.GetChild(0);
-            pressurePlate.gameObject.SetActive(false);*/
-            //pressurePlate.GetComponent<Collider>().enabled = false;
         }
     }
+    /// <summary>
+    /// Revert 3D button safe mode changes by enabling collider and the FrameClickDetection script.
+    /// </summary>
     private void safemodeOffButton3D()
     {
         List<GameObject> allButtons = interactionPrefabs.Find(x => x.TagName.Equals("Button3D")).FoundObjects;
@@ -241,21 +274,12 @@ public class SubMenuAnimationHandler : MonoBehaviour
             Transform frame = obj.transform.GetChild(1);
             frame.GetComponent<Collider>().enabled = true;
             frame.GetComponent<FrameClickDetection>().enabled = true;
-
-            /*Transform activeArea = obj.transform.GetChild(2);
-            activeArea.GetComponent<Collider>().enabled = true;*/
-
-            /*Transform pressurePlate = obj.transform.GetChild(0);
-            pressurePlate.gameObject.SetActive(true);*/
-            /*Rigidbody rigidbody = pressurePlate.GetComponent<Rigidbody>();
-            rigidbody.velocity = Vector3.zero;
-            rigidbody.angularVelocity = Vector3.zero;
-            rigidbody.centerOfMass = new Vector3(0, 0, 0.01f);*/
-            /*pressurePlate.transform.localPosition = new Vector3(0, 0.75f, -0.325f);
-            pressurePlate.GetComponent<Collider>().enabled = true;*/
         }
     }
 
+    /// <summary>
+    /// Put 3D slider in safe mode by disabling collider and the CustomSlider script.
+    /// </summary>
     private void safemodeOnSlider3D()
     {
         List<GameObject> allSliders = interactionPrefabs.Find(x => x.TagName.Equals("Slider3D")).FoundObjects;
@@ -265,6 +289,9 @@ public class SubMenuAnimationHandler : MonoBehaviour
             obj.transform.GetChild(0).GetComponent<CustomSlider>().enabled = false;
         }
     }
+    /// <summary>
+    /// Revert 3D slider safe mode changes by enabling collider and the CustomSlider script.
+    /// </summary>
     private void safemodeOffSlider3D()
     {
         List<GameObject> allSliders = interactionPrefabs.Find(x => x.TagName.Equals("Slider3D")).FoundObjects;

@@ -6,13 +6,17 @@ public class VolumeControl : MonoBehaviour {
     private CustomSlider slider;
     private AudioSource song;
     
-    // Start is called before the first frame update
+    /// <summary>
+    /// Get reference to instances
+    /// </summary>
     void Start() {
         slider = GameObject.FindObjectOfType<CustomSlider>();
         song = this.GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Update Volume value of the song according to the current slider value
+    /// </summary>
     void Update() {
         song.volume = slider.GetValue();
     }

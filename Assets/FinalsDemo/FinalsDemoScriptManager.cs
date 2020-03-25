@@ -11,7 +11,10 @@ public class FinalsDemoScriptManager : MonoBehaviour
     private RoomArea room;
 
     GameObject trashBin;
-    // Start is called before the first frame update
+
+    /// <summary>
+    /// Set reference to instances. Assert valid value for NumberOfCubes.
+    /// </summary>
     void Start()
     {
         room = GameObject.FindObjectOfType<RoomArea>();
@@ -21,19 +24,10 @@ public class FinalsDemoScriptManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            StartQuest();
-        }
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            StopQuest();
-        }
-    }
 
+    /// <summary>
+    /// Activates quest: update roboy posture, show trashbin, spawn trash cubes randomly within room
+    /// </summary>
     public void StartQuest()
     {
         Transform roboyArms = GameObject.FindGameObjectWithTag("RoboyArms").transform;
@@ -46,6 +40,9 @@ public class FinalsDemoScriptManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Stop quest and clean up quest objects: reset roboy posture, hide trashbin, destroy trash cubes
+    /// </summary>
     public void StopQuest()
     {
         Transform roboyArms = GameObject.FindGameObjectWithTag("RoboyArms").transform;
@@ -58,6 +55,10 @@ public class FinalsDemoScriptManager : MonoBehaviour
         roboyArms.localEulerAngles = new Vector3(0f, roboyArms.localEulerAngles.y, roboyArms.localEulerAngles.z);
     }
 
+    /// <summary>
+    /// Generate a random position within the room boundaries
+    /// </summary>
+    /// <returns>Vector3 result the position in the room</returns>
     Vector3 GetRandomPositionInRoom()
     {
         float y = Random.Range(0.1f, 1.7f);

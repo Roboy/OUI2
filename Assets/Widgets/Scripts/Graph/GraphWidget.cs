@@ -28,8 +28,8 @@ namespace Widgets
         /// <summary>
         /// Stores the initial data.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="viewDesignPrefab"></param>
+        /// <param name="context">the message which contains the initial data</param>
+        /// <param name="viewDesignPrefab">the prefab that should be instantiated to show the widget</param>
         public new void Init(RosJsonMessage context, GameObject viewDesignPrefab)
         {
             color = WidgetUtility.BytesToColor(context.graphColor);
@@ -44,7 +44,7 @@ namespace Widgets
         /// Gets called when a new RosMessage arrives for the widget. Adds a new datapoint and/or updates
         /// the widget properties
         /// </summary>
-        /// <param name="rosMessage"></param>
+        /// <param name="rosMessage">the message which contains the live data point</param>
         public override void ProcessRosMessage(RosJsonMessage rosMessage)
         {
             if (rosMessage.graphColor != null && rosMessage.graphColor.Length == 4)
@@ -68,7 +68,7 @@ namespace Widgets
         /// <summary>
         /// Stores the new datapoint and updates the view
         /// </summary>
-        /// <param name="newDatapoint"></param>
+        /// <param name="newDatapoint">the latest datapoint</param>
         public void AddDatapoint(Datapoint newDatapoint)
         {
             if (datapoints.Count == SIZE)
@@ -96,8 +96,8 @@ namespace Widgets
         /// <summary>
         /// Attaches the GraphView to the corresponding GameObject
         /// </summary>
-        /// <param name="viewGameObject"></param>
-        /// <returns></returns>
+        /// <param name="viewGameObject">the GameObject the new view should be attached to</param>
+        /// <returns>the reference to the created View</returns>
         public override View AddViewComponent(GameObject viewGameObject)
         {
             return viewGameObject.AddComponent<GraphView>();

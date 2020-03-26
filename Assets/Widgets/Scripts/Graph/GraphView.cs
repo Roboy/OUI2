@@ -21,7 +21,7 @@ namespace Widgets
         /// <summary>
         /// Creates a new graph object and initialises it with the properties given in its json file
         /// </summary>
-        /// <param name="widget"></param>
+        /// <param name="widget">The corresponding GraphWidget which holds the data</param>
         public override void Init(Widget widget)
         { 
             gameObject.AddComponent<CurvedUI.CurvedUIVertexEffect>();
@@ -48,7 +48,7 @@ namespace Widgets
         /// Sets properties of the newly created graph object and
         /// gets references to important scripts of the new object
         /// </summary>
-        /// <param name="graphWidget"></param>
+        /// <param name="graphWidget">The corresponding GraphWidget which holds the data</param>
         private void InitGraphObject(GraphWidget graphWidget)
         {
             graph = GetComponentInChildren<GraphChart>();
@@ -77,7 +77,7 @@ namespace Widgets
         /// <summary>
         /// Inserts a new datapoint and sets the properties of the graph
         /// </summary>
-        /// <param name="widget"></param>
+        /// <param name="widget">The corresponding GraphWidget which holds the data</param>
         public void UpdateView(Widget widget)
         {
             GraphWidget graphWidget = (GraphWidget)widget;
@@ -93,7 +93,7 @@ namespace Widgets
         /// Sets the properties of the graph such as how many axis labels
         /// get shown and which color the line has
         /// </summary>
-        /// <param name="graphWidget"></param>
+        /// <param name="graphWidget">The corresponding GraphWidget which holds the data such as the color</param>
         private void SetGraphProperties(GraphWidget graphWidget)
         {
             SetColor(graphWidget.name, graphWidget.color);
@@ -108,7 +108,7 @@ namespace Widgets
         /// If the widget is a child of another view, it sets its parent to the other view and
         /// moves itself next to the parent widget
         /// </summary>
-        /// <param name="relativeChildPosition"></param>
+        /// <param name="relativeChildPosition">The direction in which the widget should be, relative to its parent</param>
         public override void ShowView(RelativeChildPosition relativeChildPosition)
         {
             gameObject.SetActive(true);
@@ -147,8 +147,8 @@ namespace Widgets
         /// Sets the color of the line of the graph for the given topic
         /// (graphs can just show one line yet, therefore the topic is always the widget name)
         /// </summary>
-        /// <param name="topic"></param>
-        /// <param name="c"></param>
+        /// <param name="topic">the widget name</param>
+        /// <param name="c">the new color</param>
         public void SetColor(string topic, Color c)
         {
             Material fill = new Material(lineMaterial);
@@ -159,7 +159,7 @@ namespace Widgets
         /// <summary>
         /// Sets the number of labels shown on the X Axis to num
         /// </summary>
-        /// <param name="num"></param>
+        /// <param name="num">the number of labels that should be shown</param>
         public void SetNumLabelsShownX(int num)
         {
             if (num < 0 || num > 10)
@@ -173,7 +173,7 @@ namespace Widgets
         /// <summary>
         /// Sets the number of labels shown on the Y Axis to num
         /// </summary>
-        /// <param name="num"></param>
+        /// <param name="num">the number of labels that should be shown</param>
         public void SetNumLabelsShownY(int num)
         {
             if (num <= 0 || num >= 10)

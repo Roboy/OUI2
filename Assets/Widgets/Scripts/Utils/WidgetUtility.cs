@@ -8,8 +8,8 @@ namespace Widgets
         /// Converts the Json friendly byte array to determine the color to the
         /// Unity friendly type Color32. Also checks for invalid input.
         /// </summary>
-        /// <param name="b"></param>
-        /// <returns></returns>
+        /// <param name="b">the byte array that should be converted to a Color</param>
+        /// <returns>the color as type Color</returns>
         public static Color BytesToColor(byte[] b)
         {
             if (b == null || !(b.Length == 3 || b.Length == 4))

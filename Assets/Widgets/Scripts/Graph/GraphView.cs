@@ -1,170 +1,117 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using ChartAndGraph;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Widgets
 {
+    /// <summary>
+    /// Displays and controls how a graph looks like
+    /// </summary>
     public class GraphView : View
     {
-        private IconStateManager iconManager;
-        private GraphManager graphManager;
-
         private readonly float RELATIVE_OFFSET = 100.0f;
+        
+        private Material lineMaterial;
 
-        private GameObject CreateGraphlikeObject()
-        {
-            GameObject graph = new GameObject();
-            graph.transform.SetParent(transform);
-            graph.AddComponent<RectTransform>();
-            graph.transform.localScale = Vector3.one;
+        private GraphChart graph;
+        private VerticalAxis verticalAxis;
+        private HorizontalAxis horizontalAxis;
+        private TextMeshProUGUI titleText;
 
-            graph.AddComponent<CurvedUI.CurvedUIVertexEffect>();
-            return graph;
-        }
-
-        private GameObject CreateGraph()
-        {
-            GameObject graph = CreateGraphlikeObject();
-            graph.name = "Graph";
-            graph.transform.localPosition = Vector3.zero;
-            ((RectTransform)(graph.transform)).sizeDelta = new Vector2(600, 300);
-            graph.AddComponent<ChartAndGraph.GraphChart>();
-            graph.AddComponent<ChartAndGraph.VerticalAxis>();
-            graph.AddComponent<ChartAndGraph.HorizontalAxis>(); // todo: should be hand made
-            graph.AddComponent<ChartAndGraph.SensitivityControl>();
-            graph.AddComponent<GraphManager>();
-            return graph;
-        }
-
-        private GameObject CreateGraphAdditions(GraphWidget graphWidget)
-        {
-            GameObject additions = CreateGraphlikeObject();
-            additions.name = "Additions";
-            additions.transform.localPosition = Vector3.forward;
-            RectTransform rectTrans = ((RectTransform)(additions.transform));
-            //rectTrans.
-
-            TextMeshProUGUI title = additions.AddComponent<TextMeshProUGUI>();
-            title.text = graphWidget.name;
-
-            title.fontSize = 30;
-            
-            rectTrans.sizeDelta = new Vector2(650, 380);
-            additions.AddComponent<CurvedUI.CurvedUIVertexEffect>();
-            return additions;
-        }
-
-        //public void Init(List<float> dataPoints, Widget childWidget, string graphName, Color color)
+        /// <summary>
+        /// Creates a new graph object and initialises it with the properties given in its json file
+        /// </summary>
+        /// <param name="widget">The corresponding GraphWidget which holds the data</param>
         public override void Init(Widget widget)
         { 
             gameObject.AddComponent<CurvedUI.CurvedUIVertexEffect>();
             GraphWidget graphWidget = (GraphWidget)widget;
             SetChildWidget(graphWidget.childWidget);
 
-            GameObject graph = Instantiate(Factory.Instance.graphDesignPrefab);
-            graph.transform.SetParent(transform);
-            graph.transform.localScale = Vector3.one * 0.7f;
-            graph.transform.localPosition = Vector3.down * 45;
+            GameObject graphObject = Instantiate(Factory.Instance.graphDesignPrefab);
+            graphObject.transform.SetParent(transform);
+            graphObject.transform.localScale = Vector3.one * 0.7f;
+            graphObject.transform.localPosition = Vector3.down * 45;
 
-
-            //GameObject graph = CreateGraph();
-            //GameObject graphAdditions = CreateGraphAdditions(graphWidget);
-            graphManager = graph.GetComponentInChildren<GraphManager>();
-
-            graphManager.Init(graphWidget);
-            graphManager.SetColor(graphWidget.name, graphWidget.color);
-            graphManager.SetNumLabelsShownX(graphWidget.numXLabels);
-            graphManager.SetNumLabelsShownY(graphWidget.numYLabels);
+            InitGraphObject(graphWidget);
+            SetGraphProperties(graphWidget);
             foreach (GraphWidget.Datapoint data in graphWidget.datapoints)
             {
-                graphManager.AddDataPoint(graphWidget.name, data.time,
+                graph.DataSource.AddPointToCategoryRealtime(graphWidget.name, data.time,
                     data.data);
             }
 
             Init(widget.relativeChildPosition, widget.GetContext().unfoldChildDwellTimer);
-
-            /*
-            //iconManager = GetComponent<IconStateManager>();
-            graphManager = GetComponentInChildren<GraphManager>();
-            graphManager.Init();
-            iconManager.DetailedPanel.SetActive(false);
-            //SetPosition(panel_id); // test
-            //SetPosition(((GraphModel)model).GetPanelId());
-            UpdateView(widget);*/
         }
 
-        // not in use atm and outdated
+        /// <summary>
+        /// Sets properties of the newly created graph object and
+        /// gets references to important scripts of the new object
+        /// </summary>
+        /// <param name="graphWidget">The corresponding GraphWidget which holds the data</param>
+        private void InitGraphObject(GraphWidget graphWidget)
+        {
+            graph = GetComponentInChildren<GraphChart>();
+            if (graph == null)
+            {
+                // the ChartGraph info is obtained via the inspector
+                Debug.LogWarning("No GraphChart found! Place this script into a graph chart!");
+                return;
+            }
+
+            lineMaterial = new Material(Shader.Find("Chart/Canvas/Solid"));
+            graph.DataSource.AddCategory(graphWidget.name, lineMaterial, 20, new MaterialTiling(false, 20), null, true, null, 20);
+
+            graph.AutoScrollHorizontally = true;
+            graph.DataSource.AutomaticHorizontalView = graphWidget.showCompleteHistory;
+            if (verticalAxis == null)
+            {
+                verticalAxis = graph.GetComponent<VerticalAxis>();
+                horizontalAxis = graph.GetComponent<HorizontalAxis>();
+                horizontalAxis.Format = AxisFormat.Time;
+            }
+            // has to be changed if the graph gets other TextMeshProUGUI scripts
+            titleText = GetComponentInChildren<TextMeshProUGUI>();
+        }
+
+        /// <summary>
+        /// Inserts a new datapoint and sets the properties of the graph
+        /// </summary>
+        /// <param name="widget">The corresponding GraphWidget which holds the data</param>
         public void UpdateView(Widget widget)
         {
             GraphWidget graphWidget = (GraphWidget)widget;
-            //SetDetailedPanelPosition(1); // graphModel.detailedPanelPos
-            graphManager.SetColor(graphWidget.name, graphWidget.color);
-            graphManager.SetNumLabelsShownX(graphWidget.numXLabels);
-            graphManager.SetNumLabelsShownY(graphWidget.numYLabels);
+            SetGraphProperties(graphWidget);
             if (graphWidget.datapoints.Count > 0)
             {
                 GraphWidget.Datapoint dp = graphWidget.datapoints[graphWidget.datapoints.Count - 1];
-                graphManager.AddDataPoint(graphWidget.name, dp.time, dp.data);
-                    //graphWidget.datapoints.ToArray()[graphWidget.datapoints.Count - 1]);
+                graph.DataSource.AddPointToCategoryRealtime(graphWidget.name, dp.time, dp.data);
             }
-            // Debug.Log("View updated");
-
         }
 
-        private void SetPosition(int pos)
+        /// <summary>
+        /// Sets the properties of the graph such as how many axis labels
+        /// get shown and which color the line has
+        /// </summary>
+        /// <param name="graphWidget">The corresponding GraphWidget which holds the data such as the color</param>
+        private void SetGraphProperties(GraphWidget graphWidget)
         {
-            if (pos - 1 < 0 || pos - 1 > GUIData.Instance.positionsUI.Length)
-            {
-                Debug.LogWarning("Invalid position for widget:" + pos);
-                return;
-            }
-            transform.SetParent(GUIData.Instance.positionsUI[pos - 1].transform);
-            transform.localPosition = Vector3.zero;
-            transform.localScale = Vector3.one;
+            SetColor(graphWidget.name, graphWidget.color);
+            SetNumLabelsShownX(graphWidget.numXLabels);
+            SetNumLabelsShownY(graphWidget.numYLabels);
+            titleText.text = graphWidget.name;
+            
         }
 
-        
-        private void SetDetailedPanelPosition(int pos)
-        {
-            if (pos - 1 < 0 || pos - 1 > GUIData.Instance.positionsDetailedPanels.Length)
-            {
-                Debug.LogWarning("Invalid position of Detailed Panel for widget:" + pos);
-                return;
-            }
-
-            iconManager.DetailedPanel.transform.SetParent(GUIData.Instance.positionsDetailedPanels[pos - 1].transform);
-            RectTransform rect = iconManager.DetailedPanel.GetComponent<RectTransform>();
-            rect.offsetMin = Vector3.zero;
-            rect.offsetMax = Vector3.zero;
-            //iconManager.DetailedPanel.transform.SetParent(transform);
-            // TODO: set the panel to the correct x position
-            // iconManager.DetailedPanel.transform.localPosition -= Vector3.right * transform.position.x; //120; // iconManager.DetailedPanel.transform.position.x
-            //rect.offsetMin = Vector3.zero;
-            //rect.offsetMax = Vector3.zero;
-
-            //iconManager.DetailedPanel.transform.localScale = Vector3.one;
-        }
-        
-
-        private void SetThumbnailIcon(string iconName)
-        {
-            // TODO
-        }
-
-        /*private void SetColor(string title, Color col)
-        {
-            // TODO: parse Color
-            graphManager.SetColor(title, col);
-        }*/
-
+        /// <summary>
+        /// Activates the gameObject of the view, therefore showing it.
+        /// If the widget is a child of another view, it sets its parent to the other view and
+        /// moves itself next to the parent widget
+        /// </summary>
+        /// <param name="relativeChildPosition">The direction in which the widget should be, relative to its parent</param>
         public override void ShowView(RelativeChildPosition relativeChildPosition)
         {
             gameObject.SetActive(true);
-
-
 
             Vector3 offsetVector = Vector3.zero;
 
@@ -195,7 +142,51 @@ namespace Widgets
 
             transform.localPosition = offsetVector;
         }
+        
+        /// <summary>
+        /// Sets the color of the line of the graph for the given topic
+        /// (graphs can just show one line yet, therefore the topic is always the widget name)
+        /// </summary>
+        /// <param name="topic">the widget name</param>
+        /// <param name="c">the new color</param>
+        public void SetColor(string topic, Color c)
+        {
+            Material fill = new Material(lineMaterial);
+            fill.color = c;
+            graph.DataSource.SetCategoryLine(topic, fill, 5, new MaterialTiling(false, 0));
+        }
 
+        /// <summary>
+        /// Sets the number of labels shown on the X Axis to num
+        /// </summary>
+        /// <param name="num">the number of labels that should be shown</param>
+        public void SetNumLabelsShownX(int num)
+        {
+            if (num < 0 || num > 10)
+            {
+                Debug.LogWarning("Invalid Amount of Labels on X Axis");
+            }
+            horizontalAxis.MainDivisions.Total = num;
+            horizontalAxis.SubDivisions.Total = 1;
+        }
+        
+        /// <summary>
+        /// Sets the number of labels shown on the Y Axis to num
+        /// </summary>
+        /// <param name="num">the number of labels that should be shown</param>
+        public void SetNumLabelsShownY(int num)
+        {
+            if (num <= 0 || num >= 10)
+            {
+                Debug.LogWarning("Invalid Amount of Labels on Y Axis");
+            }
+            verticalAxis.MainDivisions.Total = num;
+            verticalAxis.SubDivisions.Total = 1;
+        }
+
+        /// <summary>
+        /// Deactivates the view by deactivating its gameObject
+        /// </summary>
         public override void HideView()
         {
             gameObject.SetActive(false);

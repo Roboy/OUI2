@@ -18,11 +18,10 @@ namespace Widgets
         #endregion
 
         #region Graph
-        // Time passed in ms since 1/1/1970
-        public double graphTimestamp;  
-        public float graphValue;    
+        // Time passed in s since 1/1/1970
+        public double graphTimestamp;  // MANDATORY FOR GRAPH
+        public float graphValue;    // MANDATORY FOR GRAPH
         public byte[] graphColor;
-        public string graphTitle;
         public int xDivisionUnits;
         public int yDivisionUnits;
         public bool showCompleteHistory;

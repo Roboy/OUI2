@@ -1,41 +1,27 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Widgets
 {
     public static class WidgetUtility
     {
+        /// <summary>
+        /// Converts the Json friendly byte array to determine the color to the
+        /// Unity friendly type Color32. Also checks for invalid input.
+        /// </summary>
+        /// <param name="b">the byte array that should be converted to a Color</param>
+        /// <returns>the color as type Color</returns>
         public static Color BytesToColor(byte[] b)
         {
-            if (b == null || b.Length == 0)
+            if (b == null || !(b.Length == 3 || b.Length == 4))
             {
                 return new Color32(255, 255, 255, 255);
             }
-            return new Color32(b[0], b[1], b[2], b[3]);
-        }
 
-        public static Color IntToColor(uint i)
-        {
-            byte[] b = BitConverter.GetBytes(i);
+            if (b.Length == 3)
+            {
+                return new Color32(b[0], b[1], b[2], 255);
+            }
             return new Color32(b[0], b[1], b[2], b[3]);
-        }
-
-        public static Color IntToColor(int i)
-        {
-            byte[] b = BitConverter.GetBytes(i);
-            return new Color32(b[0], b[1], b[2], b[3]);
-        }
-
-        /// <summary>
-        /// Takes a string of format "FFFFFFFF" and returns the corresponding int value, which can be turned into a color using IntToColor()
-        /// </summary>
-        /// <param name="hexString"></param>
-        /// <returns></returns>
-        public static uint HexStringToInt(string hexString)
-        {
-            return uint.Parse(hexString, System.Globalization.NumberStyles.HexNumber);
         }
 
         public static WidgetPosition StringToWidgetPosition(string widgetPositionAsString)

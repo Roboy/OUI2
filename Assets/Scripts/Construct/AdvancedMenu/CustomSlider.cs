@@ -20,12 +20,6 @@ public class CustomSlider : MonoBehaviour
     public int[] fingersRight;
     public int[] fingersLeft;
 
-    //For debugging
-    /*public Vector3 v1 = new Vector3(0, 0, 0);
-    public Vector3 v2 = new Vector3(0, 0, 0);
-    public Vector3 v3 = new Vector3(0, 0, 0);
-    public Vector3 v4 = new Vector3(0, 0, 0);*/
-
     private void Reset()
     {
         defaultValue = 0f;
@@ -50,6 +44,9 @@ public class CustomSlider : MonoBehaviour
         setDefaultValue();
     }
 
+    /// <summary>
+    /// Forward buzz requests.
+    /// </summary>
     private void Update()
     {
         for(int i = 0; i < fingersRight.Length; i++)
@@ -190,19 +187,6 @@ public class CustomSlider : MonoBehaviour
         }
 
         Vector3 closestPoint = transform.InverseTransformPoint(worldPoint);
-        /*
-        float maxY = -1000000000000000000;
-        Vector3 closestPoint = new Vector3(0,0,0);
-        Vector3 contactPointLocal;
-        foreach (ContactPoint contact in collision.contacts)
-        {
-            contactPointLocal = transform.InverseTransformPoint(contact.point);
-            if (contactPointLocal.y > maxY)
-            {
-                maxY = contactPointLocal.y;
-                closestPoint = contactPointLocal;
-            }
-        }*/
         Vector3 localLeftBorderPoint = transform.localPosition;
         localLeftBorderPoint.y += 1f * transform.localScale.y;
 
@@ -280,16 +264,4 @@ public class CustomSlider : MonoBehaviour
     {
         transform.localPosition = defaultPosFull;
     }
-
-    // Only for debugging
-    /*private void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(v1, 10f);
-        Gizmos.color = new Color(255,0,0);
-        Gizmos.DrawSphere(v2, 0.012f);
-        Gizmos.color = new Color(0, 255, 0);
-        Gizmos.DrawSphere(v3, 0.014f);
-        Gizmos.color = new Color(0, 0, 255);
-        Gizmos.DrawSphere(v4, 0.016f);
-    }*/
 }

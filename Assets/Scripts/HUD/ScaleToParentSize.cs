@@ -9,14 +9,19 @@ public class ScaleToParentSize : MonoBehaviour
     RectTransform parent;
     Vector2 size;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Set reference to parent.
+    /// Initial adaptation of this collider to the scale of the parent.
+    /// </summary>
     void Start()
     {
         parent = this.transform.parent.GetComponent<RectTransform>();
         Rescale();
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// If the parent's scale changes adapt accordingly.
+    /// </summary>
     void FixedUpdate()
     {
         if (!HasFixedScale)
@@ -28,6 +33,9 @@ public class ScaleToParentSize : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adapt scale of this collider to the scale of the parent.
+    /// </summary>
     private void Rescale()
     {
         size = parent.sizeDelta;

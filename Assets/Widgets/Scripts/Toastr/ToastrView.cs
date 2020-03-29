@@ -12,11 +12,18 @@ namespace Widgets
 
         public GameObject toastrDesignPrefab;
 
+        /// <summary>
+        /// Init toastr queue in awake to avoid null pointer from Update().
+        /// </summary>
         private void Awake()
         {
             toastrQueue = new Queue<Toastr>();
         }
 
+        /// <summary>
+        /// Initialize toastr view.
+        /// </summary>
+        /// <param name="widget"></param>
         public override void Init(Widget widget)
         {
             SetChildWidget(widget.childWidget);
@@ -31,6 +38,10 @@ namespace Widgets
             Init(widget.relativeChildPosition, widget.GetContext().unfoldChildDwellTimer);
         }
 
+        /// <summary>
+        /// Create new Toastr from template and enqueue.
+        /// </summary>
+        /// <param name="toastrToInstantiate"></param>
         public void CreateNewToastr(ToastrTemplate toastrToInstantiate)
         {
             GameObject toastrGameObject = Instantiate(toastrDesignPrefab);
@@ -45,6 +56,9 @@ namespace Widgets
             toastrQueue.Enqueue(newToastr);
         }
 
+        /// <summary>
+        /// Slerp all toastr upwards with delay according to their position.
+        /// </summary>
         public void MoveToastrsUp()
         {
             float offsetTime = 0;
@@ -56,19 +70,27 @@ namespace Widgets
             }
         }
 
+        /// <summary>
+        /// Destroy top toastr and move all other toastr up.
+        /// </summary>
         public void DestroyTopToastr()
         {
             Destroy(toastrQueue.Dequeue().gameObject);
             MoveToastrsUp();
         }
 
-        // TODO: hide new toastr as well
+        /// <summary>
+        /// Empty. Toastr view is never hidden
+        /// </summary>
+        /// <param name="relativeChildPosition"></param>
         public override void ShowView(RelativeChildPosition relativeChildPosition)
         {
 
         }
 
-        // TODO: hide new toastr as well
+        /// <summary>
+        /// Empty. Toastr view is never hidden
+        /// </summary>
         public override void HideView()
         {
             Debug.LogWarning("Toastr widget can not be hidden.");

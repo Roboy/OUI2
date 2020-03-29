@@ -5,8 +5,12 @@ using UnityEngine;
 public class ShowOpenMenuButton : MonoBehaviour
 {
     bool menuOpen;
+    //this object's local coordinate system is used as reference
     public Transform CompareObject;
 
+    /// <summary>
+    /// Set reference to instance.
+    /// </summary>
     void Start()
     {
         if (CompareObject == null)
@@ -16,7 +20,9 @@ public class ShowOpenMenuButton : MonoBehaviour
         menuOpen = false;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Check if this object (OpenMenuButton) is pointing up (using the CompareObject's local coordinate system)
+    /// </summary>
     void FixedUpdate()
     {
         if (!menuOpen)

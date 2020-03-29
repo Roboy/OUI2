@@ -11,23 +11,17 @@ namespace Widgets
         public GameObject iconDesignPrefab;
         public GameObject graphDesignPrefab;
 
-        readonly int TASKBAR_ICON_OFFSET = 200;
-
-        // public CurvedUI.CurvedUISettings curvedUI;
-
-        // public GameObject canvas;
         private GameObject widgetParentGameObject;
 
         Dictionary<string, Texture2D> icons;
 
-        List<Widget> taskbarWidgets;
-
-        // Start is called before the first frame update
+        /// <summary>
+        /// Receives all widget templates from parser and creates corresponding widgets objects.
+        /// </summary>
+        /// <returns>List of created widget objects</returns>
         public List<Widget> CreateWidgetsAtStartup()
         {
             icons = FetchAllIcons();
-
-            taskbarWidgets = new List<Widget>();
 
             CreateWidgetParentGameObject();
 
@@ -48,20 +42,24 @@ namespace Widgets
                 widgets.Add(createdWidget);
             }
 
-            // PositionTaskbarWidgets();
-
             return widgets;
         }
         
+        /// <summary>
+        /// Creates an empty gameobject for every widget for better hierarchical structure in scene graph
+        /// </summary>
         private void CreateWidgetParentGameObject()
         {
             widgetParentGameObject = new GameObject("Widgets");
         }
 
+        /// <summary>
+        /// Opens all registered icons from the resources folder.
+        /// </summary>
+        /// <returns>Returns a dictionary of the icons as Texture2D with their names as keys.</returns>
         private Dictionary<string, Texture2D> FetchAllIcons()
         {
             Texture2D[] iconsArray = Resources.LoadAll<Texture2D>("Icons");
-
             Dictionary<string, Texture2D> iconsDictionary = new Dictionary<string, Texture2D>();
 
             foreach (Texture2D icon in iconsArray)
@@ -72,6 +70,11 @@ namespace Widgets
             return iconsDictionary;
         }
 
+        /// <summary>
+        /// Finds a subset of icons from all registered icons by their names as keys.
+        /// </summary>
+        /// <param name="iconNames">Names of icons to find in registered icons</param>
+        /// <returns>Subset of icons matching the given names</returns>
         private Dictionary<string, Texture2D> FindIconsWithName(string[] iconNames)
         {
             Dictionary<string, Texture2D> iconsFound = new Dictionary<string, Texture2D>();
@@ -89,29 +92,17 @@ namespace Widgets
             return iconsFound;
         }
 
-        // TODO: What is the performance of this call?
-        private void LateUpdate()
-        {
-            // curvedUI.AddEffectToChildren();
-        }
-
-        /*
-        private void PositionTaskbarWidgets()
-        {           
-            for (int i = 0; i < taskbarWidgets.Count; i++)
-            {
-                taskbarWidgets[i].transform.position = panelTransforms[0].transform.position;
-
-                taskbarWidgets[i].transform.localPosition += (Vector3.right * (taskbarWidgets.Count - 1) * (TASKBAR_ICON_OFFSET / 2) * -1) + Vector3.right * TASKBAR_ICON_OFFSET * i;
-            }
-        }
-        */
-
-        private bool IsWidgetIdUnique(RosJsonMessage widgetContext, List<Widget> existingWidgets)
+        /// <summary>
+        /// Checks, if widget id of given context is already taken
+        /// </summary>
+        /// <param name="newWidgetContext">Widget context of new widget to register</param>
+        /// <param name="existingWidgets">List of existing widgets</param>
+        /// <returns></returns>
+        private bool IsWidgetIdUnique(RosJsonMessage newWidgetContext, List<Widget> existingWidgets)
         {
             foreach (Widget existingWidget in existingWidgets)
             {
-                if (existingWidget.GetID() == widgetContext.id)
+                if (existingWidget.GetID() == newWidgetContext.id)
                 {                    
                     return false;
                 }
@@ -120,6 +111,12 @@ namespace Widgets
             return true;
         }
 
+        /// <summary>
+        /// Create a new widget object from a given context.
+        /// </summary>
+        /// <param name="widgetContext">Context of new widget to create</param>
+        /// <param name="existingWidgets">List of already existing widgets, to check for duplicate ids</param>
+        /// <returns></returns>
         public Widget CreateWidgetFromContext(RosJsonMessage widgetContext, List<Widget> existingWidgets)
         {
             if (IsWidgetIdUnique(widgetContext, existingWidgets) == false)
@@ -147,8 +144,7 @@ namespace Widgets
                 case "Icon":
                     IconWidget iconWidget = widgetGameObject.AddComponent<IconWidget>();
                     Dictionary<string, Texture2D> iconsForThisWidget = FindIconsWithName(widgetContext.icons);
-                    iconWidget.Init(widgetContext, iconDesignPrefab, iconsForThisWidget);
-                    taskbarWidgets.Add(iconWidget);                    
+                    iconWidget.Init(widgetContext, iconDesignPrefab, iconsForThisWidget);           
                     return iconWidget;
                     
                 case "Text":

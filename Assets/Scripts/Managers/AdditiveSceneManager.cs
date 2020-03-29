@@ -25,6 +25,10 @@ public class AdditiveSceneManager : MonoBehaviour {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    /// <summary>
+    /// Returns the currently loaded scene
+    /// </summary>
+    /// <returns>the currently loaded scene</returns>
     public static Scenes GetCurrentScene() {
         return currentScene;
     }
@@ -61,6 +65,14 @@ public class AdditiveSceneManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Performs a scene change. First Unloads a scene, then Load the next Scene
+    /// </summary>
+    /// <param name="newScene">the new scene that shall be loaded</param>
+    /// <param name="beforeSceneUnload">delegate that is executed before the current scene is unloaded</param>
+    /// <param name="onSceneUnload">delegate that ist executed after the current scene is unloaded</param>
+    /// <param name="beforeSceneLoad">delegate that is executed before the new scene is loaded</param>
+    /// <param name="onSceneLoad">delegate that is executed after the new scene is loaded</param>
     public void ChangeScene(Scenes newScene, BeforeSceneUnloadDelegate beforeSceneUnload, OnSceneUnloadDelegate onSceneUnload, BeforeSceneLoadDelegate beforeSceneLoad, OnSceneLoadDelegate onSceneLoad) {
         StartCoroutine(UnloadScene(newScene, beforeSceneUnload, onSceneUnload, beforeSceneLoad, onSceneLoad));
     }

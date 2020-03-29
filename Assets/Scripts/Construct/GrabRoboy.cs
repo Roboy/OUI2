@@ -9,6 +9,9 @@ public class GrabRoboy : MonoBehaviour
     SenseGlove_Grabable grab;
     AdditiveSceneManager additiveSceneManager;
 
+    /// <summary>
+    /// Set reference to instances
+    /// </summary>
     private void Start()
     {
         additiveSceneManager = GameObject.FindGameObjectWithTag("AdditiveSceneManager").GetComponent<AdditiveSceneManager>();
@@ -17,6 +20,9 @@ public class GrabRoboy : MonoBehaviour
         grab = this.GetComponent<SenseGlove_Grabable>();
     }
 
+    /// <summary>
+    /// If this object has been moved and then released without triggering the transition, it is reset to its inital position.
+    /// </summary>
     private void Update()
     {
         if(this.transform.localPosition != defaultPos && !grab.IsInteracting())
@@ -25,6 +31,10 @@ public class GrabRoboy : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// If this object intersects its target zone, the transition to the next state is triggered.
+    /// </summary>
+    /// <param name="other">The collider of the intersected object</param>
     private void OnTriggerEnter(Collider other)
     {
         if(other.name == "TargetZoneStartTransition")
@@ -37,6 +47,9 @@ public class GrabRoboy : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Resets this object's position and rotation to the initial state.
+    /// </summary>
     void ResetTransform()
     {
         this.transform.localPosition = defaultPos;

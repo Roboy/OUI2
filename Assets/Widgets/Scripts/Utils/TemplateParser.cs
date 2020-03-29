@@ -5,6 +5,10 @@ namespace Widgets
 {
     public static class TemplateParser
     {
+        /// <summary>
+        /// Parses all widget template json files in resources folder and deserializes them into RosJsonMessages as contexts for initialization by the factory.
+        /// </summary>
+        /// <returns></returns>
         public static List<RosJsonMessage> ParseAllWidgetTemplates()
         {
             List<RosJsonMessage> widgetContexts = new List<RosJsonMessage>();
@@ -25,6 +29,11 @@ namespace Widgets
             return widgetContexts;
         }
 
+        /// <summary>
+        /// Parse a single widget template and create the RosJsonMessage object.
+        /// </summary>
+        /// <param name="asset"></param>
+        /// <returns></returns>
         private static RosJsonMessage ParseWidgetTemplate(TextAsset asset)
         {
             RosJsonMessage parsedContext = JsonUtility.FromJson<RosJsonMessage>(asset.text);

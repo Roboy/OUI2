@@ -11,7 +11,10 @@ namespace Widgets
 
         TextMeshProUGUI textMeshPro;
         RawImage[] images;
-                
+
+        /// <summary>
+        /// Hides view by deactivating the TextMeshPro and all background images.
+        /// </summary>
         public override void HideView()
         {
             textMeshPro.enabled = false;
@@ -22,6 +25,10 @@ namespace Widgets
             }
         }
 
+        /// <summary>
+        /// Show view by activating TextMeshPro, background images and setting the position and parent.
+        /// </summary>
+        /// <param name="relativeChildPosition"></param>
         public override void ShowView(RelativeChildPosition relativeChildPosition)
         {
             textMeshPro.enabled = true;
@@ -61,6 +68,10 @@ namespace Widgets
             transform.localPosition = offsetVector;
         }
 
+        /// <summary>
+        /// Change message.
+        /// </summary>
+        /// <param name="incomingMessageTemplate"></param>
         public void ChangeMessage(TextWidgetTemplate incomingMessageTemplate)
         {
             textMeshPro.text = incomingMessageTemplate.messageToDisplay;
@@ -68,6 +79,10 @@ namespace Widgets
             textMeshPro.fontSize = incomingMessageTemplate.textFontSize;
         }
 
+        /// <summary>
+        /// Initialization of text view.
+        /// </summary>
+        /// <param name="widget"></param>
         public override void Init(Widget widget)
         {
             GameObject viewDesign = Instantiate(widget.viewDesignPrefab);

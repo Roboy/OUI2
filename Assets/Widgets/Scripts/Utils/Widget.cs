@@ -16,6 +16,11 @@ namespace Widgets
         
         protected View view;
 
+        /// <summary>
+        /// Initialization of widget.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="viewDesignPrefab"></param>
         public void Init(RosJsonMessage context, GameObject viewDesignPrefab)
         {
             this.context = context;
@@ -27,21 +32,36 @@ namespace Widgets
             this.viewDesignPrefab = viewDesignPrefab;
         }
 
+        /// <summary>
+        /// Get id.
+        /// </summary>
+        /// <returns></returns>
         public int GetID()
         {
             return id;
         }
 
+        /// <summary>
+        /// Get widget position.
+        /// </summary>
+        /// <returns></returns>
         public WidgetPosition GetWidgetPosition()
         {
             return position;
         }
 
+        /// <summary>
+        /// Get context.
+        /// </summary>
+        /// <returns></returns>
         public RosJsonMessage GetContext()
         {
             return context;
         }
 
+        /// <summary>
+        /// Searches for given child widget by giving the widget manager its id.
+        /// </summary>
         private void SearchAndSetChild()
         {
             childWidget = Manager.Instance.FindWidgetWithID(childWidgetId);
@@ -52,6 +72,10 @@ namespace Widgets
             }
         }
 
+        /// <summary>
+        /// Constantly searches for child if it was not found yet. Due to the serial initialization of widgets, the child widget may not be created yet.
+        /// Also constantly tries to recreate views, if they were destroyed by transition to construct.
+        /// </summary>
         private void Update()
         {
             if (childWidget == null && childWidgetId != 0)
@@ -68,16 +92,26 @@ namespace Widgets
             UpdateInClass();
         }
 
+        /// <summary>
+        /// Pass Update call to inheriting classes for more specific calls.
+        /// </summary>
         protected abstract void UpdateInClass();
 
+        /// <summary>
+        /// Process incoming ros message
+        /// </summary>
+        /// <param name="rosMessage"></param>
         public abstract void ProcessRosMessage(RosJsonMessage rosMessage);
 
+        /// <summary>
+        /// Create view attatched to hud canvas.
+        /// </summary>
+        /// <param name="viewParent"></param>
         public void CreateView(GameObject viewParent)
         {
             GameObject viewGameObject = new GameObject(gameObject.name + "View", typeof(RectTransform));
             viewGameObject.transform.SetParent(viewParent.transform, false);
-            // viewGameObject.name = gameObject.name + "View";
-            view = AddViewComponent(viewGameObject);
+            view = viewGameObject.AddComponent<ToastrView>();
             view.Init(this);
 
             if (position == WidgetPosition.Child)
@@ -86,6 +120,9 @@ namespace Widgets
             }
         }
 
+        /// <summary>
+        /// Searches for the widget panels by tag. If HUD scene is reactivated, the panels can be found and views can be recreated. This part is a bit hacky and can be improved by using Unity Events.
+        /// </summary>
         private void TryToRecreateView()
         {
             GameObject textParent = GameObject.FindGameObjectWithTag("Widgets" + GetWidgetPosition());
@@ -95,11 +132,13 @@ namespace Widgets
             }
         }
 
+        /// <summary>
+        /// Get view.
+        /// </summary>
+        /// <returns></returns>
         public View GetView()
         {
             return view;
         }
-
-        public abstract View AddViewComponent(GameObject viewGameObject);
     }
 }

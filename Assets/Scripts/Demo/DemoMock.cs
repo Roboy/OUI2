@@ -22,8 +22,7 @@ public class DemoMock : MockUtility
                 RosJsonMessage iconMessage = RosJsonMessage.CreateIconMessage(20, "GlovesRed");
                 // GlovesYellow GlovesRed
                 rosPublisher.PublishMessage(iconMessage);
-                RosJsonMessage textMessage = RosJsonMessage.CreateTextMessage(30, "Senseglove disconnected", "Text", "Child",
-                    "Bottom", 0, "Not connected\nThe cable disconnected", 0, null);
+                RosJsonMessage textMessage = RosJsonMessage.CreateTextMessage(30, "Not connected\nThe cable disconnected", 0, null);
                 rosPublisher.PublishMessage(textMessage);
             }
             else
@@ -34,8 +33,7 @@ public class DemoMock : MockUtility
                 //RosJsonMessage iconMessage = RosJsonMessage.CreateIconMessage(20, "Gloves-ON_01a");
                 RosJsonMessage iconMessage = RosJsonMessage.CreateIconMessage(20, "GlovesGreen");
                 rosPublisher.PublishMessage(iconMessage);
-                RosJsonMessage textMessage = RosJsonMessage.CreateTextMessage(30, "Senseglove connected", "Text", "Child",
-                    "Bottom", 0, "Connected\nSensegloves fully functioning", 0, null);
+                RosJsonMessage textMessage = RosJsonMessage.CreateTextMessage(30, "Connected\nSensegloves fully functioning", 0, null);
                 rosPublisher.PublishMessage(textMessage);
             }
             sensgloves_working = !sensgloves_working;

@@ -17,8 +17,7 @@ public class VideoMock : MockUtility
         if (tempTimer <= 0)
         {
             // update the text 
-            RosJsonMessage textMessage = RosJsonMessage.CreateTextMessage(37, "Text", "TemperatureText", "Child",
-                "Bottom", 0, "Temperature:\n" + temperature + " C", 0, null);
+            RosJsonMessage textMessage = RosJsonMessage.CreateTextMessage(37, "Temperature:\n" + temperature + " C", 0, null);
             rosPublisher.PublishMessage(textMessage);
 
             // update the graph

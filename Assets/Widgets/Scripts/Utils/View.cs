@@ -29,6 +29,11 @@ namespace Widgets
         public bool useDwellTimer = false;
         #endregion
 
+        /// <summary>
+        /// Called at initialization.
+        /// </summary>
+        /// <param name="relativeChildPosition"></param>
+        /// <param name="dwellTimerDuration"></param>
         public void Init(RelativeChildPosition relativeChildPosition, float dwellTimerDuration)
         {
             SetRelativeChildPosition(relativeChildPosition);
@@ -45,17 +50,13 @@ namespace Widgets
             dwellTimer = new Timer();
         }
 
+        /// <summary>
+        /// Sets child widget position according to parents values and visibility active
+        /// </summary>
         public void UnfoldChild()
         {
             childIsActive = true;
-
-            /*
-            if (parentView != null)
-            {
-                parentView.OnSelectionEnter();
-            }
-            */
-
+            
             if (childWidget != null)
             {
                 childWidget.GetView().SetParentView(this);
@@ -65,6 +66,9 @@ namespace Widgets
             dwellTimerActive = false;
         }
 
+        /// <summary>
+        /// Hides child widget.
+        /// </summary>
         public void FoldChildIn()
         {
             childIsActive = false;
@@ -84,22 +88,34 @@ namespace Widgets
             keepChildUnfolded = false;
         }
 
+        /// <summary>
+        /// Resets dwell timer to zero.
+        /// </summary>
         public void ResetDwellTimer()
         {
             dwellTimer.ResetTimer();
             dwellTimerActive = false;
         }
 
+        /// <summary>
+        /// Called when pointer or gaze enters childs view.
+        /// </summary>
         public void OnSelectionChildEnter()
         {
             keepChildUnfolded = false;
         }
 
+        /// <summary>
+        /// Called when pointer or gaze exits childs view.
+        /// </summary>
         public void OnSelectionChildExit()
         {
             keepChildUnfolded = true;
         }
 
+        /// <summary>
+        /// Called when pointer or gaze enters this view.
+        /// </summary>
         public void OnSelectionEnter()
         {
             isLookedAt = true;
@@ -123,6 +139,10 @@ namespace Widgets
             }
         }
 
+
+        /// <summary>
+        /// Called when pointer or gaze exits this view.
+        /// </summary>
         public void OnSelectionExit()
         {
             isLookedAt = false;
@@ -142,25 +162,47 @@ namespace Widgets
             }
         }
 
+        /// <summary>
+        /// Set relative child position.
+        /// </summary>
+        /// <param name="relativeChildPosition"></param>
         public void SetRelativeChildPosition(RelativeChildPosition relativeChildPosition)
         {
             this.relativeChildPosition = relativeChildPosition;
         }
 
+        /// <summary>
+        /// Set all view components visible.
+        /// </summary>
+        /// <param name="relativeChildPosition"></param>
         public abstract void ShowView(RelativeChildPosition relativeChildPosition);
 
+        /// <summary>
+        /// Sets all view components invisible
+        /// </summary>
         public abstract void HideView();
 
+        /// <summary>
+        /// Set child widget.
+        /// </summary>
+        /// <param name="childWidget"></param>
         public void SetChildWidget(Widget childWidget)
         {
             this.childWidget = childWidget;
         }
 
+        /// <summary>
+        /// Set parent view.
+        /// </summary>
+        /// <param name="parentView"></param>
         public void SetParentView(View parentView)
         {
             this.parentView = parentView;
         }
 
+        /// <summary>
+        /// Managing timers.
+        /// </summary>
         public void Update()
         {
             // Folding child in again timer
@@ -178,11 +220,19 @@ namespace Widgets
             }
         }
 
+        /// <summary>
+        /// If mouse enters view.
+        /// </summary>
+        /// <param name="eventData"></param>
         public void OnPointerEnter(PointerEventData eventData)
         {
             OnSelectionEnter();
         }
 
+        /// <summary>
+        /// If mouse exits view.
+        /// </summary>
+        /// <param name="eventData"></param>
         public void OnPointerExit(PointerEventData eventData)
         {
             OnSelectionExit();
